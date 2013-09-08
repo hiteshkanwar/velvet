@@ -1,6 +1,4 @@
 class UserMailer < ActionMailer::Base
-  #:from    => "\"#{@diea.name}\" <admin@planhero.com>"
-
    
   def welcome_email(user)
     
