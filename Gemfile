@@ -22,6 +22,13 @@ end
 
 gem 'jquery-rails'
 
+# Handle email
+gem 'sendgrid'
+
+# Queue server
+gem 'redis'
+gem "resque", "~> 1.22.0", :require => "resque/server"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

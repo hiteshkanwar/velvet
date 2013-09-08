@@ -1,4 +1,16 @@
 Velvet::Application.routes.draw do
+
+  root :to => 'dashboard#index', :constraints => lambda{|req| !req.session[:email].blank?}
+  root :to => 'landing#index'
+
+  match '/about',     :to => 'landing#about'
+  match '/login',     :to => 'landing#login'
+  match '/register',  :to => 'landing#register'
+  match '/logout',    :to => 'landing#logout'
+  match '/forgot',    :to => 'landing#forgot'
+  match '/confirm_forgot',    :to => 'landing#confirm_forgot'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -54,5 +66,5 @@ Velvet::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+   match ':controller(/:action(/:id))(.:format)'
 end
