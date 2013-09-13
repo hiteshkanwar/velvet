@@ -3,14 +3,16 @@
 
 			<div class="third">
 				<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
-				<form id="forgot" action="landing/confirm_reset" method="post">
+				<form id="forgot" action="/landing/confirm_reset" method="post">
 					<h1>Reset password</h1><br>
 					 
 					 <label>New Password</label><br>
-					 <input type="text" name="password" class="sec"><br>
+					 <input type="password" name="password" placeholder="Password" class="sec"><br>
 
 					 <label>Re-type Password</label><br>
-					 <input type="text" name="password" class="sec"><br>
+					 <input type="password" name="password" placeholder="Password" class="sec"><br>
+					 <input name="email" type="hidden" value= "<%= @params[:email] %>" />
+					 <input name="token" type="hidden" value= "<%= @params[:token] %>" />
 					  <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 
 					 <input type="Submit" class="submit2" value="submit"><br>

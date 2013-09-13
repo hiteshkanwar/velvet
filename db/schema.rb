@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908204033) do
+ActiveRecord::Schema.define(:version => 20130913214759) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -45,9 +45,10 @@ ActiveRecord::Schema.define(:version => 20130908204033) do
     t.string   "country"
     t.string   "dob"
     t.text     "about"
-    t.string   "filepicker_url",  :default => "main/avatarExample.png"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "filepicker_url",        :default => "main/avatarExample.png"
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
+    t.string   "forgot_password_token"
   end
 
 end
