@@ -42,8 +42,7 @@ class LandingController < ApplicationController
 
     if User.authenticate(params[:email], params[:password])
     	session[:email] = params[:email]
-    	mixpanel.track 'User Signed In', { :distinct_id => params[:email], :time => Time.now.to_datetime }
-      
+    	
       # If state exists from, accept inviation
       # Redirect to state, else login user
       if session[:state]
@@ -56,21 +55,29 @@ class LandingController < ApplicationController
 
     else
     	flash[:notice] = "Invalid email or password"
-    	redirect_to '/login'
+    	redirect_to :root
     end
 
   end
 
   def create
 
-  	 @user = User.new(name: params[:name], email: params[:email], hashed_password: params[:password])
+  	 @user = User.new(username: params[:username], email: params[:email], hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+
   	 if @user.save
 
   	 	logger.debug("User created successfuly")
   	 	session[:email] = @user.email
 
         #=> Send welcome email
-        UserMailer.welcome_email(@user).deliver
+        #UserMailer.welcome_email(@user).deliver
+
+         # Store defaults 
+         session[:signup_email] = nil
+         session[:username] = nil
+         session[:month] = nil
+         session[:day] = nil
+         session[:year] = nil
         
         # If state exists from, accept inviation
         # Redirect to state, else login user
@@ -83,9 +90,16 @@ class LandingController < ApplicationController
         end
         
   	 else
-  	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub(" Hashed", "")
+       # Store defaults 
+       session[:signup_email] = params[:email]
+       session[:username] = params[:username]
+       session[:month] = params[:month]
+       session[:day] = params[:day]
+       session[:year] = params[:year]
+
+  	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub("Hashed", "")
   	 	logger.debug("User not created: #{flash[:notice]}")
-  	 	redirect_to '/register'
+  	 	redirect_to :root
   	 end
   	 
   end
@@ -111,7 +125,7 @@ class LandingController < ApplicationController
   		user.update_attributes(hashed_password: Digest::SHA1.hexdigest(params[:password]))
   		user.update_attributes(forgot_password_token: nil)
       flash[:notice] = "Your password as been updated"
-      redirect_to '/login'
+      redirect_to :root
   	else
   		redirect_to :root
   	end
@@ -119,7 +133,7 @@ class LandingController < ApplicationController
 
   def logout
   	session[:email] = nil
-	redirect_to :root
+	  redirect_to :root
   end
 
  

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email, :username
   validates_presence_of :email, :username, :hashed_password
   validates :email, email: true
-  validates :name, length: { minimum: 5 }
+  validates :username, length: { minimum: 5 }
   validates :hashed_password, length: { minimum: 6 }
   after_create :hash_password 
 

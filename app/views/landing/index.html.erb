@@ -2,13 +2,13 @@
 	<div class="center-form">
 
 		<div class="first">
+			<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
 			<form id="confirm" action="#" method="post">
 				<div class="enter">ENTER YOUR DATE OF BIRTH</div>
 				<div class="inputer">
-				<input type="text" class="input1" name="month" placeholder="MM"/>
-				<input type="hidden" name="identify" value="123" />
-				<input type="text" class="input2" name="day" placeholder="DD"/>
-				<input type="text" class="input3" name="year" placeholder="YYYY"/></div>
+				<input type="text" class="input1" name="month" value="<%= session[:month] %>" placeholder="MM"/>
+				<input type="text" class="input2" name="day" value="<%= session[:day] %>" placeholder="DD"/>
+				<input type="text" class="input3" name="year" value="<%= session[:year] %>" placeholder="YYYY"/></div>
 				<div class="what">WHAT COUNTRY DO YOU LIVE IN?</div>
 				<div class="selectors">
 					<select class="country" name="country">
@@ -26,14 +26,14 @@
 
 	
 		<div class="second">
-			<form id="register" action="create" method="post">
+			<form id="register" action="landing/create" method="post">
 				<h1>Register</h1><br/>
 				 <label>Username</label><br/>
-				 <input type="text" name"username" class="sec"/><br/>
+				 <input type="text" name="username" value="<%= session[:username] %>" class="sec"/><br/>
 				 <label>Email Address</label><br/>
-				 <input type="text" name"email" class="sec"/><br/>
+				 <input type="text" name="email" value="<%= session[:signup_email] %>" class="sec"/><br/>
 				 <label>Password</label><br/>
-				 <input type="password" name"password" class="sec"/><br/>
+				 <input type="password" name="password" class="sec"/><br/>
 				 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 			 </form>
 		</div>
