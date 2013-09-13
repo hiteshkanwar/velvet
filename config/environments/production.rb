@@ -31,7 +31,17 @@ Velvet::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
+
+  # Use a different logger for distributed setups
+  config.logger = Logger.new STDOUT
+  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'INFO')
+
+  # Send an email to an admin whenever an exception is raised
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[TipInTheVelvet Error] ",
+    :sender_address => "Tip in The Velvet <admin@tipinthevelvet.com>",
+    :exception_recipients => "Richard Aberefa <ngrichyj4@gmail.com>"
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]

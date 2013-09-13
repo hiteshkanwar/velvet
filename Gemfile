@@ -29,6 +29,9 @@ gem 'sendgrid'
 gem 'redis'
 gem "resque", "~> 1.22.0", :require => "resque/server"
 
+# Exception handler
+gem 'exception_notification', git: 'git://github.com/alanjds/exception_notification.git'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -37,6 +40,7 @@ gem "resque", "~> 1.22.0", :require => "resque/server"
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano'

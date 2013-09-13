@@ -53,6 +53,22 @@ module Velvet
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
 
+    # Assets Path
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.paths << Rails.root.join("app", "assets", "images")
+
+    # Precompile additional assets
+    config.assets.precompile += %w( .svg .eot .woff .ttf)
+    config.assets.precompile += %w( .png, .jpg )
+
+    config.assets.css_compressor = :yui
+    config.assets.js_compressor = :uglifier
+    config.assets.initialize_on_precompile = false
+
+    # Set Time.zone default and make ActiveRecord auto-convert to this time zone
+    # (Run 'rake time:zones:all' to display all available time zones)
+    config.time_zone = "Mountain Time (US & Canada)"
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

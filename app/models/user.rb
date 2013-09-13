@@ -1,16 +1,22 @@
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] << (options[:message] || "is not valid")
+    end
+  end
+end
+
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :posts
   has_many :comments
   
-  validates_uniqueness_of :email
-  validates_presence_of :email, :name, :hashed_password
+  validates_uniqueness_of :email, :username
+  validates_presence_of :email, :username, :hashed_password
   validates :email, email: true
   validates :name, length: { minimum: 5 }
   validates :hashed_password, length: { minimum: 6 }
-
-  after_create :default_profile_url
   after_create :hash_password 
 
   private
