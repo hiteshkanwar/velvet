@@ -44,6 +44,9 @@ gem 'exception_notification', git: 'git://github.com/alanjds/exception_notificat
 # gem 'unicorn'
 gem 'thin'
 
+# CSS compressor
+gem 'yui-compressor'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

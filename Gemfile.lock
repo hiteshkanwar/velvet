@@ -158,6 +158,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    yui-compressor (0.11.0)
 
 PLATFORMS
   ruby
@@ -176,3 +177,4 @@ DEPENDENCIES
   therubyracer
   thin
   uglifier (>= 1.0.3)
+  yui-compressor
