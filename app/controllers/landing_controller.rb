@@ -70,7 +70,7 @@ class LandingController < ApplicationController
   	 	session[:email] = @user.email
 
         #=> Send welcome email
-        #UserMailer.welcome_email(@user).deliver
+        UserMailer.welcome_email(@user).deliver
 
          # Store defaults 
          session[:signup_email] = nil
@@ -109,7 +109,7 @@ class LandingController < ApplicationController
   	if user
   		user.update_attributes(forgot_password_token: SecureRandom.hex(20))
   		# Send confirm email
-  		 #UserMailer.forgot_password_email(user).deliver
+  		 UserMailer.forgot_password_email(user).deliver
        flash[:notice] = "Please check your email, to reset your password"
        redirect_to '/forgot'
   	else

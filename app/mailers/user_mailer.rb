@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     mail(
         :subject => "Welcome to Tippin The Velvet",
         :to      => @user.email,
-        :from    => "Tippin The Velvet <admin@tipinthevelvet.com>",
+        :from    => "Tippin The Velvet <no-reply@tippinthevelvet.com>",
         :tag     => "Welcome"
       )
   end
@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
     mail(
         :subject => "Forgot password",
         :to      => @user.email,
-        :from    => "Tippin The Velvet <admin@tipinthevelvet.com>",
+        :from    => "Tippin The Velvet <support@tippinthevelvet.com>",
         :tag     => "Forgot"
       )
   end
