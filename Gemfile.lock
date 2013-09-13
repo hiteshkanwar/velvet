@@ -71,6 +71,7 @@ GEM
     multi_json (1.7.9)
     multipart-post (1.2.0)
     mysql2 (0.3.13)
+    newrelic_rpm (3.5.5.38)
     pg (0.16.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -168,6 +169,7 @@ DEPENDENCIES
   exception_notification!
   jquery-rails
   mysql2
+  newrelic_rpm
   pg
   rails (= 3.2.11)
   redis

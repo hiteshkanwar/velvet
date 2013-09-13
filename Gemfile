@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 
 gem 'mysql2'
 gem 'pg'
+gem 'newrelic_rpm'
 
 
 # Gems used only for assets and not required
