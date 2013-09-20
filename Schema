@@ -1,0 +1,25 @@
+Post
+	# controllers
+		- post/create/{body}
+
+	# attributes
+	- user (User model)
+	- body
+	- filepicker_url
+
+	- Comments (Tips)
+	- body
+	- filepicker_url
+
+	- Re-post (Retip)
+		user_id
+		post_id
+
+Comment
+ #controllers 
+ 	comment/create/{body}
+ Repost
+ 	#controllers
+ 	repost/create/{post_id}
+ Message
+ 	#controllers

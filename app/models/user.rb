@@ -9,16 +9,21 @@ end
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
-  has_many :posts
+  has_many :posts, order:'created_at DESC'
   has_many :comments
   has_many :likes
+  has_many :reposts, order:'created_at DESC'
   
   validates_uniqueness_of :email, :username
   validates_presence_of :email, :username, :hashed_password
   validates :email, email: true
   validates :username, length: { minimum: 5 }
   validates :hashed_password, length: { minimum: 6 }
-  after_create :hash_password 
+  after_create :hash_password
+
+  def all_posts(pg==1)
+    (self.posts << self.reposts.map(&:post_id).map {|id| Post.find(id) })
+  end 
 
   private
   def self.password_match?(password="", user)
