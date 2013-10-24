@@ -10,6 +10,10 @@ Velvet::Application.routes.draw do
   match '/forgot',    :to => 'landing#forgot'
   match '/confirm_forgot',    :to => 'landing#confirm_forgot'
 
+  match '/#!/:username' => 'profile#index', via: "get"
+
+  resources :users, :path=>''
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

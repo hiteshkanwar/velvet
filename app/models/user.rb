@@ -21,9 +21,12 @@ class User < ActiveRecord::Base
   validates :hashed_password, length: { minimum: 6 }
   after_create :hash_password
 
-  def all_posts(pg==1)
+  def all_posts(pg=1)
     (self.posts << self.reposts.map(&:post_id).map {|id| Post.find(id) })
   end 
+
+  def who_to_follow
+  end
 
   private
   def self.password_match?(password="", user)

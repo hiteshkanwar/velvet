@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 	$(".enter-site img").click(function(){
-	
 	var Year=$(".input3").val(),
+	country = $(".country").val(),
 	date=$(".input2").val(),
 	Month=$(".input1").val(),
 	currentYear=2013,
@@ -22,6 +22,13 @@ $(document).ready(function(){
 		$(".enter-site3").css({'display':'block'});
 		$(".enter-site").css({'display':'none'});
 		$(".error").fadeOut();
+		$(".error").html("");
+
+		// Add country & age to register form
+		$("form#register").append('<input type="hidden" name="month" value="'+ Month +'">');
+		$("form#register").append('<input type="hidden" name="day" 	value="'+  date +'">');
+		$("form#register").append('<input type="hidden" name="year"  value="'+ Year +'">');
+		$("form#register").append('<input type="hidden" name="country" value="'+ country +'">');
 		
 		
 	}
@@ -46,7 +53,13 @@ b.onkeyup = function() {
 	$(".enter-site3").click(function(){
 
 		$("#DOB").hide();
-		$("#Registeration").fadeIn();
+		$("#register").fadeIn();
+		$(".enter-site3").html('<div class="submit-form">Register</div>');
+	});
+
+	// Submit register form
+	$(document).on('click', '.submit-form', function(){
+		$("#register").submit();
 	});
 
 $(".input1").focus(function(){

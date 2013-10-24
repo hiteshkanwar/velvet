@@ -1,35 +1,39 @@
 <div class="middle">
 	<div class="center-form">
-		
+		<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
 		<form id="DOB" method="POST" action="" class="Dob">
 			<div class="enter">ENTER YOUR DATE OF BIRTH</div>
 			<div class="inputer">
-			<input type="text" class="input1" placeholder="MM" maxlength="2" id="a"/>
-			<input type="text" class="input2" placeholder="DD" maxlength="2" id="b"/>
-			<input type="text" class="input3" placeholder="YYYY" maxlength="4" id="c"/></div>
+			<input type="text" class="input1" name="month" value="<%= session[:month] %>" placeholder="MM" maxlength="2" id="a"/>
+			<input type="text" class="input2" name="day"  value="<%= session[:day] %>" placeholder="DD" maxlength="2" id="b"/>
+			<input type="text" class="input3" name="year" value="<%= session[:year] %>" placeholder="YYYY" maxlength="4" id="c"/></div>
 			<div class="error">asdsds</div>
 			<div class="what">WHAT COUNTRY DO YOU LIVE IN?</div>
 			<div class="selectors">
-			<select>
+			<select class="country" name="country">
 			<option>UNITED STATES</option>
+			<option>CANADA</option>
 			
-			</select><br/><br/>
+			</select>
+			<!--
+			<br/><br/>
 			<input type="checkbox" name="" class="cheking"/> <span class="rem">Remember Me</span><span class="privacy"><A href="#">Privacy Policy</a></span>
-			
+			-->
 			</div>
 		</form>
 		
-		<form id="Registeration" method="POST" action="" class="Registeration">
+		<form id="register" action="landing/create" method="POST" class="Registeration">
 			<h1 class="registrationh1">Registration</h1>
 			<div class="register-field">
-			<label>Name:</label><br/>
-			<input type="text" class="register name" Placeholder="User Name"/><br/>
-			<label>Email:</label><br/>
-			<input type="text" class="register email" Placeholder="Email"/><br/>
-			<label>Password:</label><br/>
-			<input type="password" class="register Password" Placeholder="Password"/>
+			<label>Username</label><br/>
+			<input type="text" class="register name"  name="username" value="<%= session[:username] %>" Placeholder="Username"/><br/>
+			<label>Email</label><br/>
+			<input type="text" class="register email" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/><br/>
+			<label>Password</label><br/>
+			<input type="password" class="register Password" name="password" Placeholder="Password"/>
 			</div>
 			<div class="error">asdsds</div>
+			<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 		</form>
 		<div>
 		
@@ -37,7 +41,7 @@
 		</div>
 		  <div class="enter-site"><%= image_tag "entersite.png" %></div>
 		  <div class="enter-site3">Register</div>
-		  <div class="enter-site2"><%= image_tag "exit.png" %></div>
+		  <div class="enter-site2"><a href="/"><%= image_tag "exit.png" %></a></div>
 	</div>
 
 </div><!--End of middle-->

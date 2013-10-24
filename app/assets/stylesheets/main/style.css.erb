@@ -1,0 +1,807 @@
+/*   
+Theme Name: Impression
+Theme URI: http://Impression.co.uk
+Description: Developed by <a href="http://Impression.co.uk">Impression</a> and <a href="http://Impression.co.uk">Impression</a>
+Version: 1.1
+Author: Impression
+Author URI: http://Impression.co.uk
+*/
+
+/*--[ Google Fonts Import ]-------------------*/ 
+/*@import url(http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold|Droid+Serif:regular,italic,bold,bolditalic&subset=latin);*/
+@import url(http://fonts.googleapis.com/css?family=Alegreya+SC:regular,bold);
+/*--[ Bootstrap Import ]-------------------*/
+
+/*--[ HELPER CLASSES ]-------------------*/
+.thide,.displace,.ir { display:block; text-indent:-999em; overflow:hidden; background-repeat: no-repeat; } /* for image replacement */
+.hide,.hidden { display:none; visibility:hidden; }  /* Hide for both screenreaders and browsers */
+.visuallyhidden { position:absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); } /* Hide only visually - available for screenreaders */
+.invisible { visibility: hidden; } /* Hide visually and from screenreaders, but maintain layout */
+.clear { clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0; }
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; } /* Hides from IE-mac \*/
+.clearfix { display: block; }
+.fl {float:left !important}
+.fr {float:right !important}
+.tl {text-align:left !important}
+.tr {text-align:right !important}
+.tc {text-align:center !important}
+.tj {text-align:justify !important}
+.underline {text-decoration:underline}
+.bold {font-weight:bold}
+.italic {font-style:italic}
+.nodec {text-decoration:none}
+
+.nav li {position: relative; }
+.navbar .nav > li > a {text-shadow: none; font-family: 'Conv_PFDINDISPLAYPRO-REG'; font-size:18px; color:#777777;}
+.nav ul { left: -999em; top: 0; position: absolute; background: #fff; border: 1px solid #eee; border-top: 0; margin: 2.5em 0 0 0 !important; padding: 0 !important; line-height: 1em; }
+.nav li:hover ul { left: auto; width: 15em;z-index: 1000;}
+.nav li:hover ul ul { left: -999em; margin: 0; }
+.nav ul li:hover ul { left: 15em; margin-top: -1px !important;}
+.nav ul li { display: block; float: none; padding: 0 !important; margin: 0 !important; border-top: 1px solid #eee; }
+.nav ul li a { display: block; padding: 1em; }
+
+#loginform{padding-left: 120px!important;margin: 0px!important;}
+input[type="text"]{ border: none;width: 97%;margin-top: -9px;background: none;}
+
+/*--[ THEME CLASSES ]-------------------*/
+
+
+
+
+
+/* =============================================================================
+   WordPress CSS - Intializing Font Type Here  -->START
+   ========================================================================== */
+
+
+
+
+@font-face 
+{
+	font-family: 'Conv_PFDINDISPLAYPRO-REG';
+	src: url('fonts/PFDINDISPLAYPRO-REG.eot');
+	src: local('?'), url('fonts/PFDINDISPLAYPRO-REG.woff') format('woff'), url('fonts/PFDINDISPLAYPRO-REG.ttf') format('truetype'), url('fonts/PFDINDISPLAYPRO-REG.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face 
+{
+	font-family: 'OpenSans-Regular';
+	src: url('fonts/OpenSans-Regular.tff');
+	src: local('?'), url('fonts/PFDINDISPLAYPRO-REG.woff') format('woff'), url('fonts/PFDINDISPLAYPRO-REG.ttf') format('truetype'), url('fonts/PFDINDISPLAYPRO-REG.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+
+
+
+
+/* =============================================================================
+   WordPress CSS - Display:none for all class -->START
+   ========================================================================== */
+   
+/**
+ *    .example p.example, 
+       .example h1.exmaple,
+        .example h1.exmaple,
+          .example h1.exmaple,
+ *    {
+ *     display:none
+ *    } 
+ *    
+ */
+   
+   
+   
+   li.menu-publisher a span
+{
+    display:none
+}
+   
+/* =============================================================================
+   WordPress CSS - Display:none for all class-->END
+   ========================================================================== */
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================
+   WordPress CSS - Header Styles 
+   ========================================================================== */
+#header  {
+    background: #000 url(<%=asset_path "main/header-bg.png"%>) no-repeat top center;
+    height:147px;
+}
+#header .header-logo img {
+    margin-left: 220px;
+    margin-top: 20px;
+}
+.nav-bar {
+    background: #fafafa;
+    height:45px;
+    box-shadow: 0px 1px 5px #888;
+}
+ul.nav {
+    margin-top: 12px!important;
+}
+ul.nav li {
+    
+}
+ul.nav li a {
+    color:#777777!important;
+    font-family: 'Conv_PFDINDISPLAYPRO-REG';
+    text-transform: capitalize;
+    font-size:18px!important;
+    padding:0px 10px!important;
+}
+ul.nav li a:hover {
+    background:transparent;
+    color:#bb0000!important;
+}
+ul.nav li.active a {
+    color:#bb0000!important;
+    font-weight: bold!important;
+    background:transparent!important;
+    box-shadow: none!important;
+}
+
+
+.search-bar-area {
+    background: url(<%=asset_path "main/search-bar.png"%>) no-repeat;
+    margin-top: 5px;
+margin-left: 135px;
+}
+.search-bar-area input.sear-ch {
+    background: transparent;
+border: none;
+padding-left: 10px;
+margin-top: 3px;
+}
+.search-bar-area input.sub-mit {
+    background: transparent;
+border: none;
+font-size: 0;
+}
+input[type="text"]:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+.nav-bar .container {
+    position:relative;
+}
+.top-right-links {
+    position: absolute;
+    right: 0px;
+    top: 8px;
+}
+.top-right-links ul {
+    
+}
+.top-right-links ul li {
+    float:left;
+    list-style-type: none;
+    padding: 0px 7px;
+}
+
+/* =============================================================================
+   WordPress CSS - Main Styles 
+   ========================================================================== */
+body
+{
+    font-family:"OpenSans-Regular";
+}
+h1,h2,h3,h4,h5,h6
+{
+    font-family: 'Conv_PFDINDISPLAYPRO-REG';
+}
+p{
+    font-family:"OpenSans-Regular";
+	color:#666;
+}
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+    width: 980px!important;
+}
+#main-con {
+    min-height:1000px;
+}
+#main-con .container {
+    position:relative;
+}
+#main-con .main-content {
+
+    background: url(<%=asset_path "main/example-students-loan-bg.png"%>) ;
+    width:630px;
+    height:255px;
+}
+.left-links {
+    
+}
+.left-links ul {
+    border-radius: 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    margin-left: 8px;
+	clear: both;
+}
+.left-links ul li {
+    background: url(<%=asset_path "main/links-arrow.png"%>) no-repeat 266px 4px;
+    list-style-type: none;
+    height: 30px;
+    border-bottom: 1px solid #e3e3e3;
+    margin-top: 9px;
+}
+.left-links ul li a {
+    color:#333333;
+    font-size:12px;
+    text-transform: uppercase;
+    padding:0px 12px;
+    font-family: 'Conv_PFDINDISPLAYPRO-REG';
+    display: block;
+}
+.left-links ul li a:hover, .left-links ul li.active a {
+    color: #2d8dc4;
+}
+.cool-people {
+    border-radius: 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-bottom: 2px solid #e3e3e3;
+    margin-left: 8px;
+    min-height:250px;
+}
+.peaple-header {
+    border-bottom:1px solid #e3e3e3;
+    
+}
+.cool-h-link {
+    margin-left:-10px
+}
+.peaple-header .cool-heading h6 {
+    color:#333333;
+    font-weight:normal;
+    margin-left: -8px;
+	font-size:14px;
+	font-family: 'Conv_PFDINDISPLAYPRO-REG';
+}
+.cool-h-link ul {
+    margin-left:8px;
+    margin-top: 9px;
+}
+.cool-h-link ul li {
+    float: left;
+    list-style-type: none;
+}
+.cool-h-link ul li a {
+    color: #2d8dc4;
+    padding: 0px 10px;
+    font-size:14px;
+	font-family: 'Conv_PFDINDISPLAYPRO-REG';
+}
+.cool-post img {
+    float:left;
+    padding:5px;
+}
+.cool-post p{color:#b2b2b2;}
+.cool-heading {
+    margin-left: 38px;
+}
+.cool-post {
+    margin-left: 2px;
+    margin-top: 20px;
+}
+.cool-post ul  {
+    height: 11px;
+    margin-top: 12px;
+}
+.cool-post ul li {
+    float: left;
+    padding: 0 20px;
+    list-style-type: none;
+    margin-left: -18px;
+}
+.cool-post ul li a {
+    color: #9f9f9f
+}
+.cool-post p {
+    
+}
+.cool-post p span {
+    color: #2d8dc4;
+}
+a.post-link {
+   color: #2d8dc4;
+   margin-left: 55px; 
+   text-decoration:underline;
+   font-style:italic;
+}
+.miami-trends {
+    border-radius: 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-bottom: 2px solid #e3e3e3;
+    margin-left: 8px;
+    min-height:200px;
+    margin-top:10px;
+}
+.miami-trends .miami-header {
+    border-bottom:1px solid #e3e3e3;
+    height: 27px;
+}
+.miami-trends .miami-header ul {
+    margin-left: 4px;
+}
+.miami-trends .miami-header ul li {
+    float:left;
+    list-style-type: none;
+    padding:0px 10px;
+}
+.miami-trends .miami-header ul li a {
+    color: #2d8dc4;
+}
+.miami-links {
+    
+}
+.miami-links ul {
+    border-radius: 5px;
+    background: #f9f9f9;
+    margin-left: 0px;
+    margin-top: 14px;
+}
+.miami-links ul li {
+    list-style-type: none;
+    height: 30px;
+    border-bottom: 1px solid #e3e3e3;
+    margin-top: 9px;
+}
+.miami-links ul li a {
+    color:#333333;
+    font-size:12px;
+    padding:0px 12px;
+    font-family: 'OpenSans-Regular';
+    display: block;
+}
+.copy-tippen {
+    border-radius: 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-bottom: 2px solid #e3e3e3;
+    margin-left: 8px;
+    margin-top:10px;
+    }
+.copy-tippen p {
+    margin-top:15px;
+    line-height:10px;
+    margin-left:10px;
+	color:#adadad;
+}
+.tippen-content {
+    width: 630px;
+}
+.m-header {
+    border-radius: 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-bottom: 2px solid #e3e3e3;
+    height: 32px;
+    padding-bottom: 4px;
+    padding-top: 5px;
+}
+.m-header img.m-small {
+    float: left;
+    padding-right: 5px;
+    width: 35px;
+}
+.m-header p.kelly {
+    margin-top: 5px;
+}
+.m-header p.kelly span {
+    color:#c7c7c7;
+}
+.other-admir {
+    margin-left:0px;
+}
+.other-admir p {
+    margin-top: 6px;
+}
+.con-main img.m-large {
+    float: left;
+    padding-right:5px;
+}
+.con-main p.con-main-p {
+    margin-top:10px;
+}
+.con-main {
+    min-height:115px;
+	margin-left: 15px;
+}
+.m-footer {
+   border-radius: 0px 0px 5px 5px;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-bottom: 2px solid #e3e3e3;
+    height: 32px;
+    padding-bottom: 4px;
+    padding-top: 5px;
+}
+.reply-more {
+color:#b3b3b3;
+    
+}
+
+.reply-more ul {
+    margin-left: 20px;
+    margin-top: 6px;
+}
+.reply-more ul li {
+    float: left;
+    list-style-type: none;
+    padding-right: 56px;
+}
+.reply-more ul li.re-ply {
+    list-style-image: url(<%=asset_path "main/reply-img.png"%>);
+}
+.reply-more ul li.re-tip {
+    list-style-image: url(<%=asset_path "main/re-tip-img.png"%>);
+}
+.reply-more ul li.mo-re {
+    list-style-image: url(<%=asset_path "main/more-img.png"%>);
+}
+.reply-more ul li a {
+    color: #2d8dc4;
+    
+}
+.reply-more ul li.de-lete {
+    list-style-image: url(<%=asset_path "main/delete.jpg"%>);
+}
+.reply-more ul li.numbers {
+    list-style-image: url(<%=asset_path "main/numbers.jpg"%>);
+}
+.small-widget {
+    margin-left: 60px;
+    margin-top: 20px;
+    border: 1px solid #e3e3e3;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.small-widget a{color:#9f9f9f;}
+.small-widget a.details {
+    color: #2d8dc4;
+}
+.ric-area {
+    margin-top:10px;
+}
+.ric-area p.ric-reply {
+    border: 1px solid #e3e3e3;
+    height: 30px;
+    margin-left: 60px;
+    padding-top: 9px;
+    padding-left: 10px;
+    color: #a7a7a7;
+    border-radius: 5px;
+}
+.ric-area p.ric-reply1 {
+    border: 1px solid #e3e3e3;
+    height: 30px;
+    margin-left: 60px;
+    padding-top: 9px;
+    padding-left: 10px;
+    color: #a7a7a7;
+    border-radius: 5px;
+}
+.ric-reply1 input[type="text"]{ border: none;
+width: 87%;
+margin-top: -60px!important;
+background: none;
+padding-top: 10px;
+padding-left: 64px;}
+.brock-area {
+    background: #f6f6f6;
+height: 34px;
+padding: 6px;
+border-radius: 5px;
+border: 1px solid #e3e3e3;
+}
+.gallery-images-1 {
+    margin-top: 13px;
+}
+.gallery-images-2 {
+    margin-top:75px;
+}
+.lolly-area {
+    margin-top:150px;
+    background: #f6f6f6;
+    height: 34px;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #e3e3e3;
+}
+.bandz-area {
+    margin-top: 20px;
+    margin-left: -12px;
+}
+p.bandz-content {
+   font-family: 'OpenSans-Regular';
+    margin-top:20px;
+}
+.tips-reply-more ul {
+    margin-left: 40px;
+    margin-top: 6px;
+}
+.tips-reply-more ul li {
+    float: left;
+    list-style-type: none;
+    padding-right: 56px;
+}
+.tips-reply-more ul li.re-ply {
+    list-style-image: url(<%=asset_path "main/reply-img.png"%>);
+}
+.tips-reply-more ul li.re-tip {
+    list-style-image: url(<%=asset_path "main/re-tip-img.png"%>);
+}
+.tips-reply-more ul li.mo-re {
+    list-style-image: url(<%=asset_path "main/more-img.png"%>);
+}
+.tips-reply-more ul li a {
+    color: #2d8dc4;
+    
+}
+.tips-reply-more ul li.de-lete {
+    list-style-image: url(<%=asset_path "main/delete.jpg"%>);
+}
+.tips-reply-more ul li.numbers {
+    list-style-image: url(<%=asset_path "main/ numbers.jpg"%>);
+}
+.tips-reply-more ul li.admime {
+    list-style-image: url(<%=asset_path "main/star.png"%>);
+}
+p.profile-link {
+    float: right;
+    
+}
+p.profile-link a {
+    color: #2d8dc4;
+}
+
+
+
+.profile{ background: #fbfbfb;
+border: solid 1px #dedede;
+border-radius: 5px;
+float: left;
+margin-bottom: 25px;
+margin-left:10px;}
+.profile-det{ clear: both;
+margin-bottom: 10px;
+float: left;}
+.profile img{ padding:10px; float: left;}
+.name{ color:#333333; font-size:15px; float:left;padding-top: 10px;font-family:PFDinDisplayPro;}
+.name span{color:#b2b2b2; font-family:PFDinDisplayPro; padding-left:30px;margin-right: 10px;}
+.profile-link a{font-family:OpenSans; font-size:11px; color:#b2b2b2;}
+.profile-link{ font-family:OpenSans; font-size:11px; color:#b2b2b2;}
+.tips{float: left;
+border: solid 1px #dedede;
+padding: 0 11px;
+height: 45px;
+text-align: center;
+color: #b2b2b2;
+font-size:12px; 
+border-left:none;
+font-family:PFDinDisplayPro;
+padding-bottom: 10px;
+}
+.heading{ font-size: 18px;
+color: #000000;
+width: 100%;
+height: 43px;
+border: solid 1px #ebebeb;
+border-radius: 5px;
+padding: 0 0 0 20px;
+margin: 30px 0;
+font-family: 'Conv_PFDINDISPLAYPRO-REG';}
+.tips span{float: left;
+margin-left: -8px;
+width: 100%;
+color: #333333;
+font-weight: bold;
+font-size: 14px;
+margin-top: 8px;
+margin-bottom: 5px;}
+select, input[type="file"] {
+background:#bf0000;
+width: 176px;
+float: left;
+margin-top: 15px;
+margin-left: 10px;
+height: 27px;
+text-align: center;
+color: #f9dfdf;
+padding-top: 3px;
+font-size: 14px;
+font-family: PFDinDisplayPro;
+margin-bottom: 10px;
+font-weight: bold;
+}
+.msg{ 
+
+width: 176px;
+float: left;
+margin-top: 15px;
+margin-left: 10px;
+height: 27px;
+text-align: center;
+color: #f9dfdf;
+padding-top: 3px;
+font-size: 14px;
+font-family: PFDinDisplayPro;
+margin-bottom: 10px;
+font-weight: bold;
+}
+.star{float:right; margin-top: -10px;}
+.banner{width: 98%;
+margin-left: 7px;
+margin-top: 20px;
+margin-bottom: 20px;}
+
+.ric-area1 p.ric-reply {
+    border: 1px solid #e3e3e3;
+    height: 30px;
+    padding-top: 9px;
+    padding-left: 10px;
+    color: #a7a7a7;
+    border-radius: 5px;
+	margin-top:10px;
+}
+.m-footer p{ color:#b9b9b9; font-size:10px; float: right;
+margin-right: 8px;}
+.m-footer a{ color:#7db7d8; text-decoration:none; font-size:10px;}
+.con-mai{ float:left;
+padding-right:5px;
+border: solid 1px #ebebeb;
+border-radius: 2px;
+margin:30px 0;}
+
+.ric-reply span{color:#7db7d8;}
+.list_img{ float:right;padding: 10px;}
+.list_name{float:left; padding:15px; color:#999999;}
+.list_name span{color:#333333;}
+
+/* =============================================================================
+   WordPress CSS - Footer Styles 
+   ========================================================================== */
+.footer {
+    background: #000 url(<%=asset_path "main/footer-bg.png"%>) no-repeat top center;
+    height:200px;
+	margin-top: 100px
+}
+.footer .footer-logo {
+    text-align:center;
+}
+.footer .footer-logo img {
+    margin-top:25px;
+}
+.f-nav {
+    margin-left: 205px;
+    margin-top: 22px;
+}
+.f-nav li {
+    list-style-type: none;
+    float: left;
+    border-right: 1px solid #000000;
+    line-height: 10px;
+    padding-right: 10px;
+}
+.f-nav li.f-menu-contact-us {
+    border-right:none;
+}
+.f-nav li a {
+    padding: 0px 0px;
+    padding-left: 10px;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    color:#fff;
+    text-transform: uppercase;
+}
+p.copyrite {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+.page-header{
+	margin-bottom : 20px;
+	padding: 8px 0 0px 0 !important;
+	font-size: 20px;
+	 font-family:"MyriadProRegular",arial;
+	 width:655px;
+	}
+	.post-box{
+		-moz-border-bottom-colors: none;
+		-moz-border-left-colors: none;
+		-moz-border-right-colors: none;
+		-moz-border-top-colors: none;
+		
+		border-color: #E3E3E3;
+		border-image: none;
+		border-radius: 5px 5px 5px 5px;
+		border-style: solid;
+		border-width: 1px 1px 2px;
+		
+		border-bottom:0px;
+		border-bottom-width:0px;
+		border-collapse:collapse;
+		
+		width:655px;
+		
+		padding-top: 5px;
+		}
+		.banner-section{
+				border-radius: 5px 5px 5px 5px;
+				border-width: 1px;
+				border-color: #E3E3E3;
+				width:655px;
+				height:307px;
+				
+		}
+		.banner-footer{
+			 -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #E3E3E3;
+    border-image: none;
+    border-radius: 0 0 5px 5px;
+    border-style: solid;
+    border-width: 0px 1px 2px;
+    height: 52px;
+    padding-bottom: 4px;
+  	
+			}
+			.total-posts{
+				width:400px !important;
+				margin-top:0px;}
+			.total-posts ul {
+    margin-left: 0px;
+	padding-top:5px;
+ 
+}
+.total-posts ul li {
+    float: left;
+	border-right: 2px solid #f0f0f0;
+    list-style-type: none;
+    padding-right: 30px;
+	margin-left: 10px;
+}
+.total-posts ul li:last-child{
+	border:0;}
+	.total-posts ul li span{
+		color:#777777;
+		
+		}
+		button.edit-account{
+			background:url(<%=asset_path "main/edit-account.png"%>);
+			width:113px;
+			height:26px;
+			border:0;
+			background-repeat:no-repeat;
+			}
+			button.message{
+			background:url(<%=asset_path "main/message.png"%>);
+			width:93px;
+			height:26px;
+			border:0;
+			background-repeat:no-repeat;
+			}
+			.total-posts-buttons{
+				padding-top:15px;}
