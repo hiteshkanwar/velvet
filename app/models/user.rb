@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates :email, email: true
   validates :username, length: { minimum: 5 }
   validates :hashed_password, length: { minimum: 6 }
+  validates_exclusion_of :username, :in => %w( messages posts blog forum admin profile dashboard comment landing )
+
   after_create :hash_password
 
   def all_posts(pg=1)

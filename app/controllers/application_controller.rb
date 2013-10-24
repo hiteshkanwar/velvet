@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  protected
+    protected
     def _set_current_session
       # Define an accessor. The session is always in the current controller
       # instance in @_request.session. So we need a way to access this in

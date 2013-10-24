@@ -10,9 +10,10 @@ Velvet::Application.routes.draw do
   match '/forgot',    :to => 'landing#forgot'
   match '/confirm_forgot',    :to => 'landing#confirm_forgot'
 
-  match '/#!/:username' => 'profile#index', via: "get"
+  #resources :profile, :path=>''
 
-  resources :users, :path=>''
+  match ':username', :controller => 'profile', :action => 'show'
+  match ':username/:action', :controller => 'profile'
 
 
   # The priority is based upon order of creation:

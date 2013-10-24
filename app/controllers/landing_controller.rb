@@ -42,6 +42,8 @@ class LandingController < ApplicationController
 
     if User.authenticate(params[:email], params[:password])
     	session[:email] = params[:email]
+      user = User.find_by_email(params[:email])
+      session[:username] = user.username
     	
       # If state exists from, accept inviation
       # Redirect to state, else login user
@@ -133,6 +135,7 @@ class LandingController < ApplicationController
 
   def logout
   	session[:email] = nil
+    session[:username] = nil
 	  redirect_to :root
   end
 
