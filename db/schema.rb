@@ -11,12 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913214759) do
+ActiveRecord::Schema.define(:version => 20131025005159) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "post_id"
     t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "followings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "follower_id"
+    t.boolean  "blocked"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "hash_tags", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "name"
+    t.integer  "count"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -32,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20130913214759) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "body"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "filepicker_url"
+  end
+
+  create_table "reposts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

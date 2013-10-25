@@ -6,10 +6,10 @@ module ApplicationHelper
 
 	    #replace @usernames with links to that user
 	    while s =~ user
-	        s.sub! "@#{$1}", "<a href='http://tippinthevelvet.com/#{$1}' >@#{$1}</a>"
+	        s.sub! "@#{$1}", "<a href='http://tippinthevelvet.com/#{$1}' >@ #{$1}</a>"
 	    end
 
-	     s
+	    s
 
 	end
 end

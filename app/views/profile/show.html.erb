@@ -2,7 +2,7 @@
 <% # Display self %>
 
 <%if @user == session[:username] %>
-    <%= render :partial => 'other' %>
+    <%= render :partial => 'own' %>
 <% else %>
     <%= render :partial => 'other' %>
 <% end %>

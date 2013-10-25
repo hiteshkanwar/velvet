@@ -22,70 +22,9 @@
 
     <div class="span8 tippen-content">
         
-        <div class="ric-area1">
-            <p class="ric-reply"><input type="text" placeholder="write a Tip---"></p>
-        </div>
-		<div class="con-main">
-            <%= image_tag "main/main-large-img.png", :class => 'm-large' %>
-            <p class="con-main-p">Julie  <a href="#" style="color:#9f9f9f">@ric_flair</a></p>
-            <p>London Serviced Apartments, Corporate Housing Extended Stay Hotels &amp; Short-lets</p>
-            <p class="profile-link"><a href="#">View Ric Flair Profile</a></p>
-        </div>
-        <div class="m-footer">
-            <div class="tips-reply-more">
-                <ul>
-                    <li class="re-ply"><a href="#">Reply</a></li>
-                    <li class="re-tip"><a href="#">Re-Tip</a></li>
-                    <li class="numbers"><a href="#">300</a></li>
-                    <li class="mo-re"><a href="#">More</a></li>
-                </ul>
-            </div>
-			<p>about an hour ago 5:20 AM - 16 Sep 13 - <a class="details" href="#">Details</a></p>
-        </div>
-		<div class="small-widget">
-            
-            <%= image_tag "main/main-large-img.png", :class => 'm-large', :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-
-            <p>Marie &nbsp; &nbsp; &nbsp;<a href="#">@merry</a><br> nce display picture</p>
-            <div class="reply-more">
-                <ul>
-                    <li class="re-ply"><a href="#">Reply</a></li>
-                    <li class="re-tip"><a href="#">Re-Tip</a></li>
-                    <li class="numbers"><a href="#">300</a></li>
-                    <li class="mo-re"><a href="#">More</a></li>
-                </ul>
-            </div><br>
-            <p>about an hour ago 5:20 AM - 16 Sep 13 - <a class="details" href="#">Details</a></p>
-        </div>
-       <div class="ric-area">
-   
-             <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-            <p class="ric-reply"><input type="text" placeholder="write a Tip---"></p>
-        </div>
-		<div class="con-main">
-           
-            <%= image_tag "main/main-large-img.png", :class => "m-large" %>
-
-            <p class="con-main-p">Julie  <a href="#" style="color:#9f9f9f">@ric_flair</a></p>
-            <p>London Serviced Apartments, Corporate Housing Extended Stay Hotels &amp; Short-lets</p>
-            <p class="profile-link"><a href="#">View Ric Flair Profile</a></p>
-        </div>
-        <div class="m-footer">
-            <div class="tips-reply-more">
-                <ul>
-                    <li class="re-ply"><a href="#">Reply</a></li>
-                    <li class="re-tip"><a href="#">Re-Tip</a></li>
-                    <li class="numbers"><a href="#">300</a></li>
-                    <li class="mo-re"><a href="#">More</a></li>
-                </ul>
-            </div>
-			<p>about an hour ago 5:20 AM - 16 Sep 13 - <a href="#">Details</a></p>
-        </div>
-    
-    <div class="ric-area">
-	 <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-            <p class="ric-reply"><input type="text" placeholder="write a Tip---"></p>
-        </div>
+        <!-- START POST -->
+        <%= render :partial => 'posts' %>
+        <!-- END POST -->
     
 	</div>
 </div>
