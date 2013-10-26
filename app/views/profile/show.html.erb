@@ -1,7 +1,7 @@
 <% # If user navigates to own profile %>
 <% # Display self %>
 
-<%if @user == session[:username] %>
+<%if @user.username == session[:username] %>
     <%= render :partial => 'own' %>
 <% else %>
     <%= render :partial => 'other' %>

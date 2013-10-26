@@ -30,6 +30,17 @@ class User < ActiveRecord::Base
   end 
 
   def who_to_follow
+    # Get 20 random ids from who user is currently following
+    people_user_following_ids = self.following.sort_by { rand }.slice(0, 20).map(&:user_id)
+    # Find those users
+    people_user_following = User.where(id: people_user_following_ids)
+    # Find 5 random friends of friends 
+    friends_of_friends = people_user_following.map { |person| 
+      person.following.sort_by { rand }.slice(0, 5).map{ |friend| "#{friend.user_id}, #{friend.follower_id}" }
+    }.flatten
+
+    return friends_of_friends
+    
   end
 
   private

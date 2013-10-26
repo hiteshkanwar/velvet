@@ -6,28 +6,25 @@
         </div>
         <div class="span2 cool-h-link">
             <ul>
-                <li><a href="#">Refresh</a></li>
-                <li><a href="#">View All</a></li>
+                <li><a href="<%= @current_url %>">Refresh</a></li>
+               <!-- <li><a href="#">View All</a></li> -->
             </ul>
         </div>
         </div>
     </div>
-    <div class="cool-post">
-        <img align="left" src="./images/cool-img.png">
-        <ul>
-            <li>Lexus</li>
-            <li><a href="#">@Lexus</a></li>
-        </ul>
-        <p>Acquainted by <span>Marie Lau</span> and <span>others</span></p>
-        <a class="post-link" href="#">Acquaintance</a>
-    </div>
-    <div class="cool-post">
-        <img align="left" src="./images/cool-img.png">
-        <ul>
-            <li>Franklin</li>
-            <li><a href="#">@Franklin</a></li>
-        </ul>
-        <p>Acquainted by <span>Marie</span> and <span>others</span></p>
-        <a class="post-link" href="#">Acquaintance</a>
-    </div>
+    <%  @current_user.who_to_follow.each do |suggestion| %>
+       <% person      = User.find(suggestion.split(",")[0]) %>
+       <% followed_by = User.find(suggestion.split(",")[1]) %>
+
+        <div class="cool-post">
+            <%= image_tag "main/main-large-img.png", :align => "left", :width => "46" %>
+            <ul>
+                <li><%= person.name %></li>
+                <li><a href="/<%= person.username %>">@<%= person.username %></a></li>
+            </ul>
+            <p>Acquainted by <span><a href="/<%= followed_by.username %>"> <%= followed_by.name %></a></span> and <span>others</span></p>
+            <a class="post-link" href="#">Acquaintance</a>
+        </div>
+    <% end %>
+
 </div>  

@@ -9,14 +9,15 @@ class Post < ActiveRecord::Base
 
   def process_hashtags
        hashtag_regex = /\B#\w\w+/
-       text_hashtags = text.scan(hashtag_regex)
+       text_hashtags = self.body.scan(hashtag_regex)
        text_hashtags.each do |tag|
        	 hashtag = HashTag.where(name: tag)
        	 if !hashtag.empty?
-       	 	hashtag.update_attributes(count: hashtag.count+=1)
+            hashtag = hashtag.first
+         	 	hashtag.update_attributes(count: hashtag.count+=1)
        	 else
-         	HashTag.create name: tag, post_id: self.id
-     	 end
+         	  HashTag.create name: tag, post_id: self.id, count: 1
+     	   end
        end
   end
 

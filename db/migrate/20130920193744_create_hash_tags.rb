@@ -3,7 +3,7 @@ class CreateHashTags < ActiveRecord::Migration
     create_table :hash_tags do |t|
       t.references :post
       t.string  "name"
-      t.integer "count"
+      t.integer "count", default: 1
       t.timestamps
     end
   end

@@ -20,9 +20,9 @@
             <div class="banner-footer">
             	<div class="span4 total-posts">
                 	<ul>
-                    	<li> 6 <br> <span><strong>TIPS</strong></span></li>
-                        <li>10 <br> <span><strong>ACQUANTING</strong></span></li>
-                        <li>8 <br> <span><strong>ACQUANTANCES</strong></span></li>
+                    	<li> <%= @current_user.posts.size %> <br> <span><strong>TIPS</strong></span></li>
+                        <li><%= @current_user.following.size %> <br> <span><strong>ACQUANTING</strong></span></li>
+                        <li><%= @current_user.followers.size %> <br> <span><strong>ACQUANTANCES</strong></span></li>
                     </ul>
                 </div>
                 <div class="left total-posts-buttons">

@@ -9,4 +9,10 @@ class PostController < ApplicationController
 		@current_user.reposts.create(post_id: params[:id])
 	end
 
+	def reply
+	end
+
+	def destroy
+	end
+
 end

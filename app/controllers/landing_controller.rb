@@ -64,7 +64,7 @@ class LandingController < ApplicationController
 
   def create
 
-  	 @user = User.new(username: params[:username], email: params[:email], hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+  	 @user = User.new(name: params[:name], username: params[:username], email: params[:email], hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
 
   	 if @user.save
 
@@ -80,6 +80,7 @@ class LandingController < ApplicationController
          session[:month] = nil
          session[:day] = nil
          session[:year] = nil
+         session[:name] = nil
         
         # If state exists from, accept inviation
         # Redirect to state, else login user
@@ -95,6 +96,7 @@ class LandingController < ApplicationController
        # Store defaults 
        session[:signup_email] = params[:email]
        session[:username] = params[:username]
+       session[:name] = params[:name]
        session[:month] = params[:month]
        session[:day] = params[:day]
        session[:year] = params[:year]

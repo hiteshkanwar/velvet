@@ -25,8 +25,12 @@
 		<form id="register" action="landing/create" method="POST" class="Registeration">
 			<h1 class="registrationh1">Registration</h1>
 			<div class="register-field">
+			<label>Name</label><br/>
+			<input type="text" class="name"  name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
+
 			<label>Username</label><br/>
 			<input type="text" class="register name"  name="username" value="<%= session[:username] %>" Placeholder="Username"/><br/>
+
 			<label>Email</label><br/>
 			<input type="text" class="register email" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/><br/>
 			<label>Password</label><br/>

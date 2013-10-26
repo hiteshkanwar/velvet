@@ -2,8 +2,8 @@ class HashTag < ActiveRecord::Base
   # attr_accessible :title, :body
   belongs_to :post
 
-  def trending
-  	self.order("hast_tags.count DESC").limit(10)
+  def self.trending
+  	self.order("count DESC").limit(10)
   end
 
 end

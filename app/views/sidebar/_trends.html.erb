@@ -2,16 +2,15 @@
     <div class="miami-header">
         <ul>
             
-            <li><a href="#">Miami Trends</a></li>
-            <li>Change</li>
+            <li><a href="#">Trends</a></li>
+            <!-- <li>Change</li> --> 
         </ul>
     </div>
     <div class="miami-links">
         <ul>
-            <li><a href="#">#sytcdfinale</a></li>
-            <li><a href="#">#Manuel Contresras</a></li>
-            <li><a href="#">#Adnire</a></li>
-            <li><a href="#">#Cristiano Ronaldo</a></li>
+            <% HashTag.trending.each do |tag| %>
+                <li><a href="#"><%= tag.name %></a></li>
+            <% end %>
         </ul>
     </div>
 </div>
