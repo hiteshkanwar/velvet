@@ -11,6 +11,8 @@ Velvet::Application.routes.draw do
   match '/confirm_forgot',    :to => 'landing#confirm_forgot'
 
   #resources :profile, :path=>''
+  match "/post/create", :to => 'post#create'
+  match "/post/comment", :to => 'post#comment'
 
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'

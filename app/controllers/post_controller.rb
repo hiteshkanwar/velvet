@@ -25,20 +25,37 @@ class PostController < ApplicationController
 		@current_user.reposts.create(post_id: params[:id]) if Post.find(params[:id])
 	end
 
-	def reply
+	def repost
+		post = Post.find(params[:id])
+		@current_user.reposts.create(post: post) if post
+		redirect_to request.referer
 	end
 
 	def comment
 		post = Post.find(params[:id])
-		if post
+		if post && params[:body]
 			post.comments.create(body: params[:body], user: @current_user)
-			flash[:notice] = "Write something..."
+			flash[:notice] = "Posted reply..."
+		end
+		redirect_to request.referer
+	end
+
+	def remove
+		comment = Comment.find(params[:id])
+		# Allow comment or post owner to remove comment
+		if comment && (comment.user == @current_user || comment.post.user == @current_user)
+			# Find comment user and remove comment
+			# comment.user.comments.find(comment).destroy
+			comment.post.comments.find(comment).destroy
+			flash[:notice] = "Comment as been removed..."
 		end
 		redirect_to request.referer
 	end
 
 	def destroy
 		@current_user.posts.find(params[:id]).destroy
+		@current_user.reposts.find_by_post_id(params[:id]).destroy
+		flash[:notice] = "Past as been removed..."
 		redirect_to request.referer
 	end
 

@@ -1,6 +1,6 @@
 
  <div class="ric-area1">
-    <form action="/post/create/1" name="tips" method="post">
+    <form action="/post/create" name="tips" method="post">
         <p class="ric-reply"><input name="body" type="text" placeholder="Write a Tip---"></p>
         <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
         <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
@@ -8,6 +8,7 @@
 </div>
 
 <% @user.all_posts(1)[0, 10].each do |post| %>
+
     <div class="post-container">
 
         <!-- original post body -->
@@ -24,7 +25,7 @@
             <div class="tips-reply-more">
                 <ul>
                    <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
-                    <li class="re-tip"><a href="#">Re-Tip</a></li>
+                    <li class="re-tip"><a href="/post/repost/<%= post.id %>">Re-Tip</a></li>
                     <li class="admime"><a href="#">Admire</a></li>
                     <% if post.user == @current_user %>
                     <li class="de-lete"><a href="/post/destroy/<%= post.id %>">Delete</a></li>
@@ -39,11 +40,13 @@
         <% post.comments.each do |comment| %>
         <div class="small-widget">
             <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-            <p class="con-main-p" style="color:#333">Marie &nbsp; &nbsp; &nbsp;<a href="#" style="color:#9f9f9f">@merry</a></p><p style="color:#a6a6a6"> nice display picture</p><p></p>
+            <p class="con-main-p" style="color:#333"><%= comment.user.name %> &nbsp; &nbsp; &nbsp;<a href="<%= comment.user.username %>" style="color:#9f9f9f">@<%= comment.user.username %></a></p><p style="color:#a6a6a6"> <%= raw link_urls_and_users(comment.body) %></p><p></p>
             <div class="reply-more">
                 <ul>
                     <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
-                    <li class="de-lete"><a href="#">Delete</a></li>
+                    <% if comment.user == @current_user || post.user == @current_user %>
+                    <li class="de-lete"><a href="/post/remove/<%= comment.id %>">Delete</a></li>
+                    <% end %>
                     <li class="numbers"><a href="#">300</a></li>
                     <li class="mo-re"><a href="#">More</a></li>
                 </ul>
@@ -55,11 +58,12 @@
         <!-- reply here -->
         <div class="ric-area">
            <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-           <form action="/post/comment/1" name="reply" method="post">
+           <form action="/post/comment" name="reply" method="post">
                 <p class="ric-reply"><input type="text" name="body" placeholder="Write a Reply---"></p>
                 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
                 <input name="id" type="hidden" value= "<%= post.id %>" />
            </form>
         </div>
     </div>
+
 <% end %>

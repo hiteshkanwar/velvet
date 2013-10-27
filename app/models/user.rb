@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   after_create :hash_password
 
   def all_posts(pg=1)
-    (self.posts << self.reposts.map(&:post_id).map {|id| Post.find(id) })
+    posts = Array.new
+    posts << self.posts  + self.reposts.map(&:post_id).map {|id| Post.find(id) }
+    posts.flatten.sort{|a, b| b[:created_at] <=> a[:created_at]}
   end 
 
   # People user is following
