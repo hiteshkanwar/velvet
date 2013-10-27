@@ -1,12 +1,12 @@
 
  <div class="ric-area1">
     <form action="/posts/create" name="tips" method="post">
-        <p class="ric-reply"><input name="body" type="text" placeholder="Write a Tip---"></p>
+        <p class="ric-reply"><input class="disabled" name="body" type="text" placeholder="Write a Tip---"></p>
         <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
     </form>
 </div>
 
-<% @current_user.posts[0, 10].each do |post| %>
+<% @user.posts[0, 10].each do |post| %>
     <div class="post-container">
 
         <!-- original post body -->

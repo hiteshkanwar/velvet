@@ -12,9 +12,9 @@
         </div>
         </div>
     </div>
-    <%  @current_user.who_to_follow.each do |suggestion| %>
-       <% person      = User.find(suggestion.split(",")[0]) %>
-       <% followed_by = User.find(suggestion.split(",")[1]) %>
+    <%  @current_user.who_to_follow[0,5].each do |suggest| %>
+       <% person      = User.find(suggest.split(",")[0]) %>
+       <% followed_by = User.find(suggest.split(",")[1]) %>
 
         <div class="cool-post">
             <%= image_tag "main/main-large-img.png", :align => "left", :width => "46" %>

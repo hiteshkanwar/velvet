@@ -7,7 +7,6 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
   <meta charset="utf-8">
-  <title>Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <%= stylesheet_link_tag "main/application" %>
@@ -37,10 +36,10 @@
                 <div class="navba-inner">
                     
                         <ul id="menu-primary-navigation" class="nav">
-                            <li class="menu-home"><a href="index.html">Home</a></li>
-                            <li class="menu-activity"><a href="activity.html">Activity</a></li>
-                            <li class="menu-discover"><a href="discover.html">Discover</a></li>
-                            <li class="menu-profile active active"><a href="profile.html">Profile</a></li>
+                            <li class="menu-home"><a href="/">Home</a></li>
+                            <li class="menu-activity"><a href="#">Activity</a></li>
+                            <li class="menu-discover"><a href="#">Discover</a></li>
+                            <li class="menu-profile active active"><a href="/<%= session[:username] %>">Profile</a></li>
                         </ul>
                         <div class="clear"></div>
                     
@@ -59,16 +58,25 @@
                 <div class="top-right-links">
                 <ul>
                     <li><a href="#"><%= image_tag "main/setting-img.png" %></a></li>
-                    <li><a href="#"><%= image_tag "main/top-edit-img.png" %></a></li>
+                   <!-- <li><a href="#"><= image_tag "main/top-edit-img.png" %></a></li> -->
                 </ul>
                 </div>
                 
             </div>
             </div>
         </div>
+
+    <!-- status -->
+    <%if flash[:notice] %>
+        <div class="notice" style="margin-right: 500px;margin-left: 600px;width: 400px;">
+                 <p> <%= flash[:notice] %> </p>
+        </div>
+    <% end %>
+
     
     
     <div id="main-con">
+        
         <!-- container --> 
         <%= yield %>
     
@@ -82,12 +90,12 @@
                     <div class="f-navba-inner">
                         
                             <ul id="menu-primary-navigation" class="f-nav">
-                                <li class="f-menu-about-tv"><a href="index.html">about tv</a></li>
-                                <li class="f-menu-adver"><a href="advertisers.html">advertisers</a></li>
-                                <li class="f-menu-blog"><a href="blog.html">blog</a></li>
-                                <li class="f-menu-find"><a href="find-acquaintances.html">find acquaintances</a></li>
-                                <li class="f-menu-privacy"><a href="privacy.html">PRIVACY</a></li>
-                                <li class="f-menu-terms"><a href="terms.html">TERMS</a></li>
+                                <li class="f-menu-about-tv"><a href="#">about tv</a></li>
+                                <li class="f-menu-adver"><a href="#">advertisers</a></li>
+                                <li class="f-menu-blog"><a href="#">blog</a></li>
+                                <li class="f-menu-find"><a href="#">find acquaintances</a></li>
+                                <li class="f-menu-privacy"><a href="#">PRIVACY</a></li>
+                                <li class="f-menu-terms"><a href="#">TERMS</a></li>
                             </ul>
                             <div class="clear"></div>
                         

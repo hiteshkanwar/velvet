@@ -1,11 +1,19 @@
 class ProfileController < ApplicationController
 	layout 'main/application'
+	# ---------------
+ 	# Validations
+	# -------------
 
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :only => [:show]
 	
 	def current_user
-	    @current_user ||= User.find_by_email(session[:email])
+		unless session[:email]
+			# Default user if not signed in.
+			@current_user = User.new
+		else
+	    	@current_user ||= User.find_by_email(session[:email])
+	    end
 	end
 
 	def not_found(username)
@@ -15,6 +23,8 @@ class ProfileController < ApplicationController
       	return true
       end
     end
+
+    # ---------------------
 
 	def index
 		redirect_to :root
@@ -55,5 +65,13 @@ class ProfileController < ApplicationController
 		render :nothing => true
 	end
 
+	# create before filter to validate 
+	#  session[:username] is current viewing username
+
+	def message
+	end
+
+	def settings
+	end
 
 end

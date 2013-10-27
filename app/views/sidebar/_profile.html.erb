@@ -1,17 +1,24 @@
 <div class="profile">
 	<div class="profile-det">
 		<a href="#"><%= image_tag "main/main-large-img.png", :width => "47" %></a>
-		<div class="name"><%= @user.name %><span>@<%= @user.username %></span></div>
+		<div class="name"><%= @user.name %><span>@<%= @user.username %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 		<div class="profile-link"><a href="/<%= @user.username %>">view my profile page</a></div>
 	</div>
 	<div class="tips"><span><%= @user.posts.size %></span>TIPS</div>
 	<div class="tips"><span><%= @user.following.size %></span>ACQUAINTING</div>
 	<div class="tips" style="border-right:none;"><span><%= @user.followers.size %></span>ACQUAINTANCES</div>
-	<select class="msg">    
-		<option value="direct-message">Direct Message</option>
+	<select class="msg" onchange="javascript:handleSelect(this)">    
+		<option value="direct_message">Direct Message</option>
 		<option value="acquaint">Acquaint</option>
 		<option value="admire">Admire</option>
 		<option value="message">Message</option>
-		<option value="add-to-list">Add to list</option>
+		<option value="add_to_list">Add to list</option>
 	</select>
 </div>
+
+<script type="text/javascript">
+	function handleSelect(elm)
+	{
+		window.location = "/dashboard/"+elm.value+"/<%= params[:username] %>";
+	}
+</script>

@@ -3,11 +3,11 @@
 
 			<div class="third">
 				<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
-				<form id="forgot" action="/landing/reset" method="post">
+				<form id="forgot" action="/landing/reset/1" method="post">
 					<h1>Forgot password</h1><br>
 					 
 					 <label>Email Address</label><br>
-					 <input type="text" name="email" class="sec"><br>
+					 <input type="text" name="email" class="register name"><br>
 					 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 					 <input type="Submit" class="submit2" value="submit"><br>
 			 	 </form>

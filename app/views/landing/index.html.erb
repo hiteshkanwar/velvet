@@ -22,11 +22,11 @@
 			</div>
 		</form>
 		
-		<form id="register" action="landing/create" method="POST" class="Registeration">
+		<form id="register" action="landing/create/1" method="POST" class="Registeration">
 			<h1 class="registrationh1">Registration</h1>
 			<div class="register-field">
 			<label>Name</label><br/>
-			<input type="text" class="name"  name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
+			<input type="text" class="register name"  name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
 
 			<label>Username</label><br/>
 			<input type="text" class="register name"  name="username" value="<%= session[:username] %>" Placeholder="Username"/><br/>
