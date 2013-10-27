@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
 	# -------------
 
 	before_filter :confirm_logged_in
-	before_filter :expect => [:index] do |c| c.not_found params[:id] end 
+	before_filter :only => [:acquaint, :direct_message, :admire, :message, :add_to_list] do |c| c.not_found params[:id] end 
 	before_filter :current_user, :only => [:show]
 	
 	def current_user
@@ -36,22 +36,34 @@ class DashboardController < ApplicationController
 		render 'index', :layout => false
 	end
 
-	def direct_message
-		render :nothing => true
-	end
+
+	# -----------
+	# Controls
+	# ---------------
 
 	def acquaint
-		if @current_user.following.include?
+
+		if !@current_user.is_following.include? @user
 			@user.followers.create(follower_id: @current_user.id)
-			flash[:notice] = "You a"
+			flash[:notice] = "Now following #{@user.name}"
 		else
 			flash[:notice] = "You're already following #{@user.name}"
 		end
+
+		redirect_to "/#{@user.username}"
+	end
+
+	def direct_message
+		flash[:notice] = "Not yet implemented"
 		redirect_to "/#{@user.username}"
 	end
 
 	def admire
-		flash[:notice] = "Not yet implemented"
+
+		if Post.find(params[:post_id])
+			@current_user.admires.create(post_id: params[:post_id])
+			flash[:notice] = "Admired"
+		end
 		redirect_to "/#{@user.username}"
 		
 	end
@@ -65,5 +77,7 @@ class DashboardController < ApplicationController
 		flash[:notice] = "Not yet implemented"
 		redirect_to "/#{@user.username}"
 	end
+
+	# ----------
 
 end

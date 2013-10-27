@@ -12,7 +12,7 @@
         </div>
         </div>
     </div>
-    <%  @current_user.who_to_follow[0,5].each do |suggest| %>
+    <%  @current_user.who_to_follow[0,3].each do |suggest| %>
        <% person      = User.find(suggest.split(",")[0]) %>
        <% followed_by = User.find(suggest.split(",")[1]) %>
 

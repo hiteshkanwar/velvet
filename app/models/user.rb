@@ -29,6 +29,16 @@ class User < ActiveRecord::Base
     (self.posts << self.reposts.map(&:post_id).map {|id| Post.find(id) })
   end 
 
+  # People user is following
+  def is_following
+    self.following.map { |f| f.user }
+  end
+
+  # User followers
+  def is_followers
+    self.followers.map { |f| f.follower }
+  end
+
   def who_to_follow
     # Get 20 random ids from who user is currently following
     people_user_following_ids = self.following.sort_by { rand }.slice(0, 20).map(&:user_id)

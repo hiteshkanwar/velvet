@@ -5,7 +5,7 @@ class ProfileController < ApplicationController
 	# -------------
 
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
-	before_filter :current_user, :only => [:show]
+	before_filter :current_user, :except => [:index]
 	
 	def current_user
 		unless session[:email]
@@ -17,21 +17,26 @@ class ProfileController < ApplicationController
 	end
 
 	def not_found(username)
-	  if User.where(username: username).empty?
+	  @user = User.where(username: username)
+	  if @user.empty?
       	raise ActionController::RoutingError.new('Not Found')
       else
+      	@user = @user.first
       	return true
       end
     end
 
+
     # ---------------------
+    # @current_user : self, @user : other user
+    # ---------------------
+
 
 	def index
 		redirect_to :root
 	end
 
 	def show
-		@user = User.find_by_username(params[:username])
 		@current_url = request.original_url
 
 	end
@@ -47,22 +52,24 @@ class ProfileController < ApplicationController
 
 	# People user is following
 	def acquainting
-		render :nothing => true
+		@users_to_display = @user.is_following
 	end
 
 	# People following user
 	def acquaintances
-		render :nothing => true
+		@users_to_display = @user.is_followers
 	end
 
 	# People user admires
 	def admire
-		render :nothing => true
+		flash[:notice] = "Not yet implemented"
+		redirect_to "/#{@user.username}"
 	end
 
 	# User lists
 	def lists
-		render :nothing => true
+		flash[:notice] = "Not yet implemented"
+		redirect_to "/#{@user.username}"
 	end
 
 	# create before filter to validate 

@@ -1,58 +1,64 @@
 
  <div class="ric-area1">
-    <form action="/posts/create" name="tips" method="post">
-        <p class="ric-reply"><input class="disabled" name="body" type="text" placeholder="Write a Tip---"></p>
+    <form action="/post/create/1" name="tips" method="post">
+        <p class="ric-reply"><input name="body" type="text" placeholder="Write a Tip---"></p>
         <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+        <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
     </form>
 </div>
 
-<% @user.posts[0, 10].each do |post| %>
+<% @user.all_posts(1)[0, 10].each do |post| %>
     <div class="post-container">
 
         <!-- original post body -->
         <div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
     		<%= image_tag "main/main-large-img.png", :class => "m-large" %>
     		
-    		<div class="span3"><p class="con-main-p">Julie  <a href="#" style="color:#9f9f9f">@ric_flair</a></p></div>
+    		<div class="span3"><p class="con-main-p"><%= post.user.name %>  <a href="#" style="color:#9f9f9f">@<%= post.user.username %></a></p></div>
     		<div class="span8" style="width: 470px;">
-    			<p class="bandz-content">Last night was so hot had a graet time spend with budies</p>
-    			<p class="profile-link"><a href="#">View Ric Flair Profile</a></p>
+    			<p class="bandz-content"><%= raw link_urls_and_users(post.body) %></p>
+    			<p class="profile-link"><a href="/<%= post.user.username %> ">View <%= post.user.name %> Profile</a></p>
     		</div>
     </div>  
     <div class="m-footer" style="margin-left:15px; width: 640px;">
             <div class="tips-reply-more">
                 <ul>
-                    <li class="re-ply"><a href="#">Reply</a></li>
+                   <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
                     <li class="re-tip"><a href="#">Re-Tip</a></li>
-                    <li class="admime"><a href="#">Admired</a></li>
+                    <li class="admime"><a href="#">Admire</a></li>
+                    <% if post.user == @current_user %>
+                    <li class="de-lete"><a href="/post/destroy/<%= post.id %>">Delete</a></li>
+                    <% end %>
                     <li class="mo-re"><a href="#">More</a></li>
                 </ul>
             </div>
-    		<p>about an hour ago 5:20 AM - 16 Sep 13 - <a class="details" href="">Details</a></p>
+    		<p><%= time_ago_in_words(post.created_at) %> <a class="details" href="">Details</a></p>
         </div>
 
     	<!-- current replies -->
-
+        <% post.comments.each do |comment| %>
         <div class="small-widget">
             <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
             <p class="con-main-p" style="color:#333">Marie &nbsp; &nbsp; &nbsp;<a href="#" style="color:#9f9f9f">@merry</a></p><p style="color:#a6a6a6"> nice display picture</p><p></p>
             <div class="reply-more">
                 <ul>
-                    <li class="re-ply"><a href="#">Reply</a></li>
+                    <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
                     <li class="de-lete"><a href="#">Delete</a></li>
                     <li class="numbers"><a href="#">300</a></li>
                     <li class="mo-re"><a href="#">More</a></li>
                 </ul>
             </div><br>
-            <p style="color:#a6a6a6">about an hour ago 5:20 AM - 16 Sep 13 - <a class="details" href="#">Details</a></p>
+            <p style="color:#a6a6a6"><%= time_ago_in_words(comment.created_at) %> <a class="details" href="#">Details</a></p>
         </div>
+        <% end %>
+
         <!-- reply here -->
         <div class="ric-area">
            <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-           <form action="/posts/reply" name="reply" method="post">
-                <p class="ric-reply"><input type="text" placeholder="write a tip---"></p>
+           <form action="/post/comment/1" name="reply" method="post">
+                <p class="ric-reply"><input type="text" name="body" placeholder="Write a Reply---"></p>
                 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
-                <input name="id" type="hidden" value= "111" />
+                <input name="id" type="hidden" value= "<%= post.id %>" />
            </form>
         </div>
     </div>

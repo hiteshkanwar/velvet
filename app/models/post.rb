@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
 
   def process_hashtags
        hashtag_regex = /\B#\w\w+/
-       text_hashtags = self.body.scan(hashtag_regex)
+       text_hashtags = self.body.to_s.scan(hashtag_regex)
        text_hashtags.each do |tag|
        	 hashtag = HashTag.where(name: tag)
        	 if !hashtag.empty?
