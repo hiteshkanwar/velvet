@@ -50,7 +50,7 @@ class DashboardController < ApplicationController
 			flash[:notice] = "You're already following #{@user.name}"
 		end
 
-		redirect_to "/#{@user.username}"
+		redirect_to "/#{@current_user.username}"
 	end
 
 	def direct_message

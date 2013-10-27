@@ -43,6 +43,7 @@ class LandingController < ApplicationController
     if User.authenticate(params[:email], params[:password])
     	session[:email] = params[:email]
       user = User.find_by_email(params[:email])
+      session[:email]    = user.email
       session[:username] = user.username
     	
       # If state exists from, accept inviation
@@ -70,6 +71,7 @@ class LandingController < ApplicationController
 
   	 	logger.debug("User created successfuly")
   	 	session[:email] = @user.email
+      session[:username] = @user.username
 
         #=> Send welcome email
         UserMailer.welcome_email(@user).deliver

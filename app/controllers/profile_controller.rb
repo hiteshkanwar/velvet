@@ -37,6 +37,7 @@ class ProfileController < ApplicationController
 	end
 
 	def show
+		logger.debug session[:username]
 		@current_url = request.original_url
 
 	end

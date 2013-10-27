@@ -21,14 +21,11 @@ class PostController < ApplicationController
 		redirect_to request.referer
 	end
 
-	def create_repost
-		@current_user.reposts.create(post_id: params[:id]) if Post.find(params[:id])
-	end
 
 	def repost
 		post = Post.find(params[:id])
 		@current_user.reposts.create(post: post) if post
-		redirect_to request.referer
+		redirect_to "/#{@current_user.username}"
 	end
 
 	def comment
@@ -55,7 +52,7 @@ class PostController < ApplicationController
 	def destroy
 		@current_user.posts.find(params[:id]).destroy
 		@current_user.reposts.find_by_post_id(params[:id]).destroy
-		flash[:notice] = "Past as been removed..."
+		flash[:notice] = "Post as been removed..."
 		redirect_to request.referer
 	end
 
