@@ -22,6 +22,7 @@ class ProfileController < ApplicationController
       	raise ActionController::RoutingError.new('Not Found')
       else
       	@user = @user.first
+      	@title = "#{@user.name} - Profile"
       	return true
       end
     end
