@@ -3,13 +3,17 @@ module ApplicationHelper
 
 	    #regexps
 	    user = /@(\w+)/
-
+	    hashtags = /#(\w+)/
 	    #replace @usernames with links to that user
 	    while s =~ user
-	        s.sub! "@#{$1}", "<a href='/#{$1}' >@ #{$1}</a>"
+	        s.sub! "@#{$1}", "<a href='/#{$1}'>[at]#{$1}</a>"
 	    end
 
-	    s
+	    while s =~ hashtags
+	       s.sub! "##{$1}", "<a href='/search/#{$1}'>[hash]#{$1}</a>"
+	    end
+
+	    s.gsub("[hash]", "#").gsub("[at]", "@")
 
 	end
 end

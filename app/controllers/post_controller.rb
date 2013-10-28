@@ -23,6 +23,7 @@ class PostController < ApplicationController
 
 
 	def repost
+		i
 		post = Post.find(params[:id])
 		@current_user.reposts.create(post: post) if post
 		redirect_to "/#{@current_user.username}"
@@ -50,9 +51,11 @@ class PostController < ApplicationController
 	end
 
 	def destroy
-		@current_user.posts.find(params[:id]).destroy
-		@current_user.reposts.find_by_post_id(params[:id]).destroy
-		flash[:notice] = "Post as been removed..."
+		if @current_user.posts.find(params[:id])
+			@current_user.posts.find(params[:id]).destroy
+			@current_user.reposts.find_by_post_id(params[:id]).destroy
+			flash[:notice] = "Post as been removed..."
+		end
 		redirect_to request.referer
 	end
 
