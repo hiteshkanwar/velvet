@@ -23,7 +23,6 @@ class PostController < ApplicationController
 
 
 	def repost
-		i
 		post = Post.find(params[:id])
 		@current_user.reposts.create(post: post) if post
 		redirect_to "/#{@current_user.username}"
