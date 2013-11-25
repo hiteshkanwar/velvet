@@ -3,16 +3,27 @@ Velvet::Application.routes.draw do
   root :to => 'dashboard#index', :constraints => lambda{|req| !req.session[:email].blank?}
   root :to => 'landing#index'
 
-  match '/about',     :to => 'landing#about'
+  
   match '/login',     :to => 'landing#login'
   match '/register',  :to => 'landing#register'
   match '/logout',    :to => 'landing#logout'
   match '/forgot',    :to => 'landing#forgot'
   match '/confirm_forgot',    :to => 'landing#confirm_forgot'
 
+  # Static pages
+
+   match '/privacy',     :to => 'landing#privacy'
+   match '/about',     :to => 'landing#about'
+   match '/terms',     :to => 'landing#terms'
+
   #resources :profile, :path=>''
   match "/post/create", :to => 'post#create'
   match "/post/comment", :to => 'post#comment'
+
+  # Search
+  # match "/dashboard/search", :to => 'dashboard#search'
+  match ':username/dashboard/:action', :controller => 'dashboard'
+
 
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'

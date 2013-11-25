@@ -32,9 +32,16 @@ class LandingController < ApplicationController
   end
 
   def about
-  	
+  	render 'about', layout: false 
   end
 
+  def terms
+    render 'terms', layout: false 
+  end
+
+  def privacy
+    render 'privacy', layout: false 
+  end
 
   # Controls -----------------
   

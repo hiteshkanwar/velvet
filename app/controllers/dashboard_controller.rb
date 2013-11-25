@@ -36,6 +36,40 @@ class DashboardController < ApplicationController
 		render 'index', :layout => false
 	end
 
+	# Find users & post with similar keywords
+
+	def search
+		#@users_to_display = Array.new
+		@user =  @current_user # Map current user to user in profile/_user
+		@users = User.where("username like ?", "%#{params[:q]}%")
+		@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }
+		
+		@users_to_display = @users + @posts
+		@users_to_display.flatten
+
+		@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = ""
+
+	end
+
+	def discover
+		@posts = Post.find(:all, :order => "created_at desc", :limit => 50)
+		@user = User.new
+		@user.assigned_posts = @posts
+
+		logger.debug @user.all_posts(1)
+	end
+
+	def activity
+		# 1. People who mentioned me
+		@mentioned = Post.where("body like ?", "%#{@current_user.username}%")
+
+		# 2. People who admired my tips
+		# Todo -
+
+		# 3. People who followed me
+		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5)
+	end
+
 
 	# -----------
 	# Controls
@@ -67,6 +101,8 @@ class DashboardController < ApplicationController
 		redirect_to "/#{@user.username}"
 		
 	end
+
+
 
 	def message
 		flash[:notice] = "Not yet implemented"

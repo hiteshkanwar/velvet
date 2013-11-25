@@ -37,9 +37,9 @@
                     
                         <ul id="menu-primary-navigation" class="nav">
                             <li class="menu-home"><a href="/">Home</a></li>
-                            <li class="menu-activity"><a href="#">Activity</a></li>
-                            <li class="menu-discover"><a href="#">Discover</a></li>
-                            <li class="menu-profile active active"><a href="/<%= session[:username] %>">Profile</a></li>
+                            <li class="menu-activity"><a href="/<%= session[:username] %>/dashboard/activity">Activity</a></li>
+                            <li class="menu-discover"><a href="/<%= session[:username] %>/dashboard/discover">Discover</a></li>
+                            <li class="menu-discover"><a href="/<%= session[:username] %>">Profile</a></li>
                         </ul>
                         <div class="clear"></div>
                     
@@ -51,8 +51,8 @@
             </div>
             <div class="span6">
                 <div class="search-bar-area">
-                <form id="top-search" action="">
-                  	<input class="sear-ch" type="text"  placeholder="Search" />
+                <form id="top-search" action="/<%= session[:username] %>/dashboard/search" method="get">
+                  	<input class="sear-ch" type="text" name="q" placeholder="Search" />
                 </form>
                 </div>
                 <div class="top-right-links">
@@ -87,15 +87,17 @@
                 <a href="/"><%= image_tag "main/footer-logo.png" %></a>
             </div>
                 <div id="footer-main-nav" class="f-navbar">
-                    <div class="f-navba-inner">
+                    <div class="f-navba-inner" style="margin-left: 120px;">
                         
                             <ul id="menu-primary-navigation" class="f-nav">
-                                <li class="f-menu-about-tv"><a href="#">about tv</a></li>
+                                <li class="f-menu-about-tv"><a href="/about">about tv</a></li>
                                 <li class="f-menu-adver"><a href="#">advertisers</a></li>
+                                 <!--
                                 <li class="f-menu-blog"><a href="#">blog</a></li>
                                 <li class="f-menu-find"><a href="#">find acquaintances</a></li>
-                                <li class="f-menu-privacy"><a href="#">PRIVACY</a></li>
-                                <li class="f-menu-terms"><a href="#">TERMS</a></li>
+                                 -->
+                                <li class="f-menu-privacy"><a href="/privacy">PRIVACY</a></li>
+                                <li class="f-menu-terms"><a href="/terms">TERMS</a></li>
                             </ul>
                             <div class="clear"></div>
                         

@@ -11,7 +11,7 @@
 			<% end %>
 		</div>
 		<div class="span8" style="width: 470px;">
-			<p class="bandz-content">Tag line ...</p>
+			<p class="bandz-content"><%= user.posts.last.body if user.posts.last %></p>
 		</div>
 </div>
 <% end %>

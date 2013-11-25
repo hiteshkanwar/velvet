@@ -8,10 +8,12 @@ end
 
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
+  attr_accessor :assigned_posts
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
   has_many :likes
+  has_many :activities
   has_many :reposts, order:'created_at DESC'
   has_many :followers, :class_name => 'Followings', :foreign_key => 'user_id'
   has_many :following, :class_name => 'Followings', :foreign_key => 'follower_id'
@@ -26,9 +28,11 @@ class User < ActiveRecord::Base
   after_create :hash_password
 
   def all_posts(pg=1)
-    posts = Array.new
-    posts << self.posts  + self.reposts.map(&:post_id).map {|id| Post.find(id) }
-    posts.flatten.sort{|a, b| b[:created_at] <=> a[:created_at]}
+    @assigned_posts ||= begin
+      posts = Array.new
+      posts << self.posts  + self.reposts.map(&:post_id).map {|id| Post.find(id) }
+      posts.flatten.sort{|a, b| b[:created_at] <=> a[:created_at]}
+    end
   end 
 
   # People user is following

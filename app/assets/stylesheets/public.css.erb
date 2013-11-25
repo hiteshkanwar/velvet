@@ -1,0 +1,373 @@
+body
+{
+	margin:0;
+	padding:0;
+}
+@font-face
+{ 
+	font-family:"PF DinDisplay Pro";
+	src: url('pfdindisplaypro.ttf') format('truetype');
+	url('pfdindisplaypro.ttf')
+}
+@font-face
+{
+	font-family:"OpenSans-Regular";
+	src:url('OpenSans-Regular.tff') format('truetype');
+}
+*
+{margin:0; padding:0}
+#main-page
+{
+	margin:0 auto;
+	width:1024px;
+	min-height:1200px;
+}
+.header
+{
+	width:1024px;
+	height:147px;
+	background:url(<%=asset_path "main/header-bg.jpg"%>);
+}
+#nav-area
+{
+	width:1024px;
+	height:46px;
+	box-shadow:0px 1px 4px 0px #999;
+	-webkit-box-shadow:0px 1px 4px 0px #999;
+	-moz-box-shadow:0px 1px 4px 0px #999;
+	-o-box-shadow:0px 1px 4px 0px #999;
+}
+#nav-area .nav-menu
+{
+	width:701px;
+	height:42px;
+	float:left;
+}
+#nav-area .nav-menu ul
+{
+	margin:9px 0 0 22px;
+	width:542px;
+	height:26px;
+}
+#nav-area .nav-menu ul li
+{
+	list-style-type:none;
+	float:left;
+	margin:0 0 0 6px;
+}
+#nav-area .nav-menu ul li a
+{
+	padding:0 13px;
+	display:inline-block;
+	width:auto;
+	height:26px;
+	line-height:26px;
+	text-decoration:none;
+	font-family:Verdana;
+	font-size:14px;
+	color:#FFF;
+	background:url(<%=asset_path "main/nav-bg.jpg"%>);
+	border-radius:4px;
+	float:left;
+}
+#nav-area .search-area
+{
+	width:301px;
+	height:41px;
+	float:right;
+}
+#nav-area .search-area .search
+{
+	margin-top:8px;
+	width:247px;
+	height:27px;
+	border:solid 1px #bebebe;
+	background:url(<%=asset_path "main/searchbox-bg.jpg"%>);
+	border-radius:12px;
+	-webkit-border-radius:12px;
+}
+#nav-area .search-area .search #search-box
+{
+	margin:1px 0 0 5px;
+	padding:0 0 0 10px;
+	width:211px;
+	height:25px;
+	float:left;
+	border:0;
+	background:transparent;
+	line-height:100%;
+	font-family:Verdana;
+	font-size:12px;
+	color:#bebebe;
+}
+#nav-area .search-area .search .submit
+{
+	margin:-20px 10px 0 0;
+	border:none;
+	width:14px;
+	height:14px;
+	float:right;
+	background:url(<%=asset_path "main/search-img.jpg"%>);
+}
+#nav-area img
+{
+	margin:-32px 0px 0 0;
+	float:right;
+}
+#header-btm
+{
+	margin-top:6px;
+	width:1024px;
+	height:auto;
+	text-align:center;
+	background:url(<%=asset_path "main/header-btm-bg.jpg"%>);
+}
+#header-btm h1
+{
+	padding:15px 0 0 250px;
+	width:550px;
+	height:65px;
+	font-family:"PF DinDisplay Pro";
+	font-size:48px;
+	color:#bb0000;
+	text-align:center;
+}
+#header-btm h2
+{
+	padding:0px 0 0 250px;
+	width:550px;
+	height:65px;
+	font-family:"PF DinDisplay Pro";
+	font-size:20px;
+	color:#777;
+	font-weight:normal;
+	text-align:center;
+}
+#content-area
+{
+	width:980px;
+	height:1112px;
+	margin-left:22px;
+	float:left;
+}
+#content-area h1
+{
+	padding:37px 0 5px 0;
+	font-family:"PF DinDisplay Pro";
+	font-size:18px;
+	color:#333333;
+}
+#content-area p
+{
+	margin:10px 0 5px 0;
+	width:auto;
+	height:auto;
+	font-family:"OpenSans-Regular";
+	font-size:14px;
+	color:#333;
+	text-align:justify;
+}
+#footer
+{
+	width:1024px;
+	height:182px;
+	background:url(<%=asset_path "main/footer.jpg"%>);
+	clear:both;
+}
+#select
+{
+	width:219px;
+	height:30px;
+	padding:4px 6px;
+}
+#form
+{
+	margin:36px 0px 0px 0px;
+	font-family:"OpenSans-Regular";
+	font-size:14px;
+	width:620px;
+	height:auto;
+	color:#333;
+}
+#form p
+{
+	width:150px
+	margin:10px 0px 5px 0px;
+	font-family:"OpenSans-Regular";
+	font-size:14px;
+	color:#333;
+}
+#form .text-box
+{
+	width:210px;
+	height:26px;
+	font-family:font-family:"OpenSans-Regular";
+	font-size:12px;
+	color:#333;
+	border:1px solid #aaa;
+	border-radius:5px;
+	-webkit-border-radius:10px;;
+	-moz-border-radius:10px;
+	float:left;
+	
+}
+#form-area
+{
+	width:980px;
+	height:auto;
+	margin-bottom:15px;
+	float:left;
+}
+#form-area .form-l
+{
+	width:280px;
+	height:auto;
+	float:left;
+}
+#form-area .form-r
+{
+	margin-right:300px;
+	width:300px;
+	height:auto;
+	float:right;
+}
+.h1-tag
+{
+	font-family:"PF DinDisplay Pro";
+	font-size:24px;
+	color:#333333;
+}
+#content-left
+{
+	width:708px;
+	height:1028px;
+	float:left;
+}
+#content-left .posts
+{
+	width:708px;
+	height:193px;
+	border-bottom:solid 1px #aaa;
+}
+#content-left .posts h1
+{
+	height:26px;
+	font-family:"PF DinDisplay Pro";
+	font-size:30px;
+	color:#333333;
+	font-weight:normal;
+}
+#content-left .posts .tagline
+{
+	width:700px;
+	font-family:font-family:"OpenSans-Regular";
+	font-size:14px;
+	color:#333;
+}
+#content-left .posts  p
+{
+	width:700px;
+	font-family:font-family:"OpenSans-Regular";
+	font-size:13px;
+	color:#333;
+}
+#content-left img
+{
+	margin:8px 0;
+}
+#content-right
+{
+	width:271px;
+	height:1028px;
+	float:right;
+}
+#content-right .heading
+{
+	margin-top:22px;
+	padding:0 0 0 14px;
+	width:641px;
+	line-height:37px;
+	height:37px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	-ms-border-radius:8px;
+	border:1px solid #aaa;
+	font-family:"PF DinDisplay Pro";
+	font-size:16px;
+	color:#333333;
+	font-weight:normal;
+}
+#content-right .posting-box
+{
+	margin-top:20px;
+	width:655px;
+	height:125px;
+	border-radius:8px;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	-ms-border-radius:8px;
+	border:1px solid #aaa;
+}
+#content-right .posting-box img
+{
+	margin:11px 0 0 12px;
+	float:left;
+}
+#content-right .posting-box .btn-red
+{
+	margin:10px 12px 0 0;
+	width:54px;
+	height:26px;
+	float:right;
+	background:url(<%=asset_path "main/btn-red.jpg"%>);
+	border:none;
+}
+#content-right .posting-box .btn-black
+{
+	margin:10px 12px 0 0;
+	width:104px;
+	height:26px;
+	float:right;
+	background:url(<%=asset_path "main/btn-black.jpg"%>);
+	border:none;
+}
+#nav-post
+{
+	width:255px;
+	height:auto;
+	margin:21px 0 0 20px;
+}
+#nav-post .menu_list 
+{	
+	width: 255px;
+}
+#nav-post .menu_head {
+	padding: 5px 10px;
+	cursor: pointer;
+	margin:1px;
+	height:26px;
+	line-height:26px;
+	border:#CCC 1px solid;
+    font-weight:bold;
+    background:#f8f8f8 url(<%=asset_path "main/left.png"%>) center right no-repeat;
+}
+#nav-post .menu_body 
+{
+	display:none;
+}
+#nav-post .menu_body a{
+  display:block;
+  color:#006699;
+  	height:33px;
+	line-height:33px;
+  background-color:#EFEFEF;
+  padding-left:10px;
+  font-weight:bold;
+  text-decoration:none;
+}
+#nav-post .menu_body a:hover
+{
+  color: #000000;
+  text-decoration:underline;
+}
