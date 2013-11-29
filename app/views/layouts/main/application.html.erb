@@ -37,8 +37,8 @@
                     
                         <ul id="menu-primary-navigation" class="nav">
                             <li class="menu-home"><a href="/">Home</a></li>
-                            <li class="menu-activity"><a href="/<%= session[:username] %>/dashboard/activity">Activity</a></li>
-                            <li class="menu-discover"><a href="/<%= session[:username] %>/dashboard/discover">Discover</a></li>
+                            <li class="menu-activity"><a href="/activity">Activity</a></li>
+                            <li class="menu-discover"><a href="/discover">Discover</a></li>
                             <li class="menu-discover"><a href="/<%= session[:username] %>">Profile</a></li>
                         </ul>
                         <div class="clear"></div>
@@ -51,7 +51,7 @@
             </div>
             <div class="span6">
                 <div class="search-bar-area">
-                <form id="top-search" action="/<%= session[:username] %>/dashboard/search" method="get">
+                <form id="top-search" action="/search" method="get">
                   	<input class="sear-ch" type="text" name="q" placeholder="Search" />
                 </form>
                 </div>

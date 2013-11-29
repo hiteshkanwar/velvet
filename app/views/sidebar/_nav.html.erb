@@ -1,9 +1,9 @@
 <div class="left-links">
     <ul>
-        <li class="menu-tips "><a href="/<%= params[:username] %>/tips">TIPS</a></li>
-        <li class="menu-acquating"><a href="/<%= params[:username] %>/acquainting">ACQUAINTING</a></li>
-        <li class="menu-acquaintances"><a href="/<%= params[:username] %>/acquaintances">ACQUAINTANCES</a></li>
-        <li class="menu-admire"><a href="/<%= params[:username] %>/admire">ADMIRE</a></li>
-        <li class="menu-lists"><a href="/<%= params[:username] %>/lists">LISTS</a></li>
+        <li class="menu-tips "><a href="/<%= params[:username] || @current_user.username %>/tips">TIPS</a></li>
+        <li class="menu-acquating"><a href="/<%= params[:username] || @current_user.username %>/acquainting">ACQUAINTING</a></li>
+        <li class="menu-acquaintances"><a href="/<%= params[:username] || @current_user.username %>/acquaintances">ACQUAINTANCES</a></li>
+        <li class="menu-admire"><a href="/<%= params[:username] || @current_user.username %>/admire">ADMIRE</a></li>
+        <li class="menu-lists"><a href="/<%= params[:username] || @current_user.username %>/lists">LISTS</a></li>
     </ul>
 </div>	

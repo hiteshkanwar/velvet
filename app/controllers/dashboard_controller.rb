@@ -6,7 +6,14 @@ class DashboardController < ApplicationController
 	# -------------
 
 	before_filter :confirm_logged_in
-	before_filter :only => [:acquaint, :direct_message, :admire, :message, :add_to_list] do |c| c.not_found params[:id] end 
+	before_filter :only => [:acquaint, :direct_message, :admire, :message, :add_to_list] do |c| 
+		c.not_found params[:id]
+	end 
+
+	#before_filter :only => [:discover, :activity] do |c| 
+	#	c.not_found params[:username] 
+	#end 
+
 	before_filter :current_user, :only => [:show]
 	
 	def current_user
@@ -51,7 +58,7 @@ class DashboardController < ApplicationController
 		@users_to_display = @users + @posts
 		@users_to_display.flatten
 
-		@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = ""
+		@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
 
 	end
 
@@ -72,6 +79,10 @@ class DashboardController < ApplicationController
 
 		# 3. People who followed me
 		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5)
+
+		@posts = Post.find(:all, :order => "created_at desc", :limit => 50)
+		@user = User.new
+		@user.assigned_posts = @posts
 	end
 
 

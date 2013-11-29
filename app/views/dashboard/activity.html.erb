@@ -16,9 +16,19 @@
     
     <div class="span8 tippen-content">
     	
+    	<div class="m-header">
+		    <div class="span6">
+		    <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+		    <p class="kelly">Kelly Kelly <span>Admired</span> Jemmy Harddick</p>
+		    </div>
+		    <div class="span2 other-admir">
+		        <p>1 hour ago</p>
+		    </div>
+		</div>
 
         <!-- START POST -->
         <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
         <!-- END POST -->
     </div>
 </div>
+

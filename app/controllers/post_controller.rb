@@ -21,6 +21,9 @@ class PostController < ApplicationController
 		redirect_to request.referer
 	end
 
+	def admire
+	end
+
 
 	def repost
 		post = Post.find(params[:id])
