@@ -1,2 +1,24 @@
-<p> Welcome, <a href="/<%= @current_user.username %>"><%= @current_user.name %></a> . See your profile</p>
-<p><a href="/logout">Sign out</a>
+<div class="container">
+    <div class="span4 left">
+    
+        <!-- nav --> 
+        <%= render :partial => '/sidebar/nav' %>
+
+        <!-- suggest -->
+        <%= render :partial => '/sidebar/suggest' %>
+        
+        <!-- trends -->
+        <%= render :partial => '/sidebar/trends' %>
+
+        <!-- trends -->
+        <%= render :partial => '/sidebar/copy' %>
+    </div>
+    
+    <div class="span8 tippen-content">
+    	
+
+        <!-- START POST -->
+        <%= render :partial => '/profile/posts' %>
+        <!-- END POST -->
+    </div>
+</div>

@@ -51,9 +51,12 @@ class PostController < ApplicationController
 
 	def destroy
 		if @current_user.posts.find(params[:id])
-			@current_user.posts.find(params[:id]).destroy
-			@current_user.reposts.find_by_post_id(params[:id]).destroy
-			flash[:notice] = "Post as been removed..."
+			begin
+				@current_user.posts.find(params[:id]).destroy
+				flash[:notice] = "Post as been removed..."
+				@current_user.reposts.find_by_post_id(params[:id]).destroy
+			rescue => error
+			end
 		end
 		redirect_to request.referer
 	end

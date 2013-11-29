@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     end
   end 
 
+  def followings_posts(pg=1)
+    self.following.map { |following| following.user.posts.find(:all, :order => "created_at desc", :limit => 5) }.flatten
+  end
+
   # People user is following
   def is_following
     self.following.map { |f| f.user }

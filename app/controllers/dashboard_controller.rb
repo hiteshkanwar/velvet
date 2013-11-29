@@ -33,10 +33,14 @@ class DashboardController < ApplicationController
     # ---------------------
 
 	def index
-		render 'index', :layout => false
+		@posts = @current_user.followings_posts
+		@user = User.new
+		@user.assigned_posts = @posts
+
+		logger.debug @user.all_posts(1)
 	end
 
-	# Find users & post with similar keywords
+	# Find users & post with similar keywords.
 
 	def search
 		#@users_to_display = Array.new
@@ -61,7 +65,7 @@ class DashboardController < ApplicationController
 
 	def activity
 		# 1. People who mentioned me
-		@mentioned = Post.where("body like ?", "%#{@current_user.username}%")
+		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").limit(5).reverse
 
 		# 2. People who admired my tips
 		# Todo -
