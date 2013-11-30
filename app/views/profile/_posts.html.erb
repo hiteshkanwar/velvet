@@ -16,7 +16,7 @@
         <div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
     		<%= image_tag "main/main-large-img.png", :class => "m-large" %>
     		
-    		<div class="span3"><p class="con-main-p"><%= post.user.name %>  <a href="#" style="color:#9f9f9f">@<%= post.user.username %></a></p></div>
+    		<div class="span3"><p class="con-main-p"><%= post.user.name %>  <a href="/<%= post.user.username %>" style="color:#9f9f9f">@<%= post.user.username %></a></p></div>
     		<div class="span8" style="width: 470px;">
     			<p class="bandz-content"><%= raw link_urls_and_users(post.body) %></p>
     			<p class="profile-link"><a href="/<%= post.user.username %> ">View <%= post.user.name %> Profile</a></p>
