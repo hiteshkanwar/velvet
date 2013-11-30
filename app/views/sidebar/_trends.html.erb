@@ -9,7 +9,7 @@
     <div class="miami-links">
         <ul>
             <% HashTag.trending.each do |tag| %>
-                <li><a href="#"><%= tag.name %></a></li>
+                <li><a href="#"><%= raw link_urls_and_users(tag.name) %></a></li>
             <% end %>
         </ul>
     </div>
