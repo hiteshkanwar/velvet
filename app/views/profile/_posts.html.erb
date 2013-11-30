@@ -31,7 +31,7 @@
                     <% if post.user == @current_user %>
                     <li class="de-lete"><a href="/post/destroy/<%= post.id %>">Delete</a></li>
                     <% end %>
-                    <li class="mo-re"><a href="#">More</a></li>
+                    <!-- <li class="mo-re"><a href="#">More</a></li> -->
                 </ul>
             </div>
     		<p><%= time_ago_in_words(post.created_at) %> <a class="details" href="">Details</a></p>

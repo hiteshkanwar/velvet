@@ -23,7 +23,7 @@
     <div class="span8 tippen-content">
         
         <!-- START POST -->
-        <%= render :partial => 'posts' %>
+        <%= render :partial => 'posts', :locals => { disable_post: true } %>
         <!-- END POST -->
     
 	</div>

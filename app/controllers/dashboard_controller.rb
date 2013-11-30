@@ -72,15 +72,15 @@ class DashboardController < ApplicationController
 
 	def activity
 		# 1. People who mentioned me
-		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").limit(5).reverse
+		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").order('created_at desc').limit(10)
 
 		# 2. People who admired my tips
 		# Todo -
 
 		# 3. People who followed me
-		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5)
+		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5).map{ |follower| User.find(follower.follower_id)}
 
-		@posts = Post.find(:all, :order => "created_at desc", :limit => 50)
+		@posts = @mentioned
 		@user = User.new
 		@user.assigned_posts = @posts
 	end
@@ -94,9 +94,10 @@ class DashboardController < ApplicationController
 
 		if !@current_user.is_following.include? @user
 			@user.followers.create(follower_id: @current_user.id)
-			flash[:notice] = "Now following #{@user.name}"
+			# @user.activities.create(person: @current_user.id, body: "#{@current_user.name} acquainted you")
+			flash[:notice] = "Now acquainting #{@user.name}"
 		else
-			flash[:notice] = "You're already following #{@user.name}"
+			flash[:notice] = "You're already acquainting #{@user.name}"
 		end
 
 		redirect_to "/#{@current_user.username}"

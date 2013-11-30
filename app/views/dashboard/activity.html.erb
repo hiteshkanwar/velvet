@@ -15,16 +15,17 @@
     </div>
     
     <div class="span8 tippen-content">
-    	
-    	<div class="m-header">
+    	<% @followed.each do |user| %>
+    	<div class="m-header" style="margin-bottom: 10px;">
 		    <div class="span6">
 		    <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
-		    <p class="kelly">Kelly Kelly <span>Admired</span> Jemmy Harddick</p>
+		    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
 		    </div>
 		    <div class="span2 other-admir">
-		        <p>1 hour ago</p>
+		        <p><%= time_ago_in_words(user.following.find_by_user_id(@current_user.id).created_at) %></p>
 		    </div>
 		</div>
+		<% end %>
 
         <!-- START POST -->
         <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
