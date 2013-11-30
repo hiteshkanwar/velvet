@@ -38,7 +38,9 @@ class User < ActiveRecord::Base
   def followings_posts(pg=1)
     followings = self.following
     followings += [Followings.new(user_id: self.id)] # Include myself to followings but don't create
-    followings.map { |following| following.user.posts.find(:all, :order => "created_at desc", :limit => 5) }.flatten
+    posts = followings.map { |following| following.user.posts.find(:all, :order => "created_at desc", :limit => 50) }.flatten
+    posts.sort{|a, b| b[:created_at] <=> a[:created_at]}
+
   end
 
   # People user is following
