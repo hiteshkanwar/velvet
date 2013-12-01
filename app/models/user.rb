@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
+  has_many :emojis
   has_many :likes
   has_many :activities
   has_many :reposts, order:'created_at DESC'
