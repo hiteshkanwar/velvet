@@ -8,12 +8,12 @@ class Emoji < ActiveRecord::Base
 
   def self.family(name)
   	family = { 
-  			   :free 	=> 	
-  			   	"69, anal-beads, anal-plug, anal1, anal2, bat-weapon, beer, blood, blowjob-guys, blowjob, bomb, bong, brass-knuckles, bridge, bukkake, casino, chair-position, cocaine, cocaine2, cocksock, cocktail, cocktails, cowgirl, crack, crosshairs, crosshairs2, cunnilingus, desert, doggy-style, double-penetration, ear, finger-sucking, fisting, forest, froggy-style, gym, gym2, handgun, handjob, high-rise, home, huffing, huffing2, island, knife (1), knife, mansion, martini-short, martini-tall, meth, meth2, missionary, mountains, peeing-girl, pills, pole, pole2, porn-set, punch, reverse-cowgirl, rifle, rock-weapon, rolled-up-bill2, shit, snow, spoon-position, standing-cowgirl, standing-reverse-cowgirl, store, stripper, sword, target, Tits, vomit-man, vomit-puddle, weed, wine, bukkake3, middle-finger", 
   			   
   			   :fetish  =>	"finger-fucking, footjob1, footjob2, peeing-girl2, peeing-man, toe-sucking",
   			   :porn 	=> 	"porn-dvd, porn-dvd2, cum-swapping",
-  			   :street 	=> 	"rolled-up-bill, molly,red-eyes,whipits,huffing3,heroin, rimjob"
+  			   :street 	=> 	"rolled-up-bill, molly,red-eyes,whipits,huffing3,heroin, rimjob",
+  			   :free 	=> 	
+  			   	"69, anal-beads, anal-plug, anal1, anal2, bat-weapon, beer, blood, blowjob-guys, blowjob, bomb, bong, brass-knuckles, bridge, bukkake, casino, chair-position, cocaine, cocaine2, cocksock, cocktail, cocktails, cowgirl, crack, crosshairs, crosshairs2, cunnilingus, desert, doggy-style, double-penetration, ear, finger-sucking, fisting, forest, froggy-style, gym, gym2, handgun, handjob, high-rise, home, huffing, huffing2, island, knife, mansion, martini-short, martini-tall, meth, meth2, missionary, mountains, peeing-girl, pills, pole, pole2, porn-set, punch, reverse-cowgirl, rifle, rock-weapon, rolled-up-bill2, shit, snow, spoon-position, standing-cowgirl, standing-reverse-cowgirl, store, stripper, sword, target, Tits, vomit-man, vomit-puddle, weed, wine, bukkake3, middle-finger"
   			}
   	family.each { |family, emojis|
 

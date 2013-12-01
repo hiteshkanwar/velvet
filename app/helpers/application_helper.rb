@@ -16,4 +16,8 @@ module ApplicationHelper
 	    s.gsub("[hash]", "#").gsub("[at]", "@")
 
 	end
+
+	def pack_price name
+		"499"
+	end
 end
