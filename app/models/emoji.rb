@@ -17,7 +17,7 @@ class Emoji < ActiveRecord::Base
   			}
   	family.each { |family, emojis|
 
-  		puts "key: #{family} value: #{emojis}"
+  		#puts "key: #{family} value: #{emojis}"
   		return family.to_s if emojis.include?(name)
 
   	}

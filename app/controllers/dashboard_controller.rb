@@ -90,6 +90,11 @@ class DashboardController < ApplicationController
 	# Controls
 	# ---------------
 
+	# Purchase emoji
+	def purchase
+		
+	end
+
 	def acquaint
 
 		if !@current_user.is_following.include? @user

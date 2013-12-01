@@ -62,6 +62,10 @@ class ProfileController < ApplicationController
 		@users_to_display = @user.is_followers
 	end
 
+	# Display emoji sheet
+	def emoji
+	end
+
 	# People user admires
 	def admire
 		flash[:notice] = "Not yet implemented"

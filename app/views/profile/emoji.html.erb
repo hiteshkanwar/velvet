@@ -15,45 +15,44 @@
     </div>
 
 	<div class="span8 tippen-content">
-		<div class="banner-section">
-			<div class="cool-people">
+		<% Emoji.family("display").each do |family, emojis| %>
+        <div class="banner-section" style="margin-bottom: <%= (emojis.split(",").size / 3) * 22 %>px;">
+			<div class="cool-people" style="background: white;"> 
 		        
 		        <div class="peaple-header">
-			        <div class="row">
+			        <div class="row" style="background: white;">
 			            <div style="margin-right: 350px;" class="span2 cool-heading">
-			                <h6>Cool People to Acquaint</h6>
+			                <h6><%= "#{family.to_s.titleize} Pack" %></h6>
 			            </div>
+                        <% if family.to_s != "free" %>
 			            <div class="span2 cool-h-link">
 			                <ul>
-			                    <li><a href="">Refresh</a></li>
-			                    <li><a href="">View All</a></li>
+			                    <li><a href="#">Buy this</a></li>
+			                    <li><a href="#">Buy All</a></li>
 			                </ul>
 			            </div>
+                        <% end %>
 			        </div>
 		        </div>
 		        
 		        <!-- emoji content -->
 
 		        <div style="margin: 10px;" class="row">
-		        	
-                    <div class="span2">
-                        <img align="left" src="./images/cool-img.png">
+		        	<% emojis.split(",").each do |emoji| %>
+                    <div class="span2" style="margin: 3px;" >
+                        <img align="left" width="30" src="/assets/emoji/<%= emoji.delete(' ') %>.png">
                         <ul>
-                            <li>Lexus</li>
-                            <li><a href="">@Lexus</a></li>
+                            <!-- <li>Lexus</li> -->
+                            <li><a href="#">:<%= emoji.delete(' ') %>:</a></li>
                         </ul>
                     </div>
-                    <div class="span2">
-                        <img align="left" src="./images/cool-img.png">
-                        <ul>
-                            <li>Franklin</li>
-                            <li><a href="">@Franklin</a></li>
-                        </ul>     
-                    </div>
+                    <% end %>
 
                 </div>
 
 		    </div>
 		</div>
+        <% end %>
+        <!-- family div -->
 	</div>
 </div>
