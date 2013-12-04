@@ -40,11 +40,15 @@ class DashboardController < ApplicationController
     # ---------------------
 
 	def index
+
+		#puts request.fullpath
 		@posts = @current_user.followings_posts
 		@user = User.new
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
+
+		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
 	end
 
 	# Find users & post with similar keywords.
@@ -84,11 +88,13 @@ class DashboardController < ApplicationController
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
+
+		@posts
 	end
 
 	def activity
 
-		# puts request.fullpath
+		 puts request.fullpath
 		# 1. People who mentioned me
 		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").order('created_at desc').limit(10)
 
@@ -105,19 +111,28 @@ class DashboardController < ApplicationController
 		@posts
 	end
 
-	def activity_notification
+	def notification
+		status = 0
 
-		status = [0]
-		feed = activity.order('created_at desc').limit(1)
-
+		case params[:seed]
+		when "/"
+			feed = index.first
+		when "/activity"
+			feed = activity.first
+		when "/discover"
+			feed = discover.first
+		else
+			feed = nil
+		end
+		
 		if feed
-			status = [1] if Time.now - feed.created_at <= 59 # Less than a minute ago
+			status = 1 if Time.now - feed.created_at <= 59 # Less than a minute ago
 		end
 
-		#logger.debug activity.order('created_at desc').limit(1).to_json
-
-
-		render nothing: true
+		respond_to do |format|
+		    format.json {render :json => status }
+		end
+			
 	end
 
 

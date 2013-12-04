@@ -175,10 +175,4 @@ $('#specialbutton').button('loading');
 
   });
 
- // Long polling for posts
- //(function poll(){
- //   $.ajax({ url: "/server", success: function(data){
- //       analytics.innerHTML = data;
- //   }, dataType: "json", complete: poll, timeout: 30000 });
- // })();
-      
+ 
