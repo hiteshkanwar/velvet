@@ -50,15 +50,31 @@ class DashboardController < ApplicationController
 	# Find users & post with similar keywords.
 
 	def search
-		#@users_to_display = Array.new
-		@user =  @current_user # Map current user to user in profile/_user
-		@users = User.where("username like ?", "%#{params[:q]}%")
-		@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }
-		
-		@users_to_display = @users + @posts
-		@users_to_display.flatten
 
-		@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
+		@user =  @current_user # Map current user to user in profile/_user
+		@users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+		@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
+		@users_to_display = (@users + @posts).flatten.uniq
+	
+
+		if params[:source] && params[:source] == "autocomplete"
+			autocomplete = @users_to_display.map { | user | 
+				{ label: "#{user.name} @#{user.username}", value: user.username }
+			}
+
+			logger.debug(autocomplete)
+
+			respond_to do |format|
+		      format.json {render :json => autocomplete }
+		    end
+			
+		else
+
+			
+			@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
+			render 'search'
+			
+		end
 
 	end
 
@@ -71,6 +87,8 @@ class DashboardController < ApplicationController
 	end
 
 	def activity
+
+		# puts request.fullpath
 		# 1. People who mentioned me
 		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").order('created_at desc').limit(10)
 
@@ -83,12 +101,31 @@ class DashboardController < ApplicationController
 		@posts = @mentioned
 		@user = User.new
 		@user.assigned_posts = @posts
+
+		@posts
+	end
+
+	def activity_notification
+
+		status = [0]
+		feed = activity.order('created_at desc').limit(1)
+
+		if feed
+			status = [1] if Time.now - feed.created_at <= 59 # Less than a minute ago
+		end
+
+		#logger.debug activity.order('created_at desc').limit(1).to_json
+
+
+		render nothing: true
 	end
 
 
 	# -----------
 	# Controls
 	# ---------------
+
+
 
 	# Purchase emoji
 	def purchase

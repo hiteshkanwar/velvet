@@ -23,8 +23,11 @@ Velvet::Application.routes.draw do
   # Search
   # match "/dashboard/search", :to => 'dashboard#search'
   ### match ':username/dashboard/:action', :controller => 'dashboard'
+  match '/home_notification', :to => 'dashboard#home_notification'
   match '/activity', :to => 'dashboard#activity'
+  match '/activity_notification', :to => 'dashboard#activity_notification'
   match '/discover', :to => 'dashboard#discover'
+  match '/discover_notification', :to => 'dashboard#discover_notification'
   match '/search', :to => 'dashboard#search'
   match '/search/:q', :to => 'dashboard#search'
 

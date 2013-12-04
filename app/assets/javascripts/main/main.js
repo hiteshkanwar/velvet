@@ -152,5 +152,33 @@ $('#specialbutton').button('loading');
    $('.typeahead').typeahead();
     
       });      
-      
+
+ // Search autocomplete
+ $(function() {
+    $( ".sear-ch" ).autocomplete({
+
+      source: function( request, response ) {
+            $.ajax({
+
+              type: "GET",
+              url: "/search",
+              data: {'q': request.term, 'source':'autocomplete' },
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              success: function(data) {
+                 response(data);
+              }
+
+            });
+        }
+      });
+
+  });
+
+ // Long polling for posts
+ //(function poll(){
+ //   $.ajax({ url: "/server", success: function(data){
+ //       analytics.innerHTML = data;
+ //   }, dataType: "json", complete: poll, timeout: 30000 });
+ // })();
       
