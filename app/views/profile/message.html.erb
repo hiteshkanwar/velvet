@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="span4 left">
+
+    <!-- nav --> 
+    <%= render :partial => '/sidebar/nav' %>
+
+    <!-- suggest -->
+    <%= render :partial => '/sidebar/suggest' %>
+
+    <!-- trends -->
+    <%= render :partial => '/sidebar/trends' %>
+
+    <!-- trends -->
+    <%= render :partial => '/sidebar/copy' %>
+  </div>
+  <div class="span8 tippen-content">
+    <div class="banner-section">
+      <%= image_tag "main/admire-banner.png", :class => 'm-large' %>
+      <div class="banner-footer">
+        <div class="span4 total-posts">
+          <ul>
+            <li> <%= @current_user.posts.size %> <br> <span><strong>TIPS</strong></span></li>
+            <li><%= @current_user.following.size %> <br> <span><strong>ACQUANTING</strong></span></li>
+            <li><%= @current_user.followers.size %> <br> <span><strong>ACQUANTANCES</strong></span></li>
+          </ul>
+        </div>
+        <div class="left total-posts-buttons">
+          <button class="message"></button>
+          <button class="edit-account"></button>
+        </div>
+      </div>
+    </div>
+      <% @messages.each do |message| %>
+        <div class="post-container">
+
+          <!-- original post body -->
+          <div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
+            <%= image_tag "main/main-large-img.png", :class => "m-large" %>
+          
+            <div class="span3">
+              <p class="con-main-p"><%= message.sender.name %>  <a href="/<%= message.sender.username %>" style="color:#9f9f9f">@<%= message.sender.username %></a></p>
+            </div>
+            <div class="span8" style="width: 470px;">
+              <p class="bandz-content"><%= raw emojify(link_urls_and_users(message.message_text)) %></p>
+              <p class="profile-link"><a href="/<%= message.sender.username %> ">View <%=message.sender.name %> Profile</a></p>
+            </div>
+          </div> 
+        </div>  
+      <% end %>   
+ 
+    </div>  
+  </div>
+</div>
+</div>    
