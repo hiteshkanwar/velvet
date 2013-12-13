@@ -31,14 +31,15 @@ Velvet::Application.routes.draw do
   #--
   # Feed notification
   #--
-
+  
   match '/notification', :to => 'dashboard#notification'
 
-
+  resources :messages
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'
-
-
+  match ':username/messages/:action',:controller=>"messages"
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

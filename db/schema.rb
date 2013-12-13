@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131201190734) do
+ActiveRecord::Schema.define(:version => 20131213074056) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -49,9 +49,9 @@ ActiveRecord::Schema.define(:version => 20131201190734) do
   create_table "hash_tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.integer  "count"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "count",      :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "likes", :force => true do |t|
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(:version => 20131201190734) do
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "message_text"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.string   "ancestry"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "posts", :force => true do |t|
