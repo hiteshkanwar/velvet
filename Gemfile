@@ -46,7 +46,10 @@ gem 'exception_notification', git: 'git://github.com/alanjds/exception_notificat
 # Use unicorn as the app server
 # gem 'unicorn'
 gem 'thin'
-
+gem 'ancestry'
+group :development do 
+  gem 'pry'
+end
 # CSS compressor
 gem 'yui-compressor'
 

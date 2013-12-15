@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   has_many :reposts, order:'created_at DESC'
   has_many :followers, :class_name => 'Followings', :foreign_key => 'user_id'
   has_many :following, :class_name => 'Followings', :foreign_key => 'follower_id'
+  has_many :messages, :class_name => 'Message', :foreign_key => 'receiver_id'
+  has_many :send_messages, :class_name => 'Message', :foreign_key => 'sender_id'
+  
   
   validates_uniqueness_of :email, :username
   validates_presence_of :email, :username, :hashed_password

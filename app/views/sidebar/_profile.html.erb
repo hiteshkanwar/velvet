@@ -7,7 +7,7 @@
 	<div class="tips"><span><%= @user.posts.size %></span>TIPS</div>
 	<div class="tips"><span><%= @user.following.size %></span>ACQUAINTING</div>
 	<div class="tips" style="border-right:none;"><span><%= @user.followers.size %></span>ACQUAINTANCES</div>
-	<select class="msg" onchange="javascript:handleSelect(this)">
+	<select class="msg" id="profile_dropdown">
 		<option value=""></option>    
 		<!-- <option value="direct_message">Direct Message</option> -->
 		<option value="acquaint">Acquaint</option>
@@ -18,8 +18,12 @@
 </div>
 
 <script type="text/javascript">
-	function handleSelect(elm)
-	{
-		window.location = "/dashboard/"+elm.value+"/<%= params[:username] %>";
-	}
+$(document).ready(function(e){
+	VL.message.handleDropdown("<%= params[:username] %>")
+});
+	// function handleSelect(elm)
+	// {
+
+	// 	window.location = "/dashboard/"+elm.value+"/<%= params[:username] %>";
+	// }
 </script>

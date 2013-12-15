@@ -84,6 +84,7 @@ class ProfileController < ApplicationController
 	#  session[:username] is current viewing username
 
 	def message
+		@messages = @current_user.messages
 	end
 
 	def settings

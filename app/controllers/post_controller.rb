@@ -6,10 +6,7 @@ class PostController < ApplicationController
 	before_filter :confirm_logged_in
 	before_filter :current_user, :except => [:index]
 	
-	def current_user
-	    @current_user ||= User.find_by_email(session[:email])
-	end
-	
+
 	def create
 
 		if params[:body]

@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="span4 left">
+    
+    <!--  profile -->
+
+    <%= render :partial => '/sidebar/profile' %>
+        <!-- nav --> 
+        <%= render :partial => '/sidebar/nav' %>
+
+        <!-- suggest -->
+        <%= render :partial => '/sidebar/suggest' %>
+        
+        <!-- trends -->
+        <%= render :partial => '/sidebar/trends' %>
+
+        <!-- trends -->
+        <%= render :partial => '/sidebar/copy' %>
+
+   
+    <div class="banner"><%= image_tag "main/isotok.png" %></div>
+    </div>
+
+    <div class="span8 tippen-content">
+        
+      <%= form_for(@message) do |f|%>
+        <%= f.text_area :message_text,:placeholder=>"Message",:rows=>3,:class=>"span8" %>
+        <%= hidden_field_tag :username,params[:username] %>
+        <%= f.submit "Send Message",:class=>"btn" %>
+      <% end %>
+       
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Messages</div>
+          <div class="panel-body">
+
+            <% @messages.each do |message| %>
+            <p>  <%= message.message_text %><hr/></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+</div>
+
