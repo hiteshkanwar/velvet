@@ -67,9 +67,11 @@ class ProfileController < ApplicationController
 	end
 
 	# People user admires
-	def admire
-		flash[:notice] = "Not yet implemented"
-		redirect_to "/#{@user.username}"
+	def admired
+		#flash[:notice] = "Not yet implemented"
+		#redirect_to "/#{@user.username}"
+		@posts = @user.admires.map { |admire| Post.find(admire.post_id) }.uniq
+		@user.assigned_posts = @posts.sort{|a, b| b[:created_at] <=> a[:created_at]}
 	end
 
 	# User lists

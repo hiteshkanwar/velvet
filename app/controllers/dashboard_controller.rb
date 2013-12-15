@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
 	# -------------
 
 	before_filter :confirm_logged_in
-	before_filter :only => [:acquaint, :direct_message, :admire, :message, :add_to_list] do |c| 
+	before_filter :only => [:acquaint, :unacquaint, :direct_message, :admire, :message, :add_to_list] do |c| 
 		c.not_found params[:id]
 	end 
 
@@ -100,9 +100,10 @@ class DashboardController < ApplicationController
 
 		# 2. People who admired my tips
 		# Todo -
+		@activities = @current_user.activities.sort{|a, b| b[:created_at] <=> a[:created_at]}
 
 		# 3. People who followed me
-		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5).map{ |follower| User.find(follower.follower_id)}
+		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
 
 		@posts = @mentioned
 		@user = User.new
@@ -160,19 +161,25 @@ class DashboardController < ApplicationController
 		redirect_to "/#{@current_user.username}"
 	end
 
+	def unacquaint
+		
+		begin
+			following = @current_user.following.find_by_user_id(@user.id)
+			Followings.find(following.id).destroy if following
+
+			#@current_user.following.destroy(@current_user.following.find_by_user_id(@user.id))
+			#@user.followers.de(@user.followers.find_by_follower_id(@current_user.id)
+			flash[:notice] = "You have unaquainted #{@user.name}"
+		rescue => error
+			flash[:notice] = "Error"
+		end
+		
+		redirect_to request.referrer
+	end
+
 	def direct_message
 		flash[:notice] = "Not yet implemented"
 		redirect_to "/#{@user.username}"
-	end
-
-	def admire
-
-		if Post.find(params[:post_id])
-			@current_user.admires.create(post_id: params[:post_id])
-			flash[:notice] = "Admired"
-		end
-		redirect_to "/#{@user.username}"
-		
 	end
 
 

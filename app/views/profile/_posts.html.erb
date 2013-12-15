@@ -1,7 +1,7 @@
 <%  if local_assigns[:disable_post].nil? %>
  <div class="ric-area1">
     <form action="/post/create" name="tips" method="post">
-        <p class="ric-reply"><input name="body" type="text" placeholder="Write a Tip---"></p>
+        <p class="ric-reply"><input name="body" type="text" maxlength="170" placeholder="Write a Tip---"></p>
         <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
         <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
     </form>
@@ -16,9 +16,9 @@
         <div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
     		<%= image_tag "main/main-large-img.png", :class => "m-large" %>
     		
-    		<div class="span3"><p class="con-main-p"><%= post.user.name %>  <a href="/<%= post.user.username %>" style="color:#9f9f9f">@<%= post.user.username %></a></p></div>
+    		<div class="span3"><p class="con-main-p">  <a href="/<%= post.user.username %>" style="color:#9f9f9f"><%= post.user.name %> @<%= post.user.username %></a></p></div>
     		<div class="span8" style="width: 470px;">
-    			<p class="bandz-content"><%= raw emojify(link_urls_and_users(post.body)) %></p>
+    			<p class="bandz-content"><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
     			<p class="profile-link"><a href="/<%= post.user.username %> ">View <%= post.user.name %> Profile</a></p>
     		</div>
     </div>  
@@ -27,21 +27,25 @@
                 <ul>
                    <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
                     <li class="re-tip"><a href="/post/repost/<%= post.id %>">Re-Tip</a></li>
-                    <li class="admime"><a href="#">Admire</a></li>
+                    <% if !post.admires.where(user_id: @current_user.id).empty? %>
+                    <li class="admime"><a href="/post/unadmire/<%= post.id %>">Unadmire</a></li>
+                    <% else %>
+                    <li class="admime"><a href="/post/admire/<%= post.id %>">Admire</a></li>
+                    <% end %>
                     <% if post.user == @current_user %>
                     <li class="de-lete"><a href="/post/destroy/<%= post.id %>">Delete</a></li>
                     <% end %>
                     <!-- <li class="mo-re"><a href="#">More</a></li> -->
                 </ul>
             </div>
-    		<p><%= time_ago_in_words(post.created_at) %> <a class="details" href="">Details</a></p>
+    		<p><%= time_ago_in_words(post.created_at).include?("day") || time_ago_in_words(post.created_at).include?("year") || time_ago_in_words(post.created_at).include?("month")? to_date(post.created_at) : time_ago_in_words(post.created_at) %> <!-- <a class="details" href="">Details</a> --></p>
         </div>
 
     	<!-- current replies -->
         <% post.comments.each do |comment| %>
         <div class="small-widget">
             <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-            <p class="con-main-p" style="color:#333"><%= comment.user.name %> &nbsp; &nbsp; &nbsp;<a href="<%= comment.user.username %>" style="color:#9f9f9f">@<%= comment.user.username %></a></p><p style="color:#a6a6a6"> <%= raw emojify(link_urls_and_users(comment.body)) %></p><p></p>
+            <p class="con-main-p" style="color:#333">&nbsp; &nbsp; &nbsp;<a href="<%= comment.user.username %>" style="color:#9f9f9f"><%= comment.user.name %> @<%= comment.user.username %></a></p><p style="color:#a6a6a6"> <%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p><p></p>
             <div class="reply-more">
                 <ul>
                     <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
@@ -52,7 +56,7 @@
                     <li class="mo-re"><a href="#">More</a></li>
                 </ul>
             </div><br>
-            <p style="color:#a6a6a6"><%= time_ago_in_words(comment.created_at) %> <a class="details" href="#">Details</a></p>
+            <p style="color:#a6a6a6"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <a class="details" href="#">Details</a></p>
         </div>
         <% end %>
 

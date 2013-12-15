@@ -4,6 +4,9 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :reposts
   has_many :hash_tags
+  has_many :admires
+
+  validates_length_of :body, maximum: 170
 
   after_create :process_hashtags
 

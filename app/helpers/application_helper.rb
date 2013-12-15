@@ -4,6 +4,7 @@ module ApplicationHelper
 	    #regexps
 	    user = /@(\w+)/
 	    hashtags = /#(\w+)/
+	 
 	    #replace @usernames with links to that user
 	    while s =~ user
 	        s.sub! "@#{$1}", "<a href='/#{$1}'>[at]#{$1}</a>"
@@ -20,4 +21,31 @@ module ApplicationHelper
 	def pack_price name
 		"499"
 	end
+
+	def to_date(date)
+		date.strftime("%d %b. %Y")
+	end
+
+	def linkify(string)
+		string_with_href = find_links!(string)
+		string_with_href.nil? ? string : string_with_href
+	end
+
+	def find_links!(string)
+		string.gsub!(/\b((https?:\/\/|ftps?:\/\/|mailto:|www\.)([A-Za-z0-9\-_=%&@\?\.\/]+))\b/) {
+
+			match = $1
+			tail  = $3
+
+			case match
+			when /^www/     then  "<a href=\"http://#{match}\">#{match}</a>"
+			when /^mailto/  then  "<a href=\"#{match}\">#{tail}</a>"
+			else                  "<a href=\"#{match}\">#{match}</a>"
+			end
+
+		}
+	end
+
 end
+
+

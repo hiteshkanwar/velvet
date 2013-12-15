@@ -5,13 +5,13 @@
 		<div class="span3">
 			<a href="/<%= user.username %>"><%= image_tag "main/bandz-img-1.png", :style => "margin-left: 55px;" %></a>
 			<% if @user.is_following.include? user %>
-			 	<a href="#"><%= image_tag "main/bandz-img-2.png" %></a>
+			 	<a href="/dashboard/unacquaint/<%= user.username %>"><%= image_tag "main/bandz-img-2.png" %></a>
 			<% else %> 
 				<a href="/dashboard/acquaint/<%= user.username %>"><%= image_tag "main/bidz-img33.png" %></a>
 			<% end %>
 		</div>
 		<div class="span8" style="width: 470px;">
-			<p class="bandz-content"><%= raw emojify(link_urls_and_users(user.posts.last.body)) if user.posts.last %></p>
+			<p class="bandz-content"><%= raw emojify(linkify(link_urls_and_users(user.posts.last.body))) if user.posts.last %></p>
 		</div>
 </div>
 <% end %>

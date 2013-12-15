@@ -13,8 +13,12 @@ class PostController < ApplicationController
 	def create
 
 		if params[:body]
-			@current_user.posts.create(body: params[:body])
-			flash[:notice] = "Posted " + "#{params[:body][0..17]}..."
+			begin
+				@current_user.posts.create(body: params[:body])
+				flash[:notice] = "Posted " + "#{params[:body][0..17]}..."
+			rescue => error
+				flash[:notice] = error.full_messages.to_sentence
+			end
 		else
 			flash[:notice] = "Write something..."
 		end
@@ -22,13 +26,38 @@ class PostController < ApplicationController
 	end
 
 	def admire
+		post = Post.find(params[:id])
+		if post
+			@current_user.admires.create(post_id: post.id)
+			post.user.activities.create(person: @current_user.id, description: "Admired your Post")
+			flash[:notice] = "Admired"
+		end
+		redirect_to request.referer
+		
+	end
+
+	def unadmire
+		post = Post.find(params[:id])
+		if post && admire = @current_user.admires.find_by_post_id(post.id)
+			@current_user.admires.delete(admire)
+			flash[:notice] = "Unadmired post"
+		end
+		redirect_to request.referer
 	end
 
 
 	def repost
 		post = Post.find(params[:id])
-		@current_user.reposts.create(post: post) if post
-		redirect_to "/#{@current_user.username}"
+		if post
+			begin
+				@current_user.reposts.create(post: post)
+				post.user.activities.create(person: @current_user.id, description: "Retiped your Post")
+				flash[:notice] = "Post as been retipped to your profile"
+			rescue => error
+			end
+		end
+		#redirect_to "/#{@current_user.username}"
+		redirect_to request.referer
 	end
 
 	def comment

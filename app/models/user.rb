@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :emojis
   has_many :likes
+  has_many :admires
   has_many :activities
   has_many :reposts, order:'created_at DESC'
   has_many :followers, :class_name => 'Followings', :foreign_key => 'user_id'
@@ -46,12 +47,12 @@ class User < ActiveRecord::Base
 
   # People user is following
   def is_following
-    self.following.map { |f| f.user }
+    self.following.map { |f| f.user }.compact
   end
 
   # User followers
   def is_followers
-    self.followers.map { |f| f.follower }
+    self.followers.map { |f| f.follower }.compact
   end
 
   def who_to_follow

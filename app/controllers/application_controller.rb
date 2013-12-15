@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
         redirect_to :root
         return false
       else
-      	@current_user = User.find_by_email(session[:email])
+      	@current_user ||= User.find_by_email(session[:email])
       	#@current_user = User.first
         return true
       end

@@ -15,6 +15,24 @@
     </div>
     
     <div class="span8 tippen-content">
+
+        <!-- Other notfications -->
+       <% @activities.each do |activity| %>
+       <% user = User.find(activity.person) %>
+       <div class="m-header" style="margin-bottom: 10px;">
+            <div class="span6">
+            <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+            <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
+            </div>
+            <div class="span2 other-admir">
+                <% date = activity.created_at %>
+                <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+            </div>
+        </div>
+       <% end %>
+
+        
+        <!-- Aquainted -->
     	<% @followed.each do |user| %>
     	<div class="m-header" style="margin-bottom: 10px;">
 		    <div class="span6">
@@ -22,7 +40,8 @@
 		    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
 		    </div>
 		    <div class="span2 other-admir">
-		        <p><%= time_ago_in_words(user.following.find_by_user_id(@current_user.id).created_at) %></p>
+                <% date = user.following.find_by_user_id(@current_user.id).created_at %>
+		        <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
 		    </div>
 		</div>
 		<% end %>
