@@ -71,6 +71,9 @@ class User < ActiveRecord::Base
     return friends_of_friends
     
   end
+  def user_name
+    "#{self.name} @#{self.username}"
+  end
 
   private
   def self.password_match?(password="", user)

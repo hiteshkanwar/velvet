@@ -63,7 +63,7 @@ class DashboardController < ApplicationController
 
 		if params[:source] && params[:source] == "autocomplete"
 			autocomplete = @users_to_display.map { | user | 
-				{ label: "#{user.name} @#{user.username}", value: user.username }
+				{ label: "#{user.name} @#{user.username}", value: user.username,:id=>user.id }
 			}
 
 			logger.debug(autocomplete)

@@ -35,7 +35,17 @@ Velvet::Application.routes.draw do
   
   match '/notification', :to => 'dashboard#notification'
 
-  resources :messages
+  resources :messages do
+    collection do
+      get 'sent'
+      get 'trash'
+      get 'search_receivers'
+    end
+    member do
+      get 'move_to_trash'
+    end
+  end
+
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'
   match ':username/messages/:action',:controller=>"messages"
