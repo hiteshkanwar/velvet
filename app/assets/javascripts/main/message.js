@@ -6,7 +6,7 @@ VL = (function($, window, document, Velvet){
       $("#profile_dropdown").on("change",function(){
         var url = $(this).val()
         if(url=="message")
-          window.location = userName+"/messages/new"
+          window.location = "/messages/new"
       })
     },
     receiverSearch : function(){
