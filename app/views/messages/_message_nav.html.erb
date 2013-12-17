@@ -13,5 +13,8 @@
       <li class="<%= active_message_class('trash') %>"><a href="<%= trash_messages_path() %>">Trash</a></li>
     </ul>
   </div>  
+  <%= render "sidebar/suggest"%>
+  <%= render "sidebar/trends"%>
+  <%= render "sidebar/copy"%>
   <div class="banner"><%= image_tag "main/isotok.png" %></div>
   
