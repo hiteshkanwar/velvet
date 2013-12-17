@@ -29,8 +29,9 @@ class MessagesController < ApplicationController
   end
 
   def trash
-    
+    @messages = @current_user.messages.trash_messages
   end
+
   def move_to_trash
     @message = current_user.messages.find(params[:id])
     @message.move_to_trash
@@ -38,7 +39,12 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    @message = current_user.send_messages.find(params[:id])
+    if params[:trash]
+      @message = current_user.messages.find(params[:id])
+    else
+      @message = current_user.send_messages.find(params[:id])
+    end
+    
     @message.destroy
     redirect_to :back
   end

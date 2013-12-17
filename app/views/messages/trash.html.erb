@@ -1,0 +1,33 @@
+ <div class="container">
+    <div class="span4 left">
+      
+      <%= render :partial=>"message_nav" %>
+    </div>  
+    <div class="span8 tippen-content">
+    
+      <div class="panel panel-default">
+        <div class="panel-body">Trash Messages</div>
+      </div>  
+          
+      <div>
+        <% @messages.each do |message| %>
+          <div id="message_<%=message.id %>">
+            <div class="row-fluid">
+              <div class="span1">
+                <%= image_tag "main/main-large-img.png", :width => "47" %>
+              </div>
+              <div class="span11">
+                <p><strong><%= message.receiver.name %></strong></p>
+                <p><strong>RE:</strong> <%= message.message_text %></p>
+                <p><%= link_to "Delete", message_path(message,:trash=>true),:method=>"delete" %>
+              </div>  
+              
+            </div>  
+            <hr/>
+          </div>  
+        <% end %>
+      </div>
+        
+    </div>  
+</div>
+
