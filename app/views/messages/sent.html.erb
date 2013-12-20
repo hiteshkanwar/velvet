@@ -1,11 +1,14 @@
  <div class="container">
     <div class="span4 left">
+      
       <%= render :partial=>"message_nav" %>
     </div>  
     <div class="span8 tippen-content">
+    
       <div class="panel panel-default">
-        <div class="panel-body">INBOX</div>
+        <div class="panel-body">Sent</div>
       </div>  
+          
       <div>
         <% @messages.each do |message| %>
           <div id="message_<%=message.id %>">
@@ -14,10 +17,9 @@
                 <%= image_tag "main/main-large-img.png", :width => "47" %>
               </div>
               <div class="span11">
-                <p><strong><%= message.sender.name %></strong></p>
+                <p><strong><%= message.receiver.name %></strong></p>
                 <p><strong>RE:</strong> <%= message.message_text %></p>
-                <p><%=link_to "Reply",new_message_path(:parent_id=>message.id) %> -
-                  <a href="#">Forward</a> - <%= link_to "Delete", move_to_trash_message_path(message)%>
+                <p><a href="#">Forward</a> - <%= link_to "Delete", message_path(message),:method=>"delete" %>
               </div>  
               
             </div>  
@@ -25,8 +27,7 @@
           </div>  
         <% end %>
       </div>
+        
     </div>  
 </div>
 
-
- 

@@ -53,6 +53,10 @@ end
 # CSS compressor
 gem 'yui-compressor'
 
+gem 'carrierwave'
+gem "fog", "~> 1.3.1"
+gem 'nested_form'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 

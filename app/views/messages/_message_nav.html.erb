@@ -1,0 +1,20 @@
+  <div class="profile">
+    <div class="profile-det">
+      <a href="#"><%= image_tag "main/main-large-img.png", :width => "47" %></a>
+      <div class="name"><%= @current_user.name %><span>@<%= @current_user.username %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      <div class="profile-link"><a href="/<%= @current_user.username %>">view my profile page</a></div>
+    </div>
+  </div>
+  <div class="left-links">
+    <ul>
+      <li class="<%= active_message_class('compose') %>"><a href="<%= new_message_path %>">Compose Message</a></li>
+      <li class="<%= active_message_class('home') %>"><a href="<%= messages_path()  %>">Inbox</a></li>
+      <li class="<%= active_message_class('sent') %>"><a href="<%= sent_messages_path()%>">Sent</a></li>
+      <li class="<%= active_message_class('trash') %>"><a href="<%= trash_messages_path() %>">Trash</a></li>
+    </ul>
+  </div>  
+  <%= render "sidebar/suggest"%>
+  <%= render "sidebar/trends"%>
+  <%= render "sidebar/copy"%>
+  <div class="banner"><%= image_tag "main/isotok.png" %></div>
+  

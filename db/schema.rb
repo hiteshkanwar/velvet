@@ -11,9 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20131213074056) do
-
+ActiveRecord::Schema.define(:version => 20131217102142) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -29,6 +27,14 @@ ActiveRecord::Schema.define(:version => 20131213074056) do
     t.integer  "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "attachments", :force => true do |t|
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.string   "document"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -76,8 +82,9 @@ ActiveRecord::Schema.define(:version => 20131213074056) do
     t.integer  "sender_id"
     t.integer  "receiver_id"
     t.string   "ancestry"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_trash",     :default => false
   end
 
   create_table "posts", :force => true do |t|
