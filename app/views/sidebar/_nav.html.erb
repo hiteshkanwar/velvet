@@ -1,10 +1,10 @@
-<div class="left-links">
-    <ul>
-        <li class="menu-tips "><a href="/<%= params[:username] || @current_user.username %>/tips">TIPS</a></li>
-        <li class="menu-acquating"><a href="/<%= params[:username] || @current_user.username %>/acquainting">ACQUAINTING</a></li>
-        <li class="menu-acquaintances"><a href="/<%= params[:username] || @current_user.username %>/acquaintances">ACQUAINTANCES</a></li>
-        <li class="menu-admire"><a href="/<%= params[:username] || @current_user.username %>/admired">ADMIRE</a></li>
-        <li class="menu-lists"><a href="/<%= params[:username] || @current_user.username %>/lists">LISTS</a></li>
-        <li class="menu-lists"><a href="/<%= params[:username] || @current_user.username %>/emoji">EMOJI</a></li>
+<div class="left-list box-space">
+	<ul class="border-radius">
+    	<li><a href="/<%= params[:username] || @current_user.username %>/tips">TIPS</a></li>
+    	<li><a href="/<%= params[:username] || @current_user.username %>/acquainting">ACQUAINTING</a></li>
+    	<li><a href="/<%= params[:username] || @current_user.username %>/acquaintances">ACQUAINTANCES</a></li>
+    	<li><a href="/<%= params[:username] || @current_user.username %>/admired">admire</a></li>
+    	<li><a href="/<%= params[:username] || @current_user.username %>/lists">LISTS</a></li>
+    	<li><a href="/<%= params[:username] || @current_user.username %>/emoji">EMOJI</a></li>
     </ul>
-</div>	
+</div><!-- .left-list -->

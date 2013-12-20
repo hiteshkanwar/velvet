@@ -1,30 +1,64 @@
-<div class="container">
-    <div class="span4 left">
-	
-		<!--  profile -->
-		<%= render :partial => '/sidebar/profile' %>
+<div class="page">
+    <div class="container">
+        <div class="left-section left">
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/profile' %>
 
-        <!-- nav --> 
-        <%= render :partial => '/sidebar/nav' %>
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
 
-        <!-- suggest -->
-        <%= render :partial => '/sidebar/suggest' %>
-        
-        <!-- trends -->
-        <%= render :partial => '/sidebar/trends' %>
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
 
-        <!-- trends -->
-        <%= render :partial => '/sidebar/copy' %>
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
+            <br/>
+            <div class="banner"><%= image_tag "main/isotok.png" %></div>
+        </div>
 
-   
-		<div class="banner"><%= image_tag "main/isotok.png" %></div>
-    </div>
+        <div class="right-section right">
 
-    <div class="span8 tippen-content">
-        
-        <!-- START POST -->
-        <%= render :partial => 'posts', :locals => { disable_post: true } %>
-        <!-- END POST -->
-    
-	</div>
+            <div class="tip-display">
+            <%= image_tag "main/admire-banner.png", :class => 'm-large', width: "655" %>
+            <div class="tip-iiner">
+                <ul class="left">
+                    <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
+                    <li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
+                    <li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
+                </ul><!-- ul -->
+                <div class="tip-buttons right" style="margin-top: 20px;">
+                <!--
+                <input type="text" value="Message" class="button">
+                <input type="text" value="Edit Account" class="button">
+                -->
+                <a href="#" class="button">Message</a>
+                <a href="#" class="button">Add to list</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            </div>
+
+            <div class="heading all-heading">TIPS</div>
+            <br/>
+
+            <!-- START POST -->
+            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
+            <!-- END POST -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
 </div>
+
+
+
+
+
+
+
+
+
+

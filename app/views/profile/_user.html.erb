@@ -1,17 +1,25 @@
 <% @users_to_display.each do |user| %>
-<div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
-		<%= image_tag "main/main-large-img.png", :class => 'm-large' %>
-		<div class="span3"><p class="con-main-p"><%= user.name %>  <a href="/<%= user.username %>" style="color:#9f9f9f">@<%= user.username %></a></p></div>
-		<div class="span3">
-			<a href="/<%= user.username %>"><%= image_tag "main/bandz-img-1.png", :style => "margin-left: 55px;" %></a>
-			<% if @user.is_following.include? user %>
-			 	<a href="/dashboard/unacquaint/<%= user.username %>"><%= image_tag "main/bandz-img-2.png" %></a>
-			<% else %> 
-				<a href="/dashboard/acquaint/<%= user.username %>"><%= image_tag "main/bidz-img33.png" %></a>
-			<% end %>
-		</div>
-		<div class="span8" style="width: 470px;">
-			<p class="bandz-content"><%= raw emojify(linkify(link_urls_and_users(user.posts.last.body))) if user.posts.last %></p>
-		</div>
+<div class="tip-holder">
+    <div class="box acq-box border-radius">
+        <div class="box-left left"><%= image_tag "main/main-large-img.png", :width => "116", :style=> "border-radius: 0px;" %></div>
+        <div class="box-center left">
+        <h2><%= user.name %><span><a href="/<%= user.username %>">@<%= user.username %></a></span></h2>
+        <p><%= raw emojify(linkify(link_urls_and_users(user.posts.last.body))) if user.posts.last %></p>
+        </div>
+        <% if @user.is_following.include? user %>
+			 	<form method="get" action="/dashboard/unacquaint/<%= user.username %>">
+			 	<div class="box-right right"><input type="submit" value="Unacquaint" class="button black"></div>
+			 	</form>
+		<% else %> 
+			<form method="get" action="/dashboard/acquaint/<%= user.username %>">
+			 	<div class="box-right right"><input type="submit" value="Acquaint" class="button"></div>
+			 </form>
+		<% end %>
+        
+        <div class="clear"></div>
+    </div><!-- .box -->
+    <!-- .box-comment -->
+    <div class="clear"></div>
 </div>
 <% end %>
+

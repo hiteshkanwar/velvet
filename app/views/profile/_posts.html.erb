@@ -1,74 +1,81 @@
 <%  if local_assigns[:disable_post].nil? %>
- <div class="ric-area1">
+<div class="write-tip">
     <form action="/post/create" name="tips" method="post">
-        <p class="ric-reply"><input name="body" type="text" maxlength="170" placeholder="Write a Tip---"></p>
-        <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+    <input type="text" name="body" id="tip" maxlength="170" value="Write a Tip" onfocus="if (this.value == 'Write a Tip') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
+     <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
         <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
     </form>
 </div>
-
 <% end %>
+
+<% if  @user.all_posts(1)[0, 10].empty? %>
+<div style="margin-left: 280px;margin-top: 150px;">
+<span style="font-weight: 600; font-size: 25px;">NO POSTS :(</span>
+</div>
+<% end %>
+
 <% @user.all_posts(1)[0, 10].each do |post| %>
+<div class="tip-holder">
+    <div class="box border-radius">
+        <div class="box-left left"><%= image_tag "main/main-large-img.png", width: "116", :class => "m-large" %></div>
+        <div class="box-right right">
+        <h2><%= post.user.name %><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
 
-    <div class="post-container">
+        <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
+        <div class="view-profile"><a href="/<%= post.user.username %>">View Profile</a></div>
+        </div>
+        <div class="clear"></div>
+        <div class="box-bottom">
+            <div class="bottom-left left"><a href="/post/repost/<%= post.id %>" class="re-tip">retip</a>
+            
+            <!-- admire -->
+            <% if !post.admires.where(user_id: @current_user.id).empty? %>
+            <a href="/post/unadmire/<%= post.id %>" class="admire">unadmire</a>
+            <% else %>
+             <a href="/post/admire/<%= post.id %>" class="admire">admire</a>
+            <% end %>
 
-        <!-- original post body -->
-        <div class="con-main" style="border: solid 1px #ebebeb; clear: both; border-radius: 5px; margin-top: 15px; padding: 10px 0 10px 10px; width: 100%;">
-    		<%= image_tag "main/main-large-img.png", :class => "m-large" %>
-    		
-    		<div class="span3"><p class="con-main-p">  <a href="/<%= post.user.username %>" style="color:#9f9f9f"><%= post.user.name %> @<%= post.user.username %></a></p></div>
-    		<div class="span8" style="width: 470px;">
-    			<p class="bandz-content"><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
-    			<p class="profile-link"><a href="/<%= post.user.username %> ">View <%= post.user.name %> Profile</a></p>
-    		</div>
-    </div>  
-    <div class="m-footer" style="margin-left:15px; width: 640px;">
-            <div class="tips-reply-more">
-                <ul>
-                   <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
-                    <li class="re-tip"><a href="/post/repost/<%= post.id %>">Re-Tip</a></li>
-                    <% if !post.admires.where(user_id: @current_user.id).empty? %>
-                    <li class="admime"><a href="/post/unadmire/<%= post.id %>">Unadmire</a></li>
-                    <% else %>
-                    <li class="admime"><a href="/post/admire/<%= post.id %>">Admire</a></li>
-                    <% end %>
-                    <% if post.user == @current_user %>
-                    <li class="de-lete"><a href="/post/destroy/<%= post.id %>">Delete</a></li>
-                    <% end %>
-                    <!-- <li class="mo-re"><a href="#">More</a></li> -->
-                </ul>
+            <!-- delete -->
+            <% if post.user == @current_user %>
+                <a href="/post/destroy/<%= post.id %>" class="more">delete</a>
+            <% end %>
             </div>
-    		<p><%= time_ago_in_words(post.created_at).include?("day") || time_ago_in_words(post.created_at).include?("year") || time_ago_in_words(post.created_at).include?("month")? to_date(post.created_at) : time_ago_in_words(post.created_at) %> <!-- <a class="details" href="">Details</a> --></p>
+            <!-- timestamp -->
+            <div class="bottom-right right"><%= time_ago_in_words(post.created_at).include?("day") || time_ago_in_words(post.created_at).include?("year") || time_ago_in_words(post.created_at).include?("month")? to_date(post.created_at) : time_ago_in_words(post.created_at) %> <!-- <a href="#">Details</a> --></div>
+            <div class="clear"></div>
         </div>
+    </div><!-- .box -->
 
-    	<!-- current replies -->
-        <% post.comments.each do |comment| %>
-        <div class="small-widget">
-            <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-            <p class="con-main-p" style="color:#333">&nbsp; &nbsp; &nbsp;<a href="<%= comment.user.username %>" style="color:#9f9f9f"><%= comment.user.name %> @<%= comment.user.username %></a></p><p style="color:#a6a6a6"> <%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p><p></p>
-            <div class="reply-more">
-                <ul>
-                    <!-- <li class="re-ply"><a href="#">Reply</a></li> -->
-                    <% if comment.user == @current_user || post.user == @current_user %>
-                    <li class="de-lete"><a href="/post/remove/<%= comment.id %>">Delete</a></li>
-                    <% end %>
-                    <li class="numbers"><a href="#">300</a></li>
-                    <li class="mo-re"><a href="#">More</a></li>
-                </ul>
-            </div><br>
-            <p style="color:#a6a6a6"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <a class="details" href="#">Details</a></p>
-        </div>
-        <% end %>
+    <% if !post.comments.empty? %>
+        <div class="box box-comment border-radius">
+            
+            <% post.comments.each do |comment| %>
+            <div class="box-comment-hold">
+                <div class="box-left left"><%= image_tag "main/main-large-img.png", :width => "47" %></div>
+                <div class="box-right right">
+                <h2><%= post.user.name %><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a></span></h2>
+                <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
+                <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
+               
+                <!-- timestamp -->
+                <div class="bottom-right"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <!-- <a href="#">Details</a> --></div>
+            </div>
+                <div class="clear"></div>
+            </div><!-- .box-comment-hold -->
+            <% end %> 
+            
+        </div><!-- .box-comment -->
 
-        <!-- reply here -->
-        <div class="ric-area">
-           <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style =>  "padding-right:10px;" %>
-           <form action="/post/comment" name="reply" method="post">
-                <p class="ric-reply"><input type="text" name="body" placeholder="Write a Reply---"></p>
+        <div class="clear"></div>
+        <div class="reply-tip">
+           
+            <form action="/post/comment" name="reply" method="post">
+                <%= image_tag "main/main-large-img.png", :width => "47" %>
+                <input type="text" name="body" id="tip" value="Write a Reply" onfocus="if (this.value == 'Write a Reply') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
                 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
                 <input name="id" type="hidden" value= "<%= post.id %>" />
-           </form>
+            </form>
         </div>
-    </div>
-
+    <% end %>
+</div>
 <% end %>

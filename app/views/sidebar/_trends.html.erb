@@ -1,16 +1,9 @@
-<div class="miami-trends">
-    <div class="miami-header">
-        <ul>
+<div class="footer border-radius box-space">
+    Trends
+    <ul>
+        <% HashTag.trending.each do |tag| %>
             
-            <li><a href="#">Trends</a></li>
-            <!-- <li>Change</li> --> 
-        </ul>
-    </div>
-    <div class="miami-links">
-        <ul>
-            <% HashTag.trending.each do |tag| %>
-                <li><a href="#"><%= raw link_urls_and_users(tag.name) %></a></li>
-            <% end %>
-        </ul>
-    </div>
-</div>
+            <li><a href="#"><%= raw link_urls_and_users(tag.name) %></a></li>
+        <% end %>
+    </ul>
+</div><!-- .footer -->

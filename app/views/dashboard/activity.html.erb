@@ -1,54 +1,75 @@
-<div class="container">
-    <div class="span4 left">
-    
-        <!-- nav --> 
-        <%= render :partial => '/sidebar/nav' %>
+<div class="page">
+    <div class="container">
+        <div class="left-section left">
 
-        <!-- suggest -->
-        <%= render :partial => '/sidebar/suggest' %>
-        
-        <!-- trends -->
-        <%= render :partial => '/sidebar/trends' %>
+            <%= render :partial => '/sidebar/profile' %>
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
 
-        <!-- trends -->
-        <%= render :partial => '/sidebar/copy' %>
-    </div>
-    
-    <div class="span8 tippen-content">
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
 
-        <!-- Other notfications -->
-       <% @activities.each do |activity| %>
-       <% user = User.find(activity.person) %>
-       <div class="m-header" style="margin-bottom: 10px;">
-            <div class="span6">
-            <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
-            <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
-            </div>
-            <div class="span2 other-admir">
-                <% date = activity.created_at %>
-                <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-            </div>
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
         </div>
-       <% end %>
 
-        
-        <!-- Aquainted -->
-    	<% @followed.each do |user| %>
-    	<div class="m-header" style="margin-bottom: 10px;">
-		    <div class="span6">
-		    <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
-		    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
-		    </div>
-		    <div class="span2 other-admir">
-                <% date = user.following.find_by_user_id(@current_user.id).created_at %>
-		        <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-		    </div>
-		</div>
-		<% end %>
+        <div class="right-section right">
 
-        <!-- START POST -->
-        <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
-        <!-- END POST -->
-    </div>
+            <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
+                <ul>
+                       
+                   <!-- Other notfications -->
+                   <% @activities.each do |activity| %>
+                   <% user = User.find(activity.person) %>
+                   <div class="m-header" style="margin-bottom: 10px;">
+                        <div class="span6">
+                        <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+                        <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
+                        </div>
+                        <div class="span2 other-admir">
+                            <% date = activity.created_at %>
+                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                        </div>
+                    </div>
+                   <% end %>
+
+                    <!-- Aquainted -->
+                    <% @followed.each do |user| %>
+                    <div class="m-header" style="margin-bottom: 10px;">
+                        <div class="span6">
+                        <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+                        <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
+                        </div>
+                        <div class="span2 other-admir">
+                            <% date = user.following.find_by_user_id(@current_user.id).created_at %>
+                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                </ul>
+            </div>
+
+
+            <!-- START POST -->
+            <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
+            <!-- END POST -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
 </div>
+
+
+
+
+
+
+
+
+
+
 

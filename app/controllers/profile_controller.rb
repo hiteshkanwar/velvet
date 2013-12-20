@@ -64,13 +64,20 @@ class ProfileController < ApplicationController
 
 	# Display emoji sheet
 	def emoji
+		flash[:notice] = "Re-implementing"
+		redirect_to "/#{@user.username}"
 	end
 
 	# People user admires
 	def admired
 		#flash[:notice] = "Not yet implemented"
-		#redirect_to "/#{@user.username}"
-		@posts = @user.admires.map { |admire| Post.find(admire.post_id) }.uniq
+		#redirect_to "/#{@user.username}" 
+		@posts = @user.admires.map { |admire| 
+			begin
+			Post.find(admire.post_id) 
+			rescue => error
+			end
+		}.uniq.compact
 		@user.assigned_posts = @posts.sort{|a, b| b[:created_at] <=> a[:created_at]}
 	end
 

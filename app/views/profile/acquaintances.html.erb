@@ -1,44 +1,54 @@
-<div class="container">
-    <div class="span4 left">
-    
-        <!-- nav --> 
-        <%= render :partial => '/sidebar/nav' %>
+<div class="page">
+    <div class="container">
+        <div class="left-section left">
 
-        <!-- suggest -->
-        <%= render :partial => '/sidebar/suggest' %>
-        
-        <!-- trends -->
-        <%= render :partial => '/sidebar/trends' %>
+            <%= render :partial => '/sidebar/profile' %>
+           
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
 
-        <!-- trends -->
-        <%= render :partial => '/sidebar/copy' %>
-    </div>
-    
-    <div class="span8 tippen-content">
-    	<div class="banner-section">
-        	<%= image_tag "main/admire-banner.png", :class => 'm-large' %>
-            <div class="banner-footer">
-            	<div class="span4 total-posts">
-                	<ul>
-                    	<li> <%= @user.posts.size %> <br> <span><strong>TIPS</strong></span></li>
-                        <li><%= @user.following.size %> <br> <span><strong>ACQUANTING</strong></span></li>
-                        <li><%= @user.followers.size %> <br> <span><strong>ACQUANTANCES</strong></span></li>
-                    </ul>
-                </div>
-                <div class="left total-posts-buttons">
-                	<button class="message"></button>
-                    <button class="edit-account"></button>
-                </div>
-            </div>
-        </div>
-    	<div class="m-header page-header">
-            <div class="span6">
-            	ACQUANTANCES
-            </div>
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
+
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
+            <br/>
+            <div class="banner"><%= image_tag "main/isotok.png" %></div>
         </div>
 
-        <!-- START POST -->
-        <%= render :partial => 'user' %>
-        <!-- END POST -->
-    </div>
+        <div class="right-section right">
+
+            <div class="tip-display">
+            <%= image_tag "main/admire-banner.png", :class => 'm-large', width: "655" %>
+            <div class="tip-iiner">
+                <ul class="left">
+                    <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
+                    <li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
+                    <li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
+                </ul><!-- ul -->
+                <div class="tip-buttons right" style="margin-top: 20px;">
+                <!--
+                <input type="text" value="Message" class="button">
+                <input type="text" value="Edit Account" class="button">
+                -->
+                <a href="#" class="button">Message</a>
+                <a href="#" class="button">Add to list</a>
+                </div>
+                <div class="clear"></div>
+            </div>
+            </div>
+
+            <div class="heading all-heading">ACQUANTANCES</div>
+            <br/>
+
+            <!-- START POST -->
+            <%= render :partial => 'user' %>
+            <!-- END POST -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
 </div>

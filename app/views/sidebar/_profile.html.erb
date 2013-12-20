@@ -1,23 +1,34 @@
-<div class="profile">
-	<div class="profile-det">
-		<a href="#"><%= image_tag "main/main-large-img.png", :width => "47" %></a>
-		<div class="name"><%= @user.name %><span>@<%= @user.username %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-		<div class="profile-link"><a href="/<%= @user.username %>">view my profile page</a></div>
-	</div>
-	<div class="tips"><span><%= @user.posts.size %></span>TIPS</div>
-	<div class="tips"><span><%= @user.following.size %></span>ACQUAINTING</div>
-	<div class="tips" style="border-right:none;"><span><%= @user.followers.size %></span>ACQUAINTANCES</div>
-	<select class="msg" id="profile_dropdown">
-		<option value=""></option>    
-		<!-- <option value="direct_message">Direct Message</option> -->
-		<option value="acquaint">Acquaint</option>
-		<!--<option value="admire">Admire</option>-->
-		<option value="message">Message</option>
-		<option value="add_to_list">Add to list</option>
-	</select>
-</div>
+<div class="display-box border-radius">
+	<div class="name">
+        <p><%= @user.name %><span>@<%= @user.username %></span><small><a href="/<%= @user.username %>">view my profile page</a></small></p>
+    	<a href="/<%= @user.username %>"><%= image_tag "main/main-large-img.png", :width => "47" %></a>
+    </div><!-- .name -->
+    <ul>
+    	<li><p><%= @user.posts.size %><span>TIPS</span></p></li>
+    	<li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
+    	<li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
+    </ul><!-- ul -->
+    <div class="clear"></div>
+    <% if @current_user.id && @current_user != @user %>
+    <div class="direct-messaging">
+    	<!--<a href="#" class="button">direct messaging</a>-->
+        <% if @current_user.is_following.include? @user %>
+                <a href="/dashboard/unacquaint/<%= @user.username %>" class="button black">Unacquaint</a>
+        <% else %> 
+             <a href="/dashboard/acquaint/<%= @user.username %>" class="button">Acquaint</a>
+        <% end %>
+    </div><!-- .direct-messaging & aquaint -->
+    <!--
+    <div class="direct-messaging">
+        <a href="#" class="button">add to list</a>
+    </div>
+    -->
+    <!-- .add to list -->
+    <% end %>
+</div><!-- .display-box -->
 
 <script type="text/javascript">
+/*
 $(document).ready(function(e){
 	VL.message.handleDropdown("<%= params[:username] %>")
 });
@@ -26,4 +37,5 @@ $(document).ready(function(e){
 
 	// 	window.location = "/dashboard/"+elm.value+"/<%= params[:username] %>";
 	// }
+*/
 </script>

@@ -1,24 +1,36 @@
-<div class="container">
-    <div class="span4 left">
-    
-        <!-- nav --> 
-        <%= render :partial => '/sidebar/nav' %>
+<div class="page">
+    <div class="container" style="padding-top:0px">
+        <div class="left-section left">
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
 
-        <!-- suggest -->
-        <%= render :partial => '/sidebar/suggest' %>
-        
-        <!-- trends -->
-        <%= render :partial => '/sidebar/trends' %>
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
 
-        <!-- trends -->
-        <%= render :partial => '/sidebar/copy' %>
-    </div>
-    
-    <div class="span8 tippen-content">
-    	
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
+        </div>
 
-        <!-- START POST -->
-        <%= render :partial => '/profile/user' %>
-        <!-- END POST -->
-    </div>
+        <div class="right-section right">
+
+            <!-- START USERS -->
+            <%= render :partial => '/profile/user' %>
+            <!-- END USERS -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
 </div>
+
+
+
+
+
+
+
+
+
+

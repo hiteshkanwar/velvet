@@ -147,6 +147,7 @@ class LandingController < ApplicationController
   def logout
   	session[:email] = nil
     session[:username] = nil
+    @current_user = nil
 	  redirect_to :root
   end
 

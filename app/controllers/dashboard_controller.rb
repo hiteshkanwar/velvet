@@ -43,7 +43,7 @@ class DashboardController < ApplicationController
 
 		#puts request.fullpath
 		@posts = @current_user.followings_posts
-		@user = User.new
+		@user = @current_user
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
@@ -106,7 +106,7 @@ class DashboardController < ApplicationController
 		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
 
 		@posts = @mentioned
-		@user = User.new
+		@user = @current_user
 		@user.assigned_posts = @posts
 
 		@posts
@@ -150,7 +150,7 @@ class DashboardController < ApplicationController
 
 	def acquaint
 
-		if !@current_user.is_following.include? @user
+		if !@current_user.is_following.include? @user && @current_user != @user
 			@user.followers.create(follower_id: @current_user.id)
 			# @user.activities.create(person: @current_user.id, body: "#{@current_user.name} acquainted you")
 			flash[:notice] = "Now acquainting #{@user.name}"

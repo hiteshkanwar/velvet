@@ -1,30 +1,15 @@
-<div class="cool-people">
-    <div class="peaple-header">
-    <div class="row">
-        <div class="span2 cool-heading">
-            <h6>Cool People to Acquaint</h6>
-        </div>
-        <div class="span2 cool-h-link">
-            <ul>
-                <li><a href="<%= @current_url %>">Refresh</a></li>
-               <!-- <li><a href="#">View All</a></li> -->
-            </ul>
-        </div>
-        </div>
-    </div>
+<div class="display-box border-radius box-space">
+    <div class="cool">
+        <a href="" class="current_page_item">Cool People to Acquaint</a><a href="">Refresh</a>
+    </div><!-- .cool -->
+
     <%  @current_user.who_to_follow[0,3].each do |suggest| %>
        <% person      = User.find(suggest.split(",")[0]) %>
        <% followed_by = User.find(suggest.split(",")[1]) %>
-
-        <div class="cool-post">
-            <%= image_tag "main/main-large-img.png", :align => "left", :width => "46" %>
-            <ul>
-                <li><%= person.name %></li>
-                <li><a href="/<%= person.username %>">@<%= person.username %></a></li>
-            </ul>
-            <p>Acquainted by <span><a href="/<%= followed_by.username %>"> <%= followed_by.name %></a></span> and <span>others</span></p>
-           <!-- <a class="post-link" href="#">Acquaintance</a> -->
-        </div>
+    <div class="cool-hold">
+        <p><%= person.name %><span>@<%= person.username %></span><small>Acquainted by <%= followed_by.name %> and others</small><a href="/<%= person.username %>">View</a></p>
+        <%= image_tag "main/main-large-img.png", :width => "47" %>
+    </div><!-- .cool-hold -->
     <% end %>
-
-</div>  
+   
+</div><!-- .display-box -->

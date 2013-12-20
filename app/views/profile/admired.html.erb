@@ -1,24 +1,41 @@
-<div class="container">
-    <div class="span4 left">
-    
-        <!-- nav --> 
-        <%= render :partial => '/sidebar/nav' %>
+<div class="page">
+    <div class="container">
+        <div class="left-section left">
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/profile' %>
 
-        <!-- suggest -->
-        <%= render :partial => '/sidebar/suggest' %>
-        
-        <!-- trends -->
-        <%= render :partial => '/sidebar/trends' %>
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
 
-        <!-- trends -->
-        <%= render :partial => '/sidebar/copy' %>
-    </div>
-    
-    <div class="span8 tippen-content">
-    	
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
 
-        <!-- START POST -->
-        <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
-        <!-- END POST -->
-    </div>
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
+            <br/>
+            <div class="banner"><%= image_tag "main/isotok.png" %></div>
+        </div>
+
+        <div class="right-section right">
+
+            <!-- START POST -->
+            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
+            <!-- END POST -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
 </div>
+
+
+
+
+
+
+
+
+
+
