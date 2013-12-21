@@ -1,33 +1,31 @@
- <div class="container">
-    <div class="span4 left">
-      
+<div class="page"> 
+  <div class="container">
+    <div class="left-section left">
       <%= render :partial=>"message_nav" %>
     </div>  
-    <div class="span8 tippen-content">
-    
-      <div class="panel panel-default">
-        <div class="panel-body">Sent</div>
-      </div>  
-          
-      <div>
+    <div class="right-section right">
+      <div class="heading border-radius">Sent</div>
+      <div class="inbox message border-radius">
         <% @messages.each do |message| %>
-          <div id="message_<%=message.id %>">
-            <div class="row-fluid">
-              <div class="span1">
-                <%= image_tag "main/main-large-img.png", :width => "47" %>
-              </div>
-              <div class="span11">
-                <p><strong><%= message.receiver.name %></strong></p>
-                <p><strong>RE:</strong> <%= message.message_text %></p>
-                <p><a href="#">Forward</a> - <%= link_to "Delete", message_path(message),:method=>"delete" %>
-              </div>  
-              
-            </div>  
-            <hr/>
-          </div>  
-        <% end %>
-      </div>
-        
-    </div>  
+
+        <div class="message-holder"  id="message_<%=message.id %>">
+          <img src="images/inbox-img.jpg" />
+          <%#= image_tag "inbox-img.jpg" ,:width=>47%>
+          <div class="description">
+            <h2><%= message.sender.name %></h2>
+            <p><%= message.message_text %> </p>
+            <a href="#">Forward</a> - <%= link_to "Delete", message_path(message),:method=>"delete",:confirm=>"Are you sure?" %>
+
+          </div>
+          <div class="clear"></div>
+        </div><!-- .message-holder -->
+        <% end %>  
+      </div><!-- .inbox -->
+    </div><!-- .right-section -->
+    <div class="clear"></div>
+  </div><!-- .container -->
 </div>
+
+
+
 

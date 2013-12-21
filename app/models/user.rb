@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   after_create :hash_password
 
   def user_avatar
-    self.avatar.url.nil? ? "main/main-large-img.png" : self.avatar.url(:thumb)
+    self.avatar.url.nil? ? "/assets/main/main-large-img.png" : self.avatar.url(:thumb)
   end
 
   def user_header(params = :large)
