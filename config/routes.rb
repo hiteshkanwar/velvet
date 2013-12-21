@@ -46,6 +46,7 @@ Velvet::Application.routes.draw do
     end
   end
 
+  match '/landing/:action/:id', :controller => 'landing'
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'
   match ':username/:action/:id', :controller => 'profile'

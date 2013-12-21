@@ -1,13 +1,19 @@
 <div class="heading">Email notifications<span>Control when and how often Tippin sends emails to you.</span></div>
 <div class="box profile">
-<form>
-
+<form action="/<%= @current_user.username %>/update" method="post">
+<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 
 <div class="profile-heading all-heading">Activity related to you and your Tips</div>
 
+
 <div class="label-holder">
 <label class="label">email me when</label>
-<p class="check-list"><input name="" type="checkbox" value="">My Tips get a reply or I'm mentioned in a Tip</p>
+<p class="check-list">
+
+      <%=hidden_field_tag 'user[noti_mention]', '0'%>
+      <%=check_box_tag 'user[noti_mention]', 1, (@current_user.noti_mention == true ? true : false)%>
+      My Tips get a reply or I'm mentioned in a Tip
+</p>
 
 <!--
 <p><input name="" type="checkbox" value="">My Tips are marked as favorites</p>
@@ -36,10 +42,30 @@
 
 <div class="label-holder">
 <label class="label">email me when</label>
-<p><input name="" type="checkbox" value="">My tips are marked as favorites</p>
-<p class="check-list"><input name="" type="checkbox" value="">My tips are retiped</p>
-<p class="check-list"><input name="" type="checkbox" value="">I'm sent a direct message</p>
-<p class="check-list"><input name="" type="checkbox" value="">Someone sends me a follow request</p>
+<p>
+      <%=hidden_field_tag 'user[noti_retips]', '0'%>
+      <%=check_box_tag 'user[noti_retips]', 1, (@current_user.noti_retips == true ? true : false)%>
+      My tips are retiped
+</p>
+
+<p>
+      <%=hidden_field_tag 'user[noti_admire]', '0'%>
+      <%=check_box_tag 'user[noti_admire]', 1, (@current_user.noti_admire == true ? true : false)%>
+      My tips are marked as favorites
+</p>
+
+<p>
+      <%=hidden_field_tag 'user[noti_message]', '0'%>
+      <%=check_box_tag 'user[noti_message]', 1, (@current_user.noti_message == true ? true : false)%>
+      I'm sent a direct message
+</p>
+
+<p>
+      <%=hidden_field_tag 'user[noti_follow]', '0'%>
+      <%=check_box_tag 'user[noti_follow]', 1, (@current_user.noti_follow == true ? true : false)%>
+      Someone sends me a follow request
+</p>
+
 
 
 <div class="clear"></div>
@@ -66,7 +92,7 @@
 
 
 
-<input type="button" class="button save" value="Save Changes">
+<input type="submit" class="button save" value="Save Changes">
 <div class="clear"></div>
 </form>
 </div>

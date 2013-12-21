@@ -1,7 +1,8 @@
 <div class="heading">Profile<span>This information appears on your public profile, search results, and beyond.</span></div>
 
 <div class="box profile">
-<form>
+<form action="/<%= @current_user.username %>/update" method="post">
+	<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 
 <div class="profile-heading all-heading">Activity related to you and your Tips</div>
 
@@ -35,41 +36,41 @@
 
 <div class="label-holder">
 <label class="label">name</label>
-<p><input type="text" placeholder="John Seed" value="<%= @current_user.name %>"><span>Enter your real name, so people you know can recognize you.</span></p>
+<p><input type="text" placeholder="John Seed" name="user[name]" value="<%= @current_user.name %>"><span>Enter your real name, so people you know can recognize you.</span></p>
 <div class="clear"></div>
 </div>
 
 <div class="label-holder">
 <label class="label">username</label>
-<p><input type="text" placeholder="jseed" value="<%= @current_user.username %>"><span>Enter your username.</span></p>
+<p><input type="text" placeholder="jseed" name="user[username]" value="<%= @current_user.username %>"><span>Enter your username.</span></p>
 <div class="clear"></div>
 </div>
 
 <div class="label-holder">
 <label class="label">email</label>
-<p><input type="text" placeholder="john.seed@example.com" value="<%= @current_user.email %> "><span>Enter your email.</span></p>
+<p><input type="text" placeholder="john.seed@example.com" name="user[email]" value="<%= @current_user.email %>"><span>Enter your email.</span></p>
 <div class="clear"></div>
 </div>
 
 <div class="label-holder">
 <label class="label">location</label>
-<p><input type="text" placeholder="location" value="<%= @current_user.location %>"><span>Where in the world are you?</span></p>
+<p><input type="text" placeholder="Location" name="user[location]" value="<%= @current_user.location %>"><span>Where in the world are you?</span></p>
 <div class="clear"></div>
 </div>
 
 <div class="label-holder">
 <label class="label">website</label>
-<p><input type="text" placeholder="example.com"  value="<%= @current_user.website %>"><span>Have a homepage or a blog? Put the address here.</span></p>
+<p><input type="text" placeholder="example.com"  name="user[website]" value="<%= @current_user.website %>"><span>Have a homepage or a blog? Put the address here.</span></p>
 <div class="clear"></div>
 </div>
 
 <div class="label-holder">
 <label class="label">bio</label>
-<p><textarea rows="8"><%= @current_user.bio %></textarea><span>About yourself in 160 characters or less.</span></p>
+<p><textarea name="user[bio]" rows="8"><%= @current_user.bio %></textarea><span>About yourself in 160 characters or less.</span></p>
 <div class="clear"></div>
 </div>
 
-<input type="button" class="button save" value="Save Changes">
+<input type="submit" class="button save" value="Save Changes">
 <div class="clear"></div>
 </form>
 </div>

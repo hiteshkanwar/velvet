@@ -22,6 +22,10 @@ module ApplicationHelper
 		"499"
 	end
 
+	def check(params)
+		@current_user.send(params) ? "checked" : nil
+	end
+
 	def to_date(date)
 		date.strftime("%d %b. %Y")
 	end

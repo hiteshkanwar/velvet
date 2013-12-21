@@ -76,9 +76,30 @@ class ProfileController < ApplicationController
 	end
 
 	def update
+	
+			
+		if	!@current_user.update_attributes(params[:user])
+			flash[:notice] = @current_user.errors.full_messages.to_sentence
+		else
+			session[:email] = @current_user.email
+			session[:username] = @current_user.username
+			flash[:notice] = "Setting's updated"
+		end
 
-		@current_user.update_attributes(params[:user])
+		redirect_to "/#{@current_user.username}/edit"
 
+	end
+
+	def update_password
+		if @current_user.hashed_password == Digest::SHA1.hexdigest(params[:current_password])
+			@current_user.update_attributes(hashed_password: Digest::SHA1.hexdigest(params[:change_password]))
+		
+			flash[:notice] = "Password saved"
+		else
+			flash[:notice] = "Incorrect password"
+		end
+
+		redirect_to request.referrer
 	end
 
 	# Display emoji sheet
