@@ -40,7 +40,16 @@ class User < ActiveRecord::Base
   end
 
   def user_header(params = :large)
-    self.header.url.nil? ? "main/main-large-img.png" : self.header.url(params)
+
+    if self.header.url.nil?
+      if params == :thumb
+        "main/main-large-img.png"
+      else
+        "main/admire-banner.png"
+      end
+    else 
+      self.header.url(params)
+    end
   end
 
   def all_posts(pg=1)
