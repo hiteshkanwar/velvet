@@ -76,7 +76,9 @@ class ProfileController < ApplicationController
 	end
 
 	def update
-		
+
+		@current_user.update_attributes(params[:user])
+
 	end
 
 	# Display emoji sheet

@@ -9,6 +9,9 @@ end
 class User < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessor :assigned_posts
+  # Handle image uploads
+  mount_uploader :avatar, DocumentUploader
+  mount_uploader :header, DocumentUploader
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
