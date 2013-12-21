@@ -1,6 +1,6 @@
 <div class="display-box border-radius">
 	<div class="name">
         <p><%= @current_user.name %><small><a href="/<%= @current_user.username %>">view my profile page</a></small></p>
-    	<%= image_tag @current_user.avatar.url, :width => "47" %>
+    	<%= image_tag @current_user.user_avatar, :width => "47" %>
     </div><!-- .name -->
 </div>
