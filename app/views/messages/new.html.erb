@@ -1,40 +1,46 @@
-<div class="container">
-  <div class="span4 left">
-
-    <%= render :partial=>"message_nav" %>
-
-  </div>
-
-  <div class="span8 tippen-content">
-    <div class="panel panel-default">
-      <div class="panel-body">
-       Direct Messaging - New
-      </div>
-    </div> 
-    <% if @parent_message.blank? %>
-      <form id="search-user" action="/search" method="get">
-        <input class="receiver-search" type="text" name="q" placeholder="Search" />
-      </form>
-    <% else %>
-      <p><%= @parent_message.sender.name %> @<%= @parent_message.sender.username %></p>
-    <% end %>
-      
-    <%= nested_form_for(@message,:html=>{:multipart=>true,:id=>"new_message"}) do |f|%>
-      <% if @parent_message.present? %>
-        <%= f.hidden_field :receiver_id ,:value=>@parent_message.sender_id,:id=>"receiver_id" %>
-        <%= f.hidden_field :parent_id ,:value=>@parent_message.id %>
-      <% else %>
-        <%= f.hidden_field :receiver_id ,:id=>"receiver_id" %>
-      <% end %>  
-    
-      <%= f.text_area :message_text,:placeholder=>"Message",:rows=>3,:class=>"span8",:id=>"message_text",:maxlength=>140 %>
-      <%= f.fields_for :attachments %>
-      <%= f.link_to_add "Add Attachment", :attachments %>
-      <br />
-      <%= f.submit "Send Message",:class=>"btn" %>
-    <% end %>
-  </div> 
+<div class="page"> 
+  <div class="container">
+    <div class="left-section left">
+      <%= render :partial=>"message_nav" %>
+    </div>  
+    <div class="right-section right">
+      <div class="heading border-radius">direct messaging - new</div>
+      <div class="inbox  border-radius">
+        
+          <% if @parent_message.blank? %>
+            <p>
+              
+              <input type="text" name="q" id="tip" value="Write a Composer Name" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search"/>
+              
+            </p>  
+            <%= image_tag @current_user.user_avatar, :width => "47" ,:height=>"36",:id=>"user_profile_image"%>
+          <% else %>
+            <p><%= @parent_message.sender.name %> @<%= @parent_message.sender.username %></p>
+            <%= image_tag @parent_message.sender.user_avatar, :width => "47" ,:height=>"36",:id=>"user_profile_image"%>
+          <% end %>
+          
+        
+        
+        <div class="composer-area">
+          <%= nested_form_for(@message,:html=>{:multipart=>true,:id=>"new_message"}) do |f|%>
+            <% if @parent_message.present? %>
+              <%= f.hidden_field :receiver_id ,:value=>@parent_message.sender_id,:id=>"receiver_id" %>
+              <%= f.hidden_field :parent_id ,:value=>@parent_message.id %>
+            <% else %>
+              <%= f.hidden_field :receiver_id ,:id=>"receiver_id" %>
+            <% end %>  
+             <%= f.text_area :message_text,:placeholder=>"Message",:rows=>8,:id=>"message_text" %>
+               <%#= f.fields_for :attachments %>
+              <%#= f.link_to_add "Add Attachment", :attachments %>
+              <%= f.submit "Send Message",:class=>"button" %>
+          <% end %>  
+        </div>
+      </div><!-- .inbox -->
+    </div><!-- .right-section -->
+    <div class="clear"></div>
+  </div><!-- .container -->
 </div>
+
 
 <script type="text/javascript">
 $(document).ready(function(){

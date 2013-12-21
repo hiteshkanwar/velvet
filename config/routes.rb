@@ -43,6 +43,7 @@ Velvet::Application.routes.draw do
     end
     member do
       get 'move_to_trash'
+      get 'undelete'
     end
   end
 

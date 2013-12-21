@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   before_filter :confirm_logged_in
   layout 'main/application'
   def index
-    @messages = @current_user.messages.not_trash
+    @messages = @current_user.messages.not_trash.order("created_at desc")
   end
   
   def new
@@ -19,17 +19,17 @@ class MessagesController < ApplicationController
       # redirect_to "/"+params[:username]+"/messages/new"
        redirect_to sent_messages_path
     else
-      @messages = @current_user.send_messages
+      @messages = @current_user.send_messages.order("created_at desc")
       render :action=>:new
     end
   end
 
   def sent
-    @messages = @current_user.send_messages
+    @messages = @current_user.send_messages.order("created_at desc")
   end
 
   def trash
-    @messages = @current_user.messages.trash_messages
+    @messages = @current_user.messages.trash_messages.order("created_at desc")
   end
 
   def move_to_trash
@@ -52,9 +52,15 @@ class MessagesController < ApplicationController
   def search_receivers
     @users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
     autocomplete = @users.map { | user | 
-        { label: "#{user.name} @#{user.username}", value: "#{user.name} @#{user.username}",:id=>user.id }
+        { label: "#{user.name} @#{user.username}", value: "#{user.name} @#{user.username}",:id=>user.id ,:user_avatar=>user.user_avatar}
       }
 
      render :json => autocomplete 
+  end
+
+  def undelete
+    @message = current_user.messages.find(params[:id])
+    @message.undelete
+    redirect_to trash_messages_path()
   end
 end

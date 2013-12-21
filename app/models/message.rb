@@ -13,4 +13,9 @@ class Message < ActiveRecord::Base
     self.is_trash = true
     self.save
   end
+  
+  def undelete
+    self.is_trash = false
+    self.save
+  end
 end

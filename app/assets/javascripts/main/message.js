@@ -29,6 +29,7 @@ VL = (function($, window, document, Velvet){
         },
         select: function(event, ui) {
           $( "#receiver_id" ).val( ui.item.id );
+          $("#user_profile_image").attr("src",ui.item.user_avatar)
         }
       });
     },

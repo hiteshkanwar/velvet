@@ -1,32 +1,30 @@
- <div class="container">
-    <div class="span4 left">
+<div class="page"> 
+  <div class="container">
+    <div class="left-section left">
       <%= render :partial=>"message_nav" %>
     </div>  
-    <div class="span8 tippen-content">
-      <div class="panel panel-default">
-        <div class="panel-body">INBOX</div>
-      </div>  
-      <div>
+    <div class="right-section right">
+      <div class="heading border-radius">inbox</div>
+      <div class="inbox message border-radius">
         <% @messages.each do |message| %>
-          <div id="message_<%=message.id %>">
-            <div class="row-fluid">
-              <div class="span1">
-                <%= image_tag "main/main-large-img.png", :width => "47" %>
-              </div>
-              <div class="span11">
-                <p><strong><%= message.sender.name %></strong></p>
-                <p><strong>RE:</strong> <%= message.message_text %></p>
-                <p><%=link_to "Reply",new_message_path(:parent_id=>message.id) %> -
-                  <a href="#">Forward</a> - <%= link_to "Delete", move_to_trash_message_path(message)%>
-              </div>  
-              
-            </div>  
-            <hr/>
-          </div>  
-        <% end %>
-      </div>
-    </div>  
+
+        <div class="message-holder">
+          <img src="images/inbox-img.jpg" />
+          <div class="description">
+            <h2><%= message.sender.name %></h2>
+            <p><%= message.message_text %> </p>
+            <%=link_to "Reply",new_message_path(:parent_id=>message.id) %> -
+            <a href="#">Forward</a> - <%= link_to "Delete", move_to_trash_message_path(message)%>
+
+          </div>
+          <div class="clear"></div>
+        </div><!-- .message-holder -->
+        <% end %>  
+      </div><!-- .inbox -->
+    </div><!-- .right-section -->
+    <div class="clear"></div>
+  </div><!-- .container -->
 </div>
 
 
- 
+
