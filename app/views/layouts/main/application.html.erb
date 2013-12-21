@@ -33,8 +33,10 @@
                   <input type="input" class="sear-ch" placeholder="Search" name="q">
                 </form>
               </div>
-              <div class="setting left text-align-right"><a href="/logout"><%= image_tag "main/setting.jpg", width: "18", height: "18" %></a></div>
+              <% if @current_user.id %>
+              <div class="setting left text-align-right"><a href="/<%= @current_user.username %>/edit"><%= image_tag "main/setting.jpg", width: "18", height: "18" %></a></div>
               <div class="compose left text-align-right"><a href="#"><%= image_tag "main/compose.jpg", width: "39", height: "26" %></a></div>
+              <% end %>
             </div><!-- .search-setting -->
             <div class="clear"></div>
     </div>

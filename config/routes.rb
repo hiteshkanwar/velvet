@@ -48,6 +48,7 @@ Velvet::Application.routes.draw do
 
   match ':username', :controller => 'profile', :action => 'show'
   match ':username/:action', :controller => 'profile'
+  match ':username/:action/:id', :controller => 'profile'
   match ':username/messages/:action',:controller=>"messages"
   
   

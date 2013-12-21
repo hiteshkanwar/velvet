@@ -1,41 +1,28 @@
 <div class="page">
     <div class="container">
         <div class="left-section left">
-            <!-- nav --> 
-            <%= render :partial => '/sidebar/profile' %>
 
+            <%= render :partial => '/sidebar/edit_profile' %>
+           
             <!-- nav --> 
-            <%= render :partial => '/sidebar/nav' %>
-
-            <!-- suggest -->
-            <%= render :partial => '/sidebar/suggest' %>
-            
-            <!-- trends -->
-            <%= render :partial => '/sidebar/trends' %>
+            <%= render :partial => '/sidebar/edit_nav' %>
 
             <!-- copy -->
             <%= render :partial => '/sidebar/copy' %>
+            
             <br/>
             <div class="banner"><%= image_tag "main/isotok.png" %></div>
         </div>
 
         <div class="right-section right">
 
+            
+
             <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
+            <%= render :partial => "edit_" + @partial %>
             <!-- END POST -->
 
         </div>
         <div class="clear"></div>
     </div><!-- .container -->
 </div>
-
-
-
-
-
-
-
-
-
-

@@ -26,6 +26,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Handle email
 gem 'sendgrid'

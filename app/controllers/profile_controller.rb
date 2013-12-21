@@ -6,6 +6,7 @@ class ProfileController < ApplicationController
 
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :except => [:index]
+	before_filter :only => [:edit] do |c| c.editable params[:username] end 
 	
 	def current_user
 		unless session[:email]
@@ -14,6 +15,10 @@ class ProfileController < ApplicationController
 		else
 	    	@current_user ||= User.find_by_email(session[:email])
 	    end
+	end
+
+	def editable(username)
+		raise ActionController::RoutingError.new('Not Found') unless @current_user == @user
 	end
 
 	def not_found(username)
@@ -60,6 +65,18 @@ class ProfileController < ApplicationController
 	# People following user
 	def acquaintances
 		@users_to_display = @user.is_followers
+	end
+
+	def edit
+
+		["notification", "account", "profile", "password"].include? params[:id] ? 
+				@partial = params[:id] : @partial = "profile"
+
+		
+	end
+
+	def update
+		
 	end
 
 	# Display emoji sheet
