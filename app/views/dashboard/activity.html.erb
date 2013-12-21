@@ -26,7 +26,7 @@
                    <% user = User.find(activity.person) %>
                    <div class="m-header" style="margin-bottom: 10px;">
                         <div class="span6">
-                        <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+                        <%= image_tag user.user_avatar, :width => "40", :style => "margin-right: 5px;", :align => "left" %>
                         <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
                         </div>
                         <div class="span2 other-admir">
@@ -40,7 +40,7 @@
                     <% @followed.each do |user| %>
                     <div class="m-header" style="margin-bottom: 10px;">
                         <div class="span6">
-                        <%= image_tag "main/main-large-img.png", :align => "left", :width => "40", :style => "margin-right: 5px;" %>
+                        <%= image_tag user.user_avatar, :width => "40", :style => "margin-right: 5px;", :align => "left" %>
                         <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
                         </div>
                         <div class="span2 other-admir">

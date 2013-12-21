@@ -17,7 +17,7 @@
 <% @user.all_posts(1)[0, 10].each do |post| %>
 <div class="tip-holder">
     <div class="box border-radius">
-        <div class="box-left left"><%= image_tag "main/main-large-img.png", width: "116", :class => "m-large" %></div>
+        <div class="box-left left"><%= image_tag post.user.user_avatar, :width => "116" %></div>
         <div class="box-right right">
         <h2><%= post.user.name %><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
 
@@ -51,9 +51,9 @@
             
             <% post.comments.each do |comment| %>
             <div class="box-comment-hold">
-                <div class="box-left left"><%= image_tag "main/main-large-img.png", :width => "47" %></div>
+                <div class="box-left left"><%= image_tag comment.user.user_avatar, :width => "47" %></div>
                 <div class="box-right right">
-                <h2><%= post.user.name %><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a></span></h2>
+                <h2><%= comment.user.name %><span><a href="/<%= post.user.username %>"> @<%= comment.user.username %></a></span></h2>
                 <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
                 <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
                
@@ -70,7 +70,7 @@
         <div class="reply-tip">
            
             <form action="/post/comment" name="reply" method="post">
-                <%= image_tag "main/main-large-img.png", :width => "47" %>
+                <%= image_tag @current_user.user_avatar, :width => "47" %>
                 <input type="text" name="body" id="tip" value="Write a Reply" onfocus="if (this.value == 'Write a Reply') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
                 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
                 <input name="id" type="hidden" value= "<%= post.id %>" />

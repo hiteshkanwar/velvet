@@ -8,7 +8,7 @@
        <% followed_by = User.find(suggest.split(",")[1]) %>
     <div class="cool-hold">
         <p><%= person.name %><span>@<%= person.username %></span><small>Acquainted by <%= followed_by.name %> and others</small><a href="/<%= person.username %>">View</a></p>
-        <%= image_tag "main/main-large-img.png", :width => "47" %>
+        <%= image_tag person.user_avatar, :width => "47" %>
     </div><!-- .cool-hold -->
     <% end %>
    

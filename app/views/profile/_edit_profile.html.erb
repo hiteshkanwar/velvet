@@ -1,18 +1,18 @@
 <div class="heading">Profile<span>This information appears on your public profile, search results, and beyond.</span></div>
 
 <div class="box profile">
-<form action="/<%= @current_user.username %>/update" method="post">
+<form action="/<%= @current_user.username %>/update" method="post" enctype="multipart/form-data">
 	<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 
-<div class="profile-heading all-heading">Activity related to you and your Tips</div>
+<div class="profile-heading all-heading">Change Your Profile And Header Picture</div>
 
 
 <div class="label-holder">
 <label class="label">photo</label>
 <p>
-</p><div class="profile-photo border-radius left"></div>
+</p><div class="profile-photo border-radius left"><%= image_tag @current_user.user_avatar, :width => "80" %></div>
 <div class="change-photo left">
-<input type="button" class="button" value="Change Photo"><span>This photo is your identity on Tippin and appears with your Tips.</span>
+<input type="file" name="user[avatar]" value="Change Photo"> <span>This photo is your identity on Tippin and appears with your Tips.</span>
 </div>
 <div class="clear"></div>
 <p></p>
@@ -22,9 +22,9 @@
 <div class="label-holder">
 <label class="label">header</label>
 <p>
-</p><div class="profile-photo border-radius left"></div>
+</p><div class="profile-photo border-radius left"><%= image_tag @current_user.user_header, :width => "80" %></div>
 <div class="change-photo left">
-<input type="button" class="button" value="Change Header">
+<input type="file" name="user[header]" value="Change Header">
 <span>Recommended dimensions of 1252×626<br>Maximum file size of 5MB</span>
 </div>
 <div class="clear"></div>
