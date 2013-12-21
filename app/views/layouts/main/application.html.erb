@@ -25,7 +25,9 @@
                     <li><a href="/activity">Activity</a></li>
                     <li><a href="/discover">Discover</a></li>
                     <li><a href="/<%= session[:username] %>">Profile</a></li>
+                    <% if @current_user && @current_user.id %>
                     <li><a href="/logout">Sign Out</a></li>
+                    <% end %>
 
                 </ul>
             </div><!-- .nav-holder -->
