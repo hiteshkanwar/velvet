@@ -34,7 +34,7 @@ gem 'sendgrid'
 # Queue server
 gem 'redis'
 gem "resque", "~> 1.22.0", :require => "resque/server"
-#gem 'rmagick'
+gem 'rmagick'
 
 # Exception handler
 gem 'exception_notification', git: 'git://github.com/alanjds/exception_notification.git'

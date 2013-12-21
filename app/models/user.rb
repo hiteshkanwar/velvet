@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
   after_create :hash_password
 
   def user_avatar
-    self.avatar.url.nil? ? "main/main-large-img.png" : self.avatar
+    self.avatar.url.nil? ? "main/main-large-img.png" : self.avatar.url(:thumb)
   end
 
-  def user_header
-    self.header.url.nil? ? "main/admire-banner.png" : self.header
+  def user_header(params = :large)
+    self.header.url.nil? ? "main/admire-banner.png" : self.header.url(params)
   end
 
   def all_posts(pg=1)

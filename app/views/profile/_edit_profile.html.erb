@@ -22,7 +22,7 @@
 <div class="label-holder">
 <label class="label">header</label>
 <p>
-</p><div class="profile-photo border-radius left"><%= image_tag @current_user.user_header, :width => "80" %></div>
+</p><div class="profile-photo border-radius left"><%= image_tag @current_user.user_header(:thumb), :width => "80" %></div>
 <div class="change-photo left">
 <input type="file" name="user[header]" value="Change Header">
 <span>Recommended dimensions of 1252×626<br>Maximum file size of 5MB</span>
