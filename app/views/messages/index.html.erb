@@ -9,12 +9,12 @@
         <% @messages.each do |message| %>
 
         <div class="message-holder">
-          <img src="images/inbox-img.jpg" />
+           <%= image_tag message.sender.user_avatar, :width => "47"%>
           <div class="description">
-            <h2><%= message.sender.name %></h2>
+            <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a></h2>
             <p><%= message.message_text %> </p>
             <%=link_to "Reply",new_message_path(:parent_id=>message.id) %> -
-            <a href="#">Forward</a> - <%= link_to "Delete", move_to_trash_message_path(message)%>
+            <!--<a href="#">Forward</a> --> <%= link_to "Delete", move_to_trash_message_path(message)%>
 
           </div>
           <div class="clear"></div>

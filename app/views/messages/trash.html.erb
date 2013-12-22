@@ -9,7 +9,7 @@
         <% @messages.each do |message| %>
 
         <div class="message-holder"  id="message_<%=message.id %>">
-          <%= image_tag @message.sender.user_avatar, :width => "47" ,:height=>"36"%>
+          <%= image_tag message.sender.user_avatar, :width => "47"%>
           
           <%#= image_tag "inbox-img.jpg" ,:width=>47%>
           <div class="description">

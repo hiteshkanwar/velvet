@@ -10,13 +10,13 @@
           <% if @parent_message.blank? %>
             <p>
               
-              <input type="text" name="q" id="tip" value="Write a Composer Name" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search"/>
+              <input type="text" name="q" id="tip" value="<%= params[:receiver_name] %>" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search"/>
               
             </p>  
-            <%= image_tag @current_user.user_avatar, :width => "47" ,:height=>"36",:id=>"user_profile_image"%>
+            <%= image_tag @current_user.user_avatar, :width => "47",:id=>"user_profile_image"%>
           <% else %>
             <p><%= @parent_message.sender.name %> @<%= @parent_message.sender.username %></p>
-            <%= image_tag @parent_message.sender.user_avatar, :width => "47" ,:height=>"36",:id=>"user_profile_image"%>
+            <%= image_tag @parent_message.sender.user_avatar, :width => "47",:id=>"user_profile_image"%>
           <% end %>
           
         
@@ -27,7 +27,7 @@
               <%= f.hidden_field :receiver_id ,:value=>@parent_message.sender_id,:id=>"receiver_id" %>
               <%= f.hidden_field :parent_id ,:value=>@parent_message.id %>
             <% else %>
-              <%= f.hidden_field :receiver_id ,:id=>"receiver_id" %>
+              <%= f.hidden_field :receiver_id ,:id=>"receiver_id", :value => params[:receiver_id] %>
             <% end %>  
              <%= f.text_area :message_text,:placeholder=>"Message",:rows=>8,:id=>"message_text" %>
                <%#= f.fields_for :attachments %>

@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   layout 'main/application'
   def index
     @messages = @current_user.messages.not_trash.order("created_at desc")
+    @current_user.messages.not_trash.update_all(seen: true)
   end
   
   def new
@@ -17,6 +18,7 @@ class MessagesController < ApplicationController
   
     if @message.save
       # redirect_to "/"+params[:username]+"/messages/new"
+       User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
        redirect_to sent_messages_path
     else
       @messages = @current_user.send_messages.order("created_at desc")
