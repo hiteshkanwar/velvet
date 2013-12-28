@@ -1,7 +1,16 @@
 <%  if local_assigns[:disable_post].nil? %>
 <div class="write-tip">
-    <form action="/post/create" name="tips" method="post">
-    <input type="text" name="body" id="tip" maxlength="170" value="Write a Tip" onfocus="if (this.value == 'Write a Tip') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
+    <form action="/post/create" name="tips" method="post" enctype="multipart/form-data">
+    <input type="text" name="post[body]" id="tip" maxlength="170" value="" placeholder="Write a Tip" onfocus="if (this.value == 'Write 
+    a Tip') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
+     <div style="margin-top: 10px;margin-left: 290px;">
+        <span> 
+            <input type="file" name="post[avatar]" value="Change Photo">
+            <input style="margin-left: 15px;height: 30px;" type="submit" value="Tip" class="button">
+        </span>
+
+     </div>
+
      <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
         <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
     </form>
@@ -22,6 +31,10 @@
         <h2><%= post.user.name %><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
 
         <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
+        <% if post.avatar.url %>
+            <p><a id="example4" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url(:thumb), :width => "116" %></a></p>
+        <% end %>
+
         <div class="view-profile"><a href="/<%= post.user.username %>">View Profile</a></div>
         </div>
         <div class="clear"></div>

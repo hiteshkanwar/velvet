@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   has_many :reposts
   has_many :hash_tags
   has_many :admires
+  mount_uploader :avatar, DocumentUploader
 
   validates_length_of :body, maximum: 170
 

@@ -9,10 +9,10 @@ class PostController < ApplicationController
 
 	def create
 
-		if params[:body]
+		if params[:post][:body] || params[:post][:avatar]
 			begin
-				@current_user.posts.create(body: params[:body])
-				flash[:notice] = "Posted " + "#{params[:body][0..17]}..."
+				@current_user.posts.create(params[:post])
+				flash[:notice] = "Posted " + "#{params[:post][:body][0..17]}..."
 			rescue => error
 				flash[:notice] = error.full_messages.to_sentence
 			end
