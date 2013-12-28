@@ -23,7 +23,7 @@
 </div>
 <% end %>
 
-<% @user.all_posts(1)[0, 10].each do |post| %>
+<% @user.all_posts(1)[0, 10].uniq.each do |post| %>
 <div class="tip-holder">
     <div class="box border-radius">
         <div class="box-left left"><%= image_tag post.user.user_avatar, :width => "116" %></div>
@@ -32,7 +32,7 @@
 
         <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
         <% if post.avatar.url %>
-            <p><a id="example4" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url(:thumb), :width => "116" %></a></p>
+            <p><a id="example1" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url(:thumb), :width => "116" %></a></p>
         <% end %>
 
         <div class="view-profile"><a href="/<%= post.user.username %>">View Profile</a></div>

@@ -44,7 +44,7 @@ class DashboardController < ApplicationController
 		#puts request.fullpath
 		@posts = @current_user.followings_posts
 		@user = @current_user
-		@user.assigned_posts = @posts
+		@user.assigned_posts = @posts.uniq
 
 		logger.debug @user.all_posts(1)
 

@@ -61,7 +61,7 @@ module Velvet
     # Precompile additional assets
     config.assets.precompile += %w( .svg .eot .woff .ttf)
     config.assets.precompile += %w( .png, .jpg )
-    config.assets.precompile += %w( public.css )
+    config.assets.precompile += %w( public.css *.js )
 
 
     config.assets.css_compressor = :yui
