@@ -1,0 +1,25 @@
+<div class="tip-display">
+<%= image_tag @user.user_header, :width => "655", height: "242" %>
+<div class="tip-iiner">
+    <ul class="left">
+        <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
+        <li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
+        <li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
+    </ul><!-- ul -->
+    <div class="tip-buttons right" style="margin-top: 20px;">
+    <!--
+    <input type="text" value="Message" class="button">
+    <input type="text" value="Edit Account" class="button">
+    -->
+    <% if @current_user == @user %>
+    <a href="<%= @current_user.username %>/edit" class="button">Edit Account</a>
+    <% else %>
+    
+    <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a>
+    <a href="/<%= @current_user.username %>/lists?user_id=<%= @user.id %>" class="button">Add to list</a>
+    <% end %>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+

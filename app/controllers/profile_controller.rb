@@ -6,7 +6,7 @@ class ProfileController < ApplicationController
 
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :except => [:index]
-	before_filter :only => [:edit] do |c| c.editable params[:username] end 
+	before_filter :only => [:edit, :create_list, :add_members] do |c| c.editable params[:username] end 
 	
 	def current_user
 		unless session[:email]
@@ -90,6 +90,24 @@ class ProfileController < ApplicationController
 
 	end
 
+	def create_list
+		@current_user.lists.create(params[:list])
+		redirect_to request.referrer
+	end
+
+	def add_members
+		begin
+			@members = @current_user.lists.find(params[:list_id]).members.map { |member| member.user }.flatten
+			if !@members.include? User.find(params[:user_id])
+				@current_user.lists.find(params[:list_id]).members.create(user_id: params[:user_id])
+				flash[:notice] = "Added!"
+			end
+		rescue => error
+			flash[:notice] = "Error!"
+		end
+		redirect_to request.referrer
+	end
+
 	def update_password
 		if @current_user.hashed_password == Digest::SHA1.hexdigest(params[:current_password])
 			@current_user.update_attributes(hashed_password: Digest::SHA1.hexdigest(params[:change_password]))
@@ -123,8 +141,13 @@ class ProfileController < ApplicationController
 
 	# User lists
 	def lists
-		flash[:notice] = "Not yet implemented"
-		redirect_to "/#{@user.username}"
+		if params[:id] && params[:id] == 'create'
+			render 'list_create'
+		elsif params[:id] == 'members'
+			@list = List.find(params[:list_id]) rescue nil
+			@users_to_display = @list.members.map { |member| member.user }.flatten if @list
+			render 'list_members' if @list
+		end
 	end
 
 	# create before filter to validate 

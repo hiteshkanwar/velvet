@@ -21,26 +21,9 @@
 
         <div class="right-section right">
 
-            <div class="tip-display">
-            <%= image_tag @user.user_header, :width => "655", height: "242" %>
-            <div class="tip-iiner">
-                <ul class="left">
-                    <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
-                    <li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
-                    <li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
-                </ul><!-- ul -->
-                <div class="tip-buttons right" style="margin-top: 20px;">
-                <!--
-                <input type="text" value="Message" class="button">
-                <input type="text" value="Edit Account" class="button">
-                -->
-                <a href="#" class="button">Message</a>
-                <a href="#" class="button">Add to list</a>
-                </div>
-                <div class="clear"></div>
-            </div>
-            </div>
-
+            
+            <%= render :partial => 'tips_display' %>
+            
             <div class="heading all-heading">ACQUANTANCES</div>
             <br/>
 

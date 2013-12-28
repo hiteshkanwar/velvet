@@ -5,4 +5,7 @@
  *= require_self
  * require_tree .
  *= require main/layout
+ *= require main/jquery.fancybox-1.3.4
+ *= require main/jquery.fancybox-thumbs
+ *= require main/bootstrap_panel
 */

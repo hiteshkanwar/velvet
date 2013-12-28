@@ -1,18 +1,15 @@
 <div class="page">
     <div class="container">
         <div class="left-section left">
-            <!-- nav --> 
-            <%= render :partial => '/sidebar/profile' %>
 
+            <%= render :partial => '/sidebar/profile' %>
+           
             <!-- nav --> 
             <%= render :partial => '/sidebar/nav' %>
 
             <!-- suggest -->
-            <%= render :partial => '/sidebar/suggest' %>
+            <%= render :partial => '/sidebar/side_list' %>
             
-            <!-- trends -->
-            <%= render :partial => '/sidebar/trends' %>
-
             <!-- trends -->
             <%= render :partial => '/sidebar/copy' %>
             <br/>
@@ -21,26 +18,22 @@
 
         <div class="right-section right">
 
+            
             <%= render :partial => 'tips_display' %>
+            
+            <div class="heading all-heading"><%= @list.name %>
+                <% if @current_user.id && @current_user == @user %>
+                <p class="list-button"><a href="/<%= @current_user.username %>/lists/create" class="button">create list</a></p>
+                <% end %>
+            </div>
 
-            <div class="heading all-heading">TIPS</div>
             <br/>
 
             <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
+            <%= render :partial => 'user' %>
             <!-- END POST -->
 
         </div>
         <div class="clear"></div>
     </div><!-- .container -->
 </div>
-
-
-
-
-
-
-
-
-
-

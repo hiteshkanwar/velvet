@@ -1,0 +1,59 @@
+<div class="page">
+    <div class="container">
+        <div class="left-section left">
+
+            <%= render :partial => '/sidebar/profile' %>
+           
+            <!-- nav --> 
+            <%= render :partial => '/sidebar/nav' %>
+
+            <!-- suggest -->
+            <%= render :partial => '/sidebar/suggest' %>
+            
+            <!-- trends -->
+            <%= render :partial => '/sidebar/trends' %>
+
+            <!-- trends -->
+            <%= render :partial => '/sidebar/copy' %>
+            <br/>
+            <div class="banner"><%= image_tag "main/isotok.png" %></div>
+        </div>
+
+        <div class="right-section right">
+
+            <% if !params[:user_id] %> <%= render :partial => 'tips_display' %> <% end %>
+            
+            
+            <div class="heading all-heading">LISTS 
+                <% if @current_user.id && @current_user == @user %>
+                <p class="list-button"><a href="/<%= @current_user.username %>/lists/create" class="button">create list</a></p>
+                <% end %>
+            </div>
+
+            <br/>
+
+            <!-- START POST -->
+            <% @user.lists.each do |list| %>
+            <div class="tip-holder">
+                <div class="box list border-radius">
+                    <h2><a href="list-members.html"><%= list.name %></a></h2>
+                    <p><%= list.description %></p>
+                    <span><a href="lists/members?list_id=<%= list.id %>"><%= list.members.size %> member(s)</a></span>
+                    <% if params[:user_id] %>
+                    <p>
+                        <form action="/<%= @current_user.username %>/add_members" method="get">
+                        <input type="hidden" name="list_id" value="<%= list.id %>">
+                        <input type="hidden" name="user_id" value="<%= params[:user_id] %>">
+                        <input type="submit" value="Choose" class="button">
+                        </form>
+                    </p>
+                    <% end %>
+                </div><!-- .box -->
+            <% end %>
+            </div>
+            <!-- END POST -->
+
+        </div>
+        <div class="clear"></div>
+    </div><!-- .container -->
+</div>

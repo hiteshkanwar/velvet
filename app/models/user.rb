@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :following, :class_name => 'Followings', :foreign_key => 'follower_id'
   has_many :messages, :class_name => 'Message', :foreign_key => 'receiver_id'
   has_many :send_messages, :class_name => 'Message', :foreign_key => 'sender_id'
+  has_many :lists
+  
   
   
   validates_uniqueness_of :email, :username
