@@ -52,7 +52,7 @@ class ProfileController < ApplicationController
 	def show_more_posts
 	end
 
-
+	# Display user tips
 	def tips
 		redirect_to action: 'show', username: params[:username]
 	end
@@ -75,6 +75,7 @@ class ProfileController < ApplicationController
 		
 	end
 
+	# Update user profile
 	def update
 	
 			
@@ -90,11 +91,13 @@ class ProfileController < ApplicationController
 
 	end
 
+	# Create new lists
 	def create_list
 		@current_user.lists.create(params[:list])
-		redirect_to request.referrer
+		redirect_to "/#{@current_user.username}/lists"
 	end
 
+	# Add members to list
 	def add_members
 		begin
 			@members = @current_user.lists.find(params[:list_id]).members.map { |member| member.user }.flatten
@@ -105,6 +108,12 @@ class ProfileController < ApplicationController
 		rescue => error
 			flash[:notice] = "Error!"
 		end
+		redirect_to request.referrer
+	end
+
+	# Destroy list
+	def destroy_list
+		@current_user.lists.find(params[:id]).destroy rescue nil
 		redirect_to request.referrer
 	end
 

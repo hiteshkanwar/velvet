@@ -11,7 +11,10 @@
     <div class="clear"></div>
     <div class="list-buttons">
         <% if @current_user.id && @user == @current_user %>
-    	<form action="/<%= @current_user.username %>/destroy_list/<%= list.id %>" method="get"><input type="submit" value="Delete" class="button"></form>
+    	<form action="/<%= @current_user.username %>/destroy_list" method="get">
+            <input type="hidden" name="id" value="<%= list.id %>">
+            <input type="submit" value="Delete" class="button">
+        </form>
         <% end %>
     </div><!-- .direct-messaging -->
     <% end %>
