@@ -6,7 +6,7 @@ class ProfileController < ApplicationController
 
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :except => [:index]
-	before_filter :only => [:edit, :create_list, :add_members] do |c| c.editable params[:username] end 
+	before_filter :only => [:edit, :create_list, :add_members, :change_avatar, :change_header] do |c| c.editable params[:username] end 
 	
 	def current_user
 		unless session[:email]
@@ -68,6 +68,7 @@ class ProfileController < ApplicationController
 	end
 
 	def edit
+		
 
 		["notification", "account", "profile", "password"].include? params[:id] ? 
 				@partial = params[:id] : @partial = "profile"
@@ -89,6 +90,18 @@ class ProfileController < ApplicationController
 
 		redirect_to "/#{@current_user.username}/edit"
 
+	end
+
+	def change_avatar
+		@current_user.avatar.key = params[:key]
+		@current_user.save
+		redirect_to request.referrer
+	end
+
+	def change_header
+		@current_user.header.key = params[:key]
+		@current_user.save
+		redirect_to request.referrer
 	end
 
 	# Create new lists
@@ -131,8 +144,7 @@ class ProfileController < ApplicationController
 
 	# Display emoji sheet
 	def emoji
-		flash[:notice] = "Re-implementing"
-		redirect_to "/#{@user.username}"
+		
 	end
 
 	# People user admires

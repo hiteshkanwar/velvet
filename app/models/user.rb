@@ -7,11 +7,13 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password
   attr_accessor :assigned_posts
   # Handle image uploads
   mount_uploader :avatar, DocumentUploader
   mount_uploader :header, DocumentUploader
+  store_in_background :avatar
+  store_in_background :header
 
   has_many :posts, order:'created_at DESC'
   has_many :comments

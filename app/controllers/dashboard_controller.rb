@@ -146,6 +146,35 @@ class DashboardController < ApplicationController
 	# Purchase emoji
 	def purchase
 		
+	    # Stripe acess token to bill user
+	
+	    price = params[:family] == "all" ? 4.99 : 1.99 
+	    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+
+	    # Get the credit card details submitted by the form
+	    card_token = params[:stripeToken]
+
+	    # Create the charge on Stripe's servers - this will charge the user's card
+	    begin
+
+	      charge = Stripe::Charge.create({
+	        :amount => price * 100, # amount in cents, again
+	        :currency => 'USD',
+	        :card => card_token,
+	        :description => "Paying for Emoji",
+	      })
+
+	      flash[:notice] = "Your payment was successful. Enjoy!"
+
+	      # Save transaction
+	      @current_user.transactions.create(stripe_id: charge.id, paid: charge.paid, price: charge.amount/100)
+	     
+	    rescue Stripe::CardError => e
+	      # The card has been declined or some error
+	      flash[:notice] = e.to_s
+	    end
+
+	    redirect_to "/#{@current_user.username}/emoji"
 	end
 
 	def acquaint

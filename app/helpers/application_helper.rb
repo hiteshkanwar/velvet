@@ -19,7 +19,7 @@ module ApplicationHelper
 	end
 
 	def pack_price name
-		"499"
+		'199'
 	end
 
 	def check(params)

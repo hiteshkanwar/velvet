@@ -55,7 +55,14 @@ end
 # CSS compressor
 gem 'yui-compressor'
 
+
 gem 'carrierwave'
+gem 'carrierwave_backgrounder'
+#gem 'carrierwave_direct'
+gem 'delayed_job_active_record'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'rack-cors', :require => 'rack/cors'
+
 gem "fog", "~> 1.3.1"
 gem 'nested_form'
 
