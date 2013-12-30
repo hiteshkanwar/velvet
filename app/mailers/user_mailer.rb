@@ -23,5 +23,18 @@ class UserMailer < ActionMailer::Base
         :tag     => "Forgot"
       )
   end
+
+  def notification(user, activity)
+    @user
+    @activity = activity
+    @person = User.find(activity.person)
+
+    mail(
+        :subject => "#{@person.name} #{@activity.description}",
+        :to      => @user.email,
+        :from    => "Tippin The Velvet <support@tippinthevelvet.com>",
+        :tag     => "Forgot"
+      )
+  end
  
 end
