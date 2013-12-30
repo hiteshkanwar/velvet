@@ -103,7 +103,8 @@ class DashboardController < ApplicationController
 		@activities = @current_user.activities.sort{|a, b| b[:created_at] <=> a[:created_at]}
 
 		# 3. People who followed me
-		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
+		  @followed = []
+		# @followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
 
 		@posts = @mentioned
 		@user = @current_user
@@ -181,7 +182,7 @@ class DashboardController < ApplicationController
 
 		if !@current_user.is_following.include? @user && @current_user != @user
 			@user.followers.create(follower_id: @current_user.id)
-			# @user.activities.create(person: @current_user.id, body: "#{@current_user.name} acquainted you")
+		    @user.activities.create(person: @current_user.id, description: "#{@current_user.name} Acquainted You")
 			flash[:notice] = "Now acquainting #{@user.name}"
 		else
 			flash[:notice] = "You're already acquainting #{@user.name}"
@@ -206,22 +207,6 @@ class DashboardController < ApplicationController
 		redirect_to request.referrer
 	end
 
-	def direct_message
-		flash[:notice] = "Not yet implemented"
-		redirect_to "/#{@user.username}"
-	end
-
-
-
-	def message
-		flash[:notice] = "Not yet implemented"
-		redirect_to "/#{@user.username}"
-	end
-
-	def add_to_list
-		flash[:notice] = "Not yet implemented"
-		redirect_to "/#{@user.username}"
-	end
 
 	# ----------
 

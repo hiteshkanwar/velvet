@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def notification(user, activity)
-    @user
+    @user = user
     @activity = activity
     @person = User.find(activity.person)
 
