@@ -28,12 +28,12 @@
 
             <div class="tip-holder">
                 <div class="box emoji border-radius">
-                    <div class="emo-heading">All Pack <span style=""><a class="buyAll" href="#">Buy</a></span></div>
-                     
-                        <div class="emo-name" style="font-size: 12px;margin-top: 5px;">This pack includes everything we sell in all packs</div>
+                    <div class="emo-heading">All Pack 
 
+                        
                         <!-- purchase form -->
                         <% if @current_user.emojis.find_by_name("all").nil? %>
+                        <span style=""><a class="buyAll" href="#">Buy</a></span>
                         <form id="payAll" name="pay" action="#">
                             <input type="hidden" value="all" name="family">
                         </form>
@@ -60,9 +60,15 @@
 
                                   return false;
                             });
-                          </script>
-                          <!-- end purchase form -->
-                          <% end %>
+                        </script>
+                        <!-- end purchase form -->
+                        <% end %>
+
+                    </div>
+                     
+                        <div class="emo-name" style="font-size: 12px;margin-top: 5px;">This pack includes everything we sell in all packs</div>
+
+                        
                         <div class="clear"></div>
             
                     <div class="clear"></div>
@@ -74,12 +80,11 @@
             <div class="tip-holder">
                 <div class="box emoji border-radius">
                     <div class="emo-heading"><%= "#{family.to_s.titleize} Pack" %> 
-                        <span style=""><a class="buy<%= family.to_s.titleize %>" href="#">Buy</a></span>
-
                         <!-- purchase form -->
-                        <% if family.to_s != "free" && @current_user.emojis.find_by_name(family.to_s).nil? %>
+                        <% if (family.to_s != "free" && @current_user.emojis.find_by_name(family.to_s).nil?) && @current_user.emojis.find_by_name("all").nil? %>
+                        <span style=""><a class="buy<%= family.to_s.titleize %>" href="#">Buy</a></span>
                         <form id="pay<%= family.to_s.titleize %>" name="pay" action="/dashboard/purchase"> 
-                            <input type="hidden" value="<%= family.to_s %>" name="family ">
+                            <input type="hidden" value="<%= family.to_s %>" name="family">
                         <script>
                             $(document).on("click", "a.buy<%= family.to_s.titleize %>", function(){
                               var token = function(res){

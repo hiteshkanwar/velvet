@@ -6,6 +6,15 @@ GIT
       actionmailer (>= 3.0.4)
       tinder (~> 1.8)
 
+GIT
+  remote: https://github.com/stripe/stripe-ruby
+  revision: f369ca16f956979d7e2a68242399417197f43168
+  specs:
+    stripe (1.9.9)
+      mime-types (~> 1.25)
+      multi_json (>= 1.0.4, < 2)
+      rest-client (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -151,6 +160,8 @@ GEM
       redis-namespace (~> 1.0)
       sinatra (>= 0.9.2)
       vegas (~> 0.1.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rmagick (2.13.2)
     ruby-hmac (0.4.0)
     sass (3.2.10)
@@ -230,6 +241,7 @@ DEPENDENCIES
   rmagick
   sass-rails (~> 3.2.3)
   sendgrid
+  stripe!
   therubyracer
   thin
   uglifier (>= 1.0.3)

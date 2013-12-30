@@ -158,7 +158,7 @@ class DashboardController < ApplicationController
 	    begin
 
 	      charge = Stripe::Charge.create({
-	        :amount => price * 100, # amount in cents, again
+	        :amount => (price * 100).to_i, # amount in cents, again
 	        :currency => 'USD',
 	        :card => card_token,
 	        :description => "Paying for Emoji",
@@ -167,7 +167,7 @@ class DashboardController < ApplicationController
 	      flash[:notice] = "Your payment was successful. Enjoy!"
 
 	      # Save transaction
-	      @current_user.transactions.create(stripe_id: charge.id, paid: charge.paid, price: charge.amount/100)
+	      @current_user.emojis.create(name: params[:family], transaction_id: charge.id, provider: 'Stripe')
 	     
 	    rescue Stripe::CardError => e
 	      # The card has been declined or some error
