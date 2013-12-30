@@ -7,7 +7,7 @@ class Activity < ActiveRecord::Base
   def send_email_notification
   	
   	# Check if notification is allowed 
-  	begin
+  	#begin
 	  	case true
 	  	when self.description.downcase.include?("admire") 		&& self.user.noti_admire
 	  		UserMailer.notification(self.user, self).deliver
@@ -15,14 +15,15 @@ class Activity < ActiveRecord::Base
 	  		UserMailer.notification(self.user, self).deliver
 	  	when self.description.downcase.include?("retip") 		&& self.user.noti_retips
 	  		UserMailer.notification(self.user, self).deliver
-	  	when self.description.downcase.include?("aquainted") 	&& self.user.noti_follow
+	  	when self.description.downcase.include?("acquainted") 	&& self.user.noti_follow
+	  		puts "Sending aquaint email"
 	  		UserMailer.notification(self.user, self).deliver
 	  	when self.description.downcase.include?("mention") 		&& self.user.noti_mention
 	  		
 	  	end
-  	rescue => error
-  		puts error.message
+  	#rescue => error
+  	#	puts error.message
 
-  	end
+  	#end
   end
 end

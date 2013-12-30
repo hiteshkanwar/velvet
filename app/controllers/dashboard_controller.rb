@@ -182,13 +182,13 @@ class DashboardController < ApplicationController
 
 		if !@current_user.is_following.include? @user && @current_user != @user
 			@user.followers.create(follower_id: @current_user.id)
-		    @user.activities.create(person: @current_user.id, description: "#{@current_user.name} Acquainted You")
+		    @user.activities.create(person: @current_user.id, description: "Acquainted You")
 			flash[:notice] = "Now acquainting #{@user.name}"
 		else
 			flash[:notice] = "You're already acquainting #{@user.name}"
 		end
 
-		redirect_to "/#{@current_user.username}"
+		redirect_to request.referrer
 	end
 
 	def unacquaint
@@ -199,7 +199,7 @@ class DashboardController < ApplicationController
 
 			#@current_user.following.destroy(@current_user.following.find_by_user_id(@user.id))
 			#@user.followers.de(@user.followers.find_by_follower_id(@current_user.id)
-			flash[:notice] = "You have unaquainted #{@user.name}"
+			flash[:notice] = "You have unacquainted #{@user.name}"
 		rescue => error
 			flash[:notice] = "Error"
 		end

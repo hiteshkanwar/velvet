@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   # Handle image uploads
   mount_uploader :avatar, DocumentUploader
   mount_uploader :header, DocumentUploader
-  store_in_background :avatar
-  store_in_background :header
+  process_in_background :avatar
+  process_in_background :header
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
