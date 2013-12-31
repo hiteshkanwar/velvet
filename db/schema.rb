@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131231105619) do
+ActiveRecord::Schema.define(:version => 20131231172852) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20131231105619) do
     t.float    "remaining_budget",      :default => 0.0
     t.float    "total_ad_served",       :default => 0.0
     t.boolean  "approved",              :default => false
+    t.text     "ga_script"
   end
 
   create_table "attachments", :force => true do |t|

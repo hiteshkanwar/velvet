@@ -2,5 +2,12 @@
   <% if @advertiser %>
     <%#= image_tag @advertiser.campaign_image_url,:width=>"302",:height=>"260px" %>
     <%= image_tag @advertiser.campaign_image_url,:width=>"302px",:height=>"" %>
+    <% if @advertiser.ga_script.present? %>
+      <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+      <script type="text/javascript">
+         <%= @advertiser.ga_script.html_safe %>
+      </script>
+
+    <% end %>
   <% end %>
 </div>

@@ -81,9 +81,14 @@
               <%= f.file_field :campaign_image,:class=>"input required" %>
               <div class="errordiv "></div>
             </div><!-- .advertisers -->
-
+            <div class="advertisers advertisers-fields left">
+              <h5>Google Analytic Script</h5>
+              <%= f.text_area :ga_script,:class=>"input" ,:rows=>5%>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+              <br />
             <div class="clear"></div>
-            <input type="submit" class="button" value="Submit" />
+            <input type="submit" class="button" value="Submit" style="margin-top:20px"/>
           </div>
         <% end %>  
       </div><!-- .tip-holder -->
