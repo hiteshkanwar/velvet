@@ -155,6 +155,7 @@ $('#specialbutton').button('loading');
 
  // Search autocomplete
  $(function() {
+  if($( ".sear-ch" ).length){
     $( ".sear-ch" ).autocomplete({
 
       source: function( request, response ) {
@@ -172,7 +173,7 @@ $('#specialbutton').button('loading');
             });
         }
       });
-
+  }
   });
 
  

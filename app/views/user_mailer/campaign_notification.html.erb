@@ -1,0 +1,51 @@
+<h1>Advertiser Information </h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <td><%= @advertiser.full_name%></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @advertiser.email%></td>
+  </tr>
+  <tr>
+    <th>Company</th>
+    <td><%= @advertiser.company%></td>
+  </tr>
+  <tr>
+    <th>Phone</th>
+    <td><%= @advertiser.phone%></td>
+  </tr>
+  <tr>
+    <th>Website</th>
+    <td><%= @advertiser.website%></td>
+  </tr>
+  <tr>
+    <th>Industry</th>
+    <td><%= @advertiser.industry%></td>
+  </tr>
+  <tr>
+    <th>Job Title</th>
+    <td><%= @advertiser.job_title%></td>
+  </tr>
+  <tr>
+    <th>Job Function</th>
+    <td><%= @advertiser.job_function%></td>
+  </tr>
+  <tr>
+    <th>Max CPM</th>
+    <td><%= @advertiser.max_cpm%></td>
+  </tr>
+
+  <tr>
+    <th>Total Budget</th>
+    <td><%= @advertiser.total_budget%></td>
+  </tr>
+  <tr>
+    <th>Campaign name</th>
+    <td><%= @advertiser.campaign_name%></td>
+  </tr>
+  
+</table>
+<%= link_to "Approve advertise",approve_ad_url(@advertiser.uuid) %>
+<%= link_to "Stop advertise",stop_ad_url(@advertiser.uuid) %>

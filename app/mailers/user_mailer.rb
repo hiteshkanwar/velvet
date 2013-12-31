@@ -36,5 +36,21 @@ class UserMailer < ActionMailer::Base
         :tag     => "Forgot"
       )
   end
- 
+
+  def campaign_notification(advertiser)
+    @advertiser = advertiser
+    mail(
+        :subject => "#{@advertiser.full_name} created advertise ment",
+        :to      => 'support@tippinthevelvet.com',
+        :from    => "Tippin The Velvet <support@tippinthevelvet.com>"
+      )
+  end
+  def payment_failed(advertiser)
+    @advertiser = advertiser
+    mail(
+        :subject => "#{@advertiser.full_name} payment failed",
+        :to      => 'support@tippinthevelvet.com',
+        :from    => "Tippin The Velvet <support@tippinthevelvet.com>"
+      )
+  end
 end

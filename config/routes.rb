@@ -1,5 +1,14 @@
 Velvet::Application.routes.draw do
 
+  match "advertisers",:to => 'advertisers#index',:as=>"advertiser"
+  match "advertisers/confirm",:to => 'advertisers#confirm',:as=>"confirm_advertiser"
+  match "advertisers/add_advertiser",:to => 'advertisers#add_advertiser',:as=>"add_advertiser",:method=>:post
+  match "activate_advertise/:id",:to => 'advertisers#activate',:as=>"activate_advertise"
+  match "de_activate_advertise/:id",:to => 'advertisers#de_activate',:as=>"de_activate_advertise"
+  match "approve_ad/:uuid",:to => 'advertisers#approve_ad',:as=>"approve_ad"
+  match "stop_ad/:uuid",:to => 'advertisers#stop_ad',:as=>"stop_ad"
+  match "serve_ad",:to => 'advertisers#serve_ad',:as=>"serve_ad"
+
   root :to => 'dashboard#index', :constraints => lambda{|req| !req.session[:email].blank?}
   root :to => 'landing#index'
 
@@ -55,6 +64,7 @@ Velvet::Application.routes.draw do
   match ':username/:action/:id', :controller => 'profile'
   match ':username/messages/:action',:controller=>"messages"
   
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

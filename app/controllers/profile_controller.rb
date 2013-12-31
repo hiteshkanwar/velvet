@@ -7,7 +7,7 @@ class ProfileController < ApplicationController
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :except => [:index]
 	before_filter :only => [:edit, :create_list, :add_members, :change_avatar, :change_header] do |c| c.editable params[:username] end 
-	
+	before_filter :serve_ad,:only=>[:show,:acquainting,:acquaintances,:admired,:lists,:emoji,:edit]
 	def current_user
 		unless session[:email]
 			# Default user if not signed in.
@@ -43,6 +43,7 @@ class ProfileController < ApplicationController
 	end
 
 	def show
+
 		logger.debug session[:username]
 		@current_url = request.original_url
 

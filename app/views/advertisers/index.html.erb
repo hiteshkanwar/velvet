@@ -1,0 +1,103 @@
+<div class="page">
+  <div class="container">
+    <div class="simple-page">
+      <div class="tip-holder">
+        <h3 class="advertiser-heading">Let's get started with a few questions.</h3>
+        <%= form_for(@advertiser,:url=>add_advertiser_path,:html=>{:id=>"advertiser_form",:multipart=>true}) do |f|%>
+          <div class="step-two">
+            <div class="advertisers advertisers-fields left">
+              <h5>First name *</h5>
+              <%= f.text_field :first_name ,:class=>"input required"%>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Last name *</h5>
+              <%= f.text_field :last_name,:class=>"input required" %>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+
+            <div class="advertisers advertisers-fields left">
+              <h5>Email *</h5>
+              <%= f.email_field :email,:class=>"input required email" %>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Tippin username for your business *</h5>
+              <%= f.text_field :tippin_user_name,:class=>"input required",:placeholder=>'@' %>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Company *</h5>
+              <%= f.text_field :company,:class=>"input required" %>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Phone *</h5>
+              <%= f.text_field :phone,:class=>"input required" %>
+              <div class="errordiv"></div>
+            </div><!-- .advertisers -->
+
+            <div class="advertisers advertisers-fields left">
+              <h5>Website *</h5>
+              <%= f.text_field :website,:class=>"input required url" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Industry *</h5>
+              <%= f.text_field :industry,:class=>"input required" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+
+            <div class="advertisers advertisers-fields left">
+              <h5>Job title *</h5>
+              <%= f.text_field :job_title,:class=>"input required" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Job function *</h5>
+              <%= f.text_field :job_function,:class=>"input required" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+
+             <div class="advertisers advertisers-fields left">
+              <h5>Max CPM *</h5>
+              <%= f.text_field :max_cpm,:class=>"input required number" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Total Budget *</h5>
+              <%= f.text_field :total_budget,:class=>"input required number" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+            <%= f.hidden_field :stripe_card_token_field,:id=>"stripe_card_token_field" %>
+
+             <div class="advertisers advertisers-fields left">
+              <h5>Campaign Name *</h5>
+              <%= f.text_field :campaign_name,:class=>"input required" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+            <div class="advertisers advertisers-fields left">
+              <h5>Campaign Image *</h5>
+              <%= f.file_field :campaign_image,:class=>"input required" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+
+            <div class="clear"></div>
+            <input type="submit" class="button" value="Submit" />
+          </div>
+        <% end %>  
+      </div><!-- .tip-holder -->
+    </div><!-- .simple-page -->
+    <div class="clear"></div>
+  </div><!-- .container -->
+</div><!-- .page -->
+<style>
+div.errordiv{margin-top: 5px;}
+label.invalid{color:red;}
+</style>
+<script src="https://checkout.stripe.com/v2/checkout.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    VL.advertiser.initAdvertiser('<%= ENV["STRIPE_PUBLISHER"] %>')
+  })
+</script>

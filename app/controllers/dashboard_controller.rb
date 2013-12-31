@@ -45,10 +45,9 @@ class DashboardController < ApplicationController
 		@posts = @current_user.followings_posts
 		@user = @current_user
 		@user.assigned_posts = @posts.uniq
-
 		logger.debug @user.all_posts(1)
-
 		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
+		serve_ad
 	end
 
 	# Find users & post with similar keywords.
@@ -88,7 +87,7 @@ class DashboardController < ApplicationController
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
-
+		serve_ad
 		@posts
 	end
 
@@ -109,7 +108,7 @@ class DashboardController < ApplicationController
 		@posts = @mentioned
 		@user = @current_user
 		@user.assigned_posts = @posts
-
+		serve_ad
 		@posts
 	end
 

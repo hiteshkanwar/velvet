@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tippin - Home Page</title>
+
+    <%= stylesheet_link_tag    "main/application", :media => "all" %>
+    <%= javascript_include_tag "main/advertisement" %>
+    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <div class="page">
+          <div class="logo text-align-center"><%= image_tag "main/logo.png", width: "541", height: "91" %></div>
+        </div>
+      </div><!-- .header -->
+      <div class="navigation">
+        <div class="page">
+          <div class="nav-holder left">
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="#">TV</a></li>
+              <li class="current_page_item"><a href="/advertisers">Aadvertisers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="find-acquaintances.html">Find Acquaintances</a></li>
+              <li><a href="/privacy">Privacy Terms</a></li>
+            </ul>
+          </div><!-- .nav-holder -->
+          <div class="search-setting page-setting right">
+            <div class="search left text-align-right">
+              <input type="input" value="Search" />
+            </div>
+            <div class="compose left text-align-right"><img src="images/inbox-img.jpg" width="35" height="26" /></div>
+          </div><!-- .search-setting -->
+          <div class="clear"></div>
+        </div>
+      </div><!-- .navigation -->
+      <div class="header-inner">
+        <div class="page">
+          <h1>Start Advertising</h1>
+        </div>
+      </div><!-- .header-inner -->
+      <%= yield %>
+      <div class="clear"></div>
+      <div class="footer-bootom text-align-center">
+        <div class="page">
+            <%= image_tag "main/logo.png", width: "541", height: "91" %>
+          <ul>
+             <li><a href="/about">About TV</a></li>
+             <li><a href="#">TV</a></li>
+            <li><a href="/advertisers">Advertisers</a></li> 
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Find Acquaintances</a></li>
+            <li><a href="/terms">Terms</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+          </ul>
+          © 2013 Tippin the velvet. All Right Reserved.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

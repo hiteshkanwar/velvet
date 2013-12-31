@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  tippin_user_name: MyString
+  company: MyString
+  phone: MyString
+  website: MyString
+  industry: MyString
+  job_title: MyString
+  job_function: MyString
+  stripe_token: MyString
+  max_cpm: 1.5
+  total_budget: 1.5
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  tippin_user_name: MyString
+  company: MyString
+  phone: MyString
+  website: MyString
+  industry: MyString
+  job_title: MyString
+  job_function: MyString
+  stripe_token: MyString
+  max_cpm: 1.5
+  total_budget: 1.5

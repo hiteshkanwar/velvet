@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     def current_user
       @current_user ||= User.find_by_email(session[:email])
     end
-  
+    def serve_ad
+      @advertiser  = Advertiser.get_ad()
+      @advertiser.ad_is_served
+      @advertiser
+    end
   	
 end

@@ -1,0 +1,5 @@
+Hi,
+Name <%= @advertiser.full_name %> 
+Campaign Name <%= @advertiser.campaign_name%> last payment is not done.Hence Stoping ads.
+More Information visit stripe
+<%= link_to "Approve advertise",approve_ad_url(@advertiser.uuid) %>

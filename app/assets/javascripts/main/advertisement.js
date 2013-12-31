@@ -14,12 +14,7 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require main/bootstrap.min
-//= require main/ajaxccfb
-//= require main/main
-//= require main/message
 //= require main/jquery.validate.js
 //= require main/additional-methods
 //= require main/advertiser
 
-//= require main/plugins
-//  require_tree .
