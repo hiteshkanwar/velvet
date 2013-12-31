@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
     def serve_ad
       @advertiser  = Advertiser.get_ad()
-      @advertiser.ad_is_served
+      @advertiser.ad_is_served  if @advertiser.present?
       @advertiser
     end
   	

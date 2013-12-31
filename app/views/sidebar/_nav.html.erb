@@ -5,6 +5,7 @@
     	<li><a href="/<%= params[:username] || @current_user.username %>/acquaintances">ACQUAINTANCES</a></li>
     	<li><a href="/<%= params[:username] || @current_user.username %>/admired">admire</a></li>
     	<li><a href="/<%= params[:username] || @current_user.username %>/lists">LISTS</a></li>
-    	<li><a href="/<%= params[:username] || @current_user.username %>/emoji">EMOJI</a></li>
+      <li><a href="/<%= params[:username] || @current_user.username %>/emoji">EMOJI</a></li>
+    	<li><a href="/<%= @current_user.username %>/ads">Ads</a></li>
     </ul>
 </div><!-- .left-list -->

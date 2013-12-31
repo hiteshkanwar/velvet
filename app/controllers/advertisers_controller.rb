@@ -8,10 +8,11 @@ class AdvertisersController < ApplicationController
   end
 
   def add_advertiser
+    
     if @current_user
-      @advertiser = Advertiser.new(params[:advertiser])
+      @advertiser =@current_user.advertisers.new(params[:advertiser])
     else
-      @advertiser = @current_user.advertisers.new(params[:advertiser])
+      @advertiser = Advertiser.new(params[:advertiser])
     end  
     if  @advertiser.save_with_stripe
        @advertiser.send_admin_notification
@@ -26,15 +27,15 @@ class AdvertisersController < ApplicationController
   end
 
   def activate
-    @advertiser = @current_user.advertisers.find(params[:id]).first
+    @advertiser = @current_user.advertisers.find(params[:id])
     @advertiser.activate
-    redirect_to root_path,:notice=>"Campaign is activated"
+    redirect_to :back,:notice=>"Campaign is activated"
   end
 
   def de_activate
     @advertiser = @current_user.advertisers.find(params[:id])
     @advertiser.de_activate
-    redirect_to root_path,:notice=>"Campaign is de activated"
+    redirect_to :back,:notice=>"Campaign is de activated"
   end
 
   def approve_ad
