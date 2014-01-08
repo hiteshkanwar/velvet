@@ -82,8 +82,13 @@
               <div class="errordiv "></div>
             </div><!-- .advertisers -->
             <div class="advertisers advertisers-fields left">
-              <h5>Google Analytic Script</h5>
-              <%= f.text_area :ga_script,:class=>"input" ,:rows=>5%>
+              <h5>Google Analytic Account</h5>
+              <%= f.text_field :ga_account,:class=>"input" %>
+              <div class="errordiv "></div>
+            </div><!-- .advertisers -->
+             <div class="advertisers advertisers-fields left">
+              <h5>Google Analytic Website</h5>
+              <%= f.text_field :ga_website,:class=>"input" %>
               <div class="errordiv "></div>
             </div><!-- .advertisers -->
               <br />
