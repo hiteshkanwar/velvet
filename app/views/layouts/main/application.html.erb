@@ -26,9 +26,9 @@
                     <li><a href="/activity">Activity</a></li>
                     <li><a href="/discover">Discover</a></li>
                     <li><a href="/<%= session[:username] %>">Profile</a></li>
-                    <% if @current_user && @current_user.id %>
+                    <!-- < if @current_user && @current_user.id %>
                     <li><a href="/logout">Sign Out</a></li>
-                    <% end %>
+                    < end %> -->
 
                 </ul>
             </div><!-- .nav-holder -->
@@ -43,11 +43,20 @@
               
 
                <div class="compose left text-align-right">
-               <div id="noti_Container">
+               <div id="noti_Container" style="margin-right: 22px;">
                 <a href="/messages"><%= image_tag "main/compose.jpg", width: "39", height: "26" %></a>
                   <% @unseen = @current_user.messages.not_trash.where(seen: false).size %>
                   <% if @unseen > 0 %> <div class="noti_bubble"><%= @unseen %></div> <% end %>
                   </div>
+              </div>
+
+              <div class="left singout">
+                <ul>
+                  <!-- replace this li with old one -->
+                  <li><a id="various6" href="/dashboard/emoji_modal">Emoji</a></li>
+                  <!-- replace this li with old one -->
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
               </div>
 
               <% end %>

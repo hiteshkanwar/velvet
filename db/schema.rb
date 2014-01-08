@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131231172852) do
+ActiveRecord::Schema.define(:version => 20140108204717) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20131231172852) do
     t.integer  "user_id"
     t.float    "max_cpm"
     t.float    "total_budget"
-    t.float    "ad_served"
+    t.float    "ad_served",             :default => 0.0
     t.boolean  "active",                :default => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(:version => 20131231172852) do
     t.float    "total_ad_served",       :default => 0.0
     t.boolean  "approved",              :default => false
     t.text     "ga_script"
+    t.string   "ga_account"
+    t.string   "ga_website"
   end
 
   create_table "attachments", :force => true do |t|
@@ -110,9 +112,9 @@ ActiveRecord::Schema.define(:version => 20131231172852) do
   create_table "hash_tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.integer  "count",      :default => 1
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "count"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "likes", :force => true do |t|

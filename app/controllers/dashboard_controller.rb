@@ -136,6 +136,10 @@ class DashboardController < ApplicationController
 			
 	end
 
+	def emoji_modal
+		render 'emoji_modal', layout: false
+	end
+
 
 	# -----------
 	# Controls

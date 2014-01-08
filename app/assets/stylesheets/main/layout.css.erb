@@ -250,7 +250,7 @@ input,select,textarea
 
 .wrapper .navigation .page .search-setting
 {
-	width:364px;
+	width:520px;
 }
 
 .wrapper .navigation .page .search, .setting, .compose
@@ -679,7 +679,7 @@ input,select,textarea
 {
 	border:1px solid #dbdbdb;
 	border-top:5px solid #f0f0f0;
-	padding:10px 0 0 0;
+	/* padding:10px 0 0 0; */
 	margin:15px 0 0 0;
 }
 
@@ -1176,8 +1176,111 @@ input,select,textarea
 
 
 
-
 /* new pages css (thursday 26-12-2013) */
+.click-nav ul 
+{
+	font-weight:900;
+}
+
+.click-nav ul li 
+{
+	position:relative;
+	list-style:none;
+	cursor:pointer;
+}
+
+.click-nav ul .clicker 
+{
+	color:#fff;
+	text-transform:uppercase;
+	padding:8px 35px 8px 10px;
+	background:#bc0000;
+	cursor:pointer;
+	border:none;
+	background-image:url(<%=asset_path "main/direct-button.jpg"%>);
+	background-position:right 11px;
+	background-repeat:no-repeat;
+}
+
+.click-nav ul .clicker:hover,
+.click-nav ul .active 
+{
+	background:#333;
+	background-image:url(<%=asset_path "main/direct-button.jpg"%>);
+	background-position:right 11px;
+	background-repeat:no-repeat;
+}
+
+.click-nav ul li ul
+{
+	position:absolute;
+	left:0;
+	right:0;
+	width:200px;
+	margin:2px 0 0 10px;
+	padding:0 10px 10px 10px;
+	background:#333;
+}
+
+.click-nav ul li ul li
+{
+	border:none !important;
+	width:100%;
+	padding:10px 0 0 0 !important;
+	margin:0;
+}
+
+.click-nav ul li a
+{
+	display:block;
+}
+
+.click-nav ul li ul li a
+{
+	display:block;
+	color:#fff;
+	font-size:12px !important;
+	text-transform:uppercase;
+	font-weight:600;
+}
+
+.click-nav ul li a:hover 
+{
+	color:#00FFFF;
+}
+
+/* Fallbacks */
+.click-nav .no-js ul {
+	display:none;
+}
+.click-nav .no-js:hover ul {
+	display:block;
+}
+
+.model-tip
+{
+	margin:0 20px 0 6px;
+}
+
+.model-tip .model-heading
+{
+	font-size:20px;
+	text-align:center;
+	font-weight:600;
+	margin:0 0 10px 0;
+}
+
+.model-tip textarea
+{
+	width:100%;
+}
+
+.model-tip .button
+{
+	padding:5px 10px;
+	margin:5px 0 0 0;
+	background-image:none;
+}
 
 h2 a
 {
@@ -1198,73 +1301,73 @@ h3
 	font-weight:600;
 }
 
-.wrapper .page .container .right-section .no-margin
+.right-section .no-margin
 {
 	margin:0;
 	padding-top:0;
 }
 
-.wrapper .page .container .right-section .box .view-profile a
+.right-section .box .view-profile a
 {
 	font-size:12px;
 	padding-right:20px;
 }
 
-.wrapper .page .container .right-section .list-button
+.right-section .list-button
 {
 	float:right;
 	margin:1px 0 0 0;
 }
 
-.wrapper .page .container .right-section .list-button .button
+.right-section .list-button .button
 {
 	padding:3px 10px;
 	background-image:none;
 }
 
-.wrapper .page .container .right-section .list
+.right-section .list
 {
 	padding:10px;
 }
 
-.wrapper .page .container .right-section .list p
+.right-section .list p
 {	
 	margin:10px 0 5px 0;
 }
 
-.wrapper .page .container .right-section .list span
+.right-section .list span
 {
 	font-size:12px;
 	padding:0;
 }
 
-.wrapper .page .container .right-section .list .label-holder
+.right-section .list .label-holder
 {
 	margin-top:15px;
 }
 
-.wrapper .page .container .right-section .list .label-holder p
+.right-section .list .label-holder p
 {
 	font-size:14px;
 }
 
-.wrapper .page .container .right-section .list .label-holder input,textarea
+.right-section .list .label-holder input,textarea
 {
 	width:400px;
 }
 
-.wrapper .page .container .right-section .list .label-holder input[type="checkbox"]
+.right-section .list .label-holder input[type="checkbox"]
 {
 	width:10px;
 	margin-right:5px;
 }
 
-.wrapper .page .container .right-section .list .label-holder:first-child
+.right-section .list .label-holder:first-child
 {
 	margin-top:0;
 }
 
-.wrapper .page .container .right-section .list .button
+.right-section .list .button
 {
 	background-image:none;
 	padding:10px;
@@ -1301,18 +1404,18 @@ h3
 	color:#333;
 }
 
-.wrapper .page .container .right-section .emoji
+.right-section .emoji
 {
 	padding:10px;
 }
 
-.wrapper .page .container .right-section .emo-heading
+.right-section .emo-heading
 {
 	border-bottom:1px solid #dbdbdb;
 	padding:0 0 10px 0;
 }
 
-.wrapper .page .container .right-section .emo-hold
+.right-section .emo-hold
 {
 	width:107px;
 	float:left;
@@ -1327,17 +1430,17 @@ h3
 	-ms-border-radius:4px;
 }
 
-.wrapper .page .container .right-section .emo-hold:nth-child(5n+6)
+.right-section .emo-hold:nth-child(5n+6)
 {
 	margin-right:0;
 }
 
-.wrapper .page .container .right-section .emo-hold img
+.right-section .emo-hold img
 {
 	float:left;
 }
 
-.wrapper .page .container .right-section .emo-hold .emo-name
+.right-section .emo-hold .emo-name
 {
 	float:left;
 	width:40px;
@@ -1346,7 +1449,7 @@ h3
 	padding:3px 0 0 0;
 }
 
-.wrapper .page .container .right-section .emo-hold .emo-name a
+.right-section .emo-hold .emo-name a
 {
 	font-weight:600;
 	line-height:16px;
@@ -1354,7 +1457,7 @@ h3
 	text-transform:capitalize;
 }
 
-.wrapper .page .container .right-section .box .activity
+.right-section .box .activity
 {
 	border-bottom:1px solid #dbdbdb;
 	background:#f5f5f5;
@@ -1363,31 +1466,31 @@ h3
 	position:relative;
 }
 
-.wrapper .page .container .right-section .box .activity .activity-others
+.right-section .box .activity .activity-others
 {
 	margin-top:7px;
 }
 
-.wrapper .page .container .right-section .box .activity p
+.right-section .box .activity p
 {
 	position:absolute;
 	margin:7px 0 0 45px;
 	padding:0;
 }
 
-.wrapper .page .container .right-section .box .activity a
+.right-section .box .activity a
 {
 	font-size:12px;
 	padding-right:10px;
 	font-weight:600;
 }
 
-.wrapper .page .container .right-section .box .activity p a.activity-admired
+.right-section .box .activity p a.activity-admired
 {
 	color:#333;
 }
 
-.wrapper .page .container .right-section .box .activity p a.activity-admired:hover
+.right-section .box .activity p a.activity-admired:hover
 {
 	color:#2d8dc4;
 }
@@ -1474,11 +1577,6 @@ h3
 .wrapper .navigation .page .page-setting input
 {
 	width:200px !important;
-}
-
-.wrapper .navigation .page .nav-holder
-{
-	width:600px;
 }
 
 .border-radius-top
@@ -1598,7 +1696,100 @@ h3
 	width:288px;
 }
 
+.wrapper .singout
+{
+	width:150px;
+	margin:17px 0 0 4px;
+}
+
+.wrapper .singout ul li
+{
+	display:inline;
+	margin:0 0 0 5px;
+}
+
+.wrapper .singout ul > li > a
+{
+	font-size:16px;
+	color:#fff;
+	padding:5px 10px;
+	font-family:"PF DinDisplay Pro";
+	font-weight:normal;
+	background:url(<%=asset_path "main/nv.jpg"%>) repeat-x;
+	text-transform:capitalize;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-ms-border-radius:3px;
+	-o-border-radius:3px;
+	-khtml-border-radius:3px;
+}
+
+.wrapper .singout ul > li > a:hover
+{
+  	color: #fff;
+	background:#333333;
+}
+
+
 /* new pages css (thursday 26-12-2013) */
 
 
+
+<!-- model emoji box new css -->
+
+.model-emo
+{
+	margin:10px;
+}
+
+
+.emo-model-heading
+{
+	border:1px solid #dbdbdb;
+	border-top:5px solid #f0f0f0;
+	color:#333;
+	font-size:16px;
+	padding:10px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.model-emo-holder .emo-hold
+{
+	width:154px;
+	float:left;
+	padding:10px 0 0 0;
+	margin:10px 0 0 0;
+	border-top:1px solid #dbdbdb;
+}
+
+.model-emo-holder .emo-hold:nth-child(5n+6)
+{
+	margin-right:0;
+}
+
+.model-emo-holder .emo-hold img
+{
+	float:left;
+	border:1px solid #dbdbdb;
+}
+
+.model-emo-holder .emo-hold .emo-name
+{
+	float:left;
+	width:60px;
+	height:30px;
+	margin:0 0 0 10px;
+}
+
+.model-emo-holder .emo-hold .emo-name a
+{
+	font-weight:600;
+	line-height:16px;
+	font-size:12px;
+	text-transform:capitalize;
+}
+
+<!-- model emoji box new css -->
 

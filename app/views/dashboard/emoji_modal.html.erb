@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tippin - Emoji</title>
+<%= stylesheet_link_tag "main/layout" %>
+<link rel="shortcut icon" href="favicon.ico" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="model-emo">
+<div class="emo-model-heading">Available emoji's</div>
+    <div class="model-emo-holder">
+    	<% Emoji.family("display").each do |family, emojis| %>
+        <% if !@current_user.emojis.where(name: family.to_s).empty? || !@current_user.emojis.where(name: 'all').empty? || family.to_s == 'free' %>
+        
+            <% emojis.split(",").each do |emoji| %>
+            	<div class="emo-hold">
+                	<img src="/assets/emoji/<%= emoji.delete(' ') %>.png" width="40" height="40" alt="" title="Emoji Name">
+                    <div class="emo-name"><a href="#">:<%= emoji.delete(' ') %>:</a></div>
+                    <div class="clear"></div>
+                </div><!-- .emo-hold -->
+            <% end %>
+
+        <% end %>
+        <% end %>
+
+    <div class="clear"></div>
+    </div>
+</div>
+</body>
+</html>

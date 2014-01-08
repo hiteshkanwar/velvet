@@ -1,12 +1,17 @@
 class Advertiser < ActiveRecord::Base
   attr_accessible :company, :email, :first_name, :industry, :job_function, :job_title, :last_name, :phone
   attr_accessible :tippin_user_name, :total_budget, :website, :campaign_name,:max_cpm,:is_active,:campaign_image
-  attr_accessible :plan_id,:stripe_card_token_field,:ga_script
+  attr_accessible :plan_id,:stripe_card_token_field,:ga_account,:ga_website
   mount_uploader :campaign_image, CampaignUploader
 
   attr_accessor :stripe_card_token_field
   validates_presence_of :company, :email, :first_name, :industry, :job_function, :job_title, :last_name
   validates_presence_of :max_cpm, :phone, :tippin_user_name, :total_budget, :website,:campaign_image,:campaign_name
+
+  validates :max_cpm, :numericality => { :greater_than_or_equal_to => 1 }
+  validates :total_budget, :numericality => { :greater_than_or_equal_to => 1 }
+
+  
 
   scope :by_uuid,lambda{|uuid|where("uuid = ?",uuid) }
   scope :active,lambda{where("active = ?",true) }
@@ -17,7 +22,7 @@ class Advertiser < ActiveRecord::Base
   def save_with_stripe
     
     if valid?
-      Stripe.api_key = ENV['STRIPE_API_KEY']
+      Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
 
       begin
         customer = Stripe::Customer.create(
@@ -30,6 +35,7 @@ class Advertiser < ActiveRecord::Base
         self.save!
 
       rescue Exception => e  
+        puts "Stripe error #{e.message}"
         false
       end  
     else
