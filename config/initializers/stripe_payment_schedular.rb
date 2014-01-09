@@ -1,4 +1,4 @@
-#require 'pry'
+require 'pry'
 require 'rufus-scheduler'
 scheduler = Rufus::Scheduler.start_new
 
