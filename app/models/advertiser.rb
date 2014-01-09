@@ -3,6 +3,7 @@ class Advertiser < ActiveRecord::Base
   attr_accessible :tippin_user_name, :total_budget, :website, :campaign_name,:max_cpm,:is_active,:campaign_image
   attr_accessible :plan_id,:stripe_card_token_field,:ga_account,:ga_website
   mount_uploader :campaign_image, CampaignUploader
+  process_in_background :campaign_image
 
   attr_accessor :stripe_card_token_field
   validates_presence_of :company, :email, :first_name, :industry, :job_function, :job_title, :last_name
