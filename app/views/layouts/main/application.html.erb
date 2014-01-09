@@ -92,9 +92,16 @@
             
             //Update your dashboard
             console.log("success: "+data)
-            if(data === 1) {
-                $(".feed").html('<p style="padding-bottom: 5px;" align="center"> New posts available. <a href=""> Refresh </a></p>')
-            }
+            // If new posts available
+            if(data[0] === 1) {
+
+              if(data[1] === 1) {
+                $(".feed").html('<p style="padding-bottom:10px;padding-top:10px;" align="center"> New posts available. <a id="fetch" href="#"> Load </a></p>') 
+              } else {
+                $(".feed").html('<p style="padding-bottom:10px;padding-top:10px;" align="center"> New posts available. <a href=""> Refresh </a></p>')
+              }
+                
+            } 
 
             //Setup the next poll recursively
             poll();

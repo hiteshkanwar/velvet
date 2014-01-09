@@ -176,4 +176,23 @@ $('#specialbutton').button('loading');
   }
   });
 
+ // Fetch new posts
+ $(document).on("click", "a#fetch", function(event){
+      event.preventDefault();
+
+      $.ajax({ url: "/notification?fetch=1",
+        success: function(data){
+            
+            //Update your dashboard
+            console.log("success: "+data);
+            $("div.right-section").html(data);
+            $(".feed").html('');
+            
+          }, 
+        dataType: "html"
+
+      });
+      
+  });
+
  

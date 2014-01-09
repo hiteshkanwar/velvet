@@ -46,8 +46,8 @@ class DashboardController < ApplicationController
 		@user = @current_user
 		@user.assigned_posts = @posts.uniq
 		logger.debug @user.all_posts(1)
-		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
 		serve_ad
+		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
 	end
 
 	# Find users & post with similar keywords.
@@ -113,7 +113,7 @@ class DashboardController < ApplicationController
 	end
 
 	def notification
-		status = 0
+		status = [0, 0]
 
 		case params[:seed]
 		when "/"
@@ -126,12 +126,29 @@ class DashboardController < ApplicationController
 			feed = nil
 		end
 		
-		if feed
-			status = 1 if Time.now - feed.created_at <= 59 # Less than a minute ago
+		if feed && (Time.now - feed.created_at) <= 59 # Less than a minute ago
+			status[0] = 1
+			params[:seed] == '/' ? status[1] = 1 : nil
+			logger.debug("New posts available")
 		end
 
-		respond_to do |format|
-		    format.json {render :json => status }
+		# Fetch new posts
+		if params[:fetch]
+
+			# Get all posts
+			@posts = @current_user.followings_posts
+			@user = @current_user
+			@user.assigned_posts = @posts.uniq
+
+			logger.debug("Loading dashboard posts")
+
+			render 'notification', layout: false
+
+		# Or check if new posts available
+		else
+			respond_to do |format|
+			    format.json {render :json => status }
+			end
 		end
 			
 	end
