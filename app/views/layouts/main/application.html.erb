@@ -11,8 +11,23 @@
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
 
 <style type="text/css">
+
 body {
-  /*background-image: url("http://www.freefever.com/stock/diamond-heart-n-flowers-pink-backgrounds.jpg");*/
+
+  <% if @user && !@user.background.url.nil?%>
+    background-image: url("<%= @user.background.url %>"); no-repeat center center fixed; 
+  <% elsif @current_user && !@current_user.background.url.nil?%>
+    background-image: url("<%= @current_user.background.url %>"); no-repeat center center fixed; 
+  <% end %>
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ 
+}
+
+.container {
+  background-color: white;
 }
 </style>
 
@@ -31,7 +46,7 @@ body {
                    <!-- <li class="current_page_item"><a href="/">Home</a></li> -->
                     <li><a href="/">Home</a></li>
                     <li><a href="/activity">Activity</a></li>
-                    <li><a href="/discover">Whats Hot</a></li>
+                    <li><a href="/discover">What's Hot</a></li>
                     <li><a href="/<%= session[:username] %>">Profile</a></li>
                     <!-- < if @current_user && @current_user.id %>
                     <li><a href="/logout">Sign Out</a></li>
@@ -60,7 +75,7 @@ body {
               <div class="left singout">
                 <ul>
                   <!-- replace this li with old one -->
-                  <li><a id="various6" href="/dashboard/emoji_modal">Fumoji</a></li>
+                  <li><a id="various6" href="/dashboard/emoji_modal">Fumoji's</a></li>
                   <!-- replace this li with old one -->
                   <li><a href="/logout">Logout</a></li>
                 </ul>

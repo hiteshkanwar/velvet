@@ -7,13 +7,15 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password
+  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password, :background
   attr_accessor :assigned_posts
   # Handle image uploads
   mount_uploader :avatar, DocumentUploader
   mount_uploader :header, DocumentUploader
+  mount_uploader :background, DocumentUploader
   process_in_background :avatar
   process_in_background :header
+  process_in_background :background
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
@@ -55,6 +57,21 @@ class User < ActiveRecord::Base
     else 
       self.header.url(params)
     end
+  end
+
+  def user_background(params = :large)
+
+    if self.background.url.nil?
+      if params == :thumb
+        "main/main-large-img.png"
+      else
+        "main/admire-banner.png"
+      end
+    else 
+     # self.background.url(params)
+     "main/main-large-img.png"
+    end
+
   end
 
   def all_posts(pg=1)
