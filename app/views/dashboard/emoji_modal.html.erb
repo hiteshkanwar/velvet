@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="model-emo">
-<div class="emo-model-heading">Available emoji's</div>
+<div class="emo-model-heading">Available FUMOJI's</div>
     <div class="model-emo-holder">
     	<% Emoji.family("display").each do |family, emojis| %>
         <% if !@current_user.emojis.where(name: family.to_s).empty? || !@current_user.emojis.where(name: 'all').empty? || family.to_s == 'free' %>
