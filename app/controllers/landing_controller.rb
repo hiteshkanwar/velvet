@@ -47,38 +47,45 @@ class LandingController < ApplicationController
   
   def validate_login
 
-    if User.authenticate(params[:email], params[:password])
-    	session[:email] = params[:email]
-      user = User.find_by_email(params[:email])
-      session[:email]    = user.email
-      session[:username] = user.username
-    	
-      # If state exists from, accept inviation
-      # Redirect to state, else login user
-      if session[:state]
-        state = session[:state]
-        session[:state] = nil
-        redirect_to state
-      else
-        redirect_to :root
-    	end
+    if User.find_by_email(params[:email]).validated.present?
+      if User.authenticate(params[:email], params[:password])
+      	session[:email] = params[:email]
+        user = User.find_by_email(params[:email])
+        session[:email]    = user.email
+        session[:username] = user.username
+      	
+        # If state exists from, accept inviation
+        # Redirect to state, else login user
+        if session[:state]
+          state = session[:state]
+          session[:state] = nil
+          redirect_to state
+        else
+          redirect_to :root
+      	end
 
+      else
+      	flash[:notice] = "Invalid email or password"
+      	redirect_to :root
+      end
     else
-    	flash[:notice] = "Invalid email or password"
-    	redirect_to :root
+      flash[:notice] = "Please verify your email"
+      redirect_to :root
     end
 
   end
 
   def create
 
-  	 @user = User.new(name: params[:name], username: params[:username], email: params[:email], hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+  	 @user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
 
   	 if @user.save
 
   	 	logger.debug("User created successfuly")
-  	 	session[:email] = @user.email
-      session[:username] = @user.username
+  	 	#session[:email] = @user.email
+      #session[:username] = @user.username
+
+      flash[:notice] = "Please verify your account, by click on the activitation link sent to your email address"
 
         #=> Send welcome email
         UserMailer.welcome_email(@user).deliver
@@ -129,6 +136,22 @@ class LandingController < ApplicationController
   		flash[:notice] = "This email address is not registered"
   		redirect_to '/forgot'
   	end
+
+  end
+
+  def verify
+
+    #=> Give user and referral incentives
+    begin
+      user = User.find(params[:id])
+      user.update_attributes(validated: true) if user.validated.nil? && params[:code] == user.code
+      flash[:notice] = "Thank you for verifying your account"
+    rescue => error
+      logger.debug(error.to_s)
+      flash[:notice] = "Invalid verification code"
+    end
+
+     redirect_to :root
 
   end
 
