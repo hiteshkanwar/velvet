@@ -80,6 +80,8 @@ class LandingController < ApplicationController
 
     user = User.find_by_email(params[:email])
     if user && user.validated.nil?
+      
+      user.update_attributes(code: generate_activation_code(12))
       flash[:notice] = "Activation link as been sent to #{user.email}"
       UserMailer.welcome_email(user).deliver
     end
