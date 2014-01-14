@@ -1,6 +1,13 @@
 <div class="middle">
 	<div class="center-form">
-		<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
+		<% if flash[:notice] %> 
+			<div class="enter"> 
+				<%= flash[:notice] %> 
+				<% if flash[:notice].include?("Please verify") %>
+					<a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
+				<% end %>
+			</div> 
+		<% end %>
 		<form id="DOB" method="POST" action="" class="Dob">
 			<div class="enter">ENTER YOUR DATE OF BIRTH</div>
 			<div class="inputer">

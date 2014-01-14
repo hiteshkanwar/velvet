@@ -70,9 +70,21 @@ class LandingController < ApplicationController
       end
     else
       flash[:notice] = "Please verify your email"
+      session[:resend] = params[:email]
       redirect_to :root
     end
 
+  end
+
+  def resend
+
+    user = User.find_by_email(params[:email])
+    if user && user.validated.nil?
+      flash[:notice] = "Activation link as been sent to #{user.email}"
+      UserMailer.welcome_email(user).deliver
+    end
+
+    redirect_to :root
   end
 
   def create
