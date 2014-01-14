@@ -195,4 +195,17 @@ $('#specialbutton').button('loading');
       
   });
 
+ // Show upload button
+ $(document).on("click", ".write-tip", function(event){
+
+  $('input[type="file"]').fadeIn( "slow" );
+  $('input[value="Tip"]').css({
+      'margin-left' : '15px',
+      'height' : '30px',
+  });
+
+
+ });
+
+
  

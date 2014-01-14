@@ -31,6 +31,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # Handle email
 gem 'sendgrid'
 
+gem "galetahub-simple_captcha", :require => "simple_captcha"
+
 # Queue server
 gem 'redis'
 gem "resque", "~> 1.22.0", :require => "resque/server"

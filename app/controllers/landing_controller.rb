@@ -77,50 +77,57 @@ class LandingController < ApplicationController
 
   def create
 
-  	 @user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+    if simple_captcha_valid?
+    	 @user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
 
-  	 if @user.save
+    	 if @user.save
 
-  	 	logger.debug("User created successfuly")
-  	 	#session[:email] = @user.email
-      #session[:username] = @user.username
+    	 	logger.debug("User created successfuly")
+    	 	#session[:email] = @user.email
+        #session[:username] = @user.username
 
-      flash[:notice] = "Please verify your account, by click on the activitation link sent to your email address"
+        flash[:notice] = "Please verify your account, by click on the activitation link sent to your email address"
 
-        #=> Send welcome email
-        UserMailer.welcome_email(@user).deliver
+          #=> Send welcome email
+          UserMailer.welcome_email(@user).deliver
 
+           # Store defaults 
+           session[:signup_email] = nil
+           session[:username] = nil
+           session[:month] = nil
+           session[:day] = nil
+           session[:year] = nil
+           session[:name] = nil
+          
+          # If state exists from, accept inviation
+          # Redirect to state, else login user
+          if session[:state]
+            state = session[:state]
+            session[:state] = nil
+            redirect_to state
+          else
+            redirect_to :root
+          end
+          
+    	 else
          # Store defaults 
-         session[:signup_email] = nil
-         session[:username] = nil
-         session[:month] = nil
-         session[:day] = nil
-         session[:year] = nil
-         session[:name] = nil
-        
-        # If state exists from, accept inviation
-        # Redirect to state, else login user
-        if session[:state]
-          state = session[:state]
-          session[:state] = nil
-          redirect_to state
-        else
-          redirect_to :root
-        end
-        
-  	 else
-       # Store defaults 
-       session[:signup_email] = params[:email]
-       session[:username] = params[:username]
-       session[:name] = params[:name]
-       session[:month] = params[:month]
-       session[:day] = params[:day]
-       session[:year] = params[:year]
+         session[:signup_email] = params[:email]
+         session[:username] = params[:username]
+         session[:name] = params[:name]
+         session[:month] = params[:month]
+         session[:day] = params[:day]
+         session[:year] = params[:year]
 
-  	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub("Hashed", "")
-  	 	logger.debug("User not created: #{flash[:notice]}")
-  	 	redirect_to :root
-  	 end
+    	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub("Hashed", "")
+    	 	logger.debug("User not created: #{flash[:notice]}")
+        redirect_to :root
+    	 	
+    	 end
+    else 
+      flash[:notice] = "Invalid captcha, please try again"
+      redirect_to :root
+    end
+
   	 
   end
 

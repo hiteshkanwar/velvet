@@ -38,7 +38,9 @@
 			<input type="password" class="register Password" name="password" Placeholder="Password"/>
 
 			<label>I accept <a style="color: black;margin-right:5px;" href="/privacy">Privacy, DMCA, Term policies</a> <input type="checkbox" name="agreement" value="1"></label>
-			
+			<div style="margin-top: 10px;">
+			<%= show_simple_captcha %>
+			</div>
 			</div>
 			<div class="error">asdsds</div>
 			<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
