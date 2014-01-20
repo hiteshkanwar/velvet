@@ -5,12 +5,13 @@ class MessagesController < ApplicationController
   layout 'main/application'
 
   def index
-    @messages = @current_user.messages.not_trash.order("created_at desc")
+    @messages = @current_user.all_messages.not_trash.roots.order("created_at desc")
     @current_user.messages.not_trash.update_all(seen: true)
   end
   
   def new
     @message = @current_user.send_messages.new
+    @attachment = @message.attachments.new
     @parent_message = @current_user.messages.find(params[:parent_id]) rescue nil
     
     @users = User.all
@@ -25,6 +26,7 @@ class MessagesController < ApplicationController
        redirect_to sent_messages_path
     else
       @messages = @current_user.send_messages.order("created_at desc")
+      @attachment = @message.attachments.new
       render :action=>:new
     end
   end

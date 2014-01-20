@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
 
   after_create :hash_password
 
+
   def user_avatar
     self.avatar.url.nil? ? "/assets/main/main-large-img.png" : self.avatar.url(:thumb)
   end
@@ -120,6 +121,10 @@ class User < ActiveRecord::Base
   end
   def user_name
     "#{self.name} @#{self.username}"
+  end
+
+  def all_messages
+    Message.where("receiver_id = ? or sender_id = ?",self.id,self.id)
   end
 
   private

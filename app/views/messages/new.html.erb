@@ -30,8 +30,8 @@
               <%= f.hidden_field :receiver_id ,:id=>"receiver_id", :value => params[:receiver_id] %>
             <% end %>  
              <%= f.text_area :message_text,:placeholder=>"Message",:rows=>8,:id=>"message_text" %>
-               <%#= f.fields_for :attachments %>
-              <%#= f.link_to_add "Add Attachment", :attachments %>
+               <%= f.fields_for :attachments %>
+                <%#= f.link_to_add "Add Attachment", :attachments %>
               <%= f.submit "Send Message",:class=>"button" %>
           <% end %>  
         </div>
