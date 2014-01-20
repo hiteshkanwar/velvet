@@ -6,15 +6,16 @@ VL = (function($, window, document, Velvet){
         key:         stripePublisher,
         address:     false,
         currency:    'usd',
-        name:        'AdPlan',
+        name:        'All Pack',
         description: 'Buy ads',
-        panelLabel:  'Pay ',
+        panelLabel:  'Purchase ad spot ',
         token:       Velvet.advertiser.addToken
       });
     },
     addToken : function(response){
       $("#stripe_card_token_field").val(response.id);
-      Velvet.advertiser.submitAdvertiser()
+      $(".buyAd").val("Done");
+      // Velvet.advertiser.submitAdvertiser()
     },
     submitAdvertiser : function(){
       $("#advertiser_form")[0].submit();
@@ -31,8 +32,13 @@ VL = (function($, window, document, Velvet){
     },
     activateForm : function(stripePublisher){
       $("#advertiser_form").on("submit",function(e){
-        if($("#advertiser_form").valid()){
-          Velvet.advertiser.initStripe(stripePublisher);
+        if($("#advertiser_form").valid() && $("#stripe_card_token_field").val()!=""){
+          Velvet.advertiser.submitAdvertiser()
+          // Velvet.advertiser.initStripe(stripePublisher);
+        }
+        else if($("#stripe_card_token_field").val()=="")
+        {
+           Velvet.advertiser.initStripe(stripePublisher);
         }
         return false
       })

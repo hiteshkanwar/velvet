@@ -1,0 +1,18 @@
+<% if @right_advertisers.present? %>
+<div style="position:absolute;top:250px;right:10px;max-height:1000px;overflow:scroll">
+  <% @right_advertisers[0...5].each do |right_advertiser| %>
+  <% right_advertiser.ad_is_served %>
+    <div>
+      <a target="_blank" href="<%= right_advertiser.website %>"><%= image_tag right_advertiser.campaign_image.url(),:width=>"120px",:height=>"200px" %></a>
+      <% if right_advertiser.ga_account.present? &&  right_advertiser.ga_website.present? %>
+        <%= content_for :head  do %>
+          <script>
+            ga('create', '<%= right_advertiser.ga_account %>', 'auto');
+            ga('send', 'pageview');
+          </script>  
+        <% end %>
+      <% end %>
+    </div>  
+  <% end %>
+</div>
+<% end %>

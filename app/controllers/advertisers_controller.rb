@@ -9,7 +9,6 @@ class AdvertisersController < ApplicationController
   end
 
   def add_advertiser
-    
     if @current_user
       @advertiser =@current_user.advertisers.new(params[:advertiser])
     else

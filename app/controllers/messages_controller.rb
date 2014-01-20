@@ -1,7 +1,7 @@
 require 'pry'
 class MessagesController < ApplicationController
   before_filter :confirm_logged_in
-  before_filter :serve_ad,:only=>[:index,:new,:sent,:trash,:lists,:emoji]
+  before_filter :serve_ads,:only=>[:index,:new,:sent,:trash,:lists,:emoji]
   layout 'main/application'
 
   def index
