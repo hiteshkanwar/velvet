@@ -31,6 +31,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # Handle email
 gem 'sendgrid'
 
+gem "galetahub-simple_captcha", :require => "simple_captcha"
+
 # Queue server
 gem 'redis'
 gem "resque", "~> 1.22.0", :require => "resque/server"
@@ -49,9 +51,9 @@ gem 'exception_notification', git: 'git://github.com/alanjds/exception_notificat
 # gem 'unicorn'
 gem 'thin'
 gem 'ancestry'
-group :development do 
+#group :development do 
   gem 'pry'
-end
+#end
 # CSS compressor
 gem 'yui-compressor'
 

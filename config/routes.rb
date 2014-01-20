@@ -22,8 +22,10 @@ Velvet::Application.routes.draw do
   # Static pages
 
    match '/privacy',     :to => 'landing#privacy'
-   match '/about',     :to => 'landing#about'
-   match '/terms',     :to => 'landing#terms'
+   match '/about',       :to => 'landing#about'
+   match '/terms',       :to => 'landing#terms'
+   match '/verify',      :to => 'landing#verify'
+   match 'landing/resend',      :to => 'landing#resend'
 
   #resources :profile, :path=>''
   match "/post/create", :to => 'post#create'

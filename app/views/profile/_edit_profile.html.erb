@@ -35,6 +35,22 @@
 <hr>
 
 <div class="label-holder">
+<label class="label">background</label>
+<p>
+</p><div class="profile-photo border-radius left"><%= image_tag @current_user.user_background(:thumb), :width => "80" %></div>
+<div class="change-photo left">
+<input type="file" name="user[background]" value="Change Background">
+<span>This photo displays as your background on the entire site.</span>
+<a href="/<%= @current_user.username %>/destroy_background" class="button save" value="Remove">Remove</a>
+</div>
+<div class="clear"></div>
+<p></p>
+<div class="clear"></div>
+</div>
+
+<hr>
+
+<div class="label-holder">
 <label class="label">name</label>
 <p><input type="text" placeholder="John Seed" name="user[name]" value="<%= @current_user.name %>"><span>Enter your real name, so people you know can recognize you.</span></p>
 <div class="clear"></div>

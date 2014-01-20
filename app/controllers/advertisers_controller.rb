@@ -4,6 +4,7 @@ class AdvertisersController < ApplicationController
   before_filter :confirm_logged_in
   def index
     @advertiser = Advertiser.new
+    flash[:notice] = nil
     # render :layout=> 'advertiser'
   end
 
@@ -19,6 +20,7 @@ class AdvertisersController < ApplicationController
       # Send Notification
       redirect_to confirm_advertiser_path
     else
+    flash[:notice] = "Error! Please try again " +@advertiser.errors.full_messages.to_sentence
     render :action=>"index"  
     end
   end
@@ -42,7 +44,7 @@ class AdvertisersController < ApplicationController
     @advertiser = Advertiser.by_uuid(params[:uuid]).first
     @advertiser.approve_ad
 
-    redirect_to root_path,:notice=>"Campaign is approves"
+    redirect_to root_path,:notice=>"Campaign is approved"
   end
 
   def stop_ad

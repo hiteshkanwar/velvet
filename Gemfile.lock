@@ -91,6 +91,7 @@ GEM
       nokogiri (~> 1.5.0)
       ruby-hmac
     formatador (0.2.4)
+    galetahub-simple_captcha (0.1.5)
     hashie (2.0.5)
     hike (1.2.3)
     http_parser.rb (0.5.3)
@@ -230,6 +231,7 @@ DEPENDENCIES
   dotenv-rails
   exception_notification!
   fog (~> 1.3.1)
+  galetahub-simple_captcha
   jquery-rails
   mysql2
   nested_form

@@ -18,26 +18,40 @@
         </div>
       </div><!-- .header -->
       <div class="navigation">
-        <div class="page">
+        <div class="page" style="height:50px;">
           <div class="nav-holder left">
             <ul>
+              <li><a href="/">Home</a></li>
               <li><a href="/about">About</a></li>
-              <li><a href="#">TV</a></li>
+              <!--
               <li class="current_page_item"><a href="/advertisers">Aadvertisers</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="find-acquaintances.html">Find Acquaintances</a></li>
+               -->
               <li><a href="/privacy">Privacy Terms</a></li>
+
             </ul>
           </div><!-- .nav-holder -->
+          <!--
           <div class="search-setting page-setting right">
             <div class="search left text-align-right">
               <input type="input" value="Search" />
             </div>
             <div class="compose left text-align-right"><img src="images/inbox-img.jpg" width="35" height="26" /></div>
-          </div><!-- .search-setting -->
+          </div>
+          -->
+          <!-- .search-setting -->
           <div class="clear"></div>
         </div>
       </div><!-- .navigation -->
+
+          <!-- status -->
+    <%if flash[:notice] %>
+        <div class="notice" style="margin-right: 500px;margin-left: 520px;width: 610px;background-color: #DBDBDB;border-radius: 2px;margin-top: 10px;">
+                     <p style="padding-bottom: 5px;" align="center"> <%= flash[:notice] %> </p>
+        </div>
+    <% end %>
+    
       <div class="header-inner">
         <div class="page">
           <h1>Start Advertising</h1>

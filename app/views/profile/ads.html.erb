@@ -19,49 +19,74 @@
       <%= render :partial => '/sidebar/serve_ad' %>
 
     </div>
+    <style type="text/css">
+      .emo-hold {
+        height: 50px;
+      }
+    </style>
+
 
     <div class="right-section right">
       <% if @advertisers.present? %>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <td>Campaign</th>
-              <td>Total balance</th>
-              <td>Available balance</th>
-              <td>Total Ad served</th>
-              <td>Approved</th>
-              <td>Mange</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @advertisers.each do |ad| %>
-              <tr>
-                <td><%= ad.campaign_name%></td>
-                <td><%= ad.total_budget%></td>
-                <td><%= ad.remaining_budget%></td>
-                <td><%= ad.total_ad_served.to_i%></td>
-                <td>
-                  <% if ad.approved %>
-                    Approved
-                  <% else %>
-                    Not Approved
-                  <% end %>
-                </td>
-                <td>
-                  <% if ad.active %>
-                    <%= link_to "Stop", de_activate_advertise_path(ad) %> 
-                  <% else %>
-                    <%= link_to "Start", activate_advertise_path(ad) %> 
-                  <% end %>
+      <div class="heading">Dashboard</div>
+      <% @advertisers.each do |ad| %>
+        <div class="tip-holder">
+            <div class="box emoji border-radius">
+              <div class="emo-heading"><%= ad.campaign_name %></div>
+               <!--
+               <div class="emo-hold">
                   
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>  
-      <% else %>
-        No advertisement is created 
+                    <div class="emo-name">Campaign <p><a style="font-size:18px;" href="#">50</a></p></div>
+                    <div class="clear"></div>
+                </div> .emo-hold -->
+                <div class="emo-hold">
+                 
+                    <div class="emo-name">Budget<p><a style="font-size:18px;" href="#"><%= ad.total_budget%></a></p></div>
+                    <div class="clear"></div>
+                </div><!-- .emo-hold -->
+                <div class="emo-hold">
+                 
+                    <div class="emo-name">Balance<p><a style="font-size:18px;" href="#"><%= ad.remaining_budget%></a></p></div>
+                    <div class="clear"></div>
+                </div><!-- .emo-hold -->
+                <div class="emo-hold">
+                  
+                    <div class="emo-name">Served <p><a style="font-size:18px;" href="#"><%= ad.total_ad_served.to_i%></a></p></div>
+                    <div class="clear"></div>
+                </div><!-- .emo-hold -->
+                <div class="emo-hold">
+                  
+                <div class="emo-name">Status</div>
+                    <% if ad.approved %>
+                    <p style="font-size:14px;"><a href="#">Approved</a></p>
+                  <% else %>
+                    <p style="font-size:14px;margin:11px;"><a href="#">Pending</a></p>
+                  <% end %>
+                  <div class="clear"></div>
+                </div><!-- .emo-hold -->
+
+                <div class="emo-hold">
+                    <div class="emo-name">Manage</div>
+                    <% if ad.active %>
+                      <p style="font-size:14px;margin:30px;"><%= link_to "Stop", de_activate_advertise_path(ad) %> </p>
+                    <% else %>
+                      <p style="font-size:14px;margin:30px;"><%= link_to "Start", activate_advertise_path(ad) %> </p>
+                    <% end %>
+                    <div class="clear"></div>
+                </div><!-- .emo-hold -->
+
+                <div class="clear"></div>
+            </div><!-- .box -->
+        </div>
       <% end %>
+      <% else %>
+        
+        <div style="margin-left: 200px;margin-top: 150px;">
+          <span style="font-weight: 600; font-size: 25px;">No advertisement is created</span>
+        </div> 
+
+      <% end %>
+
     </div>
     <div class="clear"></div>
   </div><!-- .container -->

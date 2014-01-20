@@ -9,6 +9,28 @@
 <%= csrf_meta_tags %>
 <link rel="shortcut icon" href="<%= asset_path "main/favicon.ico" %>">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+
+body {
+
+  <% if @user && !@user.background.url.nil?%>
+    background-image: url("<%= @user.background.url %>"); no-repeat center center fixed; 
+  <% elsif @current_user && !@current_user.background.url.nil?%>
+    background-image: url("<%= @current_user.background.url %>"); no-repeat center center fixed; 
+  <% end %>
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ 
+}
+
+.container {
+  background-color: white;
+}
+</style>
+
 </head>
 <body>
 <div class="wrapper">
@@ -24,11 +46,11 @@
                    <!-- <li class="current_page_item"><a href="/">Home</a></li> -->
                     <li><a href="/">Home</a></li>
                     <li><a href="/activity">Activity</a></li>
-                    <li><a href="/discover">Discover</a></li>
+                    <li><a href="/discover">What's Hot</a></li>
                     <li><a href="/<%= session[:username] %>">Profile</a></li>
-                    <% if @current_user && @current_user.id %>
+                    <!-- < if @current_user && @current_user.id %>
                     <li><a href="/logout">Sign Out</a></li>
-                    <% end %>
+                    < end %> -->
 
                 </ul>
             </div><!-- .nav-holder -->
@@ -43,11 +65,20 @@
               
 
                <div class="compose left text-align-right">
-               <div id="noti_Container">
+               <div id="noti_Container" style="margin-right: 22px;">
                 <a href="/messages"><%= image_tag "main/compose.jpg", width: "39", height: "26" %></a>
                   <% @unseen = @current_user.messages.not_trash.where(seen: false).size %>
                   <% if @unseen > 0 %> <div class="noti_bubble"><%= @unseen %></div> <% end %>
                   </div>
+              </div>
+
+              <div class="left singout">
+                <ul>
+                  <!-- replace this li with old one -->
+                  <li><a id="various6" href="/dashboard/emoji_modal">Fumoji's</a></li>
+                  <!-- replace this li with old one -->
+                  <li><a href="/logout">Logout</a></li>
+                </ul>
               </div>
 
               <% end %>
@@ -83,9 +114,16 @@
             
             //Update your dashboard
             console.log("success: "+data)
-            if(data === 1) {
-                $(".feed").html('<p style="padding-bottom: 5px;" align="center"> New posts available. <a href=""> Refresh </a></p>')
-            }
+            // If new posts available
+            if(data[0] === 1) {
+
+              if(data[1] === 1) {
+                $(".feed").html('<p style="padding-bottom:10px;padding-top:10px;" align="center"> New posts available. <a id="fetch" href="#"> Load </a></p>') 
+              } else {
+                $(".feed").html('<p style="padding-bottom:10px;padding-top:10px;" align="center"> New posts available. <a href=""> Refresh </a></p>')
+              }
+                
+            } 
 
             //Setup the next poll recursively
             poll();

@@ -40,8 +40,8 @@ class UserMailer < ActionMailer::Base
   def campaign_notification(advertiser)
     @advertiser = advertiser
     mail(
-        :subject => "#{@advertiser.full_name} created advertise ment",
-        :to      => 'support@tippinthevelvet.com',
+        :subject => "#{@advertiser.full_name} created advertisement",
+        :to      => 'ngrichyj4@gmail.com',
         :from    => "Tippin The Velvet <support@tippinthevelvet.com>"
       )
   end

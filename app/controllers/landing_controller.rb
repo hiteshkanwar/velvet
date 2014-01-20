@@ -47,50 +47,13 @@ class LandingController < ApplicationController
   
   def validate_login
 
-    if User.authenticate(params[:email], params[:password])
-    	session[:email] = params[:email]
-      user = User.find_by_email(params[:email])
-      session[:email]    = user.email
-      session[:username] = user.username
-    	
-      # If state exists from, accept inviation
-      # Redirect to state, else login user
-      if session[:state]
-        state = session[:state]
-        session[:state] = nil
-        redirect_to state
-      else
-        redirect_to :root
-    	end
-
-    else
-    	flash[:notice] = "Invalid email or password"
-    	redirect_to :root
-    end
-
-  end
-
-  def create
-
-  	 @user = User.new(name: params[:name], username: params[:username], email: params[:email], hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
-
-  	 if @user.save
-
-  	 	logger.debug("User created successfuly")
-  	 	session[:email] = @user.email
-      session[:username] = @user.username
-
-        #=> Send welcome email
-        UserMailer.welcome_email(@user).deliver
-
-         # Store defaults 
-         session[:signup_email] = nil
-         session[:username] = nil
-         session[:month] = nil
-         session[:day] = nil
-         session[:year] = nil
-         session[:name] = nil
-        
+    if User.find_by_email(params[:email]).validated.present?
+      if User.authenticate(params[:email], params[:password])
+      	session[:email] = params[:email]
+        user = User.find_by_email(params[:email])
+        session[:email]    = user.email
+        session[:username] = user.username
+      	
         # If state exists from, accept inviation
         # Redirect to state, else login user
         if session[:state]
@@ -99,21 +62,84 @@ class LandingController < ApplicationController
           redirect_to state
         else
           redirect_to :root
-        end
-        
-  	 else
-       # Store defaults 
-       session[:signup_email] = params[:email]
-       session[:username] = params[:username]
-       session[:name] = params[:name]
-       session[:month] = params[:month]
-       session[:day] = params[:day]
-       session[:year] = params[:year]
+      	end
 
-  	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub("Hashed", "")
-  	 	logger.debug("User not created: #{flash[:notice]}")
-  	 	redirect_to :root
-  	 end
+      else
+      	flash[:notice] = "Invalid email or password"
+      	redirect_to :root
+      end
+    else
+      flash[:notice] = "Please verify your email"
+      session[:resend] = params[:email]
+      redirect_to :root
+    end
+
+  end
+
+  def resend
+
+    user = User.find_by_email(params[:email])
+    if user && user.validated.nil?
+      flash[:notice] = "Activation link as been sent to #{user.email}"
+      UserMailer.welcome_email(user).deliver
+    end
+
+    redirect_to :root
+  end
+
+  def create
+
+    if simple_captcha_valid?
+    	 @user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+
+    	 if @user.save
+
+    	 	logger.debug("User created successfuly")
+    	 	#session[:email] = @user.email
+        #session[:username] = @user.username
+
+        flash[:notice] = "Please verify your account, by click on the activitation link sent to your email address"
+
+          #=> Send welcome email
+          UserMailer.welcome_email(@user).deliver
+
+           # Store defaults 
+           session[:signup_email] = nil
+           session[:username] = nil
+           session[:month] = nil
+           session[:day] = nil
+           session[:year] = nil
+           session[:name] = nil
+          
+          # If state exists from, accept inviation
+          # Redirect to state, else login user
+          if session[:state]
+            state = session[:state]
+            session[:state] = nil
+            redirect_to state
+          else
+            redirect_to :root
+          end
+          
+    	 else
+         # Store defaults 
+         session[:signup_email] = params[:email]
+         session[:username] = params[:username]
+         session[:name] = params[:name]
+         session[:month] = params[:month]
+         session[:day] = params[:day]
+         session[:year] = params[:year]
+
+    	 	flash[:notice] = @user.errors.full_messages.to_sentence.gsub("Hashed", "")
+    	 	logger.debug("User not created: #{flash[:notice]}")
+        redirect_to :root
+    	 	
+    	 end
+    else 
+      flash[:notice] = "Invalid captcha, please try again"
+      redirect_to :root
+    end
+
   	 
   end
 
@@ -129,6 +155,22 @@ class LandingController < ApplicationController
   		flash[:notice] = "This email address is not registered"
   		redirect_to '/forgot'
   	end
+
+  end
+
+  def verify
+
+    #=> Give user and referral incentives
+    begin
+      user = User.find(params[:id])
+      user.update_attributes(validated: true) if user.validated.nil? && params[:code] == user.code
+      flash[:notice] = "Thank you for verifying your account"
+    rescue => error
+      logger.debug(error.to_s)
+      flash[:notice] = "Invalid verification code"
+    end
+
+     redirect_to :root
 
   end
 

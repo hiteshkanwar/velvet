@@ -1,0 +1,71 @@
+<div class="page">
+  <div class="container">
+    <div class="left-section left">
+
+      <%= render :partial => '/sidebar/profile' %>
+
+      <!-- nav --> 
+      <%= render :partial => '/sidebar/nav' %>
+
+      <!-- suggest -->
+      <%= render :partial => '/sidebar/suggest' %>
+
+      <!-- trends -->
+      <%= render :partial => '/sidebar/trends' %>
+
+      <!-- trends -->
+      <%= render :partial => '/sidebar/copy' %>
+      <br/>
+      <%= render :partial => '/sidebar/serve_ad' %>
+
+    </div>
+
+    <div class="right-section right">
+      <% if @advertisers.present? %>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <td>Campaign</th>
+              <td>Total balance</th>
+              <td>Available balance</th>
+              <td>Total Ad served</th>
+              <td>Approved</th>
+              <td>Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @advertisers.each do |ad| %>
+              <tr>
+                <td><%= ad.campaign_name%></td>
+                <td><%= ad.total_budget%></td>
+                <td><%= ad.remaining_budget%></td>
+                <td><%= ad.total_ad_served.to_i%></td>
+                <td>
+                  <% if ad.approved %>
+                    Approved
+                  <% else %>
+                    Not Approved
+                  <% end %>
+                </td>
+                <td>
+                  <% if ad.active %>
+                    <%= link_to "Stop", de_activate_advertise_path(ad) %> 
+                  <% else %>
+                    <%= link_to "Start", activate_advertise_path(ad) %> 
+                  <% end %>
+                  
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>  
+      <% else %>
+        
+        <div style="margin-left: 200px;margin-top: 150px;">
+          <span style="font-weight: 600; font-size: 25px;">No advertisement is created</span>
+        </div> 
+      <% end %>
+    </div>
+    <div class="clear"></div>
+  </div><!-- .container -->
+</div>

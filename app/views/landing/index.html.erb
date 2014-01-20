@@ -1,6 +1,13 @@
 <div class="middle">
 	<div class="center-form">
-		<%if flash[:notice] %> <div class="enter"> <%= flash[:notice] %> </div> <% end %>
+		<% if flash[:notice] %> 
+			<div class="enter"> 
+				<%= flash[:notice] %> 
+				<% if flash[:notice].include?("Please verify") %>
+					<a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
+				<% end %>
+			</div> 
+		<% end %>
 		<form id="DOB" method="POST" action="" class="Dob">
 			<div class="enter">ENTER YOUR DATE OF BIRTH</div>
 			<div class="inputer">
@@ -23,21 +30,38 @@
 		</form>
 		
 		<form id="register" action="landing/create/1" method="POST" class="Registeration">
+
 			<h1 class="registrationh1">Registration</h1>
 			<div class="register-field">
 			<label>Name</label><br/>
 			<input type="text" class="register name"  name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
 
 			<label>Username</label><br/>
-			<input type="text" class="register name"  name="username" value="<%= session[:username] %>" Placeholder="Username"/><br/>
+			<input type="text" class="register username"  name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/><br/>
 
 			<label>Email</label><br/>
 			<input type="text" class="register email" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/><br/>
 			<label>Password</label><br/>
 			<input type="password" class="register Password" name="password" Placeholder="Password"/>
+
+			<label>I accept <a style="color: black;margin-right:5px;" href="/privacy">Privacy, DMCA, Term policies</a> <input type="checkbox" name="agreement" value="1"></label>
+			<div style="margin-top: 10px;">
+			<%= show_simple_captcha %>
+			</div>
 			</div>
 			<div class="error">asdsds</div>
 			<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+
+			<script>
+				function filterInput(e) {
+				   // Get the regular expression to test against for this particular object
+				 
+				   regAllow = /[A-Za-z\s,.?_!]/
+				   // Check for an allowed character, if not found, cancel the keypress's event bubbling
+				   if (!String.fromCharCode(e.keyCode).match(regAllow)) e.returnValue=false;
+				 }
+			</script>
+
 		</form>
 		<div>
 		

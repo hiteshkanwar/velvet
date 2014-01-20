@@ -93,6 +93,12 @@ class ProfileController < ApplicationController
 
 	end
 
+	def destroy_background
+		@current_user.remove_background!
+		@current_user.save
+		redirect_to "/#{@current_user.username}/edit"
+	end
+
 	def change_avatar
 		@current_user.avatar.key = params[:key]
 		@current_user.save

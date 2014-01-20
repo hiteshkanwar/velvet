@@ -60,7 +60,7 @@ class PostController < ApplicationController
 	def comment
 		post = Post.find(params[:id])
 		if post && params[:body]
-			post.comments.create(body: params[:body], user: @current_user)
+			post.comments.create(body: "@#{post.user.username} " +params[:body], user: @current_user)
 			flash[:notice] = "Posted reply..."
 		end
 		redirect_to request.referer

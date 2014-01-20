@@ -7,13 +7,15 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password
+  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password, :background, :country, :dob, :validated, :code
   attr_accessor :assigned_posts
   # Handle image uploads
   mount_uploader :avatar, DocumentUploader
   mount_uploader :header, DocumentUploader
+  mount_uploader :background, DocumentUploader
   process_in_background :avatar
   process_in_background :header
+  process_in_background :background
 
   has_many :posts, order:'created_at DESC'
   has_many :comments
@@ -55,6 +57,26 @@ class User < ActiveRecord::Base
     else 
       self.header.url(params)
     end
+  end
+
+  def generate_activation_code(size = 6)
+    charset = %w{ 2 3 4 6 7 9 A C D E F G H J K M N P Q R T V W X Y Z}
+    (0...size).map{ charset.to_a[rand(charset.size)] }.join
+  end
+
+  def user_background(params = :large)
+
+    if self.background.url.nil?
+      if params == :thumb
+        "main/main-large-img.png"
+      else
+        "main/admire-banner.png"
+      end
+    else 
+     # self.background.url(params)
+     "main/main-large-img.png"
+    end
+
   end
 
   def all_posts(pg=1)
@@ -107,7 +129,7 @@ class User < ActiveRecord::Base
 
   private
   def self.authenticate(email="", password="")
-      user = User.find_by_email(email)
+      user = User.find_by_email(email.downcase)
       if user && User.password_match?(password, user)
          return user
       else
@@ -118,6 +140,7 @@ class User < ActiveRecord::Base
   private 
   def hash_password
     self.hashed_password = Digest::SHA1.hexdigest(self.hashed_password)
+    self.code = generate_activation_code(12)
     self.save
   end
 end

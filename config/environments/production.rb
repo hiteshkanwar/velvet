@@ -43,6 +43,12 @@ Velvet::Application.configure do
     :sender_address => "Tip in The Velvet <admin@tipinthevelvet.com>",
     :exception_recipients => "Richard Aberefa <ngrichyj4@gmail.com>"
 
+  # Mailer
+  config.action_mailer.default_url_options = {
+    :host => 'http://velvet-development.herokuapp.com',
+    :port => 80
+  }
+
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 

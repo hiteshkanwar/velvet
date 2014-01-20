@@ -176,4 +176,36 @@ $('#specialbutton').button('loading');
   }
   });
 
+ // Fetch new posts
+ $(document).on("click", "a#fetch", function(event){
+      event.preventDefault();
+
+      $.ajax({ url: "/notification?fetch=1",
+        success: function(data){
+            
+            //Update your dashboard
+            console.log("success: "+data);
+            $("div.right-section").html(data);
+            $(".feed").html('');
+            
+          }, 
+        dataType: "html"
+
+      });
+      
+  });
+
+ // Show upload button
+ $(document).on("click", ".write-tip", function(event){
+
+  $('input[type="file"]').fadeIn( "slow" );
+  $('input[value="Tip"]').css({
+      'margin-left' : '15px',
+      'height' : '30px',
+  });
+
+
+ });
+
+
  

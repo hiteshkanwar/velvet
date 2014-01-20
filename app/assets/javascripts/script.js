@@ -59,7 +59,13 @@ b.onkeyup = function() {
 
 	// Submit register form
 	$(document).on('click', '.submit-form', function(){
-		$("#register").submit();
+
+		if ($("input[name='agreement'").is(':checked')) {
+			$("#register").submit();
+		} else {
+			alert("You need to accept our terms before your can register");
+		}
+		
 	});
 
 $(".input1").focus(function(){
