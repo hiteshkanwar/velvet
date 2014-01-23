@@ -31,7 +31,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # Handle email
 gem 'sendgrid'
 
-gem "galetahub-simple_captcha", :require => "simple_captcha"
+gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
 
 # Queue server
 gem 'redis'
@@ -40,6 +40,9 @@ gem 'rmagick'
 gem 'rufus-scheduler'
 # Exception handler
 gem 'exception_notification', git: 'git://github.com/alanjds/exception_notification.git'
+
+gem 'redis'
+gem 'redis-namespace'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
