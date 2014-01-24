@@ -1,12 +1,18 @@
 <%  if local_assigns[:disable_post].nil? %>
 <div class="write-tip">
     <form action="/post/create" name="tips" method="post" enctype="multipart/form-data">
-    <input type="text" name="post[body]" id="tip" maxlength="170" value="" placeholder="Write a Tip" onfocus="if (this.value == 'Write 
-    a Tip') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
+    <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip" onfocus="if (this.value == 'Write 
+    a Tip') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}"></textarea>
      <div style="margin-top: 10px;margin-left: 290px;">
-        <span> 
+        <span>
+            <div style="margin-top: 10px;margin-left: 243px;font-size: 13px !important;color: #333;font-weight: 600;">
+            <span id="charNum"></span> 
+            </div>
+            </br>
             <input type="file" style="display: none;" name="post[avatar]" value="Change Photo">
             <input style="margin-left: 287px;height: 30px;" type="submit" value="Tip" class="button">
+            </br>
+            
             <!--  <input style="margin-left: 15px;height: 30px;" type="submit" value="Tip" class="button"> -->
         </span>
 
@@ -18,13 +24,17 @@
 </div>
 <% end %>
 
-<% if  @user.all_posts(1)[0, 10].empty? %>
+<% # if  @user.all_posts(1)[0, 10].empty? %>
+<!--
 <div style="margin-left: 280px;margin-top: 150px;">
 <span style="font-weight: 600; font-size: 25px;">NO POSTS :(</span>
 </div>
-<% end %>
+-->
+<% #end %>
 
-<% @user.all_posts(1)[0, 10].uniq.each do |post| %>
+<% # @user.all_posts(1)[0, 10].uniq.each do |post| %>
+
+<%  @user.all_posts(1).uniq.each do |post| %>
 <div class="tip-holder">
     <div class="box border-radius">
         <div class="box-left left"><%= image_tag post.user.user_avatar, :width => "116" %></div>

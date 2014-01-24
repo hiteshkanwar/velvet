@@ -28,6 +28,9 @@
             <%= render :partial => '/profile/posts' %>
             <!-- END POST -->
 
+            <!-- Paginate -->
+            <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
+
         </div>
         <div class="clear"></div>
     </div><!-- .container -->

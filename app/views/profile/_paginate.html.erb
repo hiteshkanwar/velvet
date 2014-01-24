@@ -1,0 +1,12 @@
+<div id="results"></div>
+<script>
+	$('#results').pageless({ 
+
+		totalPages: <%= local_assigns[:total_pages] %>,
+		url: '/dashboard/paginate/1?source=<%= local_assigns[:source] %>',
+		loaderImage: '/assets/main/load.gif',
+        loaderMsg: 'Loading more results'
+
+
+    });
+</script>

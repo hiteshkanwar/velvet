@@ -59,6 +59,7 @@ gem 'ancestry'
 #end
 # CSS compressor
 gem 'yui-compressor'
+gem 'will_paginate'
 
 
 gem 'carrierwave'

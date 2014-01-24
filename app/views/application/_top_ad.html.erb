@@ -1,5 +1,5 @@
 <% if @top_advertiser.present? %>
-  <div class="page">
+  <div class="page" style="margin-bottom: 10px;">
     <div class="container">
        <a target="_blank" href="<%= @top_advertiser.website %>"><%= image_tag @top_advertiser.campaign_image.url(),:width=>"900px",:height=>"100px" %></a>
       <% if @top_advertiser.ga_account.present? &&  @top_advertiser.ga_website.present? %>

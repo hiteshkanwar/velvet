@@ -22,4 +22,5 @@
 //= require main/advertiser
 
 //= require main/plugins
+//= require main/jquery.pageless
 //  require_tree .

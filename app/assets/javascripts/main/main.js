@@ -208,4 +208,35 @@ $('#specialbutton').button('loading');
  });
 
 
+
+$(document).on("keyup", "#tip", function(event){
+
+  console.log("keyup")
+  var max = 170;
+  var len = $(this).val().length;
+  var cha = max - len;
+  console.log(len);
+  $('#charNum').text(cha + ' characters left');
+  
+
+ });
+
+// Confirm delete
+$(document).on("click", ".delete", function(event){
+ 
+  console.log("delete");
+  return confirm("Are you sure you want to delete this tip ?");
+
+ 
+});
+
+// Confirm retip
+$(document).on("click", ".re-tip", function(event){
+  
+  console.log("re-tip");
+  return confirm("Retip this to your acquaintances ?");
+
+});
+
+
  

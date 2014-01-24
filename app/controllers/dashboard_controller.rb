@@ -46,8 +46,32 @@ class DashboardController < ApplicationController
 		@user = @current_user
 		@user.assigned_posts = @posts.uniq
 		logger.debug @user.all_posts(1)
+
+		# --- total pages for all posts
+
+		@total_pages = 0
+		@user.assigned_posts.each do |post|
+			@total_pages += post.user.posts.paginate(page: params[:page], per_page: 2).total_pages
+		end
+
+		logger.debug("pages: #{@total_pages}")
+
+		# ---
 		
 		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
+	end
+
+	def paginate
+
+		case params[:source]
+		when 'home'
+			@user = @current_user
+			@user.assigned_posts = @current_user.followings_posts(params[:page]).uniq
+		else
+			nil
+		end
+
+		render 'paginate', layout: false
 	end
 
 	# Find users & post with similar keywords.
