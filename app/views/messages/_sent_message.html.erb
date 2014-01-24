@@ -1,0 +1,30 @@
+<!-- <div class="message-holder"  id="message_<%=message.id %>"> -->
+  <%= image_tag message.receiver.user_avatar, :width => "47"%>
+  <%#= image_tag "inbox-img.jpg" ,:width=>47%>
+  <div class="description">
+    <h2><a href="/<%= message.receiver.username %>"><%= message.receiver.name %> &rarr;</a> <a href="/<%= message.sender.username %>"><%= message.sender.name %></a></h2>
+    <p> 
+
+      <%= message.message_text %> </p>
+
+      <!-- <a href="#">Forward</a> --> 
+      <% if message.attachments.present? %>
+      <p style="height:125px">
+        <a href="<%=message.attachments.first.document_url %>" class="fancy-popup"><%= image_tag message.attachments.first.document.url(:thumb), :width => "120"%>  
+        </a>  
+      </p>
+      <% end %>  
+      <%= link_to "Delete", message_path(message),:method=>"delete",:confirm=>"Are you sure?" %>
+    </div>
+    <div class="clear"></div>
+<!-- </div> -->
+<!-- .message-holder -->
+<% message.descendants.each do |sub_message|%>
+  <div style="margin:20px 0px" id="message_<%=message.id %>">
+    <% if sub_message.is_sent_by?(@current_user) %>
+      <%= render :partial=>"sent_message" ,:locals=>{:message=>sub_message }%>
+    <% else  %>
+      <%= render :partial=>"message" ,:locals=>{:message=>sub_message }%>
+    <%  end %>
+  </div>  
+<% end %>

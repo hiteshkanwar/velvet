@@ -48,14 +48,13 @@ ActiveRecord::Schema.define(:version => 20140113230440) do
     t.integer  "user_id"
     t.float    "max_cpm"
     t.float    "total_budget"
-    t.float    "ad_served",             :default => 0.0
+    t.float    "ad_served"
     t.boolean  "active",                :default => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
     t.float    "remaining_budget",      :default => 0.0
     t.float    "total_ad_served",       :default => 0.0
     t.boolean  "approved",              :default => false
-    t.text     "ga_script"
     t.string   "ga_account"
     t.string   "ga_website"
   end
@@ -112,9 +111,9 @@ ActiveRecord::Schema.define(:version => 20140113230440) do
   create_table "hash_tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.integer  "count"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "count",      :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "likes", :force => true do |t|

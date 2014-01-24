@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
 	before_filter :only => [:acquaint, :unacquaint, :direct_message, :admire, :message, :add_to_list] do |c| 
 		c.not_found params[:id]
 	end 
-
+	before_filter :serve_ads,:only=>[:activity,:index,:discover]
 	#before_filter :only => [:discover, :activity] do |c| 
 	#	c.not_found params[:username] 
 	#end 
@@ -46,7 +46,7 @@ class DashboardController < ApplicationController
 		@user = @current_user
 		@user.assigned_posts = @posts.uniq
 		logger.debug @user.all_posts(1)
-		serve_ad
+		
 		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
 	end
 
@@ -87,7 +87,6 @@ class DashboardController < ApplicationController
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
-		serve_ad
 		@posts
 	end
 
@@ -108,7 +107,7 @@ class DashboardController < ApplicationController
 		@posts = @mentioned
 		@user = @current_user
 		@user.assigned_posts = @posts
-		serve_ad
+
 		@posts
 	end
 

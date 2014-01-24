@@ -21,9 +21,6 @@ VL = (function($, window, document, Velvet){
             dataType: "json",
             success: function(data) {
              response(data);
-             
-             
-
            }
          });
         },
@@ -45,6 +42,9 @@ VL = (function($, window, document, Velvet){
           return false;
         }
       })
+    },
+    initFancyBox : function(){
+      $(".fancy-popup").fancybox();
     }
   };
   return Velvet;

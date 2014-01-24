@@ -34,10 +34,29 @@ class ApplicationController < ActionController::Base
     def current_user
       @current_user ||= User.find_by_email(session[:email])
     end
+
     def serve_ad
       @advertiser  = Advertiser.get_ad()
       @advertiser.ad_is_served  if @advertiser.present?
       @advertiser
+    end
+
+    def serve_ads
+      advertisers = Advertiser.get_ads
+      if advertisers.present? 
+
+        if advertisers[0].present?
+          @top_advertiser = advertisers[0] 
+          @top_advertiser.ad_is_served 
+        end
+        if advertisers[1].present?
+          @bottom_advertiser = advertisers[1] 
+          @bottom_advertiser.ad_is_served
+        end
+        if advertisers.length > 3
+          @right_advertisers =  advertisers[2..advertisers.length ]
+        end  
+      end
     end
   	
 end

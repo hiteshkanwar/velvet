@@ -75,7 +75,15 @@ class Advertiser < ActiveRecord::Base
 
   def self.get_ad(except_ids=[])
     # Get advertisement where remaining budget is greater than 0 and order by max cpm
-    advertiser = Advertiser.approved.active.where("remaining_budget > ?",0).order("max_cpm desc").except_ids(except_ids).limit(1).first
+     Advertiser.approved.active.where("remaining_budget > ?",0).order("max_cpm desc").except_ids(except_ids).limit(1).first
+    
+
+  end
+
+   def self.get_ads(except_ids=[])
+    # Get advertisement where remaining budget is greater than 0 and order by max cpm
+    # advertiser = Advertiser.approved.active.where("remaining_budget > ?",0).order("max_cpm desc").except_ids(except_ids).limit(1).first
+    Advertiser.approved.active.where("remaining_budget > ?",0).order("max_cpm desc").except_ids(except_ids)
 
   end
 

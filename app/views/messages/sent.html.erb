@@ -13,9 +13,18 @@
           <%#= image_tag "inbox-img.jpg" ,:width=>47%>
           <div class="description">
             <h2><%= message.receiver.name %></h2>
-            <p><%= message.message_text %> </p>
-            <!-- <a href="#">Forward</a> --> <%= link_to "Delete", message_path(message),:method=>"delete",:confirm=>"Are you sure?" %>
+            <p> 
+             
+              <%= message.message_text %> </p>
 
+            <!-- <a href="#">Forward</a> --> 
+              <% if message.attachments.present? %>
+                <p style="height:125px">
+                  <a href="<%=message.attachments.first.document_url %>" class="fancy-popup"><%= image_tag message.attachments.first.document.url(:thumb), :width => "120"%>  
+                  </a>  
+                </p>
+              <% end %>  
+              <%= link_to "Delete", message_path(message),:method=>"delete",:confirm=>"Are you sure?" %>
           </div>
           <div class="clear"></div>
         </div><!-- .message-holder -->
@@ -26,6 +35,10 @@
   </div><!-- .container -->
 </div>
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+  VL.message.initFancyBox()
+})
+</script>
 
 

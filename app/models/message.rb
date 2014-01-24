@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
 
   scope :not_trash,lambda{where("is_trash"=>false)}
   scope :trash_messages,lambda{where("is_trash"=>true)}
+  
 
   def move_to_trash
     self.is_trash = true
@@ -17,5 +18,9 @@ class Message < ActiveRecord::Base
   def undelete
     self.is_trash = false
     self.save
+  end
+
+  def is_sent_by?(user)
+    sender_id == user.id
   end
 end
