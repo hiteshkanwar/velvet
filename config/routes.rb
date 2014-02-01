@@ -25,6 +25,7 @@ Velvet::Application.routes.draw do
    match '/about',       :to => 'landing#about'
    match '/terms',       :to => 'landing#terms'
    match '/verify',      :to => 'landing#verify'
+   match '/dmca',      :to => 'landing#dmca'
    match 'landing/resend',      :to => 'landing#resend'
 
   #resources :profile, :path=>''

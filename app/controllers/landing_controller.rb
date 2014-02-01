@@ -20,6 +20,10 @@ class LandingController < ApplicationController
   	render 'forgot'
   end
 
+  def dmca
+    render 'dmca', layout: false 
+  end
+
   def confirm_forgot
   	user = User.find_by_email(params[:email])
   	if user && user.forgot_password_token == params[:token]

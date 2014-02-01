@@ -221,6 +221,21 @@ $(document).on("keyup", "#tip", function(event){
 
  });
 
+$(document).on("click", "#tip", function(event){
+
+  if (localStorage.funmoji != 'null' && localStorage.funmoji != undefined) {
+
+    var text = $('#tip').val();
+    var code = localStorage.funmoji;
+
+    $('#tip').val(text +' '+code);
+    localStorage.funmoji = 'null'
+
+  }
+
+
+ });
+
 // Confirm delete
 $(document).on("click", ".delete", function(event){
  
@@ -237,6 +252,7 @@ $(document).on("click", ".re-tip", function(event){
   return confirm("Retip this to your acquaintances ?");
 
 });
+
 
 
  

@@ -4,12 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Tippin - Emoji</title>
 <%= stylesheet_link_tag "main/application" %>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link rel="shortcut icon" href="favicon.ico" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="model-emo">
 <div class="emo-model-heading">Available FUMOJI's</div>
+    <p style="margin-top: 5px;"> Selected emoji's will be automatically pasted, when post area is clicked.</p>
     <div class="model-emo-holder">
     	<% Emoji.family("display").each do |family, emojis| %>
         <% if !@current_user.emojis.where(name: family.to_s).empty? || !@current_user.emojis.where(name: 'all').empty? || family.to_s == 'free' %>
@@ -17,7 +19,7 @@
             <% emojis.split(",").each do |emoji| %>
             	<div class="emo-hold">
                 	<img src="/assets/emoji/<%= emoji.delete(' ') %>.png" width="40" height="40" alt="" title="Emoji Name">
-                    <div class="emo-name"><a href="#">:<%= emoji.delete(' ') %>:</a></div>
+                    <div class="emo-name"><a class="funmoji" href="#">:<%= emoji.delete(' ') %>:</a></div>
                     <div class="clear"></div>
                 </div><!-- .emo-hold -->
             <% end %>
@@ -28,5 +30,28 @@
     <div class="clear"></div>
     </div>
 </div>
+<script>
+// Add Funmoji to post
+$(document).on("click", "a.funmoji", function(event){
+  event.preventDefault();
+
+  // Highlight
+  $(this).css('color', 'gray');
+  $(this).css('font-weight', 'bold');
+
+  var currentCode = localStorage.funmoji
+  var code = $(this).text();
+
+  if (currentCode == undefined || currentCode == 'null') {
+    currentCode = code;
+  } else {
+    currentCode += ' ' + code
+  }
+
+  localStorage.funmoji = currentCode;
+
+
+});
+</script>
 </body>
 </html>
