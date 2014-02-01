@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :description, :is_public
   has_many :members
   belongs_to :user
 

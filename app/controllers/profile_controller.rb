@@ -118,6 +118,34 @@ class ProfileController < ApplicationController
 	end
 
 	# Add members to list
+
+	def add_members
+		begin
+			list = List.find(params[:list_id])
+			
+			# Only, owner can add anybody to list, else you can only add yourself.
+			if params[:user_id].to_i == @current_user.id || list.user == @current_user
+				
+				# If list is public, anybody can join else only owner can add new users to private lists
+				if list.is_public || list.user == @current_user
+					
+					@members = list.members.map { |member| member.user }.flatten
+					if !@members.include? User.find(params[:user_id])
+						list.members.create(user_id: params[:user_id])
+						flash[:notice] = "Added!"
+					else 
+						logger.debug "User already added"
+					end
+				end
+			end 
+		rescue => error
+			flash[:notice] = "Error!"
+		end
+		redirect_to request.referrer
+	end
+
+
+=begin
 	def add_members
 		begin
 			@members = @current_user.lists.find(params[:list_id]).members.map { |member| member.user }.flatten
@@ -130,6 +158,7 @@ class ProfileController < ApplicationController
 		end
 		redirect_to request.referrer
 	end
+=end
 
 	# Destroy list
 	def destroy_list

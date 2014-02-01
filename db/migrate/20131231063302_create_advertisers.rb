@@ -23,5 +23,8 @@ class CreateAdvertisers < ActiveRecord::Migration
       t.boolean :active,:default=>false
       t.timestamps
     end
+
+    add_column :advertisers, :ga_account, :string
+    add_column :advertisers, :ga_website, :string
   end
 end

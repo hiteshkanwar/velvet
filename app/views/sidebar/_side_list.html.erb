@@ -16,6 +16,16 @@
             <input type="submit" value="Delete" class="button">
         </form>
         <% end %>
+
+        <% if @current_user.id && @user != @current_user %>
+        <form action="/<%= @current_user.username %>/add_members" method="get">
+            <input type="hidden" name="list_id" value="<%= list.id %>">
+            <input type="hidden" name="user_id" value="<%= @current_user.id %>">
+            <input type="submit" value="Subscribe" class="button">
+        </form>
+        <% end %>
+
+
     </div><!-- .direct-messaging -->
     <% end %>
 </div>
