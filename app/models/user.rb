@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   def all_posts(pg=1)
     @assigned_posts ||= begin
       posts = Array.new
-      posts << self.posts  + self.reposts.map(&:post_id).map {|id| Post.find(id) }
+      posts << self.posts  + self.reposts.map(&:post_id).map {|id| Post.find(id) rescue nil }.compact
       posts.flatten.sort{|a, b| b[:created_at] <=> a[:created_at]}
     end
   end 
