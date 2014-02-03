@@ -1,0 +1,6 @@
+<%= render :partial=>"message",:locals=>{:message=>message} %>
+<!-- .message-holder -->
+
+<% message.descendants.each do |sub_message|%>
+  <%= render :partial=>"message" ,:locals=>{:message=>sub_message }%>
+<% end %>

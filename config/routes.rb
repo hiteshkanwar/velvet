@@ -56,6 +56,7 @@ Velvet::Application.routes.draw do
     member do
       get 'move_to_trash'
       get 'undelete'
+      get "show_conversation"
     end
   end
 

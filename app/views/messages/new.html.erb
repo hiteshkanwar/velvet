@@ -7,16 +7,20 @@
       <div class="heading border-radius">direct messaging - new</div>
       <div class="inbox  border-radius">
         
-          <% if @parent_message.blank? %>
+          <% if @parent_message.present? %>
+            <p><%= @parent_message.sender.name %> @<%= @parent_message.sender.username %></p>
+            <%= image_tag @parent_message.sender.user_avatar, :width => "47",:id=>"user_profile_image"%>
+          <% elsif @receiver.present? %>
+             <p><%= @receiver.name %> @<%= @receiver.username %></p>
+            <%= image_tag @receiver.user_avatar, :width => "47",:id=>"user_profile_image"%>
+          <% else %>
             <p>
               
               <input type="text" name="q" id="tip" value="<%= params[:receiver_name] %>" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search"/>
               
             </p>  
             <%= image_tag @current_user.user_avatar, :width => "47",:id=>"user_profile_image"%>
-          <% else %>
-            <p><%= @parent_message.sender.name %> @<%= @parent_message.sender.username %></p>
-            <%= image_tag @parent_message.sender.user_avatar, :width => "47",:id=>"user_profile_image"%>
+           
           <% end %>
           
         
