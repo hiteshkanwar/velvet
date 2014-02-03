@@ -50,8 +50,8 @@ class LandingController < ApplicationController
   # Controls -----------------
   
   def validate_login
-
-    if User.find_by_email(params[:email]).validated.present?
+    user = User.find_by_email(params[:email])
+    if user && user.validated.present?
       if User.authenticate(params[:email], params[:password])
       	session[:email] = params[:email]
         user = User.find_by_email(params[:email])
