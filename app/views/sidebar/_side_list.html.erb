@@ -3,6 +3,7 @@
 	<div class="name">
         <p><%= list.name %></p>
     	<%= image_tag @user.user_avatar, :width => "47" %>
+       <% if !list.is_public %> <div class="list-description">This is a private list</div> <% end %>
         <div class="list-description"><%= list.description %></div>
     </div><!-- .name -->
     <ul>
