@@ -53,7 +53,7 @@ gem 'redis-namespace'
 # Use unicorn as the app server
 # gem 'unicorn'
 gem 'thin'
-gem 'ancestry'
+gem 'ancestry',"~> 2.0.0"
 #group :development do 
   gem 'pry'
 #end

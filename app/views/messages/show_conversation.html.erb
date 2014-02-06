@@ -6,12 +6,10 @@
     <div class="right-section right">
       <div class="heading border-radius">inbox</div>
       <div class="inbox message border-radius">
-        <% @messages.each do |message| %>
-        <div class="message-holder">
-          <% descendant_message = message.last_message_in_thread %>
-          <%= render :partial=>"preview_message",:locals=>{:message=>descendant_message,:root_message=>message} %>
-        </div>  
-        <% end %>  
+        <!-- <div class="message-holder"> -->
+          <%= render :partial=>"message_thread",:locals=>{:message=>@message} %>
+        <!-- </div>   -->
+
       </div><!-- .inbox -->
     </div><!-- .right-section -->
     <div class="clear"></div>
