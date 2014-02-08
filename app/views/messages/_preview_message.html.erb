@@ -11,7 +11,8 @@
   <% end %>  
 
   <%#=link_to "Reply",new_message_path(:parent_id=>message.id) %> 
-  <%=link_to "View conversation",show_conversation_message_path(root_message) %> 
+  <%=link_to "View conversation",show_conversation_message_path(root_message) %> - <span> <%= to_date(message.created_at) %></span>
+  
   <!--<a href="#">Forward</a> --> 
   <%#= link_to "Delete", move_to_trash_message_path(message)%>
 </div>

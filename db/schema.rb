@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140201015101) do
+ActiveRecord::Schema.define(:version => 20140207015010) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20140201015101) do
     t.integer  "user_id"
     t.float    "max_cpm"
     t.float    "total_budget"
-    t.float    "ad_served"
+    t.float    "ad_served",             :default => 0.0
     t.boolean  "active",                :default => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(:version => 20140201015101) do
   create_table "hash_tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.integer  "count",      :default => 1
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer  "count"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "likes", :force => true do |t|
@@ -162,11 +162,12 @@ ActiveRecord::Schema.define(:version => 20140201015101) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "filepicker_url"
     t.string   "avatar"
     t.string   "avatar_tmp"
+    t.integer  "repost_count",   :default => 0
   end
 
   create_table "reposts", :force => true do |t|

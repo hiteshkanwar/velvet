@@ -77,32 +77,37 @@ class DashboardController < ApplicationController
 	# Find users & post with similar keywords.
 
 	def search
-
 		@user =  @current_user # Map current user to user in profile/_user
-		@users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
-		@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
-		@users_to_display = (@users + @posts).flatten.uniq
-	
-
-		if params[:source] && params[:source] == "autocomplete"
-			autocomplete = @users_to_display.map { | user | 
-				{ label: "#{user.name} @#{user.username}", value: user.username,:id=>user.id }
-			}
-
-			logger.debug(autocomplete)
-
-			respond_to do |format|
-		      format.json {render :json => autocomplete }
-		    end
-			
+		if params[:retips]
+			post = Post.find(params[:retips])
+			@users_to_display = post.reposts.map { |repost| repost.user }.flatten.uniq
 		else
 
 			
-			@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
-			render 'search'
-			
-		end
+			@users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+			@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
+			@users_to_display = (@users + @posts).flatten.uniq
+		
 
+			if params[:source] && params[:source] == "autocomplete"
+				autocomplete = @users_to_display.map { | user | 
+					{ label: "#{user.name} @#{user.username}", value: user.username,:id=>user.id }
+				}
+
+				logger.debug(autocomplete)
+
+				respond_to do |format|
+			      format.json {render :json => autocomplete }
+			    end
+				
+			else
+
+				
+				@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
+				render 'search'
+				
+			end
+		end
 	end
 
 	def discover
