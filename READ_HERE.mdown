@@ -1,0 +1,18 @@
+Repos
+----
+
+Heroku specifics
+git push beta -> points to velvet-beta1 (use)
+git push heroku -> points to velvet-development (don't use)
+git push origin master -> points to Bitbucket master branch
+git push origin fox -> points to Bitbucket fox branch
+
+
+Branches
+
+Master (out of date)
+Fox (currently upto date -- Work from here)
+
+Push to heroku
+
+git push beta fox:master (pushes fox branch to beta)

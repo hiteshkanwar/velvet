@@ -1,75 +1,241 @@
-<div class="middle">
-	<div class="center-form">
-		<% if flash[:notice] %> 
-			<div class="enter"> 
-				<%= flash[:notice] %> 
-				<% if flash[:notice].include?("Please verify") %>
-					<a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
-				<% end %>
-			</div> 
-		<% end %>
-		<form id="DOB" method="POST" action="" class="Dob">
-			<div class="enter">ENTER YOUR DATE OF BIRTH</div>
-			<div class="inputer">
-			<input type="text" class="input1" name="month" value="<%= session[:month] %>" placeholder="MM" maxlength="2" id="a"/>
-			<input type="text" class="input2" name="day"  value="<%= session[:day] %>" placeholder="DD" maxlength="2" id="b"/>
-			<input type="text" class="input3" name="year" value="<%= session[:year] %>" placeholder="YYYY" maxlength="4" id="c"/></div>
-			<div class="error">asdsds</div>
-			<div class="what">WHAT COUNTRY DO YOU LIVE IN?</div>
-			<div class="selectors">
-			<select class="country" name="country">
-			<option>UNITED STATES</option>
-			<option>CANADA</option>
-			
-			</select>
-			<!--
-			<br/><br/>
-			<input type="checkbox" name="" class="cheking"/> <span class="rem">Remember Me</span><span class="privacy"><A href="#">Privacy Policy</a></span>
-			-->
-			</div>
-		</form>
-		
-		<form id="register" action="landing/create/1" method="POST" class="Registeration">
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>TTV Tippin the velvet</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1, initial-scale=1, minimum-scale=1" />
+<link rel="shortcut icon" href="<%= asset_path "main/favicon.ico" %>">
+<%= stylesheet_link_tag    "font-awesome.min", :media => "all" %>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,100' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+<%= stylesheet_link_tag    "main", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+<script type="text/javascript">
+  $(document).on("click", ".btn.signup", function(){
+    $('div.verify').show(' fast ');
+    $('div.login').hide(true);
+  });
 
-			<h1 class="registrationh1">Registration</h1>
-			<div class="register-field">
-			<label>Name</label><br/>
-			<input type="text" class="register name"  name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
+  $(document).on("click", ".btn.login", function(){
+    $('div.login').show(' fast ');
+    $('div.forgot').hide(true);
+    $('div.verify').hide(true);
+    $('div.signup').hide(true);
+  });
 
-			<label>Username</label><br/>
-			<input type="text" class="register username"  name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/><br/>
+  $(document).on("click", "a.forgot", function(event){
+    $('div.forgot').show(' fast ');
+    $('div.login').hide(true);
+    event.preventDefault();
+  });
 
-			<label>Email</label><br/>
-			<input type="text" class="register email" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/><br/>
-			<label>Password</label><br/>
-			<input type="password" class="register Password" name="password" Placeholder="Password"/>
+  $(document).on("click", "button.verify", function(event){
+    event.preventDefault();
+    var day = $("input.dd").val();
+    var month = $("input.mm").val();
+    var year = $("input.yy").val();
+    var enteredYear = $("input.yy").val();
+    var country = $(".country").val();
+    var currentYear = new Date().getFullYear();
+    // Validate entries
+    if (day==""  || month=="" || year=="") {
+        $('aside.entry-form').prepend('<div class="error" style="padding:20px;"><span>Please correct date</span></div>');
+    // Check for age
+    } else if((currentYear - enteredYear) < 18) {
+      $('aside.entry-form').prepend('<div class="error" style="padding:20px;"><span>You must be 18+</span></div>');
+    } else {
+    // Show signup form
+      $('div.verify').hide(true);
+      $('div.login').hide(true);
+      $('div.forgot').hide(true);
+      $('div.signup').show(' fast ');
 
-			<label>I accept <a style="color: black;margin-right:5px;" href="/privacy">Privacy, DMCA, Term policies</a> <input type="checkbox" name="agreement" value="1"></label>
-			<div style="margin-top: 10px;">
-			<%= show_simple_captcha %>
-			</div>
-			</div>
-			<div class="error">asdsds</div>
-			<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+      // Add country & age to register form
+      $("form#register").append('<input type="hidden" name="month" value="'+ month +'">');
+      $("form#register").append('<input type="hidden" name="day"  value="'+  day +'">');
+      $("form#register").append('<input type="hidden" name="year"  value="'+ year +'">');
+      $("form#register").append('<input type="hidden" name="country" value="'+ country +'">');
+    }
 
-			<script>
-				function filterInput(e) {
-				   // Get the regular expression to test against for this particular object
-				 
-				   regAllow = /[A-Za-z\s,.?_!]/
-				   // Check for an allowed character, if not found, cancel the keypress's event bubbling
-				   if (!String.fromCharCode(e.keyCode).match(regAllow)) e.returnValue=false;
-				 }
-			</script>
+  });
 
-		</form>
-		<div>
-		
-		
-		</div>
-		  <div class="enter-site"><%= image_tag "entersite.png" %></div>
-		  <div class="enter-site3">Register</div>
-		  <div class="enter-site2"><a href="/"><%= image_tag "exit.png" %></a></div>
-	</div>
+</script>
+<section class="main">
+  <section class="header clearfix">
+    <section class="header-inner">
+      <section class="container">
+        <div class="logo-box">
+          <div class="logo"> <%= image_tag "llogo.png" %> </div>
+        </div>
+        <!--  /logo -->
+        <div class="login-box pull-left">
+          <form class="login-form">
+            <span>
+            <button type="button" class="btn login">Login</button>
+            </span> <span>
+            <button type="button" class="btn signup">Sign up</button>
+            </span>
+          </form>
+        </div>
+        <!--  /login-inner -->
+        </div>
+        <!--  /login --> 
+      </section>
+    </section>
+    <!--  /header-inner --> 
+  </section>
+  <!--  /header -->
+  <section class="full-width entery">
+    <section class="container"> <span class="heading1 clearfix">Where you can be you</span> <span class="heading2 clearfix">+18 ADULT SOCIAL NETWORKING</span>
+      <section class="full-width">
+        <aside class="entry-form">
 
-</div><!--End of middle-->
+          <!-- Error -->
+          <% if flash[:notice] %> 
+          <div class="error" style="padding:20px;">
+            <span>  <%= flash[:notice] %> </span>
+            <% if flash[:notice].include?("Please verify") %>
+              <a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
+            <% end %>
+          </div>
+          <% end %>
+
+          <!-- Signup form -->
+          <div class="verify">
+            <form class="verfy">
+              <header>Must be 18+</header>
+              <span>
+              <input type="text" id="a" value="<%= session[:day] %>" placeholder="dd&nbsp;&nbsp;&nbsp;&nbsp;/"  class="dd">
+              <input type="text" id="b" value="<%= session[:month] %>" placeholder="mm&nbsp;&nbsp;&nbsp;&nbsp;/" class="mm">
+              <input type="text" id="c" value="<%= session[:year] %>" placeholder="yy&nbsp;&nbsp;&nbsp;&nbsp;" class="yy">
+              </span> <span>
+              <select class="country" name="country">
+                <option>Country</option>
+                <option>United States</option>
+                <option>Canada</option>
+              </select>
+              <i class="fa fa-sort-down"></i> </span> <span class="conti-btn">
+              <button class="verify" type="submit">Continue...</button>
+              </span>
+            </form>
+          </div>
+
+          <!-- Login form -->
+          <div class="login" style="display:none;">
+            <form class="verfy" action="/landing/validate_login/1" method="post">
+              <header>Login</header>
+              <span>
+                <input type="text" name="email" style="width:400px;" placeholder="Email"  class="dd">
+                <input type="password" name="password" style="width:400px;margin-top:-50px;" placeholder="Password"  class="dd">
+                <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+              </span> 
+              
+              <span class="conti-btn">
+                <button type="submit">Continue...</button>
+                <span style="margin-top:5px;"><a class="forgot" style="color:inherit;" href="#"><i class="fa fa-exclamation-circle"></i></a></span>
+              </span>        
+            </form>
+          </div>
+          <!-- Login form -->
+
+          <!-- Signup form -->
+          <div class="signup" style="display:none;">
+            <form class="verfy" action="landing/create/1" method="post" id="register">
+              <header>Signup</header>
+              <span>
+
+                <input type="text" class="dd"  style="width:400px;" name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
+                <input type="text" class="dd"  style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/>
+
+                <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/>
+                
+                <input type="password" class="dd" style="width:400px;margin-top:-50px;" name="password" Placeholder="Password"/>
+                <div style="margin-top:-50px;">
+                 
+                    
+                  <span> 
+                    I accept <a style="color: black;margin-right:5px;" href="/privacy">Privacy, DMCA, Term policies</a> 
+                    <input type="checkbox" name="agreement" value="1">
+                  </span>
+                </div>
+                
+                <!-- Captcha -->
+                <div align="center" style="margin-top:-30px;margin-bottom:30px;">
+                  <%= show_simple_captcha %>
+                </div>
+                <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+                <!-- Captcha -->
+              </span> 
+              
+              <span class="conti-btn">
+                <button type="submit" class="submit-form">Continue...</button>
+              </span>        
+            </form>
+          </div>
+
+
+          <script>
+            function filterInput(e) {
+               // Used to validate username when signing up
+               // Get the regular expression to test against for this particular object
+             
+               regAllow = /[A-Za-z\s,.?_!\d]/
+               // Check for an allowed character, if not found, cancel the keypress's event bubbling
+               if (!String.fromCharCode(e.keyCode).match(regAllow)) e.returnValue=false;
+             }
+          </script>
+
+          <!-- Signup form -->
+
+          <!-- Forgot form -->
+          <div class="forgot" style="display:none;">
+            <form class="verfy" action="/landing/reset/1" method="post">
+              <header>Forgot</header>
+              <span>
+                <input type="text" name="email" style="width:400px;" placeholder="Enter email"  class="dd">
+                <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
+              </span> 
+              
+              <span class="conti-btn">
+                <button type="submit">Continue...</button>
+              </span>
+            <!-- </br>
+              <span><a style="color:inherit;" href="/forgot"><i class="fa fa-exclamation-circle"></i></a></span> --> 
+            </form>
+          </div>
+
+        </aside>
+      </section>
+    </section>
+    <!--  /.container --> 
+  </section>
+  <!--  /entery -->
+  <footer>
+    <section class="full-width footer-inner">
+    <aside class="container">
+      <nav>
+        <ul>
+          <li><a href="/about">About us</a></li>
+          <li><a href="/advertisers">Advertisers</a></li>
+          <li><a href="/dmca">DMCA</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/terms">Terms & Condition</a></li>
+        </ul>
+      </nav>
+      </aside>
+    </section>
+    </footer>
+    <!--
+     <aside class="footer-btm full-widt">
+    <p>2014 TIPPIN THE VELVET. All Rights Reserved.</p>
+    </aside>
+    -->
+ </section>
+<!--  /main -->
+</body>
+</html>

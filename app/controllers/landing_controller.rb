@@ -5,7 +5,7 @@ class LandingController < ApplicationController
   # Views --------------
   def index
 
-  	
+  	render 'index', layout: false
   end
 
   def login
@@ -156,10 +156,12 @@ class LandingController < ApplicationController
   		# Send confirm email
   		 UserMailer.forgot_password_email(user).deliver
        flash[:notice] = "Please check your email, to reset your password"
-       redirect_to '/forgot'
+       #redirect_to '/forgot'
+       redirect_to :root
   	else
   		flash[:notice] = "This email address is not registered"
-  		redirect_to '/forgot'
+      #redirect_to '/forgot'
+  		redirect_to :root
   	end
 
   end

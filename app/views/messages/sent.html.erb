@@ -18,7 +18,7 @@
               <%= message.message_text %> </p>
 
             <!-- <a href="#">Forward</a> --> 
-              <% if message.attachments.present? %>
+              <% if message.attachments.present? && message.attachments.first.document_url.present? %>
                 <p style="height:125px">
                   <a href="<%=message.attachments.first.document_url %>" class="fancy-popup"><%= image_tag message.attachments.first.document.url(:thumb), :width => "120"%>  
                   </a>  

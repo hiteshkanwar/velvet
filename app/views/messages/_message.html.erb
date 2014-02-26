@@ -3,7 +3,7 @@
    <div class="description">
     <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %> </a> <!-- <a href="/<%= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
     <p><%= message.message_text %> </p>
-    <% if message.attachments.present? %>
+    <% if message.attachments.present? && message.attachments.first.document_url.present? %>
     <p style="height:125px">
       <a href="<%=message.attachments.first.document_url %>" class="fancy-popup">
         <%= image_tag message.attachments.first.document.url(:thumb), :width => "120"%>  

@@ -7,7 +7,7 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password, :background, :country, :dob, :validated, :code
+  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password, :background, :country, :dob, :validated, :code, :forgot_password_token
   attr_accessor :assigned_posts
   # Handle image uploads
   mount_uploader :avatar, DocumentUploader
