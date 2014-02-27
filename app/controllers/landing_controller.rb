@@ -142,6 +142,7 @@ class LandingController < ApplicationController
     	 	
     	 end
     else 
+      session[:flag]= simple_captcha_valid?
       flash[:notice] = "Invalid captcha, please try again"
       redirect_to :root
     end

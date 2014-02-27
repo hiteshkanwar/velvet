@@ -106,13 +106,13 @@
           <% end %>
 
           <!-- Signup form -->
-          <div class="verify">
+          <div class="verify" style="display:none;">
             <form class="verfy">
               <header>Must be 18+</header>
               <span>
-              <input type="text" id="a" value="<%= session[:day] %>" placeholder="dd&nbsp;&nbsp;&nbsp;&nbsp;/"  class="dd">
-              <input type="text" id="b" value="<%= session[:month] %>" placeholder="mm&nbsp;&nbsp;&nbsp;&nbsp;/" class="mm">
-              <input type="text" id="c" value="<%= session[:year] %>" placeholder="yy&nbsp;&nbsp;&nbsp;&nbsp;" class="yy">
+              <input type="text" id="a" value="<%= session[:day] %>" placeholder="dd&nbsp;&nbsp;&nbsp;&nbsp;/"  class="dd" maxlength="2">
+              <input type="text" id="b" value="<%= session[:month] %>" placeholder="mm&nbsp;&nbsp;&nbsp;&nbsp;/" class="mm" maxlength="2">
+              <input type="text" id="c" value="<%= session[:year] %>" placeholder="yy&nbsp;&nbsp;&nbsp;&nbsp;" class="yy" maxlength="2">
               </span> <span>
               <select class="country" name="country">
                 <option>Country</option>
@@ -150,7 +150,7 @@
               <span>
 
                 <input type="text" class="dd"  style="width:400px;" name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
-                <input type="text" class="dd"  style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/>
+                <input type="text" class="dd" id="user_name" style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/>
 
                 <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/>
                 
@@ -238,4 +238,22 @@
  </section>
 <!--  /main -->
 </body>
+
+<script>
+$( document ).ready(function() {
+var flag= '<%=session[:flag]%>'
+
+if (flag=="false")
+{
+$('div.verify').hide(true);
+$('div.signup').show(' fast ');
+'<%=session[:flag]=""%>'
+
+}
+else
+{
+$('div.verify').show(true);
+}
+});
+</script>
 </html>

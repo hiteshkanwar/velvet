@@ -8,8 +8,9 @@ class PostController < ApplicationController
 	
 
 	def create
-
-		if params[:post][:body] || params[:post][:avatar]
+     @user = @current_user
+	 
+     if params[:post][:body] || params[:post][:avatar]
 			begin
 				@current_user.posts.create(params[:post])
 				flash[:notice] = "Posted " + "#{params[:post][:body][0..17]}..."
@@ -19,7 +20,10 @@ class PostController < ApplicationController
 		else
 			flash[:notice] = "Write something..."
 		end
-		redirect_to request.referer
+	  @user.assigned_posts = @current_user.followings_posts(params[:page]).uniq
+	  respond_to do |format|
+        format.js # actually means: if the client ask for js -> return file.js
+      end
 	end
 
 	def admire

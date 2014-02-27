@@ -62,7 +62,7 @@ class DashboardController < ApplicationController
 	end
 
 	def paginate
-
+		
 		case params[:source]
 		when 'home'
 			@user = @current_user

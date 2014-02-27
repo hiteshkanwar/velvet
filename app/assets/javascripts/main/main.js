@@ -210,8 +210,6 @@ $('#specialbutton').button('loading');
 
 
 $(document).on("keyup", "#tip", function(event){
-
-  console.log("keyup")
   var max = 170;
   var len = $(this).val().length;
   var cha = max - len;
@@ -222,7 +220,6 @@ $(document).on("keyup", "#tip", function(event){
  });
 
 $(document).on("click", "#tip", function(event){
-
   if (localStorage.funmoji != 'null' && localStorage.funmoji != undefined) {
 
     var text = $('#tip').val();
@@ -254,5 +251,14 @@ $(document).on("click", ".re-tip", function(event){
 });
 
 
-
- 
+$(document).ready(function(){
+  $("#new_tip").submit(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/post/create",
+       data:$('#new_tip').serialize()
+     });
+      return false;
+   });  
+ });
