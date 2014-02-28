@@ -73,7 +73,7 @@ body {
 
                <div class="compose left text-align-right">
                <div id="noti_Container" style="margin-right: 22px;">
-                <a href="/messages"><%= image_tag "main/compose.jpg", width: "39", height: "26" %></a>
+                <a href="/messages"><%= image_tag "main/compose.jpg", width: "39", height: "26" %></a><div class="notify_update"></div>
                   <% @unseen = @current_user.messages.not_trash.where(seen: false).size %>
                   <% if @unseen > 0 %> <div class="noti_bubble"><%= @unseen %></div> <% end %>
                   </div>

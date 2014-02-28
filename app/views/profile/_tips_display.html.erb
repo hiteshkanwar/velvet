@@ -15,7 +15,8 @@
     <a href="<%= @current_user.username %>/edit" class="button">Edit Account</a>
     <% else %>
     
-    <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a>
+    <!-- <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a> -->
+    <a href="#message_form" class="button fancybox">Message</a>
     <a href="/<%= @current_user.username %>/lists?user_id=<%= @user.id %>" class="button">Add to list</a>
     <% end %>
     </div>
@@ -23,3 +24,10 @@
 </div>
 </div>
 
+<script type="text/javascript">
+$(document).ready(function() {
+ 
+
+  $('.fancybox').fancybox();
+  });
+</script>

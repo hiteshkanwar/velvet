@@ -1,0 +1,25 @@
+<div>
+			<% @all_messages.each do |message| %>
+				<div class="chat_msg"> 
+					<% @sender = User.find(message.sender_id) %>
+					<p>
+            <% if @user.id == message.receiver_id %>
+            <% @align_left = true%>
+
+              <%#= image_tag @sender.user_avatar, :width => "47" ,:style=>"border: 2px solid; border-radius: 25px 25px 25px 25px;margin-left:300px;" %>
+              <img src="../assets/default_profile_6_bigger.png" alt="Smiley face" width="42" height="42">
+
+            <span> <%= @sender.name %> : <%= message.message_text %> </span>
+            <% else %>
+
+             <% @align_left = false%>
+            <%#= image_tag @sender.user_avatar, :width => "47" ,:style=>"border: 2px solid; border-radius: 25px 25px 25px 25px;" %>
+            <img src="../assets/default_profile_6_bigger.png" alt="Smiley face" width="42" height="42">
+            <span > <%= @sender.name %> : <%= message.message_text %> </span
+            <% end %>
+					
+						
+					</p>
+				</div>
+			<% end %>
+		</div>

@@ -1,6 +1,6 @@
 <%= image_tag message.sender.user_avatar, :width => "47"%>
 <div class="description">
-  <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a> <!-- <a href="/<%= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
+  <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a> <!-- <a href="/<%#= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
   <p><%= message.message_text %> </p>
   <% if message.attachments.present? %>
   <p style="height:125px">

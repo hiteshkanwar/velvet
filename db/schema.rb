@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(:version => 20140207015010) do
     t.boolean  "active",                :default => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.string   "ga_account"
+    t.string   "ga_website"
     t.float    "remaining_budget",      :default => 0.0
     t.float    "total_ad_served",       :default => 0.0
     t.boolean  "approved",              :default => false
-    t.string   "ga_account"
-    t.string   "ga_website"
   end
 
   create_table "attachments", :force => true do |t|
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(:version => 20140207015010) do
   create_table "hash_tags", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.integer  "count"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "count",      :default => 1
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "likes", :force => true do |t|

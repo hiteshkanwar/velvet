@@ -1,4 +1,13 @@
 
+jQuery(document).ready(function(){
+  var callAjax = function(){
+    jQuery.ajax({
+      method:'post',
+      url:'/messages/message_count_update'
+    });
+  }
+  setInterval(callAjax,1000);
+});
 
 //ADDING PLACEHOLDER FOR MAILCHUMP
 
@@ -25,9 +34,6 @@ jQuery(window).load(function(){
         
 	});
 });
-
-
-
 
 //custom js 
   $(document).ready(function(){
@@ -224,8 +230,11 @@ $(document).on("click", "#tip", function(event){
 
     var text = $('#tip').val();
     var code = localStorage.funmoji;
-
-    $('#tip').val(text +' '+code);
+    $.ajax({
+      type: "POST",
+       url: '/post/funmoji_post?post_data='+text+' '+code
+     });
+    $("#tip").val(text+' '+code)
     localStorage.funmoji = 'null'
 
   }

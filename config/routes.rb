@@ -31,6 +31,7 @@ Velvet::Application.routes.draw do
   #resources :profile, :path=>''
   match "/post/create", :to => 'post#create'
   match "/post/comment", :to => 'post#comment'
+  match "/post/funmoji_post", :to => 'post#funmoji_post'
 
   # Search
   # match "/dashboard/search", :to => 'dashboard#search'
@@ -52,6 +53,7 @@ Velvet::Application.routes.draw do
       get 'sent'
       get 'trash'
       get 'search_receivers'
+      post 'message_count_update'
     end
     member do
       get 'move_to_trash'

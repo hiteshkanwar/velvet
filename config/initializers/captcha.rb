@@ -5,7 +5,7 @@ REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.passwor
 redis = REDIS
 
 redis = Redis::Namespace.new('express:captcha', redis: redis)
-
+#redis=Redis.new
 SimpleCaptcha.setup do |sc|
   # Redis instance
   sc.redis = redis

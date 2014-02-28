@@ -2,15 +2,19 @@
 <div class="write-tip">
     <form action="/post/create" name="tips" method="post" enctype="multipart/form-data" id="new_tip">
     <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip"></textarea>
+    <br/>
+    <div id="images_preview"></div>
      <div style="margin-top: 10px;margin-left: 290px;">
         <span>
             <div style="margin-top: 10px;margin-left: 243px;font-size: 13px !important;color: #333;font-weight: 600;">
             <span id="charNum"></span> 
             </div>
             </br>
+            <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png"></a> 
             <input type="file" style="display: none;" name="post[avatar]" value="Change Photo">
             <input style="margin-left: 287px;height: 30px;" type="submit" value="Tip" class="button" id="tip_submit">
-            </br>
+            </br> 
+            
             
             <!--  <input style="margin-left: 15px;height: 30px;" type="submit" value="Tip" class="button"> -->
         </span>
@@ -20,6 +24,7 @@
      <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
         <input name="_user" type="hidden" placeholder="<%= params[:username] %>">
     </form>
+
 </div>
 <% end %>
 
@@ -32,6 +37,13 @@
 <% #end %>
 
 <% # @user.all_posts(1)[0, 10].uniq.each do |post| %>
+
 <div id="update_create_tip1">
 <%= render "profile/post_list"%>
 </div>
+<style>
+#new_tip a {
+    float: right;
+    margin: -6% 170%;
+}
+</style>

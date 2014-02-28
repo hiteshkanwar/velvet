@@ -43,9 +43,14 @@ class ProfileController < ApplicationController
 	end
 
 	def show
-
-		logger.debug session[:username]
-		@current_url = request.original_url
+       @all_messages = []
+       sender_message =current_user.messages
+       receiver_messages = @user.messages
+       @all_messages << sender_message
+       @all_messages << receiver_messages
+       @all_messages =  @all_messages.flatten.sort_by(&:created_at)
+       logger.debug session[:username]
+	   @current_url = request.original_url
 
 	end
 

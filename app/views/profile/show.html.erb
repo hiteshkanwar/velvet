@@ -6,3 +6,67 @@
 <% else %>
     <%= render :partial => 'other' %>
 <% end %>
+
+<div class="composer-area " style="display:none;" id ="message_form">
+	<div class="inbox  border-radius">  
+		<div id = "previous_chat">
+      <%= render "profile/previous_chat"%>
+    </div>
+		<br/>
+    <div class="composer-area">
+      <%= nested_form_for(Message.new,:html=>{:multipart=>true,:id=>"new_message"} ) do |f|%>
+      
+
+        <% if @parent_message.present? %>
+          <%= f.hidden_field :receiver_id ,:value=>@parent_message.sender_id,:id=>"receiver_id" %>
+          <%= f.hidden_field :parent_id ,:value=>@parent_message.id %>
+        <% else %>
+          <%= f.hidden_field :receiver_id ,:id=>"receiver_id", :value => @user.id %>
+        <% end %>  
+         <%= f.text_area :message_text, :placeholder=>"Message", :id=>"message_text" ,:style=>"height: 65px; width: 541px;", :autofocus=>true %>
+         <br/>
+          <%= f.fields_for :attachments %>
+            <%#= f.link_to_add "Add Attachment", :attachments %>
+
+          <%= f.submit "Send Message",:class=>"button", :style=>"float: right;" %>
+      <% end %>  
+ <div id="myDiv">
+        <img id="loading-image" src="../assets/loading2.gif" style="display:none;"/>
+    </div>
+    </div>
+  </div><!-- .inbox -->
+</div>
+
+<style>
+
+.chat_msg span {
+    background-color: yellow;
+    border: 2px solid;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 2px;
+    margin-top: 3px;
+    padding: 10px;
+    position: fixed;
+}
+</style>
+
+<script>
+
+$(document).ready(function(){
+  $("#new_message").submit(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/messages",
+       data:$('#new_message').serialize(),
+        beforeSend: function() {
+              $("#loading-image").show();
+           },
+           success: function(msg) {
+              $("#loading-image").hide();
+           }
+     });
+      return false;
+   });  
+ });
+</script>

@@ -23,12 +23,25 @@ class MessagesController < ApplicationController
   end
 
   def create
+
     @message = @current_user.send_messages.new(params[:message])
-  
+      
     if @message.save
       # redirect_to "/"+params[:username]+"/messages/new"
        User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
-       redirect_to messages_path
+       # redirect_to messages_path
+
+       @all_messages = []
+       sender_message =current_user.messages
+       
+       @user=User.find(params[:message][:receiver_id].to_i)
+       receiver_messages = @user.messages
+       @all_messages << sender_message
+       @all_messages << receiver_messages
+       @all_messages =  @all_messages.flatten.sort_by(&:created_at)
+      respond_to do |format|
+        format.js # actually means: if the client ask for js -> return file.js
+      end
     else
       @messages = @current_user.send_messages.order("created_at desc")
       @attachment = @message.attachments.new
@@ -74,5 +87,8 @@ class MessagesController < ApplicationController
     @message = current_user.messages.find(params[:id])
     @message.undelete
     redirect_to trash_messages_path()
+  end
+
+  def message_count_update
   end
 end

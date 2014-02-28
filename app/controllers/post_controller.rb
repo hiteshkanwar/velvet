@@ -1,5 +1,6 @@
 class PostController < ApplicationController
-	
+include ApplicationHelper
+include EmojiHelper
 	# ---------------
  	# Validations
 	# -------------
@@ -97,4 +98,8 @@ class PostController < ApplicationController
 		redirect_to request.referer
 	end
 
+	def funmoji_post
+    	@content = params[:post_data]
+        @content = @content.gsub(" :","<img width='30' src='/assets/emoji/").gsub(":",".png'/>")
+	end
 end
