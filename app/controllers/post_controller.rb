@@ -21,8 +21,8 @@ include EmojiHelper
 		else
 			flash[:notice] = "Write something..."
 		end
-
-	  @user.assigned_posts = @current_user.posts
+	  # @user.assigned_posts = @current_user.followings_posts(params[:page]).uniq
+	  @user.assigned_posts = current_user.posts
 	  respond_to do |format|
         format.js # actually means: if the client ask for js -> return file.js
       end
