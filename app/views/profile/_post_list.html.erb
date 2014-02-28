@@ -5,7 +5,7 @@
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
                 <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 616px;margin-bottom: -33px;margin-top:-5px;">
             <% end %>
-        <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a></div>
+        <div class="box-left left"><a href="/<%= post.user.username %>"><%#= image_tag post.user.user_avatar, :width => "116" %></a></div>
         <div class="box-right right">
         <h2><a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
 
