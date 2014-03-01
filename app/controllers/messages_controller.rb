@@ -92,7 +92,7 @@ class MessagesController < ApplicationController
   def message_count_update
   end
 
-   def user_account_delete
+   def account_delete_user
     @user = User.find(current_user.id)
     session[:email] = nil
     session[:username] = nil
