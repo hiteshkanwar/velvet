@@ -11,7 +11,7 @@
             </div>
             </br>
             
-            <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png"></a> 
+            <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png"  style="width: 42px; margin-right: -15px;margin-bottom: -47px;"></a> 
             <div id="image" style="">  
               <img src="../assets/camera.png" alt="camera" height="42" width="42" style="margin-left: 205px; margin-top: -76px;"> 
             </div>
@@ -52,8 +52,10 @@ $( document ).ready(function() {
   $('#tip').val("")
   $("#tip").focusin(function(){
     $("#comment").slideDown(800);
+      if ( $('#tip').val()==""){
       $("#tip_submit").removeClass("button");
       $("#tip_submit").addClass("disable_button");
+    }
     $("#tip").keyup(function(){
       if ( $('#tip').val()==""){
         $("#tip_submit").attr("disabled", true);
