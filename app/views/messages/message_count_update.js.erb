@@ -1,4 +1,4 @@
 <% if @current_user.messages.not_trash.where(seen: false).size == 0 %>
 <% else %>
-	$(".notify_update").html("<div class=\"noti_bubble\"><%= @current_user.messages.not_trash.where(seen: false).size %></div>")
+	$(".notify_update").html("<div class=\"noti_bubble\" style=\"background-color:blue !important;\"><%= @current_user.messages.not_trash.where(seen: false).size %></div>")
 <% end %>
