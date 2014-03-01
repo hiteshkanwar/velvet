@@ -19,19 +19,19 @@ class User < ActiveRecord::Base
   process_in_background :header
   process_in_background :background
 
-  has_many :posts, order:'created_at DESC'
-  has_many :comments
-  has_many :emojis
-  has_many :likes
-  has_many :admires
-  has_many :activities
-  has_many :reposts, order:'created_at DESC'
-  has_many :followers, :class_name => 'Followings', :foreign_key => 'user_id'
-  has_many :following, :class_name => 'Followings', :foreign_key => 'follower_id'
-  has_many :messages, :class_name => 'Message', :foreign_key => 'receiver_id'
-  has_many :send_messages, :class_name => 'Message', :foreign_key => 'sender_id'
-  has_many :lists
-  has_many :advertisers
+  has_many :posts, :dependent => :destroy, order:'created_at DESC'
+  has_many :comments, :dependent => :destroy
+  has_many :emojis, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
+  has_many :admires, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
+  has_many :reposts, :dependent => :destroy, order:'created_at DESC'
+  has_many :followers, :dependent => :destroy, :class_name => 'Followings', :foreign_key => 'user_id'
+  has_many :following, :dependent => :destroy, :class_name => 'Followings', :foreign_key => 'follower_id'
+  has_many :messages, :dependent => :destroy, :class_name => 'Message', :foreign_key => 'receiver_id'
+  has_many :send_messages, :dependent => :destroy, :class_name => 'Message', :foreign_key => 'sender_id'
+  has_many :lists, :dependent => :destroy
+  has_many :advertisers, :dependent => :destroy
   
   
   

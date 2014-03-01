@@ -91,4 +91,14 @@ class MessagesController < ApplicationController
 
   def message_count_update
   end
+
+   def user_account_delete
+    @user = User.find(current_user.id)
+    session[:email] = nil
+    session[:username] = nil
+    @current_user = nil
+    @user.destroy
+    redirect_to :root
+  end
+  
 end
