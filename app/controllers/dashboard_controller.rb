@@ -159,10 +159,10 @@ class DashboardController < ApplicationController
 			params[:seed] == '/' ? status[1] = 1 : nil
 			logger.debug("New posts available")
 		end
-
+      
 		# Fetch new posts
 		if params[:fetch]
-
+           
 			# Get all posts
 			@posts = @current_user.followings_posts
 			@user = @current_user
