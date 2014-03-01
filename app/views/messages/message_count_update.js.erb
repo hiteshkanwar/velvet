@@ -1,7 +1,4 @@
-<% if @current_user.messages.not_trash.where(seen: false).size == "0" %>
-<% elsif @current_user.messages.not_trash.where(seen: false).size == "1" %>
-$(".notify_update").html("<div class=\"noti_bubble\"><%= @current_user.messages.not_trash.where(seen: false).size %></div>")
-<% elsif @current_user.messages.not_trash.where(seen: false).size != "0" %>
-$(".noti_bubble").html("<%= @current_user.messages.not_trash.where(seen: false).size %>")
-$(".notify_update").remove()
+<% if @current_user.messages.not_trash.where(seen: false).size == 0 %>
+<% else %>
+	$(".notify_update").html("<div class=\"noti_bubble\"><%= @current_user.messages.not_trash.where(seen: false).size %></div>")
 <% end %>

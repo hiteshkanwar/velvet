@@ -6,7 +6,7 @@ jQuery(document).ready(function(){
       url:'/messages/message_count_update'
     });
   }
-  setInterval(callAjax,1000);
+  setInterval(callAjax,5000);
 });
 
 //ADDING PLACEHOLDER FOR MAILCHUMP
