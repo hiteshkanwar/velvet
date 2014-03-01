@@ -4,15 +4,19 @@
     <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip"></textarea>
     <br/>
     <div id="images_preview"></div>
-     <div style="margin-top: 10px;margin-left: 290px;">
+     <div id="comment" style="margin-top: 10px;margin-left: 290px; display:none; ">
         <span>
             <div style="margin-top: 10px;margin-left: 243px;font-size: 13px !important;color: #333;font-weight: 600;">
             <span id="charNum"></span> 
             </div>
             </br>
+            
             <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png"></a> 
-            <input type="file" style="display: none;" name="post[avatar]" value="Change Photo">
-            <input style="margin-left: 287px;height: 30px;" type="submit" value="Tip" class="button" id="tip_submit">
+            <div id="image" style="">  
+              <img src="../assets/camera.png" alt="camera" height="42" width="42" style="margin-left: 205px; margin-top: -76px;"> 
+            </div>
+            <input type="file" style="opacity: 0.0;" name="post[avatar]" value="Change Photo">
+            <input style="margin-left: 15px;height: 30px;" type="submit" value="Tip" class="button" id="tip_submit">
             </br> 
             
             
@@ -41,7 +45,54 @@
 <div id="update_create_tip1">
 <%= render "profile/post_list"%>
 </div>
+
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+  $('#tip').val("")
+  $("#tip").focusin(function(){
+    $("#comment").slideDown(800);
+      $("#tip_submit").removeClass("button");
+      $("#tip_submit").addClass("disable_button");
+    $("#tip").keyup(function(){
+      if ( $('#tip').val()==""){
+        $("#tip_submit").attr("disabled", true);
+        $("#tip_submit").removeClass("button");
+        $("#tip_submit").addClass("disable_button");
+      }
+      else{
+        $("#tip_submit").removeClass("disable_button");
+        $("#tip_submit").addClass("button");
+        $("#tip_submit").attr("disabled", false); 
+      }   
+    });
+  });
+  $("#tip").focusout(function(){
+      if ( $('#tip').val()=="")
+      {
+        $("#comment").slideUp(800);
+      }
+  });
+});
+</script>
+
 <style>
+
+.disable_button {
+    
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 auto;
+    padding: 5px 25px 5px 10px;
+    text-transform: capitalize;
+}
+
+
+
 #new_tip a {
     float: right;
     margin: -6% 170%;

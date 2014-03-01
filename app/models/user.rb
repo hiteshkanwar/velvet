@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
 
   def user_avatar
-    self.avatar.url.nil? ? "/assets/main/main-large-img.png" : self.avatar.url(:thumb)
+    self.avatar.url.nil? ? "/assets/main/main-large-img.png" : self.avatar.url
   end
 
   def user_header(params = :large)
@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
         "main/admire-banner.png"
       end
     else 
-      self.header.url(params)
+      self.header.url
     end
   end
 
