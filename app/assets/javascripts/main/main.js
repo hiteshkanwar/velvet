@@ -271,3 +271,16 @@ $(document).ready(function(){
       return false;
    });  
  });
+
+
+$(document).ready(function(){
+  $("#reply").submit(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/post/comment",
+       data:$('#reply').serialize()
+     });
+      return false;
+   });  
+ });
