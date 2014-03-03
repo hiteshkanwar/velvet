@@ -88,13 +88,13 @@ class ProfileController < ApplicationController
 			
 		if	!@current_user.update_attributes(params[:user])
 			flash[:notice] = @current_user.errors.full_messages.to_sentence
+			redirect_to request.referrer
 		else
 			session[:email] = @current_user.email
 			session[:username] = @current_user.username
 			flash[:notice] = "Setting's updated"
+			redirect_to "/#{@current_user.username}/edit"
 		end
-
-		redirect_to "/#{@current_user.username}/edit"
 
 	end
 

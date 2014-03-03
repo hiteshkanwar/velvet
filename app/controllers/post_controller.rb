@@ -71,7 +71,13 @@ include EmojiHelper
 			post.comments.create(body: "@#{post.user.username} " +params[:body], user: @current_user)
 			flash[:notice] = "Posted reply..."
 		end
-		redirect_to request.referer
+		@posts = @current_user.followings_posts
+		@user = @current_user
+		@user.assigned_posts = @posts.uniq
+		logger.debug @user.all_posts(1)
+	    respond_to do |format|
+        	format.js # actually means: if the client ask for js -> return file.js
+        end
 	end
 
 	def remove
