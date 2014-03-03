@@ -284,3 +284,25 @@ $(document).ready(function(){
       return false;
    });  
  });
+
+$(document).ready(function(){
+  $(".admire_false").click(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/post/admire/",
+       data: { id: $(this).data('post-id'), post_id: this.id }
+     });
+      return false;
+   }); 
+$(".admire_true").click(function() {
+    alert(1);
+    $.ajax({
+      type: "POST",
+       url: "/post/unadmire/",
+       data: { id: $(this).data('post-id'), post_id: this.id }
+     });
+      return false;
+   });  
+
+ });

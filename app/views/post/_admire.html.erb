@@ -1,0 +1,33 @@
+<div id ="unadmire_change">
+	
+<% if !post.admires.where(user_id: @current_user.id).empty? %>
+            <a href="#" class="admire admire_true " id ="<%= post.id %>" >unadmire</a>
+            <% else %>
+        
+             <a href="#" class="admire admire_false " id="<%= post.id %>" >admire</a>
+ <% end %>
+</div>
+<script>
+$(document).ready(function(){
+  $(".admire_false").click(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/post/admire/",
+       data: { id: $(this).data('post-id'), post_id: this.id }
+     });
+      return false;
+   }); 
+$(".admire_true").click(function() {
+   
+    $.ajax({
+      type: "POST",
+       url: "/post/unadmire/",
+       data: { id: $(this).data('post-id'), post_id: this.id }
+     });
+      return false;
+   });  
+
+ });
+
+</script>

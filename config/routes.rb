@@ -45,6 +45,9 @@ Velvet::Application.routes.draw do
   #--
   # Feed notification
   #--
+  post "post/admire"
+  post "post/unadmire"
+
   
   match '/notification', :to => 'dashboard#notification'
 

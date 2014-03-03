@@ -29,23 +29,26 @@ include EmojiHelper
 	end
 
 	def admire
-		post = Post.find(params[:id])
+		
+		post = Post.find(params[:post_id])
+		@post = Post.find(params[:post_id])
 		if post
 			@current_user.admires.create(post_id: post.id)
 			post.user.activities.create(person: @current_user.id, description: "Admired your Post")
 			flash[:notice] = "Admired"
 		end
-		redirect_to request.referer
+		
 		
 	end
 
 	def unadmire
-		post = Post.find(params[:id])
+		post = Post.find(params[:post_id])
+		@post = Post.find(params[:post_id])
 		if post && admire = @current_user.admires.find_by_post_id(post.id)
 			@current_user.admires.delete(admire)
 			flash[:notice] = "Unadmired post"
 		end
-		redirect_to request.referer
+		# redirect_to request.referer
 	end
 
 

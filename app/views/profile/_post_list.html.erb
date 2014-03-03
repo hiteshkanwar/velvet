@@ -30,13 +30,17 @@
         <div class="box-bottom">
             <div class="bottom-left left"><a href="/post/repost/<%= post.id %>" class="re-tip">retip</a>
             
-            <!-- admire -->
+            <!-- admire --> 
+            <div class="admire_replace" >
+                
+            
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
-            <a href="/post/unadmire/<%= post.id %>" class="admire">unadmire</a>
+            <a href="#" class="admire admire_true dfdfdf" id ="<%= post.id %>">unadmire</a>
             <% else %>
-             <a href="/post/admire/<%= post.id %>" class="admire">admire</a>
-            <% end %>
 
+             <a href="#" class="admire admire_false" id="<%= post.id %>">admire</a>
+            <% end %>
+            </div>
             <!-- delete -->
             <% if post.user == @current_user %>
                 <a href="/post/destroy/<%= post.id %>" class="more delete">delete</a>
