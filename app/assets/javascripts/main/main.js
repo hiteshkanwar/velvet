@@ -296,7 +296,7 @@ $(document).ready(function(){
       return false;
    }); 
 $(".admire_true").click(function() {
-    alert(1);
+    
     $.ajax({
       type: "POST",
        url: "/post/unadmire/",
