@@ -35,10 +35,10 @@
                 
             
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
-            <a href="#" class="admire admire_true dfdfdf" id ="<%= post.id %>">unadmire</a>
+            <a href="#" class="admire admire_true dfdfdf" id ="<%= post.id %>" data-remote="true">unadmire</a>
             <% else %>
 
-             <a href="#" class="admire admire_false" id="<%= post.id %>">admire</a>
+             <a href="#" class="admire admire_false" id="<%= post.id %>" data-remote="true">admire</a>
             <% end %>
             </div>
             <!-- delete -->
@@ -81,7 +81,7 @@
     <div class="clear"></div>
     <div class="reply-tip">
        
-        <form action="/post/comment" name="reply" method="post" id="reply">
+        <form action="/post/comment" name="reply" method="post" id="reply" data-remote="true">
             <%= image_tag @current_user.user_avatar, :width => "47" %>
             <input type="text" name="body" id="tip_comment_reply" value="Write a Reply" onfocus="if (this.value == 'Write a Reply') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
             <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />

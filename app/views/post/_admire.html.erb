@@ -1,10 +1,10 @@
 <div id ="unadmire_change">
 	
 <% if !post.admires.where(user_id: @current_user.id).empty? %>
-            <a href="#" class="admire admire_true " id ="<%= post.id %>" >unadmire</a>
+            <a href="#" class="admire admire_true " id ="<%= post.id %>" data-remote="true" >unadmire</a>
             <% else %>
         
-             <a href="#" class="admire admire_false " id="<%= post.id %>" >admire</a>
+             <a href="#" class="admire admire_false " id="<%= post.id %>" data-remote="true" >admire</a>
  <% end %>
 </div>
 <script>
