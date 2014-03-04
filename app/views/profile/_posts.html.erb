@@ -4,18 +4,18 @@
     <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip"></textarea>
     <br/>
     <div id="images_preview"></div>
-     <div id="comment" style="margin-top: 10px;margin-left: 290px; display:none; ">
+     <div id="comment" style=" display:none; ">
         <span>
-            <div style="margin-top: 10px;margin-left: 243px;font-size: 13px !important;color: #333;font-weight: 600;">
+            <div style="margin-top: 10px;margin-left: 500px;font-size: 13px !important;color: #333;font-weight: 600;">
             <span id="charNum"></span> 
             </div>
             </br>
             
-            <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png"  style="width: 42px; margin-right: -15px;margin-bottom: -47px;"></a> 
+            <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png" id="fumugi" style="width: 42px;"></a> 
             <div id="image" style="">  
-              <img src="../assets/camera.png" alt="camera" height="42" width="42" style="margin-left: 205px; margin-top: -76px;"> 
+              <img src="../assets/camera.png" alt="camera" height="42" width="42" style="\"> 
             </div>
-            <input type="file" style="opacity: 0.0;" name="post[avatar]" value="Change Photo">
+            <input type="file" id="file" style="opacity: 0.0;" name="post[avatar]" value="Change Photo">
             <input style="margin-left: 15px;height: 30px;" type="submit" value="Tip" class="button" id="tip_submit">
             </br> 
             
@@ -48,6 +48,7 @@
 
 <script>
 $( document ).ready(function() {
+  var flag=false
   // Handler for .ready() called.
   $("#tip").focusin(function(){
     $("#comment").slideDown(800);
@@ -68,6 +69,12 @@ $( document ).ready(function() {
       }   
     });
   });
+
+// $('#fumugi').click(function()
+// {
+//   flag=true
+// });
+  
   $("#tip").focusout(function(){
       if ( $('#tip').val()=="")
       {
@@ -77,25 +84,3 @@ $( document ).ready(function() {
 });
 </script>
 
-<style>
-
-.disable_button {
-    
-    border: medium none;
-    border-radius: 3px 3px 3px 3px;
-    color: #FFFFFF;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 0 auto;
-    padding: 5px 25px 5px 10px;
-    text-transform: capitalize;
-}
-
-
-
-#new_tip a {
-    float: right;
-    margin: -6% 170%;
-}
-</style>

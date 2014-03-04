@@ -1,23 +1,16 @@
-
-<%  @current_user.all_posts(1).uniq.each do |post| %>
-<% if !post.comments.empty? %>
-        <div class="box box-comment border-radius">
+<div class="clear"></div>
+<% post.comments.each do |comment| %>
+<div class="box-comment-hold">
+    <div class="box-left left"><%= image_tag comment.user.user_avatar, :width => "47" %></div>
+    <div class="box-right right">
+    <h2><%= comment.user.name %><span><a href="/<%= post.user.username %>"> @<%= comment.user.username %></a></span></h2>
+    <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
+    <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
+   
+    <!-- timestamp -->
+    <div class="bottom-right"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <!-- <a href="#">Details</a> --></div>
+</div>
+    <div class="clear"></div>
+</div><!-- .box-comment-hold -->
+<% end %> 
             
-            <% post.comments.each do |comment| %>
-            <div class="box-comment-hold">
-                <div class="box-left left"><%= image_tag comment.user.user_avatar, :width => "47" %></div>
-                <div class="box-right right">
-                <h2><%= comment.user.name %><span><a href="/<%= post.user.username %>"> @<%= comment.user.username %></a></span></h2>
-                <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
-                <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
-               
-                <!-- timestamp -->
-                <div class="bottom-right"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <!-- <a href="#">Details</a> --></div>
-            </div>
-                <div class="clear"></div>
-            </div><!-- .box-comment-hold -->
-            <% end %> 
-            
-        </div><!-- .box-comment -->
-    <% end %>
-    <%end%>

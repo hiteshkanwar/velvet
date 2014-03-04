@@ -28,10 +28,10 @@
 
         <div class="clear"></div>
         <div class="box-bottom">
-            <div class="bottom-left left"><a href="/post/repost/<%= post.id %>" class="re-tip">retip</a>
+            <div class="bottom-left left"><a href="/post/repost/<%= post.id %>" style="float: left;"class="re-tip" data-remote="true">retip</a>
             
             <!-- admire --> 
-            <div class="admire_replace" >
+            <div class="admire_replace" style="float: left;">
                 
             
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
@@ -47,7 +47,7 @@
             <% end %>
             </div>
             <!-- timestamp --> 
-            <div class="bottom-right right">
+            <div class="bottom-right right" id="retip_<%=post.id%>">
                 <% if post.repost_count > 0%>
                    <a href="/search?retips=<%= post.id %>"><%= post.repost_count %> Retips</a>| 
                 <% end %>
@@ -56,38 +56,19 @@
             <div class="clear"></div>
         </div>
     </div><!-- .box -->
-<div id="post_comment_display">
-    <% if !post.comments.empty? %>
-        <div class="box box-comment border-radius">
-            
-            <% post.comments.each do |comment| %>
-            <div class="box-comment-hold">
-                <div class="box-left left"><%= image_tag comment.user.user_avatar, :width => "47" %></div>
-                <div class="box-right right">
-                <h2><%= comment.user.name %><span><a href="/<%= post.user.username %>"> @<%= comment.user.username %></a></span></h2>
-                <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
-                <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
-               
-                <!-- timestamp -->
-                <div class="bottom-right"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <!-- <a href="#">Details</a> --></div>
-            </div>
-                <div class="clear"></div>
-            </div><!-- .box-comment-hold -->
-            <% end %> 
-            
-        </div><!-- .box-comment -->
-    <% end %>
- </div>   
+
+
+  <div id="post_<%=post.id%>" >
     <div class="clear"></div>
+
     <div class="reply-tip">
-       
-        <form action="/post/comment" name="reply" method="post" id="reply" data-remote="true">
-            <%= image_tag @current_user.user_avatar, :width => "47" %>
-            <input type="text" name="body" id="tip_comment_reply" value="Write a Reply" onfocus="if (this.value == 'Write a Reply') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
-            <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
-            <input name="id" type="hidden" value= "<%= post.id %>" />
-            <input  style="width: 12%; float: right; margin-top: 9px; margin-right: 7px;" type="submit" value="Reply" class="button" >
-        </form>
+      <%= render :partial => "profile/tip_reply", :locals => { :post => post } %>
     </div>
-</div>
+    </div>
+
+    </div>
+  <%= render :partial => "profile/form", :locals => { :post => post } %> 
+
 <% end %>
+
+

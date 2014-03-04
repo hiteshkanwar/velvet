@@ -64,20 +64,24 @@ include EmojiHelper
 			rescue => error
 			end
 		end
+		@post=post
+		respond_to do |format|
+				format.js	
+		end
 		#redirect_to "/#{@current_user.username}"
-		redirect_to request.referer
+		#redirect_to request.referer
 	end
 
 	def comment
+		
 		post = Post.find(params[:id])
 		if post && params[:body]
 			post.comments.create(body: "@#{post.user.username} " +params[:body], user: @current_user)
 			flash[:notice] = "Posted reply..."
 		end
-		@posts = @current_user.followings_posts
-		@user = @current_user
-		@user.assigned_posts = @posts.uniq
-		logger.debug @user.all_posts(1)
+		@post=post
+		@comments = post.comments
+		
 	    respond_to do |format|
         	format.js # actually means: if the client ask for js -> return file.js
         end
