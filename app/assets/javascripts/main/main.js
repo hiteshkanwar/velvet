@@ -1,13 +1,13 @@
 
-// jQuery(document).ready(function(){
-//   var callAjax = function(){
-//     jQuery.ajax({
-//       method:'post',
-//       url:'/messages/message_count_update'
-//     });
-//   }
-//   setInterval(callAjax,5000);
-// });
+jQuery(document).ready(function(){
+  var callAjax = function(){
+    jQuery.ajax({
+      method:'post',
+      url:'/messages/message_count_update'
+    });
+  }
+  setInterval(callAjax,5000);
+});
 
 //ADDING PLACEHOLDER FOR MAILCHUMP
 
