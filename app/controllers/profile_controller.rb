@@ -70,7 +70,7 @@ class ProfileController < ApplicationController
 
 	# People following user
 	def acquaintances
-		@users_to_display = @user.is_followers
+		@users_to_display = @user.is_followers.uniq
 	end
 
 	def edit
