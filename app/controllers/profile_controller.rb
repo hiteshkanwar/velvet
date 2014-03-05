@@ -65,7 +65,7 @@ class ProfileController < ApplicationController
 
 	# People user is following
 	def acquainting
-		@users_to_display = @user.is_following
+		@users_to_display = @user.is_following.uniq
 	end
 
 	# People following user
