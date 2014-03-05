@@ -32,7 +32,8 @@ Velvet::Application.routes.draw do
   match "/post/create", :to => 'post#create'
   match "/post/comment", :to => 'post#comment'
   match "/post/funmoji_post", :to => 'post#funmoji_post'
-
+  match "/post/admire" ,:to =>'post#admire'
+  match "/post/unadmire" ,:to =>'post#unadmire'
   # Search
   # match "/dashboard/search", :to => 'dashboard#search'
   ### match ':username/dashboard/:action', :controller => 'dashboard'
@@ -45,8 +46,8 @@ Velvet::Application.routes.draw do
   #--
   # Feed notification
   #--
-  post "post/admire"
-  post "post/unadmire"
+  # post "post/admire"
+  # post "post/unadmire"
 
   
   match '/notification', :to => 'dashboard#notification'
