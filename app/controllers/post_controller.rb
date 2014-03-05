@@ -11,10 +11,13 @@ include EmojiHelper
 	def create
      @user = @current_user
 	 
-     if params[:post][:body] || params[:post][:avatar]
+    if params["file-0"] || params[:body]
 			begin
-				@current_user.posts.create(params[:post])
-				flash[:notice] = "Posted " + "#{params[:post][:body][0..17]}..."
+				@tip_create=@current_user.posts.new
+				@tip_create.avatar= params["file-0"]
+				@tip_create.body= params[:body]
+				@tip_create.save
+				# flash[:notice] = "Posted " + "#{params[:post][:body][0..17]}..."
 			rescue => error
 				flash[:notice] = error.full_messages.to_sentence
 			end

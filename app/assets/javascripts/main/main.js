@@ -261,19 +261,6 @@ $(document).on("click", ".re-tip", function(event){
 
 
 $(document).ready(function(){
-  $("#new_tip").submit(function() {
-    
-    $.ajax({
-      type: "POST",
-       url: "/post/create",
-       data:$('#new_tip').serialize()
-     });
-      return false;
-   });  
- });
-
-
-$(document).ready(function(){
   $("#reply").submit(function() {
     
     $.ajax({
@@ -306,3 +293,29 @@ $(".admire_true").click(function() {
    });  
 
  });
+
+$(document).ready(function(){
+  $("#uploadbutton").click(function () { 
+    var body_data = $("#tip").val()
+      var data = new FormData();
+      jQuery.each($('#file')[0].files, function(i, file) {
+      data.append('file-'+i, file);
+      data.append('body',body_data)
+        });
+    $.ajax({
+        type: "POST",
+        url: "/post/create",
+        data:  data ,
+        cache: false,
+        contentType: false,
+        processData: false,
+        enctype: 'multipart/form-data'
+       
+        
+    });
+    return false;
+  });
+});
+
+
+
