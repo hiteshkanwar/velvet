@@ -37,7 +37,7 @@
                 <div class="box list border-radius">
                     <h2><a href="lists/members?list_id=<%= list.id %>"><%= list.name %></a></h2>
                     <p><%= list.description %></p>
-                    <span><a href="lists/members?list_id=<%= list.id %>"><%= list.members.size %> member(s)</a></span>
+                    <span><a href="<%=root_url%><%= @current_user.username %>/lists/members?list_id=<%= list.id %>"><%= list.members.size %> member(s)</a></span>
                     <% if params[:user_id] %>
                     <p>
                         <form action="/<%= @current_user.username %>/add_members" method="get">
