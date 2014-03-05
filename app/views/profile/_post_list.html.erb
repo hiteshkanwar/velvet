@@ -45,10 +45,7 @@
             </div>
             <!-- timestamp --> 
             <div class="bottom-right right" id="retip_<%=post.id%>">
-                <% if post.repost_count > 0%>
-                   <a href="/search?retips=<%= post.id %>"><%= post.repost_count %> Retips</a>| 
-                <% end %>
-                <%= time_ago_in_words(post.created_at).include?("day") || time_ago_in_words(post.created_at).include?("year") || time_ago_in_words(post.created_at).include?("month")? to_date(post.created_at) : time_ago_in_words(post.created_at) %> <!-- <a href="#">Details</a> -->
+              <%= render :partial=>'post/retip',:locals=>{:post=> post}%>
             </div>
             <div class="clear"></div>
         </div>
