@@ -66,17 +66,14 @@ include EmojiHelper
 		post = Post.find(params[:id])
 		if post
 			begin
-
 				@current_user.reposts.create(post: post)
 				post.user.activities.create(person: @current_user.id, description: "Retiped your Post")
-				repost_count = post.repost_count + 1
-				post.update_attributes(repost_count: repost_count)
-				# post.save
+				post.repost_count = post.repost_count + 1
+				post.save(:validate => false)
 				flash[:notice] = "Post as been retipped to your profile"
 			rescue => error
 			end
 		end
-
 		@post=post
 		respond_to do |format|
 				format.js	
