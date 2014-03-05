@@ -31,9 +31,13 @@
             <div class="bottom-left left retip_class"><a href="/post/repost/<%= post.id %>" style="float: left;"class="re-tip" data-remote="true" >retip</a>
             
             <!-- admire --> 
+            
             <div id="admire_<%= post.id %>" style="float: left;">
                 <%= render :partial=>'post/admire',:locals => {:post => post} %>
             </div>
+
+
+
             <!-- delete -->
             <% if post.user == @current_user %>
                 <a href="/post/destroy/<%= post.id %>" class="more delete">delete</a>

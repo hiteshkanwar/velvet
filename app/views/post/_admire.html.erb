@@ -1,31 +1,7 @@
 
 	
 <% if !post.admires.where(user_id: @current_user.id).empty? %>
-  <a href="#" class="admire admire_true " id ="<%= post.id %>" data-remote="true" >unadmire</a>
+  <a href="<%=post_unadmire_path(:post_id=>post.id)%>" class="admire admire_true " id ="<%= post.id %>" data-remote="true" >unadmire</a>
 <% else %>
-  <a href="#" class="admire unadmire_true " id="<%= post.id %>" data-remote="true" >admire</a>
+  <a href="<%=post_admire_path(:post_id=>post.id)%>" class="admire unadmire_true " id="<%= post.id %>" data-remote="true" >admire</a>
 <% end %>
-<script>
-$(document).ready(function(){
-  $(".unadmire_true").click(function() {
-    
-    $.ajax({
-      type: "POST",
-       url: "/post/admire/",
-       data: { id: $(this).data('post-id'), post_id: this.id }
-     });
-      return false;
-   }); 
-$(".admire_true").click(function() {
-    
-    $.ajax({
-      type: "POST",
-       url: "/post/unadmire/",
-       data: { id: $(this).data('post-id'), post_id: this.id }
-     });
-      return false;
-   });  
-
- });
-
-</script>

@@ -41,16 +41,22 @@ include EmojiHelper
 			  flash[:notice] = "Admired"
 			 end
 		end
-		
+		respond_to do |format|
+			format.js	
+		end
 		
 	end
 
 	def unadmire
+		
 		post = Post.find(params[:post_id])
 		@post = Post.find(params[:post_id])
 		if post && admire = @current_user.admires.find_by_post_id(post.id)
 			@current_user.admires.delete(admire)
 			flash[:notice] = "Unadmired post"
+		end
+		respond_to do |format|
+			format.js	
 		end
 		# redirect_to request.referer
 	end

@@ -272,27 +272,6 @@ $(document).ready(function(){
    });  
  });
 
-$(document).ready(function(){
-  $(".admire_false").click(function() {
-    
-    $.ajax({
-      type: "POST",
-       url: "/post/admire/",
-       data: { id: $(this).data('post-id'), post_id: this.id }
-     });
-      return false;
-   }); 
-$(".admire_true").click(function() {
-    
-    $.ajax({
-      type: "POST",
-       url: "/post/unadmire/",
-       data: { id: $(this).data('post-id'), post_id: this.id }
-     });
-      return false;
-   });  
-
- });
 
 $(document).ready(function(){
   $("#uploadbutton").click(function () { 
