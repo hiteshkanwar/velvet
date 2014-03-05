@@ -92,12 +92,20 @@ class MessagesController < ApplicationController
   def message_count_update
   end
 
-   def account_delete_user
+  def account_delete_user
+
     @user = User.find(current_user.id)
+    @activity_status=Activity.find_all_by_person(@user.id)
+    if !@activity_status.blank?
+      @activity_status.each do |status|
+        status.delete
+      end
+    end
     session[:email] = nil
     session[:username] = nil
     @current_user = nil
     @user.destroy
+
     redirect_to :root
   end
   
