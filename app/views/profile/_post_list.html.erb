@@ -31,11 +31,11 @@
             <div class="bottom-left left retip_class"><a href="/post/repost/<%= post.id %>" style="float: left;"class="re-tip" data-remote="true">retip</a>
             
             <!-- admire --> 
-            <div class="admire_replace" style="float: left;">
+            <div id="admire_<%= post.id %>" style="float: left;">
                 
             
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
-            <a href="#" class="admire admire_true dfdfdf" id ="<%= post.id %>" data-remote="true">unadmire</a>
+            <a href="#" class="admire admire_true" id ="<%= post.id %>" data-remote="true">unadmire</a>
             <% else %>
 
              <a href="#" class="admire admire_false" id="<%= post.id %>" data-remote="true">admire</a>

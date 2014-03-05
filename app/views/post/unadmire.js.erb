@@ -1,2 +1,1 @@
-
-$(".admire_replace").html("<%= escape_javascript(  render :partial => 'admire',  :locals => {:post => @post} ) %> ")
+$("#admire_<%= @post.id %>").html("<%= escape_javascript(  render :partial => 'admire',  :locals => {:post => @post} ) %> ")

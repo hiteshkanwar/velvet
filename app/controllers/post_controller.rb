@@ -32,13 +32,14 @@ include EmojiHelper
 	end
 
 	def admire
-		
 		post = Post.find(params[:post_id])
 		@post = Post.find(params[:post_id])
-		if post
-			@current_user.admires.create(post_id: post.id)
-			post.user.activities.create(person: @current_user.id, description: "Admired your Post")
-			flash[:notice] = "Admired"
+		if @post
+			@current_user.admires.create(post_id: @post.id)
+			if !@post.user.nil? && !@post.user.blank?
+			  @post.user.activities.create(person: @current_user.id, description: "Admired your Post")
+			  flash[:notice] = "Admired"
+			 end
 		end
 		
 		
