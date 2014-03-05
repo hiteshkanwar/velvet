@@ -1,1 +1,1 @@
-$('#retip_<%=@post.id%>').html("<%= escape_javascript render(:partial => 'post/retip', :locals => { :post => @post }) %>");
+$('#retip_<%=@post.id%>').html("<%= escape_javascript render(:partial => 'post/retip', :locals => { :@post => @post }) %>");
