@@ -16,7 +16,7 @@ include EmojiHelper
 				@tip_create=@current_user.posts.new
 				@tip_create.avatar= params["file-0"]
 				@tip_create.body= params[:body]
-				@tip_create.save(:validate=>false)
+				@tip_create.save
 				# flash[:notice] = "Posted " + "#{params[:post][:body][0..17]}..."
 			rescue => error
 				flash[:notice] = error.full_messages.to_sentence
