@@ -38,7 +38,10 @@
                 <a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
               </div>
               <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
+                <% if post.avatar.url %>
 
+                <p><a id="example1" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url, :width => "116" %></a></p>
+                <% end %>
               <br/><br/><br/><br/>
               <br/>
               <div class="modal-footer" style="float :right">
