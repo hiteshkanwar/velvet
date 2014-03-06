@@ -1,2 +1,2 @@
 
-<span><a href="<%=root_url%><%= @current_user.username %>/lists/members?list_id=<%= list.id %>"><%= list.subscribe_and_invitations.where(:subscribe=>1).count %> member(s)</a></span>
+<span><a href="<%=root_url%><%= @current_user.username %>/lists/members?list_id=<%= list.id %>"><%= list.subscribe_and_invitations.where(:subscribe=>true).count %> member(s)</a></span>
