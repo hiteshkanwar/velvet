@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
 	  	when self.description.downcase.include?("admire") 		&& self.user.noti_admire
 	  		# UserMailer.notification(self.user, self).deliver
 	  	when self.description.downcase.include?("message")  	&& self.user.noti_message
-	  		UserMailer.notification(self.user, self).deliver
+	  		#UserMailer.notification(self.user, self).deliver
 	  	when self.description.downcase.include?("retip") 		&& self.user.noti_retips
 	  		UserMailer.notification(self.user, self).deliver
 	  	when self.description.downcase.include?("acquainted") 	&& self.user.noti_follow
