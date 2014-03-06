@@ -42,7 +42,7 @@ class DashboardController < ApplicationController
     def invitation	
 		
 		@invite=SubscribeAndInvitation.create(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>0)
-		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
+		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}.uniq
 		@list=List.find(params[:list_id])
 		respond_to do |format|
 			 format.js
