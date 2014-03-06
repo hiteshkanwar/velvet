@@ -203,7 +203,8 @@ class ProfileController < ApplicationController
 
 	# User lists
 	def lists
-		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
+		
+		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}.uniq
 
 		if params[:id] && params[:id] == 'create'
 			render 'list_create'
