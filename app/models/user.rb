@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
   has_many :send_messages, :dependent => :destroy, :class_name => 'Message', :foreign_key => 'sender_id'
   has_many :lists, :dependent => :destroy
   has_many :advertisers, :dependent => :destroy
-  
+  has_many :subscribe_and_invitations, :dependent => :destroy
+
   
   
   validates_uniqueness_of :email, :username

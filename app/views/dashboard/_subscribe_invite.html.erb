@@ -1,0 +1,22 @@
+<!-- @list.subscribe_and_invitations.present? -->
+<!-- SubscribeAndInvitation.find_by_user_id_and_list_id(@user.id,@list.id) -->
+
+<table style="padding: 20px;">       
+	<% @followed.each do |user| %>
+	<tr>   
+		 
+		<td><%= image_tag user.user_avatar, :width => "40", :style => "margin-right: 5px;", :align => "left" %></td>  
+		<td style="padding-left: 20px;"> <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </p></td>
+		<% if user.subscribe_and_invitations.present? %>
+		
+			<%if !SubscribeAndInvitation.find_by_user_id_and_list_id(user.id,@list.id).subscribe%>	
+			<td style="padding-left: 400px; "> <a data-remote="true" href="#" class="disable_button" style="background: #777777">Invited</a></td>
+			<%else%>
+			<td style="padding-left: 400px;"> <a data-remote="true" href="<%=dashboard_invitation_path(:user_id=>user.id,:list_id=>@list.id)%>" class="button">Invite</a></td>
+			<%end%>
+		<%else%>
+			<td style="padding-left: 400px;"> <a data-remote="true" href="<%=dashboard_invitation_path(:user_id=>user.id,:list_id=>@list.id)%>" class="button">Invite</a></td>
+		<%end%>	
+	</tr>          
+	<% end %>
+</table>

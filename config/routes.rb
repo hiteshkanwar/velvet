@@ -75,7 +75,9 @@ Velvet::Application.routes.draw do
   match ':username/:action/:id', :controller => 'profile'
   match ':username/messages/:action',:controller=>"messages"
   
-
+  match 'dashboard/invitation', :controller => 'dashboard'
+  match 'dashboard/subscribe', :controller => 'dashboard'
+  match 'dashboard/unsubscribe', :controller => 'dashboard'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

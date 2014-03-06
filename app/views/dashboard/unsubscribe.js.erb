@@ -1,0 +1,8 @@
+
+<%if !@destroy.nil?%>
+$('#list_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/count' , :locals => { :list => @list })  %>");
+$('#subscribe_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/unsubscribe_button' , :locals => { :list => @list })  %>");
+<%else%>
+$('#list_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/count' , :locals => { :list => @list })  %>");
+$('#subscribe_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/subscribe_button' , :locals => { :list => @list })  %>");
+<%end%>

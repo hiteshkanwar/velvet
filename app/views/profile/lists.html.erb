@@ -37,7 +37,25 @@
                 <div class="box list border-radius">
                     <h2><a href="lists/members?list_id=<%= list.id %>"><%= list.name %></a></h2>
                     <p><%= list.description %></p>
-                    <span><a href="<%=root_url%><%= @current_user.username %>/lists/members?list_id=<%= list.id %>"><%= list.members.size %> member(s)</a></span>
+                    <div id="list_<%=list.id%>">
+                        <%= render :partial => '/dashboard/count' , :locals => { :list => list } %>
+                  
+                    </div>
+                    <div id="subscribe_<%=list.id%>" style="float: right; margin-top: -20px;">
+                        <%if @user!=@current_user%>
+                            
+
+                          <% if !list.subscribe_and_invitations.where(:user_id=>@user.id).blank? %>
+                            <% if list.subscribe_and_invitations.where(:user_id=>@user.id).first.subscribe %>
+                                <div  style="float: right; margin-top: -20px;" ><a data-remote="true" href="<%= dashboard_unsubscribe_path(:user_id=>@user.id,:list_id=>list.id)%>" class="disable_button" style="background: #777777">Unsubscribe</a>
+                                </div>
+                            <%end%>
+                          <%else%>
+                            <div  style="float: right; margin-top: -20px;" ><a data-remote="true" href="<%=dashboard_subscribe_path(:user_id=>@user.id,:list_id=>list.id) %>" class="button">Subscribe</a>
+                                </div>
+                          <%end%>  
+                        <%end%>
+                    </div>   
                     <% if params[:user_id] %>
                     <p>
                         <form action="/<%= @current_user.username %>/add_members" method="get">
@@ -46,6 +64,7 @@
                         <input type="submit" value="Choose" class="button">
                         </form>
                     </p>
+
                     <% end %>
                 </div><!-- .box -->
             </div>
