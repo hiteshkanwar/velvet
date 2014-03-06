@@ -3,8 +3,8 @@
 <div class="tip-iiner">
     <ul class="left">
         <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
-        <li><p><%= @user.following.size %><span>ACQUAINTING</span></p></li>
-        <li><p><%= @user.followers.size %><span>ACQUAINTANCES</span></p></li>
+        <li><p><%= @user.following.collect(&:follower_id).uniq.size %><span>ACQUAINTING</span></p></li>
+        <li><p><%= @user.followers.collect(&:follower_id).uniq.size %><span>ACQUAINTANCES</span></p></li>
     </ul><!-- ul -->
     <div class="tip-buttons right" style="margin-top: 20px;">
     <!--
