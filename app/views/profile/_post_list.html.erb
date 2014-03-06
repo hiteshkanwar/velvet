@@ -28,7 +28,25 @@
 
         <div class="clear"></div>
         <div class="box-bottom">
-            <div class="bottom-left left retip_class"><a href="/post/repost/<%= post.id %>" style="float: left;"class="re-tip" data-remote="true" >retip</a>
+          <div class="bottom-left left retip_class"><a href="#message1_<%=post.id%>" style="float: left;"class="re-tip fancybox" data-remote="true" >retip</a>
+
+            <div id ="message1_<%=post.id%>" style="display:none;"> 
+              <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a>
+              </div>
+              <div class="box-right right">
+                <h2>
+                <a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
+              </div>
+              <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
+
+              <br/><br/><br/><br/>
+              <br/>
+              <div class="modal-footer" style="float :right">
+                <button class="button close">Cancel</button>
+                <button class="button retip1" id="<%= post.id %>">Retip</button>
+                   <!--  <a href="/post/repost/<%#= post.id %>" style="float: left;"class="re-tip" data-remote="true" > -->
+              </div>
+            </div>
             
             <!-- admire --> 
             
@@ -64,3 +82,9 @@
   <%= render :partial => "profile/form", :locals => { :post => post } %> 
 
 <% end %>
+
+<script>
+$(".close").click(function(){
+ $.fancybox.close();
+ })
+</script>

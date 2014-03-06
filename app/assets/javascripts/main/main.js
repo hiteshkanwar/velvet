@@ -255,7 +255,7 @@ $(document).on("click", ".delete", function(event){
 $(document).on("click", ".re-tip", function(event){
   
   console.log("re-tip");
-  return confirm("Retip this to your acquaintances ?");
+  return false;
 
 });
 
@@ -297,4 +297,17 @@ $(document).ready(function(){
 });
 
 
+
+$(document).ready(function(){
+  $(".retip1").click(function(){
+    var id = this.id
+   
+    $.ajax({
+      type: "POST",
+      url: "/post/repost"+"/"+id,
+      data:$('#reply').serialize()
+    });
+    return false;
+  });  
+});
 
