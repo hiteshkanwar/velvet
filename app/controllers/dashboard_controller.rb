@@ -44,12 +44,18 @@ class DashboardController < ApplicationController
 		@invite=SubscribeAndInvitation.create(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>0)
 		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}.uniq
 		@list=List.find(params[:list_id])
+		Message.create(:message_text=>"you are invite to the list  #{@list.name}", :sender_id=>@current_user.id,:receiver_id=>params[:user_id],:list_id=>@list.id)
 		respond_to do |format|
 			 format.js
 		end
 	end
 	def subscribe
-		@invite=SubscribeAndInvitation.create(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>1)
+		@invite=SubscribeAndInvitation.find_by_user_id_and_list_id(params[:user_id],params[:list_id])
+		if @invite.nil?
+			@invite=SubscribeAndInvitation.create(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>1)
+		else
+			@invite.update_attributes(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>1)
+		end	
 		@list=List.find(params[:list_id])
 		@user=User.find(params[:user_id])
 		respond_to do |format|

@@ -1,4 +1,5 @@
-
-
 $('#list_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/count' , :locals => { :list => @list })  %>");
 $('#subscribe_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/subscribe_button' , :locals => { :list => @list })  %>");
+
+$('#list_<%=@list.id%>').html("<%= escape_javascript render(:partial => 'dashboard/message_unsubscribe' , :locals => { :list => @list })  %>");
+

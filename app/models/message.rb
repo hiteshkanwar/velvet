@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :ancestry, :message_text, :sender_id,:receiver_id,:is_trash,:parent_id,:attachments_attributes
+  attr_accessible :ancestry, :message_text,:list_id,:sender_id,:receiver_id,:is_trash,:parent_id,:attachments_attributes
   has_ancestry :orphan_strategy=>:adopt
   belongs_to :receiver ,:class_name=>"User",:foreign_key=>:receiver_id
   belongs_to :sender ,:class_name=>"User",:foreign_key=>:sender_id
