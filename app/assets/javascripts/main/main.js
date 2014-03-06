@@ -275,24 +275,41 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $("#uploadbutton").click(function () { 
-    var body_data = $("#tip").val()
+    var body_data = $("#tip").val();
+    var body_present=$("#file").val();
+    if (body_present != "")
+    {
+      
       var data = new FormData();
       jQuery.each($('#file')[0].files, function(i, file) {
       data.append('file-'+i, file);
       data.append('body',body_data)
         });
-    $.ajax({
-        type: "POST",
-        url: "/post/create",
-        data:  data ,
-        cache: false,
-        contentType: false,
-        processData: false,
-        enctype: 'multipart/form-data'
-       
+      $("#file").val("");
+      $.ajax({
+          type: "POST",
+          url: "/post/create",
+          data:  data ,
+          cache: false,
+          contentType: false,
+          processData: false,
+          enctype: 'multipart/form-data'
+         
+          
+      });
+      return false;
+    }
+    else
+      {
         
-    });
-    return false;
+        var body= $("#tip").val();
+        $.ajax({
+            type: "POST",
+            url: "/post/create",
+            data:  {body: body }
+           });
+        return false;
+      }
   });
 });
 

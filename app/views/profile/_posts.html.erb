@@ -1,7 +1,7 @@
 <%  if local_assigns[:disable_post].nil? %>
 <div class="write-tip">
     <form action="/post/create" name="tips" method="post" enctype="multipart/form-data" id="new_tip">
-    <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip"></textarea>
+    <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip" required></textarea>
     <br/>
     <div id="images_preview"></div>
      <div id="comment" style=" display:none; ">
@@ -55,21 +55,22 @@ $( document ).ready(function() {
   $("#tip").focusin(function(){
     $("#comment").slideDown(800);
       if ( $('#tip').val()==""){
-      $("#tip_submit").removeClass("button");
-      $("#tip_submit").addClass("disable_button");
+      $("#uploadbutton").removeClass("button");
+      $("#uploadbutton").addClass("disable_button");
     }
     $("#tip").keyup(function(){
       if ( $('#tip').val()==""){
-        $("#tip_submit").attr("disabled", true);
-        $("#tip_submit").removeClass("button");
-        $("#tip_submit").addClass("disable_button");
+        $("#uploadbutton").attr("disabled", true);
+        $("#uploadbutton").removeClass("button");
+        $("#uploadbutton").addClass("disable_button");
       }
       else{
-        $("#tip_submit").removeClass("disable_button");
-        $("#tip_submit").addClass("button");
-        $("#tip_submit").attr("disabled", false); 
+        $("#uploadbutton").removeClass("disable_button");
+        $("#uploadbutton").addClass("button");
+        $("#uploadbutton").attr("disabled", false); 
       }   
     });
+    $("#uploadbutton").addClass("button");
   });
 
 // $('#fumugi').click(function()
