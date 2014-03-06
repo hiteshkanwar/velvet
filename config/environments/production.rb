@@ -40,15 +40,25 @@ Velvet::Application.configure do
   # Send an email to an admin whenever an exception is raised
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[TipInTheVelvet Error] ",
-    :sender_address => "Tip in The Velvet <prateekyuvasoft101@gmail.com>",
+    :sender_address => "Tip in The Velvet <admin@tipinthevelvet.com>",
     :exception_recipients => "Richard Aberefa <ngrichyj4@gmail.com>"
 
   # Mailer
   config.action_mailer.default_url_options = {
+
     :host => 'http://velvet-development.herokuapp.com',
     :port => 80
   }
 
+config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address: "smtp.gmail.com",
+  port: 587,
+  domain: "gmail.com",
+  authentication: "plain",
+  user_name: "prateekyuvasoft101",
+  password: "yuvasoft2013"
+}
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 
