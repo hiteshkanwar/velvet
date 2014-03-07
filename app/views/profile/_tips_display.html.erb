@@ -16,8 +16,10 @@
     <% else %>
     
     <!-- <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a> -->
+    <% if unblock_user_detail(@user,@curent_user)==true %>
     <a href="#message_form" class="button fancybox">Message</a>
     <a href="/<%= @current_user.username %>/lists?user_id=<%= @user.id %>" class="button">Add to list</a>
+    <% end %>
     <% end %>
     </div>
     <div class="clear"></div>

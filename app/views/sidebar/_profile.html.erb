@@ -11,14 +11,19 @@
     </ul><!-- ul -->
     <div class="clear"></div>
     <% if @current_user.id && @current_user != @user %>
-    <div class="direct-messaging">
-    	<!--<a href="#" class="button">direct messaging</a>-->
-        <% if @current_user.is_following.include? @user %>
-                <a href="/dashboard/unacquaint/<%= @user.username %>" class="button black">Unacquaint</a>
-        <% else %> 
-             <a href="/dashboard/acquaint/<%= @user.username %>" class="button">Acquaint</a>
-        <% end %>
-    </div><!-- .direct-messaging & aquaint -->
+        <div class="direct-messaging">
+        	<!--<a href="#" class="button">direct messaging</a>-->
+            <% if block_user_detail(@user,@curent_user)==true %> 
+               <a href="/dashboard/unblock_user/<%= @user.id%>" class="button">UnBlock</a>     
+            <%else%> 
+                <% if @current_user.is_following.include? @user %>
+                   <a href="/dashboard/unacquaint/<%= @user.username %>" class="button black">Unacquaint</a>
+                <% else %> 
+                   <a href="/dashboard/acquaint/<%= @user.username %>" class="button">Acquaint</a>
+                <% end %>
+                <a href="/dashboard/block_user/<%= @user.id%>" class="button">Block</a>
+            <%end%>
+        </div><!-- .direct-messaging & aquaint -->
     <!--
     <div class="direct-messaging">
         <a href="#" class="button">add to list</a>

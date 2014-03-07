@@ -49,6 +49,21 @@ module ApplicationHelper
 
 		}
 	end
+	 def block_user_detail(user,current_user)
+
+     	 if UserBlock.find_by_blocked_id_and_user_id(@user.id, @current_user.id).present?
+    	 	return true
+    	 else
+    	 	return false
+    	 end
+    end
+    def unblock_user_detail(user,current_user)
+    	if !UserBlock.find_by_user_id_and_blocked_id(@user.id, @current_user.id).present?
+    		return true
+    	 else
+    	 	return false
+    	 end
+    end
 
 end
 

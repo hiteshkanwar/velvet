@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
 	layout 'main/application'
+	include ApplicationHelper
 	# ---------------
  	# Validations
 	# -------------
