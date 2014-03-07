@@ -44,7 +44,9 @@ class DashboardController < ApplicationController
 		@invite=SubscribeAndInvitation.create(:list_id=>params[:list_id],:user_id=>params[:user_id],:subscribe=>0)
 		@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}.uniq
 		@list=List.find(params[:list_id])
-		Message.create(:message_text=>"you are invite to the list  #{@list.name}", :sender_id=>@current_user.id,:receiver_id=>params[:user_id],:list_id=>@list.id)
+
+
+		Message.create(:message_text=>"User (#{@current_user}) has invited you to join their list #{@list.name}", :sender_id=>@current_user.id,:receiver_id=>params[:user_id],:list_id=>@list.id)
 		respond_to do |format|
 			 format.js
 		end
@@ -151,7 +153,13 @@ class DashboardController < ApplicationController
 	end
 
 	def discover
-		@posts = Post.find(:all, :order => "created_at desc", :limit => 50)
+		@posts=[]
+		@all_posts = Post.find(:all, :order => "created_at desc")
+		@all_posts.each do |post|
+			if !(User.find(post.user_id).private)
+				@posts<<post
+			end	
+		end		
 		@user = User.new
 		@user.assigned_posts = @posts
 
