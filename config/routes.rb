@@ -1,5 +1,6 @@
 Velvet::Application.routes.draw do
 
+
   match "advertisers",:to => 'advertisers#index',:as=>"advertiser"
   match "advertisers/confirm",:to => 'advertisers#confirm',:as=>"confirm_advertiser"
   match "advertisers/add_advertiser",:to => 'advertisers#add_advertiser',:as=>"add_advertiser",:method=>:post
@@ -18,6 +19,10 @@ Velvet::Application.routes.draw do
   match '/logout',    :to => 'landing#logout'
   match '/forgot',    :to => 'landing#forgot'
   match '/confirm_forgot',    :to => 'landing#confirm_forgot'
+
+  
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   # Static pages
 
