@@ -27,7 +27,11 @@
             <br/>
 
             <!-- START POST -->
+            <%if private_profile %>
             <%= render :partial => 'user' %>
+            <%else%>
+            <%= render :partial => 'profile/permission' %>
+            <%end%>
             <!-- END POST -->
 
         </div>

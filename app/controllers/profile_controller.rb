@@ -37,7 +37,16 @@ class ProfileController < ApplicationController
     # ---------------------
     # @current_user : self, @user : other user
     # ---------------------
-
+	def private_active
+		if @current_user.private
+			@current_user.update_attributes(:private=>0)
+		else
+			@current_user.update_attributes(:private=>1)
+		end
+		respond_to do |format|
+			 format.js
+		end
+	end
 
 	def index
 		redirect_to :root

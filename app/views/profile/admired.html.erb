@@ -21,9 +21,12 @@
         <div class="right-section right">
 
             <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
-            <!-- END POST -->
-
+            <%if private_profile %>
+            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>          
+            <%else%>
+            <%= render :partial => '/profile/permission', :locals => { disable_post: true } %>
+            <%end%>
+             <!-- END POST -->
         </div>
         <div class="clear"></div>
     </div><!-- .container -->

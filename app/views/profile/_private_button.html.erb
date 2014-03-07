@@ -1,0 +1,6 @@
+
+<%if !@current_user.private %>
+<a href="<%= @user.name %>/private_active" data-remote="true" class="button">Private</a>
+<%else%>
+<a href="<%= @user.name %>/private_active" data-remote="true" class="disable_button" style="background:#777777">Public</a>
+<%end%>

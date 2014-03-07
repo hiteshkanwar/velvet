@@ -27,7 +27,12 @@
             <br/>
 
             <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true }  %>
+           <%if private_profile %>
+            <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
+            <!-- END POST -->
+            <%else%>
+            <%= render :partial => '/profile/permission'%>
+            <%end%>
             <!-- END POST -->
 
         </div>
