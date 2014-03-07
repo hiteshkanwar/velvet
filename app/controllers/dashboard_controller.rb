@@ -295,7 +295,18 @@ class DashboardController < ApplicationController
 		redirect_to request.referrer
 	end
 
-
+    def block_user
+    	
+    	UserBlock.create(:blocked_id=> params[:id], :user_id=> @current_user.id)
+    	redirect_to request.referrer
+    end
+    def unblock_user
+    	
+    	@user=@user=UserBlock.find(:all,:conditions=>['user_id=? AND blocked_id= ?' ,@current_user.id,params[:id].to_i])
+    	@user.first.delete
+    	redirect_to request.referrer
+    	
+    end
 	# ----------
 
 end
