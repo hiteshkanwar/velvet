@@ -7,7 +7,7 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  attr_accessible :avatar, :name, :username, :email, :location, :website, :bio, :header, :hashed_password, :background, :country, :dob, :validated, :code, :forgot_password_token
+  attr_accessible :avatar, :name, :username, :email, :location,:private, :website, :bio, :header, :hashed_password, :background, :country, :dob, :validated, :code, :forgot_password_token
   attr_accessor :assigned_posts
   validates :username, format: { :with => /^[A-Za-z0-9.&]*\z/ ,
     message: "Your changes could not be saved because username contains unaccepted characters?" }

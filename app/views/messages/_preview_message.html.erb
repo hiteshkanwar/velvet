@@ -14,7 +14,7 @@
  
   <%if !message.list_id.nil? %>
     
-    <div id="message_list__<%=message.list_id%>">
+    <div id="message_list_<%=message.list_id%>">
       <%if !SubscribeAndInvitation.find_by_list_id(message.list_id).nil? %>
         <%if SubscribeAndInvitation.find_by_list_id(message.list_id).subscribe %>
           <%= render :partial=>"dashboard/message_unsubscribe" , :locals => { :message => message } %>  

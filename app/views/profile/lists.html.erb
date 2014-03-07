@@ -32,7 +32,8 @@
             <br/>
 
             <!-- START POST -->
-            <% @user.lists.each do |list| %>
+            <%if private_profile %>
+             <% @user.lists.each do |list| %>
             <div class="tip-holder">
                 <div class="box list border-radius">
                     <h2><a href="lists/members?list_id=<%= list.id %>"><%= list.name %></a></h2>
@@ -69,6 +70,9 @@
                 </div><!-- .box -->
             </div>
             <% end %>
+            <%else%>
+            <%= render :partial => 'profile/permission' %>
+            <%end%>
             <!-- END POST -->
 
         </div>

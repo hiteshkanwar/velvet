@@ -1,3 +1,4 @@
+
 <div class="page">
     <div class="container">
         <div class="left-section left">
@@ -31,15 +32,22 @@
                     <li><p><%= @current_user.following.size %><span>ACQUAINTING</span></p></li>
                     <li><p><%= @current_user.followers.size %><span>ACQUAINTANCES</span></p></li>
                 </ul><!-- ul -->
-                <div class="tip-buttons right" style="margin-top: 20px;">
+                <div class=" right" style="margin-top: 20px;">
                 <!--
                 <input type="text" value="Message" class="button">
                 <input type="text" value="Edit Account" class="button">
                 
                 <a href="#" class="button">Message</a>
                 -->
-                <a href="<%= @current_user.username %>/edit" class="button">Edit Account</a>
-                <a data-confirm="Are you sure?" href="/messages/account_delete_user" class="button"> Delete</a>
+               <table>
+                <tr>
+                <td><a href="<%= @current_user.username %>/edit" class="button">Edit Account</a></td>
+                <td><div id="active_profile">
+                        <%= render :partial => 'profile/private_button' %>
+                    </div>
+                </td>
+                <td><a data-confirm="Are you sure?" href="/messages/account_delete_user" class="button"> Delete</a></td>
+               </table> 
                 
                 </div>
                 <div class="clear"></div>
@@ -50,9 +58,12 @@
             <br/>
 
             <!-- START POST -->
+
+            
             <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
             <!-- END POST -->
-
+          
+           
         </div>
         <div class="clear"></div>
     </div><!-- .container -->
