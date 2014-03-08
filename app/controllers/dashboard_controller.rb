@@ -46,7 +46,7 @@ class DashboardController < ApplicationController
 		@list=List.find(params[:list_id])
 
 
-		Message.create(:message_text=>"User (#{@current_user}) has invited you to join their list #{@list.name}", :sender_id=>@current_user.id,:receiver_id=>params[:user_id],:list_id=>@list.id)
+		Message.create(:message_text=>"User (#{@current_user.name}) has invited you to join their list #{@list.name}", :sender_id=>@current_user.id,:receiver_id=>params[:user_id],:list_id=>@list.id)
 		respond_to do |format|
 			 format.js
 		end
