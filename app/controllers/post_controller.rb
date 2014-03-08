@@ -123,6 +123,8 @@ include EmojiHelper
 	end
 
 	def funmoji_post
+		
+		@post_id = params[:post_id]
     	@content = params[:post_data]
         @content = @content.gsub(" :","<img width='30' src='/assets/emoji/").gsub(":",".png'/>")
 	end

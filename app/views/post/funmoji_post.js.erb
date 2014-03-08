@@ -1,3 +1,9 @@
+<%if !@post_id.nil?%>
+$('#images_preview_<%=@post_id%>').html("<%= escape_javascript render(:partial => 'post/post_preview') %>");
+$('#images_preview_<%=@post_id%>').hide()
+$('#images_preview_<%=@post_id%>').show(1000)
+<%else%>
 $('#images_preview').html("<%= escape_javascript render(:partial => 'post/post_preview') %>");
 $('#images_preview').hide()
 $('#images_preview').show(1000)
+<%end%>
