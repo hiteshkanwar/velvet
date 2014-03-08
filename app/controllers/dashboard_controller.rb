@@ -155,16 +155,17 @@ class DashboardController < ApplicationController
 	def discover
 		@posts=[]
 		@all_posts = Post.find(:all, :order => "created_at desc")
+		
+		followers=Followings.where(:follower_id=>@current_user.id).collect(&:user_id)
 		@all_posts.each do |post|
-			if !(User.find(post.user_id).private)
+			if post.user_id==current_user.id || !(User.find(post.user_id).private) || followers.include?(post.user_id)
 				@posts<<post
 			end	
-		end		
+		end	
 		@user = User.new
 		@user.assigned_posts = @posts
 
 		logger.debug @user.all_posts(1)
-		@posts
 	end
 
 	def activity
