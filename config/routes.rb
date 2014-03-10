@@ -39,6 +39,7 @@ Velvet::Application.routes.draw do
   match "/post/funmoji_post", :to => 'post#funmoji_post'
   match "/post/admire" ,:to =>'post#admire'
   match "/post/unadmire" ,:to =>'post#unadmire'
+  match "/post/retweeted" ,:to =>'post#retweeted'
   # Search
   # match "/dashboard/search", :to => 'dashboard#search'
   ### match ':username/dashboard/:action', :controller => 'dashboard'

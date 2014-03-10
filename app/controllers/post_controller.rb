@@ -63,6 +63,7 @@ include EmojiHelper
 
 
 	def repost
+
 		post = Post.find(params[:id])
 		if post
 			begin
@@ -81,6 +82,20 @@ include EmojiHelper
 		end
 		#redirect_to "/#{@current_user.username}"
 		#redirect_to request.referer
+	end
+	def retweeted
+		@repost=Repost.find_by_post_id_and_user_id(params[:id],@current_user.id)
+       if !@repost.nil?
+       	@repost.delete
+       	flash[:notice] = "Remove retweet sucessfully...."
+       end
+       
+       @post=Post.find(params[:id])
+      @post.repost_count = @post.repost_count - 1
+      @post.save
+		respond_to do |format|
+				format.js	
+		end
 	end
 
 	def comment
