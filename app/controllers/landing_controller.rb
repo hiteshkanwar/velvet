@@ -52,37 +52,40 @@ class LandingController < ApplicationController
   def validate_login
    user = User.find_by_email(params[:email])
    
-    if user.block!=true
+    # if user.block!=true
       if user && user.validated.present?
-        if User.authenticate(params[:email], params[:password])
-        	session[:email] = params[:email]
-          user = User.find_by_email(params[:email])
-          session[:email]    = user.email
-          session[:username] = user.username
-        	
-          # If state exists from, accept inviation
-          # Redirect to state, else login user
-          if session[:state]
-            state = session[:state]
-            session[:state] = nil
-            redirect_to state
-          else
-            redirect_to :root
-        	end
+        if user.block!=true
+          if User.authenticate(params[:email], params[:password])
+          	session[:email] = params[:email]
+            user = User.find_by_email(params[:email])
+            session[:email]    = user.email
+            session[:username] = user.username
+          	
+            # If state exists from, accept inviation
+            # Redirect to state, else login user
+            if session[:state]
+              state = session[:state]
+              session[:state] = nil
+              redirect_to state
+            else
+              redirect_to :root
+          	end
 
+          else
+          	flash[:notice] = "Invalid email or password"
+          	redirect_to :root
+          end
         else
-        	flash[:notice] = "Invalid email or password"
-        	redirect_to :root
-        end
+          flash[:notice] = "You are blocked by admin Please try after some time...."
+          redirect_to :root
+        end  
       else
+        
         flash[:notice] = "Please verify your email"
         session[:resend] = params[:email]
         redirect_to :root
       end
-    else
-     flash[:notice] = "You are blocked by admin Please try after some time...."
-     redirect_to :root
-    end
+    
   end
 
   def resend
