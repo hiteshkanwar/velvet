@@ -40,8 +40,8 @@ Velvet::Application.configure do
   # Send an email to an admin whenever an exception is raised
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[TipInTheVelvet Error] ",
-    :sender_address => "Tip in The Velvet <prateekyuvasoft101@gmail.com>",
-    :exception_recipients => "Richard Aberefa <prateekbundle87@gmail.com>"
+    :sender_address => "Tip in The Velvet <admin@tipinthevelvet.com>",
+    :exception_recipients => "Richard Aberefa <ngrichyj4@gmail.com>"
 
   # Mailer
   # config.action_mailer.default_url_options = {
@@ -60,10 +60,6 @@ Velvet::Application.configure do
    :password             => 'yuvasoft2013',
    :authentication       => 'plain',
    :enable_starttls_auto => true  }
- 
- 
-
-
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
