@@ -9,6 +9,58 @@ jQuery(document).ready(function(){
   setInterval(callAjax,5000);
 });
 
+//send image via message convertation
+
+$(document).ready(function(){
+  $("#message_submit").click(function () { 
+    var body_data = $("#message_text").val();
+    var body_present=$("#file").val();
+           
+    if (body_present != "")
+    {
+      
+      var data = new FormData();
+      jQuery.each($('#file')[0].files, function(i, file) {
+      data.append('file-'+i, file);
+      data.append('body',body_data)
+      data.append('receiver_id',receiver_id)
+      data.append('parent_id',parent_id)
+        });
+      $("#file").val("");
+      $.ajax({
+          type: "POST",
+          url: "/messages",
+          data:  data ,
+          cache: false,
+          contentType: false,
+          processData: false,
+          enctype: 'multipart/form-data',
+          beforeSend: function() {
+              $("#loading-image").show();
+           },
+           success: function(msg) {
+              $("#loading-image").hide();
+           }
+         
+          
+      });
+      return false;
+    }
+    else
+      {
+        
+        var body= $("#message_text").val();
+        $.ajax({
+            type: "POST",
+            url: "/messages",
+            data:  {body: body ,receiver_id: receiver_id,parent_id: parent_id }
+           });
+        return false;
+      }
+  });
+});
+
+
 //ADDING PLACEHOLDER FOR MAILCHUMP
 
 jQuery(document).ready(function($){    

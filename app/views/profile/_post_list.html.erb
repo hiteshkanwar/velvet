@@ -28,17 +28,9 @@
 
         <div class="clear"></div>
         <div class="box-bottom">
-          <div class="bottom-left left retip_class" >
-            <div id="retweet_<%= post.id %>">
-            <% if !Repost.find_by_user_id_and_post_id(@current_user.id,post.id)%>
-              <% if unblock_user_detail(@user,@curent_user)==true %>
-              <%= render :partial=>'messages/retip',:locals => {:@post => post} %>
-              <% end %>
-            <%else%>
-              <%= render :partial=>'messages/retweeted',:locals => {:@post => post} %>
-            <%end%>
-            </div>
-
+          <% if unblock_user_detail(@user,@curent_user)==true %>
+            <div class="bottom-left left retip_class"><a href="#message1_<%=post.id%>" style="float: left;"class="re-tip fancybox" data-remote="true" >retip</a>
+          <% end %>
             <div id ="message1_<%=post.id%>" style="display:none;"> 
               <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a>
               </div>
@@ -59,14 +51,15 @@
                    <!--  <a href="/post/repost/<%#= post.id %>" style="float: left;"class="re-tip" data-remote="true" > -->
               </div>
             </div>
-
+            
             <!-- admire --> 
             <% if unblock_user_detail(@user,@curent_user)==true %>
               <div id="admire_<%= post.id %>" style="float: left;">
                 <%= render :partial=>'post/admire',:locals => {:post => post} %>
               </div>
             <%end%>
-         
+
+
             <!-- delete -->
             <% if post.user == @current_user %>
                 <a href="/post/destroy/<%= post.id %>" class="more delete">delete</a>
@@ -100,4 +93,6 @@
 $(".close").click(function(){
  $.fancybox.close();
  })
+
+
 </script>

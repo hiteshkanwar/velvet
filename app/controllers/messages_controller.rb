@@ -23,21 +23,55 @@ class MessagesController < ApplicationController
   end
 
   def create
-
+    
+  if !params[:message].nil?
     @message = @current_user.send_messages.new(params[:message])
-      
+    
+    # @message.avatar=params[:message][:attachments_attributes]
+  
     if @message.save
       # redirect_to "/"+params[:username]+"/messages/new"
        User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
+       redirect_to messages_path
+    else
+      @messages = @current_user.send_messages.order("created_at desc")
+      @attachment = @message.attachments.new
+      render :action=>:new
+    end
+  else
+    @message = Message.create(:message_text=>params[:body],:sender_id=>@current_user.id,:receiver_id=>params[:receiver_id].to_i,:avatar=>params["file-0"])
+      
+    if @message.save
+      # redirect_to "/"+params[:username]+"/messages/new"
+       User.find(params[:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
        # redirect_to messages_path
-
+       @user=User.find(params[:receiver_id].to_i)
        @all_messages = []
+       sender_messages=[]
        sender_message =current_user.messages
+        if !sender_message.blank?
+          sender_message.each do |sender|
+            
+            if sender.sender_id == @user.id
+
+              sender_messages << sender
+            end
+          end
+        end
        
-       @user=User.find(params[:message][:receiver_id].to_i)
-       receiver_messages = @user.messages
-       @all_messages << sender_message
+       receiver_messages=[]
+       receiver_message = @user.messages
+        if !receiver_message.blank?
+          receiver_message.each do |receive|
+           if receive.sender_id== current_user.id
+            receiver_messages << receive
+           end
+          end
+        end
+        
+       @all_messages << sender_messages
        @all_messages << receiver_messages
+
        @all_messages =  @all_messages.flatten.sort_by(&:created_at)
       respond_to do |format|
         format.js # actually means: if the client ask for js -> return file.js
@@ -47,7 +81,10 @@ class MessagesController < ApplicationController
       @attachment = @message.attachments.new
       render :action=>:new
     end
+
   end
+
+end
 
   def sent
     @messages = @current_user.send_messages.order("created_at desc")

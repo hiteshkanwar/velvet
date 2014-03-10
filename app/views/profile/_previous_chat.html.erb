@@ -1,9 +1,9 @@
 <div>
-			<% @all_messages.each do |message| %>
-				<div class="chat_msg"> 
-					<% @sender = User.find(message.sender_id) %>
-					<p>
-            
+      <% @all_messages.each do |message| %>
+        <div class="chat_msg"> 
+          <% @sender = User.find(message.sender_id) %>
+          <p>
+
             <% if @user.id == message.receiver_id %>
               <% @align_left = true%>
 
@@ -12,17 +12,26 @@
                 <%= image_tag (User.find(message.receiver_id)).user_avatar, :width => "47" %>
 
               <span> <%= @sender.name %> : <%= message.message_text %> </span>
+              <%if !message.avatar.blank? %>
+              <%= image_tag message.avatar.url, :width => "80" %>
+              <%end%>
+              
             <% else %>
 
               <% @align_left = false%>
               <%#= image_tag @sender.user_avatar, :width => "47" ,:style=>"border: 2px solid; border-radius: 25px 25px 25px 25px;" %>
               <%= image_tag (User.find(message.receiver_id)).user_avatar, :width => "47" %>
-              
-              <span > <%= @sender.name %> : <%= message.message_text %> </span
+              <%if !message.attachments.first.nil?%>
+                <%= image_tag message.attachments.first.document.url(:thumb), :width => "80"%> 
+               <%end%> 
+                <span > <%= @sender.name %> : <%= message.message_text %> </span>
+              <%if !message.avatar.blank? %>
+              <%= image_tag message.avatar.url, :width => "47" %>
+              <%end%>
             <% end %>
-					
-						
-					</p>
-				</div>
-			<% end %>
-		</div>
+          
+            
+          </p>
+        </div>
+      <% end %>
+    </div>

@@ -53,11 +53,33 @@ class ProfileController < ApplicationController
 	end
 
 	def show
-       @all_messages = []
+		
+      @all_messages = []
+       sender_messages=[]
        sender_message =current_user.messages
-       receiver_messages = @user.messages
-       @all_messages << sender_message
+        if !sender_message.blank?
+          sender_message.each do |sender|
+            
+            if sender.sender_id == @user.id
+
+              sender_messages << sender
+            end
+          end
+        end
+       
+       receiver_messages=[]
+       receiver_message = @user.messages
+        if !receiver_message.blank?
+          receiver_message.each do |receive|
+           if receive.sender_id== current_user.id
+            receiver_messages << receive
+           end
+          end
+        end
+        
+       @all_messages << sender_messages
        @all_messages << receiver_messages
+
        @all_messages =  @all_messages.flatten.sort_by(&:created_at)
        logger.debug session[:username]
 	   @current_url = request.original_url

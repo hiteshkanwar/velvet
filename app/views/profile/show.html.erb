@@ -8,11 +8,11 @@
 <% end %>
 
 <div class="composer-area " style="display:none;" id ="message_form">
-	<div class="inbox  border-radius">  
-		<div id = "previous_chat">
+  <div class="inbox  border-radius">  
+    <div id = "previous_chat">
       <%= render "profile/previous_chat"%>
     </div>
-		<br/>
+    <br/>
     <div class="composer-area">
       <%= nested_form_for(Message.new,:html=>{:multipart=>true,:id=>"new_message"} ) do |f|%>
       
@@ -20,15 +20,28 @@
         <% if @parent_message.present? %>
           <%= f.hidden_field :receiver_id ,:value=>@parent_message.sender_id,:id=>"receiver_id" %>
           <%= f.hidden_field :parent_id ,:value=>@parent_message.id %>
+          
+           <% @receiver_id = @parent_message.sender_id%>
+           <% @parent_id = @parent_message.id%>
+          
         <% else %>
           <%= f.hidden_field :receiver_id ,:id=>"receiver_id", :value => @user.id %>
+          
+          <% @receiver_id= @user.id%>
+          
         <% end %>  
          <%= f.text_area :message_text, :placeholder=>"Message", :id=>"message_text" ,:style=>"height: 65px; width: 541px;", :autofocus=>true %>
          <br/>
-          <%= f.fields_for :attachments %>
-            <%#= f.link_to_add "Add Attachment", :attachments %>
 
-          <%= f.submit "Send Message",:class=>"button", :style=>"float: right;" %>
+        <div class="span4">
+        <%= f.file_field :document,  :id=>"file" %>
+        </div>
+
+          <%#= f.fields_for :attachments %>
+            <%#= f.link_to_add "Add Attachment", :attachments %>
+    
+          <%= f.submit "Send Message",:class=>"button", :style=>"float: right;", :id=>"message_submit" %>
+      
       <% end %>  
  <div id="myDiv">
         <img id="loading-image" src="../assets/loading2.gif" style="display:none;"/>
@@ -51,10 +64,14 @@
     margin-top: 3px;
     padding: 10px;
     position: absolute;
+    margin-left: 87px;
 }
 </style>
 
 <script>
+
+var receiver_id="<%= @receiver_id %>"
+var parent_id= "<%= @parent_id %>"
 
 $(document).ready(function(){
   $("#new_message").submit(function() {
@@ -73,4 +90,15 @@ $(document).ready(function(){
       return false;
    });  
  });
+
+
 </script>
+<style>
+#file {
+ 
+    margin-left: 44px !important;;
+    margin-top: 0px !important;;
+    opacity: 1.0 !important;;
+    position: absolute !important;;
+}
+</style>

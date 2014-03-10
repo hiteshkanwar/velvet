@@ -3,7 +3,8 @@
 
 	<form action="/post/comment" name="reply" method="post" data-remote="true">
 		<%= image_tag @current_user.user_avatar, :width => "47" %>
-		<input type="text" name="body" id="text_<%=post.id%>" value="Write a Reply" onfocus="if (this.value == 'Write a Reply') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Tip';}">
+    <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip" >
+
 		<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 		<input name="id" type="hidden" value= "<%= post.id %>" />
 		<div id="images_preview_<%=post.id%>"></div>
