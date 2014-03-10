@@ -63,6 +63,7 @@ Velvet::Application.routes.draw do
       get 'trash'
       get 'search_receivers'
       post 'message_count_update'
+      get 'message_count_update'
       get 'account_delete_user'
     end
     member do
