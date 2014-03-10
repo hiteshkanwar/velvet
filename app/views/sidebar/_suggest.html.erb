@@ -7,8 +7,10 @@
        <% person      = User.find(suggest.split(",")[0]) %>
        <% followed_by = User.find(suggest.split(",")[1]) %>
     <div class="cool-hold">
+        <% if @current_user.id != person.id %>
         <p><%= person.name %><span>@<%= person.username %></span><small>Acquainted by <%= followed_by.name %> and others</small><a href="/<%= person.username %>">View</a></p>
         <%= image_tag person.user_avatar, :width => "47" %>
+        <% end %>
     </div><!-- .cool-hold -->
     <% end %>
    
