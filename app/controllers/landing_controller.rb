@@ -112,7 +112,7 @@ class LandingController < ApplicationController
         flash[:notice] = "Please verify your account, by click on the activitation link sent to your email address"
 
           #=> Send welcome email
-          UserMailer.welcome_email(@user).deliver
+          #UserMailer.welcome_email(@user).deliver
 
            # Store defaults 
            session[:signup_email] = nil
