@@ -164,15 +164,20 @@ class DashboardController < ApplicationController
 		end	
 		@user = User.new
 		@user.assigned_posts = @posts
+        @total_pages = 0
+		@user.assigned_posts.each do |post|
+			@total_pages += post.user.posts.paginate(page: params[:page], per_page: 2).total_pages
+		end
 
-		logger.debug @user.all_posts(1)
+		logger.debug("pages: #{@total_pages}")
+		 #logger.debug @user.all_posts(1)
 	end
 
 	def activity
-
+        
 		 puts request.fullpath
 		# 1. People who mentioned me
-		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").order('created_at desc').limit(10)
+		@mentioned = Post.where("body like ?", "%#{@current_user.username}%").order('updated_at desc').limit(10)
 
 		# 2. People who admired my tips
 		# Todo -
@@ -187,6 +192,13 @@ class DashboardController < ApplicationController
 		@user.assigned_posts = @posts
 
 		@posts
+		@total_pages = 0
+		@user.assigned_posts.each do |post|
+			@total_pages += post.user.posts.paginate(page: params[:page], per_page: 2).total_pages
+		end
+
+		logger.debug("pages: #{@total_pages}")
+
 	end
 
 	def notification

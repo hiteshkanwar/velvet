@@ -21,7 +21,7 @@
             <!-- START POST -->
             <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
             <!-- END POST -->
-
+            <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
         </div>
         <div class="clear"></div>
     </div><!-- .container -->
@@ -33,5 +33,14 @@
 
 
 
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+</script>
 
 
