@@ -1,7 +1,7 @@
 <div class="clear"></div>
 <div class="reply-tip">
 
-	<form action="/post/comment" name="reply" method="post" data-remote="true">
+	<form action="/post/comment" name="reply" method="post" data-remote="true" enctype="multipart/form-data">
 		<%= image_tag @current_user.user_avatar, :width => "47" %>
     <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip" >
 
