@@ -1,70 +1,72 @@
 <div class="page">
-    <div class="container">
-        <div class="left-section left">
+  <div class="container">
+    <div class="left-section left">
 
-            <%= render :partial => '/sidebar/profile' %>
-            <!-- nav --> 
-            <%= render :partial => '/sidebar/nav' %>
+      <%= render :partial => '/sidebar/profile' %>
+      <!-- nav --> 
+      <%= render :partial => '/sidebar/nav' %>
 
-            <!-- suggest -->
-            <%= render :partial => '/sidebar/suggest' %>
-            
-            <!-- trends -->
-            <%= render :partial => '/sidebar/trends' %>
+      <!-- suggest -->
+      <%= render :partial => '/sidebar/suggest' %>
+      
+      <!-- trends -->
+      <%= render :partial => '/sidebar/trends' %>
 
-            <!-- trends -->
-            <%= render :partial => '/sidebar/copy' %>
-            <%= render :partial => '/sidebar/serve_ad' %>
-        </div>
+      <!-- trends -->
+      <%= render :partial => '/sidebar/copy' %>
+      <%= render :partial => '/sidebar/serve_ad' %>
+    </div>
 
-        <div class="right-section right">
+    <div class="right-section right">
 
-            <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
-                <ul>
+      <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
+        <ul>
                        
-                   <!-- Other notfications -->
-                   <% @activities.each do |activity| %>
-                   <%if @current_user.id == activity.person%>
-                       <% user = User.find(activity.person) %>
-                       <div class="m-header" style="margin-bottom: 10px;">
-                            <div class="span6">
-                            <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
-                            <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
-                            </div>
-                            <div class="span2 other-admir">
-                                <% date = activity.created_at %>
-                                <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-                            </div>
-                        </div>
-                      <%end%>  
-                   <% end %>
-
-                    <!-- Aquainted -->
-                    <% @followed.each do |user| %>
-                    <div class="m-header" style="margin-bottom: 10px;">
-                        <div class="span6">
-                        <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
-                        <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
-                        </div>
-                        <div class="span2 other-admir">
-                            <% date = user.following.find_by_user_id(@current_user.id).created_at %>
-                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-                        </div>
-                    </div>
-                    <% end %>
-
-                </ul>
+          <!-- Other notfications -->
+          <% @activities.each do |activity| %>
+            <%if @current_user.id == activity.person%>
+              <% user = User.find(activity.person) %>
+                <div class="m-header" style="margin-bottom: 10px;">
+                  <div class="span6">
+                    <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
+                    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
+                  </div>
+                  <div class="span2 other-admir">
+                    <% date = activity.created_at %>
+                    <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                  </div>
+                </div>
+            <%end%>  
+           <% end %>
+            <!-- Aquainted -->
+            <% @followed.each do |user| %>
+            <div class="m-header" style="margin-bottom: 10px;">
+              <div class="span6">
+                <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
+                <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
+              </div>
+              <div class="span2 other-admir">
+                <% date = user.following.find_by_user_id(@current_user.id).created_at %>
+                <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+              </div>
             </div>
+            <% end %>
+
+        </ul>
+      </div> 
+    
 
 
             <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
-            <!-- END POST -->
-            <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
-        </div>
-        <div class="clear"></div>
+      <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
+      <!-- END POST -->
+      <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
+    </div>
+        
     </div><!-- .container -->
+    <div class="clear"></div>
 </div>
+
 <div style="margin-left: -513px; width: 206%;">
 <%= render :partial=>"footer" %>
 </div>
