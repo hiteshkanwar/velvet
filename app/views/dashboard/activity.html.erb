@@ -36,7 +36,7 @@
                     <%end%>
                   </div>
                   <div class="span2 other-admir">
-                    <% date = activity.created_at %>
+                    <% date = activity.updated_at %>
                     <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
                   </div>
                 </div>
@@ -50,7 +50,7 @@
                 <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
               </div>
               <div class="span2 other-admir">
-                <% date = user.following.find_by_user_id(@current_user.id).created_at %>
+                <% date = user.following.find_by_user_id(@current_user.id).updated_at %>
                 <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
               </div>
             </div>
