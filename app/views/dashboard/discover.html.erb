@@ -1,40 +1,36 @@
 <div class="page">
-    <div class="container" style="padding-top: 5px;">
-        <div class="left-section left">
+  <div class="container" style="padding-top: 5px;">
+    <div class="left-section left">
 
-            <!-- nav --> 
-            <%= render :partial => '/sidebar/nav' %>
+        <!-- nav --> 
+      <%= render :partial => '/sidebar/nav' %>
 
-            <!-- suggest -->
-            <%= render :partial => '/sidebar/suggest' %>
-            
-            <!-- trends -->
-            <%= render :partial => '/sidebar/trends' %>
+      <!-- suggest -->
+      <%= render :partial => '/sidebar/suggest' %>
+      
+      <!-- trends -->
+      <%= render :partial => '/sidebar/trends' %>
 
-            <!-- trends -->
-            <%= render :partial => '/sidebar/copy' %>
-            <%= render :partial => '/sidebar/serve_ad' %>
-        </div>
+      <!-- trends -->
+      <%= render :partial => '/sidebar/copy' %>
+      <%= render :partial => '/sidebar/serve_ad' %>
+    </div>
 
-        <div class="right-section right">
+    <div class="right-section right">
 
-            <!-- START POST -->
-            <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
-            <!-- END POST -->
-            <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
-        </div>
-        <div class="clear"></div>
-    </div><!-- .container -->
+        <!-- START POST -->
+        <%= render :partial => '/profile/posts', :locals => { disable_post: true } %>
+        <!-- END POST -->
+        <%= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
+    </div>
+        
+  </div><!-- .container -->
+  <div class="clear"></div>
 </div>
 
 <div style="margin-left: -513px; width: 206%;">
 <%= render :partial=>"footer" %>
 </div>
-
-
-
-
-
 
 
 <script type="text/javascript">
