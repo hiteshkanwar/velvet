@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   attr_accessor :assigned_posts
   validates :username, format: { :with => /^[A-Za-z0-9.&]*\z/ ,
     message: "Your changes could not be saved because username contains unaccepted characters?" }
+    validates :username, uniqueness: true
    # Handle image uploads
   mount_uploader :avatar, DocumentUploader
   mount_uploader :header, DocumentUploader

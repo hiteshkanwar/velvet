@@ -9,6 +9,12 @@
     <%if !comment.avatar.blank?%>
    <%= image_tag comment.avatar.url , :width => "47"%>
    <%end%>
+
+      <% if comment.media %>
+            <div class="youtube" style="margin-top: 10px;">
+            <iframe width="420" height="250" src="<%= comment.media.url %>" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        <% end %>
     <!-- timestamp -->
     <div class="bottom-right"><%= time_ago_in_words(comment.created_at).include?("day") || time_ago_in_words(comment.created_at).include?("month") || time_ago_in_words(comment.created_at).include?("year") ? to_date(comment.created_at) : time_ago_in_words(comment.created_at) %> <!-- <a href="#">Details</a> --></div>
 </div>
