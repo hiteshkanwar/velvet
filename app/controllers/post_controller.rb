@@ -102,8 +102,14 @@ include EmojiHelper
 		
 		post = Post.find(params[:id])
 		if post && params[:body]
-			post.comments.create(body: "@#{post.user.username} " +params[:body], user: @current_user)
+			
+			@comment=post.comments.new
+			@comment.user_id= @current_user.id
+			@comment.body=params[:body]
+			@comment.avatar=params["file-0"]
+            @comment.save
 			flash[:notice] = "Posted reply..."
+
 		end
 		@post=post
 		@comments = post.comments
