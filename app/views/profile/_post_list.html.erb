@@ -2,6 +2,11 @@
 <div class="tip-holder">
 
     <div class="box border-radius">
+      <%if !post.reposts.blank?%>
+      <%user=User.find(post.reposts.last.user_id).name%>
+         
+         <div style="font-size: 12px;"><a href="#" class="re-tip">Retiped by </a><%=user%></div>
+      <%end%>
             <% if !post.admires.where(user_id: @current_user.id).empty? %>
                 <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 616px;margin-bottom: -33px;margin-top:-5px;">
             <% end %>
