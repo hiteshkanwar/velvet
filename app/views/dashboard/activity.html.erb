@@ -29,7 +29,11 @@
                 <div class="m-header" style="margin-bottom: 10px;">
                   <div class="span6">
                     <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
+                    <%if user.id!=@current_user.id%>
                     <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
+                    <%else%>
+                    <p class="kelly"><a href="<%= user.username %>"> You</a><span> <%= activity.description %></span> </p>
+                    <%end%>
                   </div>
                   <div class="span2 other-admir">
                     <% date = activity.created_at %>
