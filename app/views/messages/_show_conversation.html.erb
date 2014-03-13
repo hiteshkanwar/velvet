@@ -1,0 +1,30 @@
+<div class="page"> 
+  <div class="container">
+    <div class="left-section left">
+      <%#= render :partial=>"message_nav" %>
+    </div>  
+    <div class="eft-section left">
+      <div class="heading border-radius"></div>
+      <div class="inbox message border-radius">
+        <!-- <div class="message-holder"> -->
+          <%= render :partial=>"message_thread",:locals=>{:message=>@message} %>
+        <!-- </div>   -->
+
+      </div><!-- .inbox -->
+    </div><!-- .right-section -->
+    <div class="clear"></div>
+  </div><!-- .container -->
+
+  <div class="clear"></div>
+  
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  VL.message.initFancyBox()
+})
+</script>
+
+
+
+

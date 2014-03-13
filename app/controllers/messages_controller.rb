@@ -10,7 +10,9 @@ class MessagesController < ApplicationController
   end
   def show_conversation
     @message = @current_user.all_messages.not_trash.find(params[:id])
-
+    respond_to do |format|
+      format.js # actually means: if the client ask for js -> return file.js
+    end
   end
   
   def new

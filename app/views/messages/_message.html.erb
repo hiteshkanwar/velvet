@@ -1,6 +1,6 @@
 <div class="message-holder">
-   <%= image_tag message.sender.user_avatar, :width => "47"%>
-   <div class="description">
+   <%= image_tag message.sender.user_avatar, :width => "47" %>
+   <div class="description" style="margin-left: 70px; margin-top: -45px;">
     <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %> </a> <!-- <a href="/<%= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
     <p><%= message.message_text %> </p>
     <% if message.attachments.present? && message.attachments.first.document_url.present? %>
@@ -17,5 +17,5 @@
     <%#= link_to "Delete", move_to_trash_message_path(message)%>
   </div>
   <div class="clear"></div>
-
+<br/>
 </div>

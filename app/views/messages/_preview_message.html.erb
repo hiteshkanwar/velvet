@@ -30,8 +30,8 @@
     </div> 
     <%end%>     
         <%else%>
-        <%=link_to "View conversation",show_conversation_message_path(root_message) %> - 
-    
+        <%=link_to "View conversation",show_conversation_message_path(root_message),:class=>"fancybox",:remote=>true%> - 
+        
   <%end%>
 
   <span> <%= to_date(message.created_at) %></span>
