@@ -29,14 +29,23 @@ class Post < ActiveRecord::Base
   end
 
   def process_media
+    
     media_regex = /(?:.be\/|\/watch\?v=|\/(?=p\/))([\w\/\-]+)/
     media_urls = self.body.to_s.scan(media_regex).flatten
-
-    media_urls.each do |youtube|
-      self.media = Media.create(name: "YouTube", url: "//www.youtube.com/embed/#{youtube}")
-      break
+    if !media_urls.blank?  
+      media_urls.each do |youtube|
+        self.media = Media.create(name: "YouTube", url: "//www.youtube.com/embed/#{youtube}")
+        break
+      end
     end
+    media1 = /(?:http:\/\/)?(?:www\.)?(?:youporn\.com)\/(?:watch)?(.+)/
+    media_urls = self.body.to_s.scan(media1).flatten
+    
+    media_urls.each do |youtube|
 
+        self.media = Media.create(name: "Youporn", url: "//www.youporn.com/embed#{youtube}")
+        break
+      end
   end
 
 end
