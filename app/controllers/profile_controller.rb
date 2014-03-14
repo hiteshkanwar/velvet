@@ -4,7 +4,7 @@ class ProfileController < ApplicationController
 	# ---------------
  	# Validations
 	# -------------
-
+    before_filter :confirm_logged_in
 	before_filter :expect => [:nil] do |c| c.not_found params[:username] end 
 	before_filter :current_user, :except => [:index]
 	before_filter :only => [:edit, :create_list, :add_members, :change_avatar, :change_header] do |c| c.editable params[:username] end 

@@ -98,7 +98,7 @@
           <!-- Error -->
           <% if flash[:notice] %> 
           <div class="error" style="padding:20px;">
-            <span>  <%= flash[:notice] %> </span>
+            <span>  Sorry an account with that email address already exists, if you have forgotten your password click here to reset </span>
             <% if flash[:notice].include?("Please verify") %>
               <a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
             <% end %>
@@ -256,6 +256,25 @@ $('div.signup').show(' fast ');
 else
 {
 $('div.verify').show(true);
+}
+
+
+var flag1= '<%=session[:validate_email]%>'
+
+if (flag1=="validate_email_false")
+{
+$('div.verify').hide(true);
+$('div.signup').hide(' fast ');
+$('div.login').show(' fast ');
+
+'<%=session[:validate_email]=""%>'
+
+}
+else
+{
+    if (flag!="false"){
+      $('div.verify').show(true);
+    }
 }
 });
 </script>
