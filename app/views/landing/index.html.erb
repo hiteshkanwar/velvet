@@ -98,7 +98,11 @@
           <!-- Error -->
           <% if flash[:notice] %> 
           <div class="error" style="padding:20px;">
+            <% if flash[:notice]=="This email address is not registered"%>
+             <span><%=flash[:notice] %> </span>
+            <%else%>
             <span>  Sorry an account with that email address already exists, if you have forgotten your password click here to reset </span>
+            <%end%>
             <% if flash[:notice].include?("Please verify") %>
               <a href="landing/resend?email=<%= session[:resend] %>"> resend</a>
             <% end %>
