@@ -188,11 +188,16 @@ class DashboardController < ApplicationController
 
 		# 2. People who admired my tips
 		# Todo -
-		@activities = @current_user.activities.sort{|a, b| b[:created_at] <=> a[:created_at]}
+		@activities=[]
+		@activitie2 = @current_user.activities.sort{|a, b| b[:created_at] <=> a[:created_at]}
+        @activities1=Activity.find(:all,:conditions=>['person = ?',@current_user.id])
+		@activities << @activitie2
+		@activities << @activities1
+		@activities=@activities.flatten
 
 		# 3. People who followed me
 		  @followed = []
-		# @followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
+		 @followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}
 
 		@posts = @mentioned
 		@user = @current_user
@@ -336,5 +341,12 @@ class DashboardController < ApplicationController
     	
     end
 	# ----------
+    def show_post
+    	if params[:id]
+		@post=Post.find(params[:id])
+	    else
+	    redirect_to request.referrer
+	    end
+	end
 
 end

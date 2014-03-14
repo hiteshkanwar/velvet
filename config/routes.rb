@@ -44,7 +44,7 @@ Velvet::Application.routes.draw do
   # match "/dashboard/search", :to => 'dashboard#search'
   ### match ':username/dashboard/:action', :controller => 'dashboard'
   match '/activity', :to => 'dashboard#activity'
-
+ match '/show_post/:id', :to => 'dashboard#show_post'
   match '/discover', :to => 'dashboard#discover'
   match '/search', :to => 'dashboard#search'
   match '/search/:q', :to => 'dashboard#search'

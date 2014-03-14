@@ -98,7 +98,7 @@
           <!-- Error -->
           <% if flash[:notice] %> 
           <div class="error" style="padding:20px;">
-            <% if flash[:notice]=="This email address is not registered"%>
+            <% if flash[:notice]!=(("Email has already been taken") || ("Email has already been taken and Username has already been taken"))%>
              <span><%=flash[:notice] %> </span>
             <%else%>
             <span>  Sorry an account with that email address already exists, if you have forgotten your password click here to reset </span>

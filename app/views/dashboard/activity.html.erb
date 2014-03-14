@@ -23,24 +23,39 @@
         <ul>
                        
           <!-- Other notfications -->
-          <% @activities.each do |activity| %>
-            <%if @current_user.id == activity.person%>
+         <% @activities.each do |activity| %>
+         
+            <%#if @current_user.id == activity.person%>
               <% user = User.find(activity.person) %>
+                
                 <div class="m-header" style="margin-bottom: 10px;">
                   <div class="span6">
                     <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
-                    <%if user.id!=@current_user.id%>
-                    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span><%= activity.description %></span> </p>
-                    <%else%>
-                    <p class="kelly"><a href="<%= user.username %>"> You</a><span> <%= activity.description %></span> </p>
-                    <%end%>
+                    
+                    <% if  activity.description=="Retiped your tip" && user.id != @current_user.id%>
+                    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a>
+                      
+                      Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                      <% elsif activity.description==  "Admired your tip" && user.id == @current_user.id%>
+                      You Admired <%=User.find(activity.user_id).name%> <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                      <%else%>
+                      <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a>
+                        <% if activity.description== "Admired your tip" %>
+                      <span><%#= activity.description %> </span> 
+                      Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                      <%elsif activity.description== "Retiped your tip"  %>
+                      <span><%#= activity.description %></span>
+                      Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                      <%end%>
+                      <% end %>
+                    </p>
                   </div>
                   <div class="span2 other-admir">
                     <% date = activity.updated_at %>
                     <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
                   </div>
                 </div>
-            <%end%>  
+            <%#end%>  
            <% end %>
             <!-- Aquainted -->
             <% @followed.each do |user| %>

@@ -37,7 +37,7 @@ include EmojiHelper
 		if @post
 			@current_user.admires.create(post_id: @post.id)
 			if !@post.user.nil? && !@post.user.blank?
-			  @post.user.activities.create(person: @current_user.id, description: "Admired your Post")
+			  @post.user.activities.create(person: @current_user.id, description: "Admired your tip",post_id: post.id)
 			  flash[:notice] = "Admired"
 			 end
 		end
@@ -70,7 +70,7 @@ include EmojiHelper
 				post.repost_count = post.repost_count + 1
 				post.save
 				@current_user.reposts.create(post: post)
-				post.user.activities.create(person: @current_user.id, description: "Retiped your Post")
+				post.user.activities.create(person: @current_user.id, description: "Retiped your tip", post_id: post.id)
 				
 				flash[:notice] = "Post as been retipped to your profile"
 			rescue => error
