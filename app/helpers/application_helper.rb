@@ -34,6 +34,22 @@ module ApplicationHelper
 		end	
 					
 	end	
+	def private_search (user)
+				
+		if 	user !=@current_user	
+			if user.private  
+				return @current_user.is_following.include? user
+			else
+				return true
+			end
+		else
+			return true
+		end	
+					
+	end	
+
+
+
 
 	def check(params)
 		@current_user.send(params) ? "checked" : nil

@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 	layout 'main/application'
-
+	include ApplicationHelper
 	# ---------------
  	# Validations
 	# -------------
@@ -119,6 +119,7 @@ class DashboardController < ApplicationController
 	# Find users & post with similar keywords.
 
 	def search
+		
 		@user =  @current_user # Map current user to user in profile/_user
 		if params[:retips]
 			post = Post.find(params[:retips])
@@ -128,7 +129,13 @@ class DashboardController < ApplicationController
 			
 			@users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
 			@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
-			@users_to_display = (@users + @posts).flatten.uniq
+			@users_before_display = (@users + @posts).flatten.uniq
+			@users_to_display=[]
+			@users_before_display.each do |user|
+				if private_search(user)
+				@users_to_display<<user
+				end
+			end
 		
 
 			if params[:source] && params[:source] == "autocomplete"
