@@ -104,11 +104,11 @@ class LandingController < ApplicationController
   end
 
   def create
-
+   
     if simple_captcha_valid?
     	@user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
-     
-      if Time.now.strftime("%Y")>params[:year]
+      @current_time=Time.now.strftime("%Y")
+      if @current_time > params[:year]
         @time= Time.now.strftime("%Y").to_i-params[:year].to_i
         if @time>=18
         	if @user.save
