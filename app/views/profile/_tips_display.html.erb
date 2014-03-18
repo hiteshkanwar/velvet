@@ -3,7 +3,7 @@
 <div class="tip-iiner">
     <ul class="left">
         <li><p><%= @user.posts.size %><span>TIPS</span></p></li>
-        <li><p><%= @user.following.collect(&:follower_id).uniq.size %><span>ACQUAINTING</span></p></li>
+        <li><p><%= @user.following.collect(&:user_id).uniq.size %><span>ACQUAINTING</span></p></li>
         <li><p><%= @user.followers.collect(&:follower_id).uniq.size %><span>ACQUAINTANCES</span></p></li>
     </ul><!-- ul -->
     <div class="tip-buttons right" style="margin-top: 20px;">
@@ -17,8 +17,12 @@
     
     <!-- <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a> -->
     <% if unblock_user_detail(@user,@curent_user)==true %>
-    <a href="#message_form" class="button fancybox">Message</a>
-    <a href="/<%= @current_user.username %>/lists?user_id=<%= @user.id %>" class="button">Add to list</a>
+    <%if !@current_user.followers.blank?%>
+        <% if @current_user.followers.collect(&:follower_id).include? @user.id %>
+        <a href="#message_form" class="button fancybox">Message</a>
+        <a href="/<%= @current_user.username %>/lists?user_id=<%= @user.id %>" class="button">Add to list</a>
+    <% end %>
+    <% end %>
     <% end %>
     <% end %>
     </div>
