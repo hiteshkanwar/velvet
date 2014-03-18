@@ -41,48 +41,4 @@ $(document).on("click", "#text_<%=post.id%>", function(event){
 
 
 });
-
-
-
-$(document).ready(function(){
-  $("#reply_post_submit").click(function () { 
-    var body_data1 = $("#reply_post_submit").attr("name");
-    var id = $("#reply_post_submit").attr("posts");
-    var body_data = $("#"+body_data1).val();
-    var body_present=$("#file1").val();
-    if (body_present != "")
-    {
-      
-      var data = new FormData();
-      jQuery.each($('#file1')[0].files, function(i, file) {
-      data.append('file-'+i, file);
-      data.append('body',body_data)
-      data.append('id',id)
-        });
-      $("#file1").val("");
-      $.ajax({
-          type: "POST",
-          url: "/post/comment",
-          data:  data ,
-          cache: false,
-          contentType: false,
-          processData: false,
-          enctype: 'multipart/form-data'
-         
-          
-      });
-      return false;
-    }
-    else
-      {
-          $.ajax({
-            type: "POST",
-            url: "/post/comment",
-            data:  {body: body_data ,id: id }
-           });
-        return false;
-      }
-  });
-});
-
 </script>
