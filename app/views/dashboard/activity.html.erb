@@ -17,62 +17,58 @@
       <%= render :partial => '/sidebar/serve_ad' %>
     </div>
 
-    <div class="right-section right">
+      <div class="right-section right">
 
-      <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
-        <ul>
+            <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
+                <ul>
                        
-          <!-- Other notfications -->
-         <% @activities.each do |activity| %>
-         
-            <%#if @current_user.id == activity.person%>
-              <% user = User.find(activity.person) %>
-                
-                <div class="m-header" style="margin-bottom: 10px;">
-                  <div class="span6">
-                    <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
-                    
-                    <% if  activity.description=="Retiped your tip" && user.id != @current_user.id%>
-                    <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a>
-                      
-                      Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
-                      <% elsif activity.description==  "Admired your tip" && user.id == @current_user.id%>
-                      You Admired <%=User.find(activity.user_id).name%> <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
-                      <%else%>
-                      <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a>
-                        <% if activity.description== "Admired your tip" %>
-                      <span><%#= activity.description %> </span> 
-                      Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
-                      <%elsif activity.description== "Retiped your tip"  %>
-                      <span><%#= activity.description %></span>
-                      Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
-                      <%end%>
-                      <% end %>
-                    </p>
-                  </div>
-                  <div class="span2 other-admir">
-                    <% date = activity.updated_at %>
-                    <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-                  </div>
-                </div>
-            <%#end%>  
-           <% end %>
-            <!-- Aquainted -->
-            <% @followed.each do |user| %>
-            <div class="m-header" style="margin-bottom: 10px;">
-              <div class="span6">
-                <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
-                <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
-              </div>
-              <div class="span2 other-admir">
-                <% date = user.following.find_by_user_id(@current_user.id).updated_at %>
-                <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
-              </div>
-            </div>
-            <% end %>
+                   <!-- Other notfications -->
+                   <% @activities.each do |activity| %>
+                   <% user = User.find(activity.person) %>
+                   <div class="m-header" style="margin-bottom: 10px;">
+                        <div class="span6">
+                        <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
 
-        </ul>
-      </div> 
+                        <p class="kelly">
+                          <%if activity.description=="Admired your tip"%>
+                          <%if User.find(activity.user_id).name == @current_user.name%>
+                            You Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
+                            <%else%>
+                              You Admired <%=User.find(activity.user_id).name%><a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
+                            <%end%>
+                          <%elsif activity.description== "Retiped your tip"%>
+                          <a href="<%= user.username %>"><%= user.name %> </a>
+                          Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                          <%else%>
+                           <a href="<%= user.username %>"><%= user.name %> </a>
+                            <span> <%= activity.description %></span> 
+                          <%end%>
+                        </p>
+                        </div>
+                        <div class="span2 other-admir">
+                            <% date = activity.created_at %>
+                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                        </div>
+                    </div>
+                   <% end %>
+
+                    <!-- Aquainted -->
+                    <% @followed.each do |user| %>
+                    <div class="m-header" style="margin-bottom: 10px;">
+                        <div class="span6">
+                        <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
+                        <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
+                        </div>
+                        <div class="span2 other-admir">
+                            <% date = user.following.find_by_user_id(@current_user.id).created_at %>
+                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                </ul>
+            </div>
+
     
 
 
