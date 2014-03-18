@@ -38,7 +38,8 @@
                             <%end%>
                           <%elsif activity.description== "Retiped your tip"%>
                           <a href="<%= user.username %>"><%= user.name %> </a>
-                          Retiped your <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                          
+                          Retiped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
                           <%else%>
                            <a href="<%= user.username %>"><%= user.name %> </a>
                             <span> <%= activity.description %></span> 
