@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
     @current_user.messages.not_trash.update_all(seen: true)
   end
   def show_conversation
+
     @message = @current_user.all_messages.not_trash.find(params[:id])
     respond_to do |format|
       format.js # actually means: if the client ask for js -> return file.js
@@ -25,7 +26,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-  if @current_user.followers.collect(&:follower_id).include? params[:message]["receiver_id"]  
+  #if @current_user.followers.collect(&:follower_id).include? params[:message]["receiver_id"]  
     if !params[:message].nil?
       @message = @current_user.send_messages.new(params[:message])
       
@@ -85,9 +86,9 @@ class MessagesController < ApplicationController
       end
 
     end
-  else
-    redirect_to messages_path , :notice => "Only acquaintances able to send message"
-  end  
+  # else
+  #   redirect_to messages_path , :notice => "Only acquaintances able to send message"
+  # end  
 
 end
 
