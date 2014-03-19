@@ -101,7 +101,7 @@ include EmojiHelper
 	def comment
 		
 		post = Post.find(params[:id])
-		if post && params[:body]
+		if post || params[:body]
 			
 			@comment=post.comments.new
 			@comment.user_id= @current_user.id

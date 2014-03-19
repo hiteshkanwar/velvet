@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
   end
   
   def new
+
     @message = @current_user.send_messages.new
     @attachment = @message.attachments.new
     @parent_message = @current_user.all_messages.find(params[:parent_id])  rescue nil
@@ -26,10 +27,19 @@ class MessagesController < ApplicationController
   end
 
   def create
+
   #if @current_user.followers.collect(&:follower_id).include? params[:message]["receiver_id"]  
     if !params[:message].nil?
-      @message = @current_user.send_messages.new(params[:message])
-      
+       if params[:receiver_id].nil?
+        if !@current_user.all_messages.blank?
+            params[:message][:parent_id] = @current_user.all_messages.last.id
+            @message = @current_user.send_messages.new(params[:message])
+        else
+           @message = @current_user.send_messages.new(params[:message])
+        end    
+       else
+         @message = @current_user.send_messages.new(params[:message])
+       end
       # @message.avatar=params[:message][:attachments_attributes]
     
       if @message.save
