@@ -34,12 +34,22 @@
                           <%if User.find(activity.user_id).name == @current_user.name%>
                             You Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
                             <%else%>
-                              You Admired <%=User.find(activity.user_id).name%><a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
+                              You Admired <%=User.find(activity.user_id).name%>'s<a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
                             <%end%>
                           <%elsif activity.description== "Retiped your tip"%>
                           <a href="<%= user.username %>"><%= user.name %> </a>
                           
                           Retiped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                          <%elsif activity.description== "Acquainted You"%>
+                           <a href="<%= user.username %>"><%= user.name %> </a>
+                           Acquainted <a href="<%=User.find(activity.user_id).username%>"><%=User.find(activity.user_id).name%></a>
+                          <%elsif activity.description == "Sent you a message"%>
+                           <% if @current_user.id == activity.person%>
+                              You sent <%=User.find(activity.user_id).username%>'s a message
+                           <%else%>
+                            <a href="<%= user.username %>"><%= user.name %> </a>
+                            <span> <%= activity.description %></span> 
+                           <%end%>
                           <%else%>
                            <a href="<%= user.username %>"><%= user.name %> </a>
                             <span> <%= activity.description %></span> 
