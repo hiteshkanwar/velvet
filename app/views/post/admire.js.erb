@@ -1,1 +1,2 @@
 $("#admire_<%=@post.id%>").html("<%= escape_javascript( render :partial => 'admire',  :locals => {:post => @post} ) %> ")
+$('#star_<%= @post.id%>').show()

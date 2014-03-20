@@ -7,9 +7,12 @@
          
          <div style="font-size: 12px;"><a href="#" class="re-tip">Retiped by </a><%=user%></div>
       <%end%>
-            <% if !post.admires.where(user_id: @current_user.id).empty? %>
+           <div id="star_<%= post.id%>" style="display:none;"> 
+            <%# if !post.admires.where(user_id: @current_user.id).empty? %>
                 <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 616px;margin-bottom: -33px;margin-top:-5px;">
-            <% end %>
+            <%# end %>
+            </div>
+          
         <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a></div>
         <div class="box-right right">
         <h2><a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
@@ -92,7 +95,7 @@
     <div class="reply-tip">
       <%= render :partial => "profile/tip_reply", :locals => { :post => post } %>
     </div>
-    </div>
+  </div>
 
     </div>
     <% if unblock_user_detail(@user,@curent_user)==true %>
