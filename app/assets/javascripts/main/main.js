@@ -355,12 +355,14 @@ $(document).ready(function(){
       {
         
         var body= $("#tip").val();
+        if (body != ""){
         $.ajax({
             type: "POST",
             url: "/post/create",
             data:  {body: body }
            });
         return false;
+      }
       }
   });
 });
