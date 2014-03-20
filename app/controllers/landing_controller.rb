@@ -225,6 +225,7 @@ class LandingController < ApplicationController
   	session[:email] = nil
     session[:username] = nil
     @current_user = nil
+    flash[:notice] = "successfully logout"
 	  redirect_to :root
   end
 
