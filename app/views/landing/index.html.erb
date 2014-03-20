@@ -134,8 +134,8 @@
             <form class="verfy" action="/landing/validate_login/1" method="post">
               <header>Login</header>
               <span>
-                <input type="text" name="email" style="width:400px;" placeholder="Email"  class="dd">
-                <input type="password" name="password" style="width:400px;margin-top:-50px;" placeholder="Password"  class="dd">
+                <input type="text" name="email" style="width:400px;" placeholder="Email"  class="dd" required>
+                <input type="password" name="password" style="width:400px;margin-top:-50px;" placeholder="Password"  class="dd" required>
                 <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
               </span> 
               
@@ -156,12 +156,12 @@
               <header>Signup</header>
               <span>
 
-                <input type="text" class="dd"  style="width:400px;" name="name" value="<%= session[:name] %>" Placeholder="Name"/><br/>
-                <input type="text" class="dd" id="user_name" style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username"/>
+                <input type="text" class="dd"  style="width:400px;" name="name" value="<%= session[:name] %>" Placeholder="Name" required/><br/>
+                <input type="text" class="dd" id="user_name" style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username" required/>
 
-                <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email"/>
+                <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email" required/>
                 
-                <input type="password" class="dd" style="width:400px;margin-top:-50px;" name="password" Placeholder="Password"/>
+                <input type="password" class="dd" style="width:400px;margin-top:-50px;" name="password" Placeholder="Password" required/>
                 <div style="margin-top:-50px;">
                  
                     
