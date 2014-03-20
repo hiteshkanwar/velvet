@@ -3,7 +3,8 @@
 <div class="box-comment-hold">
     <div class="box-left left"><%= image_tag comment.user.user_avatar, :width => "47" %></div>
     <div class="box-right right">
-    <h2><%= comment.user.name %><span><a href="/<%= post.user.username %>"> @<%= comment.user.username %></a></span></h2>
+        
+    <h2><%= comment.user.name %><span><a href="/<%= comment.user.username %>"> @<%= comment.user.username %></a></span></h2>
     <p><%= raw emojify(linkify(link_urls_and_users(comment.body))) %></p>
     <div class="bottom-left"><!--<a href="#" class="reply">reply</a><a href="#" class="re-tip">retip</a><a href="#" class="admire">admire</a><a href="#" class="eye">5</a><a href="#" class="more">more</a>--></div>
     <%if !comment.avatar.blank?%>
