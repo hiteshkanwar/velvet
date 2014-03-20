@@ -36,6 +36,7 @@
              <%= f.text_area :message_text,:placeholder=>"Message",:rows=>8,:id=>"message_text" %>
                <%= f.fields_for :attachments %>
                 <%#= f.link_to_add "Add Attachment", :attachments %>
+                    <a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png" id="fumugi" style="width: 42px; float:left;"></a> 
               <%= f.submit "Send Message",:class=>"button" %>
           <% end %>  
         </div>
@@ -51,7 +52,28 @@ $(document).ready(function(){
   VL.message.receiverSearch();
   VL.message.validateReceiver();
 });
+
+
+
+$(document).on("click", "#message_text", function(event){
+  if (localStorage.funmoji != 'null' && localStorage.funmoji != undefined) {
+
+    var text = $('#message_text').val();
+    var code = localStorage.funmoji;
+    $.ajax({
+      type: "POST",
+       url: '/post/funmoji_post?post_data='+text+' '+code
+     });
+    $("#message_text").val(text+' '+code)
+    localStorage.funmoji = 'null'
+
+  }
+
+
+ });
+
+
 </script>
 
-<style>
+
 

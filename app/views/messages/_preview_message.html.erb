@@ -1,7 +1,8 @@
 <%= image_tag message.sender.user_avatar, :width => "47"%>
 <div class="description">
   <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a> <!-- <a href="/<%#= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
-  <p><%= message.message_text %> </p>
+  <p><%= raw emojify(linkify(link_urls_and_users(message.message_text)))%> </p>
+  <br/>
   <% if message.attachments.present? %>
   <p style="height:125px">
     <a href="<%=message.attachments.first.document_url %>" class="fancy-popup">
