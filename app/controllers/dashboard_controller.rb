@@ -127,7 +127,7 @@ class DashboardController < ApplicationController
 		else
 
 			
-			@users = User.where("lower(username) like ? OR lower(name) like ?", "%#{params[:q]}%", "%#{params[:q]}%")||User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+			@users = User.where("lower(username) like ? OR lower(name) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
 			@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
 			@users_before_display = (@users + @posts).flatten.uniq
 			@users_to_display=[]
@@ -161,7 +161,7 @@ class DashboardController < ApplicationController
 
 	def discover
 		@posts=[]
-		@all_posts = Post.find(:all, :order => "created_at desc")
+		@all_posts = Post.find(:all, :order => "updated_at desc")
 		
 		followers=Followings.where(:follower_id=>@current_user.id).collect(&:user_id)
 		@all_posts.each do |post|
