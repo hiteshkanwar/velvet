@@ -355,6 +355,7 @@ $(document).ready(function(){
       {
         
         var body= $("#tip").val();
+        $("#tip").val("");
         if (body != ""){
         $.ajax({
             type: "POST",
