@@ -355,6 +355,7 @@ $(document).ready(function(){
       {
         
         var body= $("#tip").val();
+        $("#tip").val("");
         if (body != ""){
         $.ajax({
             type: "POST",
@@ -416,6 +417,7 @@ $(document).ready(function(){
     }
     else
       {
+        if (body_data != ""){
           $.ajax({
             type: "POST",
             url: "/post/comment",
@@ -423,5 +425,6 @@ $(document).ready(function(){
            });
         return false;
       }
+    }
   });
 });
