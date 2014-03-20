@@ -382,21 +382,23 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-  $("#reply_post_submit").click(function () { 
-    var body_data1 = $("#reply_post_submit").attr("name");
-    var id = $("#reply_post_submit").attr("posts");
+  $(".reply123").click(function () { 
+    var post_co_id= $(this).attr("id")
+    var body_data1 = $("#"+post_co_id).attr("name");
+    var id = $("#"+post_co_id).attr("posts");
     var body_data = $("#"+body_data1).val();
-    var body_present=$("#file1").val();
+    var body_present=$("#file_"+id).val();
     if (body_present != "")
     {
-      
+     
       var data = new FormData();
-      jQuery.each($('#file1')[0].files, function(i, file) {
+      jQuery.each($('#file_'+id)[0].files, function(i, file) {
       data.append('file-'+i, file);
       data.append('body',body_data)
       data.append('id',id)
         });
-      $("#file1").val("");
+      $("#file_"+id).val("");
+     
       $.ajax({
           type: "POST",
           url: "/post/comment",
