@@ -80,12 +80,17 @@ class LandingController < ApplicationController
           redirect_to :root
         end  
       else
+        if user
+          flash[:notice] = "Please verify your email"
         
-        flash[:notice] = "Please verify your email"
-        
-        session[:validate_email] = "validate_email_false"
-        session[:resend] = params[:email]
-        redirect_to :root
+          session[:validate_email] = "validate_email_false"
+          session[:resend] = params[:email]
+          redirect_to :root
+        else  
+          flash[:notice] = "Your login details are wrong"
+          redirect_to :root
+        end
+       
       end
     
   end
