@@ -126,36 +126,58 @@ class DashboardController < ApplicationController
 			@users_to_display = post.reposts.map { |repost| repost.user }.flatten.uniq
 		else
 
-			
-			@users = User.where("lower(username) like ? OR lower(name) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
-			@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
-			@users_before_display = (@users + @posts).flatten.uniq
-			@users_to_display=[]
-			@users_before_display.each do |user|
-				if private_search(user)
-				@users_to_display<<user
+		   if !params[:q].include?"#"
+				@users = User.where("lower(username) like ? OR lower(name) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+				@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
+				@users_before_display = (@users + @posts).flatten.uniq
+				@users_to_display=[]
+				@users_before_display.each do |user|
+					if private_search(user)
+					@users_to_display<<user
+					end
 				end
-			end
-		
+                
 
-			if params[:source] && params[:source] == "autocomplete"
-				autocomplete = @users_to_display.map { | user | 
-					{ label: "#{user.name} @#{user.username}", value: user.username,:id=>user.id }
-				}
+				if params[:source] && params[:source] == "autocomplete"
+					autocomplete = @users_to_display.map { | user | 
+						{ label: "#{user.name} @#{user.username}", value: user.username,:id=>user.id }
+					}
 
-				logger.debug(autocomplete)
+					logger.debug(autocomplete)
 
-				respond_to do |format|
-			      format.json {render :json => autocomplete }
-			    end
-				
+					respond_to do |format|
+				      format.json {render :json => autocomplete }
+				    end
+					
+				else
+
+					
+					@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
+					render 'search'
+					
+				end
 			else
+		    
+            @hashtags=HashTag.where("lower(name) like ?","%#{params[:q]}%")
+            if params[:source] && params[:source] == "autocomplete"
+					autocomplete = @hashtags.map { | hash | 
+						{ label: "#{hash.name}", value: hash.name }
+					}
 
-				
-				@users_to_display.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
-				render 'search'
-				
-			end
+					logger.debug(autocomplete)
+
+					respond_to do |format|
+				      format.json {render :json => autocomplete }
+				    end
+					
+				else
+
+					
+					@hashtags.empty? ? flash[:notice] = "No results" : flash[:notice] = nil
+					render 'search'
+					
+				end
+		    end
 		end
 	end
 
