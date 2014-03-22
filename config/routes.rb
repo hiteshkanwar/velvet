@@ -25,7 +25,7 @@ Velvet::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Static pages
-
+   match '/brands',     :to => 'landing#brands'
    match '/privacy',     :to => 'landing#privacy'
    match '/about',       :to => 'landing#about'
    match '/terms',       :to => 'landing#terms'
