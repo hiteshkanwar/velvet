@@ -12,7 +12,8 @@
     <input type="text" value="Edit Account" class="button">
     -->
     <% if @current_user == @user %>
-    <a href="<%= @current_user.username %>/edit" class="button">Edit my Profile</a>
+
+    <a href="<%= root_url%><%= @current_user.username %>/edit" class="button">Edit my Profile</a>
     <% else %>
     
     <!-- <a href="/messages/new?receiver_id=<%= @user.id %>&receiver_name=<%= @user.name %>" class="button">Message</a> -->

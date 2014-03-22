@@ -1,7 +1,7 @@
 <div class="footer border-radius box-space">
     Trends
     <ul>
-        <% HashTag.trending.each do |tag| %>
+        <% HashTag.trending.order("created_at DESC").limit(6).each do |tag| %>
             
             <li><a href="#"><%= raw link_urls_and_users(tag.name) %></a></li>
         <% end %>

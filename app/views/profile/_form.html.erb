@@ -13,8 +13,7 @@
      <div id="image" style="">  
               <img src="../assets/camera.png" alt="camera" height="42" width="42" style="\"> 
             </div>
-    <input type="file" id="file_<%=post.id%>" name="file" size="10" style="position: absolute; margin-left: -59px; margin-top: 12px; opacity: 0;"/> 
-
+    <input type="file" id="file_<%=post.id%>" name="file" size="10" style="position: absolute; margin-left:51px; margin-top: 12px; opacity: 0; width: 146px" class="file_upload"/> 
     <input  style="width: 12%; float: right; margin-top: 9px; margin-right: 7px;" type="submit" value="Reply" class="button reply123" id="text1_<%=post.id%>" name="text_<%=post.id%>" posts="<%=post.id%>">
 	</form>
 </div>
@@ -42,3 +41,10 @@ $(document).on("click", "#text_<%=post.id%>", function(event){
 
 });
 </script>
+<style>
+    @-moz-document url-prefix() {
+    .file_upload{
+      margin-left: -51px!important;
+    }
+    }
+  </style>
