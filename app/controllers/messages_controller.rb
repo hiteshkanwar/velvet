@@ -45,7 +45,8 @@ class MessagesController < ApplicationController
       if @message.save
         # redirect_to "/"+params[:username]+"/messages/new"
          User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
-         redirect_to messages_path
+         flash[:notice] = "message send sucessfully"
+         redirect_to messages_path  
       else
         @messages = @current_user.send_messages.order("created_at desc")
         @attachment = @message.attachments.new
