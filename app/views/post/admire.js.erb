@@ -1,2 +1,3 @@
 $("#admire_<%=@post.id%>").html("<%= escape_javascript( render :partial => 'admire',  :locals => {:post => @post} ) %> ")
-$('#star_<%= @post.id%>').show()
+alert("Admired the tip successfully");
+$('#star_<%= @post.id%>').show();

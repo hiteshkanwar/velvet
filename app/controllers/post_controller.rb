@@ -32,13 +32,14 @@ include EmojiHelper
 	end
 
 	def admire
+
 		post = Post.find(params[:post_id])
 		@post = Post.find(params[:post_id])
 		if @post
 			@current_user.admires.create(post_id: @post.id)
 			if !@post.user.nil? && !@post.user.blank?
 			  @post.user.activities.create(person: @current_user.id, description: "Admired your tip",post_id: post.id)
-			  flash[:notice] = "Admired"
+			  flash[:notice] = "Admired the tip"
 			 end
 		end
 		respond_to do |format|
@@ -53,7 +54,7 @@ include EmojiHelper
 		@post = Post.find(params[:post_id])
 		if post && admire = @current_user.admires.find_by_post_id(post.id)
 			@current_user.admires.delete(admire)
-			flash[:notice] = "Unadmired post"
+			flash[:notice] = "Unadmired the tip"
 		end
 		respond_to do |format|
 			format.js	
@@ -72,7 +73,7 @@ include EmojiHelper
 				@current_user.reposts.create(post: post)
 				post.user.activities.create(person: @current_user.id, description: "Retiped your tip", post_id: post.id)
 				
-				flash[:notice] = "Post as been retipped to your profile"
+				flash[:notice] = "Tip has been retipped"
 			rescue => error
 			end
 		end

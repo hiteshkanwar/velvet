@@ -2,3 +2,4 @@
 $('#retip_<%=@post.id%>').html("<%= escape_javascript render(:partial => 'post/retip', :locals => { :@post => @post }) %>");
 $('#retweet_<%=@post.id%>').html("<%= escape_javascript render(:partial => 'messages/retweeted', :locals => { :@post => @post }) %>");
 $.fancybox.close();
+alert("Tip has been retipped")
