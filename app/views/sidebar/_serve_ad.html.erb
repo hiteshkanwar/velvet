@@ -10,8 +10,14 @@
       <%= image_tag advertiser.campaign_image_url,:width=>"47",:height=>"" %>
       <%= advertiser.website %>
     </div>
+
+    <%@url= advertiser.website %>
+    <%if @url.include?"http"%>
+    <%else%>
+     <%@url= "http://"+@url%>
+     <%end%>
      <div style=" float:right; margin-top: 12px;">
-      <a target="_blank" href="<%= advertiser.website %>"><%= image_tag advertiser.campaign_image_url,:width=>"47px",:height=>"" %></a>
+      <a  href="<%= @url %>" target="_blank"><%= image_tag advertiser.campaign_image_url,:width=>"47px",:height=>"" %></a>
         <% if advertiser.ga_account.present? && advertiser.ga_website.present? %>
           <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
           <script type="text/javascript">
