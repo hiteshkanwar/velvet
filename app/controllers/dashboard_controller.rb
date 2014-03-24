@@ -101,6 +101,8 @@ class DashboardController < ApplicationController
 		# ---
 		
 		@posts - @current_user.posts.order('created_at desc').limit(10)  # when queried for notification, don't include user posts
+	   @advertisers=Advertiser.order('created_at DESC').limit(5).all
+	   
 	end
 
 	def paginate
