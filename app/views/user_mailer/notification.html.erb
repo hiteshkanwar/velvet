@@ -12,7 +12,12 @@
 
 
 <p style="color:#000000; font-weight:normal; font-size:14px; margin-bottom:30px;text-align:left;line-height:140%;">
-<a href="http://beta.tippinthevelvet.com/activity">Check</a>
+	
+	<%if @activity.description.include?"message" %>
+       <a href="http://beta.tippinthevelvet.com/messages">Check</a>
+	<%else%>
+       <a href="http://beta.tippinthevelvet.com">Check</a>
+    <%end%>
 </p>
 
 <p style="color:#000000; font-weight:normal; font-size:11px; margin-top:20px;text-align:left;line-height:140%;">
