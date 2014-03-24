@@ -1,8 +1,7 @@
 <%if request.fullpath.include?"q"%>
+  <%if !params[:q].nil? %>
     <%if !params[:q].include?"#"%>
       <% @users_to_display.each do |user| %>
-
-
         <%if @current_user.id != user.id%>
           <div class="tip-holder">
             <div class="box acq-box border-radius">
@@ -29,44 +28,69 @@
         <%end%> 
       <% end %>
     <%else%>
-       <%@hashtags.each do |hash|%>
-          <% Post.where("body like ?", "%#{hash.name}%").each do |hash|%>
 
-            <% user=User.find(hash.user_id) %>
-              <div class="tip-holder">
-                <div class="box acq-box border-radius">
-                  <div class="box-left left"><%= image_tag user.user_avatar, :width => "116", :style=> "border-radius: 0px;" %></div>
-                  <div class="box-center left">
-                  <h2><%= user.name %><span><a href="/<%= user.username %>">@<%= user.username %></a></span></h2>
-                  <p><%= hash.body%></p>
-                  </div>
-                  
-                      
-                  <div class="clear"></div>
-                  </div><!-- .box -->
-                  <!-- .box-comment -->
-                  <div class="clear"></div>
-              </div>
-          <%end%>
+      <%@hashtags.each do |hash|%>
+        <% Post.where("body like ?", "%#{hash.name}%").each do |hash|%>
+          <% user=User.find(hash.user_id) %>
+          <div class="tip-holder">
+          <div class="box acq-box border-radius">
+            <div class="box-left left"><%= image_tag user.user_avatar, :width => "116", :style=> "border-radius: 0px;" %></div>
+            <div class="box-center left">
+            <h2><%= user.name %><span><a href="/<%= user.username %>">@<%= user.username %></a></span></h2>
+            <p><%= hash.body%></p>
+            </div>               
+            <div class="clear"></div>
+            </div><!-- .box -->
+            <!-- .box-comment -->
+            <div class="clear"></div>
+          </div>
         <%end%>
+      <%end%>
     <%end%>
-
-<%else%>
-  <% Post.where("body like ?", "%#{params[:q]}%").each do |hash|%>
-  <% user=User.find(hash.user_id) %>
-   <div class="tip-holder">
-        <div class="box acq-box border-radius">
+  <%else%>
+    <% @users_to_display.each do |user| %>
+      <%if @current_user.id != user.id%>
+        <div class="tip-holder">
+          <div class="box acq-box border-radius">
           <div class="box-left left"><%= image_tag user.user_avatar, :width => "116", :style=> "border-radius: 0px;" %></div>
           <div class="box-center left">
           <h2><%= user.name %><span><a href="/<%= user.username %>">@<%= user.username %></a></span></h2>
-          <p><%= hash.body%></p>
+          <p><%= raw emojify(linkify(link_urls_and_users(user.posts.last.body))) if user.posts.last %></p>
           </div>
-        
-            
+          <% if @user.is_following.include? user %>
+            <form method="get" action="/dashboard/unacquaint/<%= user.username %>">
+            <div class="box-right right"><input type="submit" value="Unacquaint" class="button black"></div>
+            </form>
+          <% else %> 
+            <form method="get" action="/dashboard/acquaint/<%= user.username %>">
+              <div class="box-right right"><input type="submit" value="Acquaint" class="button"></div>
+            </form>
+          <% end %>
+                
             <div class="clear"></div>
-        </div><!-- .box -->
-        <!-- .box-comment -->
-        <div class="clear"></div>
-      </div>
+            </div><!-- .box -->
+            <!-- .box-comment -->
+            <div class="clear"></div>
+          </div>
+        <%end%> 
+    <% end %> 
+  <%end%>
+<%else%>
+  <% Post.where("body like ?", "%#{params[:q]}%").each do |hash|%>
+    <% user=User.find(hash.user_id) %>
+    <div class="tip-holder">
+      <div class="box acq-box border-radius">
+        <div class="box-left left"><%= image_tag user.user_avatar, :width => "116", :style=> "border-radius: 0px;" %></div>
+        <div class="box-center left">
+        <h2><%= user.name %><span><a href="/<%= user.username %>">@<%= user.username %></a></span></h2>
+        <p><%= hash.body%></p>
+        </div>
+      
+          
+      <div class="clear"></div>
+      </div><!-- .box -->
+      <!-- .box-comment -->
+      <div class="clear"></div>
+    </div>
   <%end%>
 <%end%>
