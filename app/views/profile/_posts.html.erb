@@ -1,7 +1,8 @@
 <%  if local_assigns[:disable_post].nil? %>
 <div class="write-tip">
     <form action="/post/create" name="tips" method="post" enctype="multipart/form-data" id="new_tip">
-    <textarea type="text" name="post[body]" id="tip" style="width:633px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip" required></textarea>
+    <textarea type="text" name="post[body]" id="tip" style="height: 92px; width:619px; max-width: 619px; min-width: 619px;" rows="3" cols="50" maxlength="170" value="" placeholder="Write a Tip" required></textarea>
+
     <br/>
     <div id="images_preview"></div>
      <div id="comment" style=" display:none; ">
