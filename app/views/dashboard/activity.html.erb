@@ -73,8 +73,14 @@
                         </div>
                         <div class="span2 other-admir">
                             <% date = activity.created_at %>
-
-                            <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
+                            
+                            <p><%if time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") %>
+                              
+                            on <%= to_date(date) %>
+                             <%else%>
+                              <%=time_ago_in_words(date)%> ago
+                             <%end%>
+                            </p>
                         </div>
                     </div>
                    <% end %>
