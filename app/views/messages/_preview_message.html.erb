@@ -1,3 +1,4 @@
+<%if @current_user.id != message.sender.id%>
 <%= image_tag message.sender.user_avatar, :width => "47"%>
 <div class="description">
   <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a> <!-- <a href="/<%#= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
@@ -31,8 +32,9 @@
     </div> 
     <%end%>     
         <%else%>
-        <%=link_to "View conversation",show_conversation_message_path(root_message),:class=>"fancybox",:remote=>true%> - 
         
+        <%=link_to "View conversation",show_conversation_message_path(root_message),:class=>"fancybox",:remote=>true%> - 
+      
   <%end%>
 
   <span> <%= to_date(message.created_at) %></span>
@@ -40,3 +42,52 @@
   <%#= link_to "Delete", move_to_trash_message_path(message)%>
 </div>
 <div class="clear"></div>
+<%else%>
+<%message=Message.find(:all,:conditions=>['sender_id =? and receiver_id = ?', message.receiver_id , message.sender_id]).last%>
+<%if !message.blank?%>
+
+  <%= image_tag message.sender.user_avatar, :width => "47"%>
+  <div class="description">
+    <h2><a href="/<%= message.sender.username %>"><%= message.sender.name %></a> <!-- <a href="/<%#= message.receiver.username %>"><%#= message.receiver.name %></a> --></h2>
+    <p><%= raw emojify(linkify(link_urls_and_users(message.message_text)))%> </p>
+    <br/>
+    <% if message.attachments.present? %>
+    <p style="height:125px">
+      <a href="<%=message.attachments.first.document_url %>" class="fancy-popup">
+        <%= image_tag message.attachments.first.document.url(:thumb), :width => "120"%>  
+      </a>  
+    </p>
+    <% end %>  
+
+    <%#=link_to "Reply",new_message_path(:parent_id=>message.id) %> 
+   
+    <%if !message.list_id.nil? %>
+    <% if message.sender_id != @current_user.id %>
+      
+      <div id="message_list_<%=message.list_id%>">
+        <%if !SubscribeAndInvitation.find_by_list_id(message.list_id).nil? %>
+          <%if SubscribeAndInvitation.find_by_list_id(message.list_id).subscribe %>
+            <%= render :partial=>"dashboard/message_unsubscribe" , :locals => { :message => message } %>  
+          <%else%> 
+            <%= render :partial=>"dashboard/message_subscribe" , :locals => { :message => message } %>
+          <%end%>  
+       <%else%>
+          <%= render :partial=>"dashboard/message_subscribe" , :locals => { :message => message } %>
+       <%end%>
+       
+
+      </div> 
+      <%end%>     
+          <%else%>
+          
+          <%=link_to "View conversation",show_conversation_message_path(root_message),:class=>"fancybox",:remote=>true%> - 
+        
+    <%end%>
+
+    <span> <%= to_date(message.created_at) %></span>
+    <!--<a href="#">Forward</a> --> 
+    <%#= link_to "Delete", move_to_trash_message_path(message)%>
+  </div>
+  <div class="clear"></div>
+  <%end%>
+<%end%>
