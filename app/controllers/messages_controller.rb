@@ -129,7 +129,15 @@ end
   end
 
   def search_receivers
-    @users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    @users=[]
+    @user = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    @user_follower=current_user.followers
+    @user.each do |user|
+      if @user_follower.collect(&:follower_id).include? user.id
+        @users << user
+      end
+    end
+    
     autocomplete = @users.map { | user | 
         { label: "#{user.name} @#{user.username}", value: "#{user.name} @#{user.username}",:id=>user.id ,:user_avatar=>user.user_avatar}
       }
