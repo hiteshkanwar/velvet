@@ -38,9 +38,13 @@
                                 You Admired <%=User.find(activity.user_id).name%>'s<a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
                               <%end%>
                           <%elsif activity.description== "Retiped your tip"%>
+                          <%if user.id != @current_user.id%>
                             <a href="<%= user.username %>"><%= user.name %> </a>
                           
-                            Retiped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                            Retipped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                            <%else%>
+                             You Retipped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                            <%end%>
                           <%elsif activity.description== "Acquainted You"%>
                             <% if user.id != @current_user.id %>
                               <a href="<%= user.username %>"><%= user.name %> </a>
@@ -69,7 +73,7 @@
                         </div>
                         <div class="span2 other-admir">
                             <% date = activity.created_at %>
-                           
+
                             <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
                         </div>
                     </div>
