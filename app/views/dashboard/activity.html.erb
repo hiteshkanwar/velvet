@@ -24,6 +24,7 @@
                        
                    <!-- Other notfications -->
                    <% @activities.each do |activity| %>
+                  
                    <% user = User.find(activity.person) %>
                    <div class="m-header" style="margin-bottom: 10px;">
                         <div class="span6">
@@ -31,25 +32,35 @@
 
                         <p class="kelly">
                           <%if activity.description=="Admired your tip"%>
-                          <%if User.find(activity.user_id).name == @current_user.name%>
-                            You Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
-                            <%else%>
-                              You Admired <%=User.find(activity.user_id).name%>'s<a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
-                            <%end%>
+                            <%if User.find(activity.user_id).name == @current_user.name%>
+                              You Admired your <a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
+                              <%else%>
+                                You Admired <%=User.find(activity.user_id).name%>'s<a href='/dashboard/show_post/<%=activity.post_id%>'> tip</a>
+                              <%end%>
                           <%elsif activity.description== "Retiped your tip"%>
-                          <a href="<%= user.username %>"><%= user.name %> </a>
-                          
-                          Retiped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
-                          <%elsif activity.description== "Acquainted You"%>
-                           <a href="<%= user.username %>"><%= user.name %> </a>
-                           Acquainted <a href="<%=User.find(activity.user_id).username%>"><%=User.find(activity.user_id).name%></a>
-                          <%elsif activity.description == "Sent you a message"%>
-                           <% if @current_user.id == activity.person%>
-                              You sent <%=User.find(activity.user_id).username%>'s a message
-                           <%else%>
                             <a href="<%= user.username %>"><%= user.name %> </a>
-                            <span> <%= activity.description %></span> 
+                          
+                            Retiped <%= User.find(activity.user_id).name%>'s <a href='/dashboard/show_post/<%=activity.post_id%>'>tip</a>
+                          <%elsif activity.description== "Acquainted You"%>
+                            <% if user.id != @current_user.id %>
+                              <a href="<%= user.username %>"><%= user.name %> </a>
+                              Acquainted 
+                              <%if @current_user.id != User.find(activity.user_id).id%>
+                                <a href="<%=User.find(activity.user_id).username%>"><%=User.find(activity.user_id).name%></a>
+                              <%else%>
+                                 You
+                              <%end%>
+                            <%else%>
+                            You Acquainted <a href="<%=User.find(activity.user_id).username%>"><%=User.find(activity.user_id).name%></a>
                            <%end%>
+
+                          <%elsif activity.description == "Sent you a message"%>
+                            <% if @current_user.id == activity.person%>
+                              You sent <%=User.find(activity.user_id).username%>'s a message
+                            <%else%>
+                              <a href="<%= user.username %>"><%= user.name %> </a>
+                              <span> <%= activity.description %></span> 
+                            <%end%>
                           <%else%>
                            <a href="<%= user.username %>"><%= user.name %> </a>
                             <span> <%= activity.description %></span> 
@@ -58,6 +69,7 @@
                         </div>
                         <div class="span2 other-admir">
                             <% date = activity.created_at %>
+                           
                             <p><%= time_ago_in_words(date).include?("day") || time_ago_in_words(date).include?("month") || time_ago_in_words(date).include?("year") ? to_date(date) : time_ago_in_words(date) %></p>
                         </div>
                     </div>
