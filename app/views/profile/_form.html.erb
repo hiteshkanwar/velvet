@@ -3,7 +3,7 @@
 
 	<form action="/post/comment" name="reply" method="post" data-remote="true" enctype="multipart/form-data">
 		<%= image_tag @current_user.user_avatar, :width => "47" %>
-    <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip" required>
+    <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip" style="width:560px!important;" required>
 
 		<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 		<input name="id" type="hidden" value= "<%= post.id %>" />

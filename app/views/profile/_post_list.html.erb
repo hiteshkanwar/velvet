@@ -1,50 +1,46 @@
 <%  @user.all_posts(1).uniq.each do |post| %>
 <div class="tip-holder">
-
-    <div class="box border-radius">
-      <%if !post.reposts.blank?%>
-      <%user=User.find(post.reposts.last.user_id).name%>
-         
-         <div style="font-size: 12px;"><a href="#" class="re-tip">Retiped by </a><%=user%></div>
-      <%end%>
-           <div id="star_<%= post.id%>" style="display:none;"> 
+  <div class="box border-radius">
+    <%if !post.reposts.blank?%>
+      <%user=User.find(post.reposts.last.user_id).name%>    
+      <div style="font-size: 12px;"><a href="#" class="re-tip">Retiped by </a><%=user%>
+      </div>
+    <%end%>
+    <div id="star_<%= post.id%>" style="display:none;"> 
             <%# if !post.admires.where(user_id: @current_user.id).empty? %>
-                <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 616px;margin-bottom: -33px;margin-top:-5px;">
+      <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 597px;margin-bottom: -33px;margin-top:-5px;">
             <%# end %>
-            </div>
-          
-        <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a></div>
-        <div class="box-right right">
-        <h2><a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
-
-        <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
-       
-        <% if post.avatar.url %>
-
-            <p><a id="example1" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url, :width => "116" %></a></p>
-        <% end %>
-
-        <% if post.media %>
-            <div class="youtube" style="margin-top: 10px;">
-            <iframe width="420" height="250" src="<%= post.media.url %>" frameborder="0" allowfullscreen=""></iframe>
-            </div>
-        <% end %>
-
-       <!--  <div class="view-profile"><a href="/<%#= post.user.username %>">View Profile</a></div>
-        </div> -->
-
+    </div>
+    <div id = "unadmire_the_post">
+      <% if !post.admires.where(user_id: @current_user.id).empty? %>
+        <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 597px;margin-bottom: -33px;margin-top:-5px;">
+      <% end %>
+    </div>
+    <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a>
+    </div>
+    <div class="box-right right">
+      <h2><a href="/<%= post.user.username %>"><%= post.user.name %></a><span><a href="/<%= post.user.username %>"> @<%= post.user.username %></a> </span></h2>
+      <p><%= raw emojify(linkify(link_urls_and_users(post.body))) %></p>
+      <% if post.avatar.url %>
+        <p><a id="example1" href="<%= post.avatar.url %>"><%= image_tag post.avatar.url, :width => "116" %></a></p>
+      <% end %>
+      <% if post.media %>
+        <div class="youtube" style="margin-top: 10px;">
+          <iframe width="420" height="250" src="<%= post.media.url %>" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+      <% end %>
 
         <div class="clear"></div>
         <div class="box-bottom">
           <div class="bottom-left left retip_class" >
             <div id="retweet_<%= post.id %>">
-            <% if !Repost.find_by_user_id_and_post_id(@current_user.id,post.id)%>
-              <% if unblock_user_detail(@user,@curent_user)==true %>
-              <%= render :partial=>'messages/retip',:locals => {:@post => post} %>
-              <% end %>
-            <%else%>
-              <%= render :partial=>'messages/retweeted',:locals => {:@post => post} %>
-            <%end%>
+              <% if !Repost.find_by_user_id_and_post_id(@current_user.id,post.id)%>
+                <% if unblock_user_detail(@user,@curent_user)==true %>
+                <%= render :partial=>'messages/retip',:locals => {:@post => post} %>
+                <% end %>
+              <%else%>
+                <%= render :partial=>'messages/retweeted',:locals => {:@post => post} %>
+              <%end%>
             </div>
 
             <div id ="message1_<%=post.id%>" style="display:none;">
@@ -97,7 +93,7 @@
     </div>
   </div>
 
-    </div>
+  </div>
     <% if unblock_user_detail(@user,@curent_user)==true %>
       <%= render :partial => "profile/form", :locals => { :post => post } %>
     <%end%>  
@@ -108,4 +104,5 @@
 $(".close").click(function(){
  $.fancybox.close();
  })
+
 </script>
