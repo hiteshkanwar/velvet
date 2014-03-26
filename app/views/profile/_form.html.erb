@@ -3,12 +3,12 @@
 
 	<form action="/post/comment" name="reply" method="post" data-remote="true" enctype="multipart/form-data">
 		<%= image_tag @current_user.user_avatar, :width => "47" %>
-    <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip" style="width:560px!important;" required>
+    <input type="text" name="body" id="text_<%=post.id%>" placeholder="Write a Tip"  required>
 
 		<input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" />
 		<input name="id" type="hidden" value= "<%= post.id %>" />
 		<div id="images_preview_<%=post.id%>"></div>
-		<a id="various6" href="/dashboard/emoji_modal"><img src="../assets/comment_add.png" id="fumugi_<%=post.id%>" style="width: 42px;"></a>
+		<a id="various6" href="/dashboard/emoji_modal"><img src="../assets/123.png" id="fumugi_<%=post.id%>" style="width: 42px; margin:  4px 10px 0 0;"></a>
 
      <div id="image" style="">  
               <img src="../assets/camera.png" alt="camera" height="42" width="42" style="\"> 
@@ -42,10 +42,3 @@ $(document).on("click", "#text_<%=post.id%>", function(event){
 });
 
 </script>
-<style>
-    @-moz-document url-prefix() {
-    .file_upload{
-      margin-left: -51px!important;
-    }
-    }
-  </style>
