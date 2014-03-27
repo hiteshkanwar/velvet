@@ -19,14 +19,14 @@
 
       <div class="right-section right">
 
-            <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;"> <p style="margin-bottom:5px;font-weight: 600;">Actions</p>
+            <div style="border: 1px solid #dbdbdb;border-top: 5px solid #f0f0f0;color: #333;padding: 10px;font-weight: bold;background-color:#fff;"> <p style="padding:10px;font-weight: 600;">Actions</p>
                 <ul>
                        
                    <!-- Other notfications -->
                    <% @activities.each do |activity| %>
                   
                    <% user = User.find(activity.person) %>
-                   <div class="m-header" style="margin-bottom: 10px;">
+                   <div class="m-header" style="border-top:1px solid#E7E7E7;padding:10px 0px;">
                         <div class="span6">
                         <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
 
@@ -87,7 +87,7 @@
 
                     <!-- Aquainted -->
                     <% @followed.each do |user| %>
-                    <div class="m-header" style="margin-bottom: 10px;">
+                    <div class="m-header" style="border-top:1px solid#E7E7E7;padding:10px 0px;">
                         <div class="span6">
                         <%= image_tag user.user_avatar, :width => "30", :style => "margin-right: 5px;", :align => "left" %>
                         <p class="kelly"><a href="<%= user.username %>"><%= user.name %> </a><span>Aquainted</span> You</p>
