@@ -3,7 +3,7 @@
   <div class="box border-radius">
     <%if !post.reposts.blank?%>
       <%user=User.find(post.reposts.last.user_id).name%>    
-      <div style="font-size: 12px; margin-left: 10px; width: 70%;"class="re-tip">Retipped by <%=user%>
+      <div style="font-size: 12px; margin-left: 18px; width: 70%;"class="re-tip">Retipped by <%=user%>
       </div>
     <%end%>
     <div id="star_<%= post.id%>" style="display:none;"> 
