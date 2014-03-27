@@ -3,7 +3,7 @@
   <div class="box border-radius">
     <%if !post.reposts.blank?%>
       <%user=User.find(post.reposts.last.user_id).name%>    
-      <div style="font-size: 12px;"class="re-tip">Retipped by <%=user%>
+      <div style="font-size: 12px; margin-left: 10px;"class="re-tip">Retipped by <%=user%>
       </div>
     <%end%>
     <div id="star_<%= post.id%>" style="display:none;"> 
@@ -13,7 +13,7 @@
     </div>
     <div id = "unadmire_the_post">
       <% if !post.admires.where(user_id: @current_user.id).empty? %>
-        <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 597px;margin-bottom: -33px;margin-top:-5px;">
+        <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="margin-left: 580px;margin-bottom: -33px;margin-top:-5px;">
       <% end %>
     </div>
     <div class="box-left left"><a href="/<%= post.user.username %>"><%= image_tag post.user.user_avatar, :width => "116" %></a>
