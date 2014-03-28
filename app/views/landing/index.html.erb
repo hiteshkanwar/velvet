@@ -157,9 +157,9 @@
               <span>
 
                 <input type="text" class="dd"  style="width:400px;" name="name" value="<%= session[:name] %>" Placeholder="Name" required/><br/>
-                <input type="text" class="dd" id="user_name" style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username" required/>
+                <input type="text" class="dd" id="user_name" style="width:400px;margin-top:-50px;" name="username" onkeypress="return filterInput(event)" value="<%= session[:username] %>" Placeholder="Username" required/><br/>
 
-                <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email" required/>
+                <input type="text" class="dd" style="width:400px;margin-top:-50px;" name="email" value="<%= session[:signup_email] %>" Placeholder="Email" id= "email" required/>
                 
                 <input type="password" class="dd" style="width:400px;margin-top:-50px;" name="password" Placeholder="Password" required/>
                 <div style="margin-top:-50px;">
@@ -167,7 +167,7 @@
                     
                   <span> 
                     I accept <a style="color: black;margin-right:5px;" href="/privacy">Privacy, DMCA, Term policies</a> 
-                    <input type="checkbox" name="agreement" value="1" required>
+                    <input type="checkbox" name="agreement" value="1" id="check" required>
                   </span>
                 </div>
                 
@@ -282,5 +282,46 @@ else
     }
 }
 });
+
+
+
+var f11 = new LiveValidation('user_name');
+f11.add( Validate.Length, { minimum: 5 } );
+var field2 = new LiveValidation( 'check', {onlyOnSubmit: true } );
+field2.add( Validate.Acceptance );
+var f20 = new LiveValidation('email');
+f20.add( Validate.Email );
 </script>
+
+
 </html>
+<style>
+LV_validation_message{
+    font-weight:bold;
+    margin:0 0 0 5px;
+}
+
+.LV_valid {
+    color:#00CC00;
+}
+  
+.LV_invalid {
+    color:#CC0000;
+}
+    
+.LV_valid_field,
+input.LV_valid_field:hover, 
+input.LV_valid_field:active,
+textarea.LV_valid_field:hover, 
+textarea.LV_valid_field:active {
+    border: 1px solid #00CC00;
+}
+    
+.LV_invalid_field, 
+input.LV_invalid_field:hover, 
+input.LV_invalid_field:active,
+textarea.LV_invalid_field:hover, 
+textarea.LV_invalid_field:active {
+    border: 1px solid #CC0000;
+}
+</style>
