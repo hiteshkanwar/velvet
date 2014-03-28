@@ -17,7 +17,7 @@
           <% else %>
             <p>
               
-              <input type="text" name="q" id="tip" value="<%= params[:receiver_name] %>" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search"/>
+              <input type="text" name="q" id="tip" value="<%= params[:receiver_name] %>" onfocus="if (this.value == 'Write a Composer Name') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Write a Composer Name';}" placeholder="Write a Composer Name" class="receiver-search" style="width:525px;"/>
               
             </p>  
             <%= image_tag @current_user.user_avatar, :width => "47",:id=>"user_profile_image"%>
