@@ -218,7 +218,7 @@ class DashboardController < ApplicationController
 		@activities << @activitie2
 		@activities << @activities1
 		@activities=@activities.flatten
-
+        @activities = Kaminari.paginate_array(@activities).page(params[:page]).per(10)
 		# 3. People who followed me
 		  @followed = []
 		 #@followed = @current_user.followers.find(:all, :order => "created_at desc", :limit => 5, :conditions => "followings.follower_id IS NOT NULL").map{ |follower| User.find(follower.follower_id)}

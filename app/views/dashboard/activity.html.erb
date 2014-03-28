@@ -103,14 +103,14 @@
             </div>
 
     
-
+          <%= paginate @activities %>
 
             <!-- START POST -->
       <%#= render :partial => '/profile/posts', :locals => { disable_post: true } %>
       <!-- END POST -->
       <%#= render :partial => '/profile/paginate', :locals => { source: 'home', total_pages: @total_pages } %>
     </div>
-        
+       
     </div><!-- .container -->
     <div class="clear"></div>
 </div>
