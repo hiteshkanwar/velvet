@@ -1,2 +1,7 @@
-$('#previous_chat').html("<%= escape_javascript render(:partial => 'profile/previous_chat') %>");
-$("#message_text").val("");
+<%if params["message_conversation"]!="message_conversation"%>
+	$('#previous_chat').html("<%= escape_javascript render(:partial => 'profile/previous_chat') %>");
+	$("#message_text").val("");
+<%else%>
+    $('#message_conversation_1').html("<%= escape_javascript render(:partial =>'messages/message_thread',:locals=>{:message=>@messages})  %>");
+	$("#message_text1").val("");
+<%end%>

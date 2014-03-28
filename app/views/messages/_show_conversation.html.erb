@@ -5,12 +5,27 @@
     </div>  
     <div class="left-section left">
       <div class="heading border-radius"></div>
-      <div class="inbox message border-radius">
+      <div class="inbox message border-radius"  id="message_conversation_1">
         <!-- <div class="message-holder"> -->
           <%= render :partial=>"message_thread",:locals=>{:message=>@message} %>
         <!-- </div>   -->
 
       </div><!-- .inbox -->
+
+        <%= nested_form_for(Message.new,:html=>{:multipart=>true,:id=>"new_message1"} ) do |f|%>
+          <%= f.text_area :message_text, :placeholder=>"Reply", :id=>"message_text1" ,:style=>"height: 65px; width: 541px;", :autofocus=>true %>  
+          <%#= f.hidden_field :parent_id ,:value=>@parent_message.id %>
+          <%if @message.sender_id != @current_user.id%>
+          <%= f.hidden_field :receiver_id , :value =>@message.sender_id %>
+          <%else%>
+          <%= f.hidden_field :receiver_id , :value =>@message.receiver_id %>
+
+          <%end%>
+          <%= hidden_field_tag "message_conversation","message_conversation"%>
+          <%= f.submit "Reply",:class=>"button", :style=>"margin-left: 521px;", :id=>"message_submit" %> 
+        <% end %>
+
+      
     </div><!-- .right-section -->
     <div class="clear"></div>
   </div><!-- .container -->
@@ -23,7 +38,31 @@
 $(document).ready(function(){
   VL.message.initFancyBox()
 })
+
+
+
+
+$(document).ready(function(){
+  $("#new_message1").submit(function() {
+    
+    $.ajax({
+      type: "POST",
+       url: "/messages",
+       data:$('#new_message1').serialize(),
+        beforeSend: function() {
+              $("#loading-image").show();
+           },
+           success: function(msg) {
+              $("#loading-image").hide();
+           }
+     });
+      return false;
+   });  
+ });
+
 </script>
+
+
 
 
 

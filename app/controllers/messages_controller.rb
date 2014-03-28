@@ -44,9 +44,21 @@ class MessagesController < ApplicationController
     
       if @message.save
         # redirect_to "/"+params[:username]+"/messages/new"
-         User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
-         flash[:notice] = "message send sucessfully"
-         redirect_to messages_path  
+        User.find(params[:message][:receiver_id]).activities.create(person: @current_user.id, description: "Sent you a message")
+        if params["message_conversation"]== "message_conversation"
+           @message1=Message.find(:all,:conditions=>['sender_id = ? and receiver_id = ?',@message.sender_id,@message.receiver_id])
+           @message2=Message.find(:all,:conditions=>['sender_id = ? and receiver_id = ?',@message.receiver_id,@message.sender_id])
+           @message_conversation=[]
+           @message_conversation<<@message1
+           @message_conversation<<@message2
+           @messages = @message_conversation.flatten.sort_by(&:created_at) 
+          respond_to do |format|
+            format.js # actually means: if the client ask for js -> return file.js
+          end
+        else
+          flash[:notice] = "message send sucessfully"
+          redirect_to messages_path
+        end   
       else
         @messages = @current_user.send_messages.order("created_at desc")
         @attachment = @message.attachments.new
