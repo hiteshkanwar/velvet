@@ -291,6 +291,10 @@ var field2 = new LiveValidation( 'check', {onlyOnSubmit: true } );
 field2.add( Validate.Acceptance );
 var f20 = new LiveValidation('email');
 f20.add( Validate.Email );
+var f7 = new LiveValidation('a');
+f7.add( Validate.Numericality, { maximum: 31 } );
+var f7 = new LiveValidation('b');
+f7.add( Validate.Numericality, { maximum: 12 } );
 </script>
 
 
