@@ -20,7 +20,7 @@
 //= require main/jquery.validate.js
 //= require main/additional-methods
 //= require main/advertiser
-
+//= require LiveValidation
 //= require main/plugins
 //= require main/jquery.pageless
 //  require_tree .
