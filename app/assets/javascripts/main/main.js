@@ -355,8 +355,9 @@ $(document).ready(function(){
       {
         
         var body= $("#tip").val();
+       
         $("#tip").val("");
-        if (body != ""){
+        if (body.replace(/\s/g,"") != "") {
         $.ajax({
             type: "POST",
             url: "/post/create",
