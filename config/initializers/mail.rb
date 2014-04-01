@@ -1,9 +1,9 @@
 ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.gmail.com',
-  :port           => '587',
+  :address        => 'smtpout.secureserver.net',
+  :port           => '80',
   :authentication => :plain,
-  :user_name      => "prateekyuvasoft101@gmail.com",
-  :password       => "yuvasoft2013",
+  :user_name      => "NoReply@TippinTheVelvet.com",
+  :password       => "Mylifesucks2",
   :domain         => 'heroku.com'
 }
 ActionMailer::Base.delivery_method ||= :smtp

@@ -53,13 +53,14 @@ Velvet::Application.configure do
  config.action_mailer.default_url_options = { :host => 'http://velvet-development.herokuapp.com' }
  config.action_mailer.delivery_method = :smtp
  config.action_mailer.smtp_settings = {
-   :address              => "smtp.gmail.com",
-   :port                 => 587,
-   :domain               => 'gmail',
-   :user_name            => 'prateekyuvasoft101@gmail.com',
-   :password             => 'yuvasoft2013',
-   :authentication       => 'plain',
-   :enable_starttls_auto => true  }
+  :address        => 'smtpout.secureserver.net',
+  :port           => '80',
+  :authentication => :plain,
+  :user_name      => "NoReply@TippinTheVelvet.com",
+  :password       => "Mylifesucks2",
+  :domain         => 'heroku.com',
+   :enable_starttls_auto => true  
+ }
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
