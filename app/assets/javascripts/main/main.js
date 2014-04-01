@@ -358,13 +358,17 @@ $(document).ready(function(){
        
         $("#tip").val("");
         if (body.replace(/\s/g,"") != "") {
-        $.ajax({
-            type: "POST",
-            url: "/post/create",
-            data:  {body: body }
-           });
-        return false;
-      }
+          $.ajax({
+              type: "POST",
+              url: "/post/create",
+              data:  {body: body }
+             });
+          return false;
+        }
+      else
+      {
+     $('#charNum').text(170 + ' characters left');
+      }  
       }
   });
 });
