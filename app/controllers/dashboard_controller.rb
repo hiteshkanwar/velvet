@@ -129,7 +129,8 @@ class DashboardController < ApplicationController
 		else
 
 		   if !params[:q].include?"#"
-				@users = User.where("lower(username) like ? OR lower(name) like ?", "%#{params[:q]}%", "%#{params[:q]}%")
+		   	    
+				@users = User.where("username like ? OR name like ?", "%#{params[:q]}%", "%#{params[:q]}%")
 				@posts = Post.where("body like ?", "%#{params[:q]}%").map { |p| p.user }	
 				@users_before_display = (@users + @posts).flatten.uniq
 				@users_to_display=[]
