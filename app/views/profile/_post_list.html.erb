@@ -9,18 +9,18 @@
     <div id="star_<%= post.id%>" style="display:none;"> 
             <%# if !post.admires.where(user_id: @current_user.id).empty? %>
       <%if post.reposts.blank?%>
-        <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; ">
+        <img src="../assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; ">
       <%else%>
-          <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; margin-top: -12px;">
+          <img src="../assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; margin-top: -12px;">
       <%end%>
             <%# end %>
     </div>
     <div id = "unadmire_the_post">
       <% if !post.admires.where(user_id: @current_user.id).empty? %>
         <%if post.reposts.blank?%>
-          <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right;">
+          <img src="../assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right;">
         <%else%>
-          <img src="assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; margin-top: -12px;">
+          <img src="../assets/main/admired-star.jpg" width="38" height="37" alt="Admired" title="Admired" style="float: right; margin-top: -12px;">
         <%end%>
       <% end %>
     </div>
