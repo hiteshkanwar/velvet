@@ -1,11 +1,11 @@
 
-uri = URI.parse(ENV["REDISCLOUD_URL"])
-REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-# REDIS = Redis.new
-redis = REDIS
+# uri = URI.parse(ENV["REDISCLOUD_URL"])
+# REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+# # REDIS = Redis.new
+# redis = REDIS
 
-redis = Redis::Namespace.new('express:captcha', redis: redis)
-#redis=Redis.new
+# redis = Redis::Namespace.new('express:captcha', redis: redis)
+redis=Redis.new
 SimpleCaptcha.setup do |sc|
   # Redis instance
   sc.redis = redis

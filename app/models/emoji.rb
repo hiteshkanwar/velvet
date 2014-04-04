@@ -14,7 +14,7 @@ class Emoji < ActiveRecord::Base
   			   :street 	=> 	"rolled-up-bill,rolled-up-bill2, molly,red-eyes,whipits,huffing3,heroin,cocaine, cocaine2, crack , meth, meth2,pills",
   			   :free 	=> 	
   			   	"cum-swapping, rimjob, middle-finger, 69, anal-beads, anal-plug, anal 1, anal 2, beer, blood, blow job-guys, blow job, bomb, bong, bridge, casino, chair-position, cocksock, cocktail, cocktails, cowgirl, crosshairs, crosshairs 2, cunnilingus, desert, doggy-style, double-penetration, ear, finger-sucking, fisting, forest, froggy-style, gym, gym2, hand job, high-rise, home, huffing 2, island, mansion, martini-short, martini-tall, missionary, mountains, punch, reverse-cowgirl, shit, snow, spoon-position, standing-cowgirl, standing-reverse-cowgirl, store, Tits, vomit-man, vomit-puddle, weed",
-           :weapon=> " bat-weapon brass-knuckles,bomb,handgun,knife,rifle,rock-weapon,sword,target" 
+           :weapon=> " bat-weapon ,brass-knuckles,bomb,handgun,knife,rifle,rock-weapon,sword,target" 
            
   			}
   	family.each { |family, emojis|
