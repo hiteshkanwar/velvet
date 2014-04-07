@@ -26,6 +26,7 @@ Velvet::Application.routes.draw do
 
   # Static pages
    match '/brands',     :to => 'landing#brands'
+   match '/media',     :to => 'landing#media'
    match '/privacy',     :to => 'landing#privacy'
    match '/about',       :to => 'landing#about'
    match '/terms',       :to => 'landing#terms'

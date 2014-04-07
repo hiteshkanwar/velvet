@@ -1,0 +1,347 @@
+ /* ----------------------------------------------
+	Website Name : 
+	
+	Version : 1.0
+	Author : Amitesh Chauhan
+	Author Email : ami070ipec@gmail.com
+	Last Date Modified : April 5, 2014
+ ------------------------------------------------ */
+
+ /* ------------------------------------------------
+    CUSTOM WEB FONTS
+--------------------------------------------------*/
+@font-face {
+    font-family: 'PF DinDisplay Pro';
+    src: url('fonts/pfdindisplaypro.eot');
+    src: url('fonts/pfdindisplaypro.eot?#iefix') format('embedded-opentype'),
+         url('fonts/pfdindisplaypro.woff') format('woff'),
+         url('fonts/pfdindisplaypro') format('truetype'),
+         url('fonts/pfdindisplaypro.svg#PF DinDisplay Pro') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('fonts/pfdindisplaypro.eot');
+    src: url('fonts/pfdindisplaypro.eot?#iefix') format('embedded-opentype'),
+         url('fonts/pfdindisplaypro.woff') format('woff'),
+         url('fonts/pfdindisplaypro.ttf') format('truetype'),
+         url('fonts/pfdindisplaypro.svg#OpenSans-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* --------------------------------------
+    RESET
+----------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* -------------------------------------------------------
+    GENERAL
+---------------------------------------------------------- */
+html { overflow-y: scroll; }
+body {
+    font-family: PF DinDisplay Pro, Serif;
+    font-size: 18px;
+    line-height: 25px;
+    color: #3B3B3B;
+    background: /* url(../images/25-pixel-baseline.png) left top repeat, */ url(../images/bg.png) left top repeat ;
+    
+}
+
+p { margin-bottom: 25px; }
+p.intro { font-size: 18px; }
+
+/* links */
+a:link, a:visited {
+    color: #FFF;
+    text-decoration: none;
+    outline: 0;
+}
+a:hover, a:focus, a:active {
+    color: #d1d1d1;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PF DinDisplay Pro', Serif;
+}
+h1 {
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: -0.9px;
+    color: #e32029;
+    margin-left: -2px;
+}
+h2 {
+    font-size: 22px;
+    line-height: 25px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+h3 {
+    font-size: 18px;
+    line-height: 25px;
+}
+
+/* Lists */
+ul, ol {
+	margin-bottom: 25px;
+	padding: 0 20px;
+}
+ul { list-style: disc; }
+
+
+input, select {
+    vertical-align: middle;
+}
+
+strong {
+    font-size: large;
+    font-weight: 600;
+}
+b {
+    color: #741113;
+    font-size: large;
+    font-weight: bolder;
+}
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+mark {
+    background-color: #FDD2B3;
+}
+
+/* Clearing and Alignment Classes */
+.align-left {
+    float: left;
+}
+.align-right {
+    float: right;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.ie7 .clearfix { zoom: 1; } /* IE7 */
+
+/* ------------------------------------------------------
+    STRUCTURE
+--------------------------------------------------------- */
+#header-wrap {
+    background: url(../images/header-bg.png);
+    width: 100%;
+    height: 70px;
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+header {
+    position: relative;
+    width: 940px;
+    height: 70px;
+    margin: 0 auto;
+}
+.content-wrap {
+    width: 940px;
+    margin: 0 auto;
+}
+.content-wrap section {
+    position: relative;
+    padding: 125px 0 25px 0;
+    background: url(../images/section-sep.png) repeat-x left 25px;
+}
+.content-wrap section section {
+    background: none;
+    margin: 0;
+}
+
+.content-wrap section .row .col {
+    
+    margin: 0;
+    padding: 0;
+   position: absolute;
+   top:240px;
+   left: 125px;
+   width: 650px;
+}
+
+.content-wrap section aside {
+    bottom: -345px;
+    position: absolute;
+    right: 175px;
+    text-align: center;
+    width: 240px;
+}
+.content-wrap section aside h2 {
+    margin: 12.5px 0 12.5px 0;
+}
+
+.content-wrap section aside ul.link-list {
+    font-size: 16px;
+    margin: 0 0 25px 0;
+    padding: 0;
+    list-style: none;
+    background: url(../images/section-sep.png) repeat-x left top;
+}
+
+
+.content-wrap section .back-to-top {
+    display: block;
+    position: absolute;
+    bottom: -65px;
+    right: 10px;
+    height: 43px;
+    width: 43px;
+    background: url(../images/back-to-top.png);
+    text-indent: -9999px;
+    z-index: 9999;
+}
+.ie7 .content-wrap section .back-to-top {
+    bottom: -70px;
+}
+
+footer {
+    position: relative;
+    background: url("../images/header-bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* -------------------------------------------
+    Header
+-------------------------------------------- */
+
+/* Logo */
+header hgroup {
+    position: absolute;
+    background: url(../images/logo.png) no-repeat;
+    height: 31px;
+    width: 312px;
+    display: block;
+    top: 25px;
+    left: 0;
+}
+header hgroup h1 a {
+    text-indent: -9999em;
+    display: block;
+    height: 31px;
+    width: 130px;
+}
+header hgroup h3  {
+    text-indent: -9999em;
+    height: 0;
+}
+
+/* Main Navigation */
+header nav {
+    float: right;
+    margin-top: 25px;
+}
+header nav ul {
+    font: bold 12px/25px  Helvetica, Arial, Sans-serif;
+    margin-right: -5px;
+    padding: 0;
+    list-style: none;
+}
+header nav ul li {
+    float: left;
+}
+header nav ul a:link, header nav ul a:visited {
+    color: #c5c4c4;
+    margin-right: 20px;
+    text-shadow: 0 -1px 0 rgba(10, 10, 10, 1);
+}
+header nav ul a:hover,
+header nav ul a:active {
+    color: #FFF;
+}
+
+
+
+
+
+
+/* ----------------------------------------------------
+    Footer
+----------------------------------------------------- */
+footer p.footer-text {
+       clear: both;
+    color: #FFFFFF;
+    font-family: "PF DinDisplay Pro",Serif;
+    font-size: 0.75em;
+    margin-bottom: 0;
+    padding: 0 10px;
+}
+footer .footer-content {
+     position: relative;
+    text-align: center;
+    
+}
+
+
+.footer-content > ul {
+    display: block;
+    list-style: none outside none;
+    padding-top: 15px;
+}
+.footer-content li {
+    display: inline;
+    padding-left: 30px;
+    
+}

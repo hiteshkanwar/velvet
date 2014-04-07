@@ -40,6 +40,9 @@ class LandingController < ApplicationController
   def about
   	render 'about', layout: false 
   end
+   def media
+    render 'media', layout: false 
+  end
 
   def terms
     render 'terms', layout: false 
@@ -113,10 +116,16 @@ class LandingController < ApplicationController
   def create
    
     if simple_captcha_valid?
-    	@user = User.new(name: params[:name], username: params[:username], email: params[:email].downcase, hashed_password: params[:password], country: params[:country], dob: "#{params[:month]}/#{params[:day]}/#{params[:year]}")
+    	@user = User.new
+      @user.name=params[:name]
+      @user.username=params[:username]
+      @user.email=params[:email].downcase
+      @user.hashed_password=params[:password]
+      @user.country=params[:country]
+      @user.dob=params[:day]
       @current_time=Time.now.strftime("%Y")
-      if (@current_time > params[:year])
-        @time= Time.now.strftime("%Y").to_i-params[:year].to_i
+      if (@current_time > params["day"].to_date.strftime("%Y"))
+        @time= Time.now.strftime("%Y").to_i-params["day"].to_date.strftime("%Y").to_i
         if (@time>=18)
         	if @user.save
 

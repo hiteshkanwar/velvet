@@ -13,6 +13,21 @@
 <%= stylesheet_link_tag    "main", :media => "all" %>
 <%= javascript_include_tag "application" %>
 <%= csrf_meta_tags %>
+
+
+<script src="../assets/jquery-1.10.2.js"></script>
+  <script src="../assets/jquery.ui.core.js"></script> 
+  <script src="../assets/jquery.ui.datepicker.js"></script>
+  <link rel="stylesheet" href="../assets/jquery.ui.datepicker.css">
+  <script>
+    $(function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: '-80:+0'
+    });
+  });
+  </script>
 </head>
 <body>
 <script type="text/javascript">
@@ -43,7 +58,7 @@
     var country = $(".country").val();
     var currentYear = new Date().getFullYear();
     // Validate entries
-    if (day==""  || month=="" || year=="") {
+    if (day=="") {
         $('aside.entry-form').prepend('<div class="error" style="padding:20px;"><span>Please correct date</span></div>');
     // Check for age
     } else if((currentYear - enteredYear) < 18) {
@@ -114,10 +129,11 @@
             <form class="verfy">
               <header>Must be 18+</header>
               <span>
-              <input type="text" id="a" value="<%= session[:day] %>" placeholder="dd&nbsp;&nbsp;&nbsp;&nbsp;/"  class="dd" maxlength="2">
-              <input type="text" id="b" value="<%= session[:month] %>" placeholder="mm&nbsp;&nbsp;&nbsp;&nbsp;/" class="mm" maxlength="2">
-              <input type="text" id="c" value="<%= session[:year] %>" placeholder="yyyy&nbsp;&nbsp;&nbsp;&nbsp;" class="yy" maxlength="4">
-              </span> <span>
+                <input type="text" id="datepicker" value="<%= session[:day] %>" placeholder="date&nbsp;&nbsp;&nbsp;&nbsp;"  class="dd" maxlength="10" readonly>
+              <!-- <input type="text" id="a" value="<%#= session[:day] %>" placeholder="dd&nbsp;&nbsp;&nbsp;&nbsp;/"  class="dd" maxlength="2">
+              <input type="text" id="b" value="<%#= session[:month] %>" placeholder="mm&nbsp;&nbsp;&nbsp;&nbsp;/" class="mm" maxlength="2">
+              <input type="text" id="c" value="<%#= session[:year] %>" placeholder="yyyy&nbsp;&nbsp;&nbsp;&nbsp;" class="yy" maxlength="4">
+              </span> --> <span>
               <select class="country" name="country">
                 <option>Country</option>
                 <option>United States</option>
@@ -291,10 +307,7 @@ var field2 = new LiveValidation( 'check', {onlyOnSubmit: true } );
 field2.add( Validate.Acceptance );
 var f20 = new LiveValidation('email');
 f20.add( Validate.Email );
-var f7 = new LiveValidation('a');
-f7.add( Validate.Numericality, { maximum: 31 } );
-var f7 = new LiveValidation('b');
-f7.add( Validate.Numericality, { maximum: 12 } );
+
 </script>
 
 
