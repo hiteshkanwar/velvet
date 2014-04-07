@@ -116,6 +116,7 @@ class LandingController < ApplicationController
   def create
    
     if simple_captcha_valid?
+      
     	@user = User.new
       @user.name=params[:name]
       @user.username=params[:username]
