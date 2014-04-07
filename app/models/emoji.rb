@@ -9,15 +9,12 @@ class Emoji < ActiveRecord::Base
   def self.family(name)
     family = { 
            
-         
-           :fetish  =>  "finger-fucking, footjob1, footjob 2, peeing-girl 2, peeing-man, toe-sucking, bukkake",
-           :porn  =>  "porn-dvd, porn-dvd 2, porn-set, stripper, pole, pole 2",
-           :street  =>  "rolled-up-bill, rolled-up-bill 2, molly, red-eyes, whip its, huffing, heroin, cocaine, cocaine 2, crack, meth, meth 2, pills",
+           :fetish  =>  "finger-fucking, footjob1, footjob2, peeing-girl2, peeing-man, toe-sucking",
+           :porn  =>  "porn-dvd, porn-dvd2, cum-swapping",
+           :street  =>  "rolled-up-bill, molly,red-eyes,whipits,huffing3,heroin, rimjob",
            :free  =>  
-            "cum-swapping, rimjob, middle-finger, 69, anal-beads, anal-plug, anal 1, anal 2, beer, blood, blow job-guys, blow job, bomb, bong, bridge, casino, chair-position, cocksock, cocktail, cocktails, cowgirl, crosshairs, crosshairs 2, cunnilingus, desert, doggy-style, double-penetration, ear, finger-sucking, fisting, forest, froggy-style, gym, gym2, hand job, high-rise, home, huffing 2, island, mansion, martini-short, martini-tall, missionary, mountains, punch, reverse-cowgirl, shit, snow, spoon-position, standing-cowgirl, standing-reverse-cowgirl, store, Tits, vomit-man, vomit-puddle, weed",
-           :weapon=> "bat-weapon, brass-knuckles, bomb, handgun, knife, rifle, rock-weapon, sword, target" 
-       
-
+            "middle-finger",
+           :weapon=> "69, anal-beads, anal-plug, anal1, anal2, bat-weapon, beer, blood, blowjob-guys, blowjob, bomb, bong, brass-knuckles, bridge, bukkake, casino, chair-position, cocaine, cocaine2, cocksock, cocktail, cocktails, cowgirl, crack, crosshairs, crosshairs2, cunnilingus, desert, doggy-style, double-penetration, ear, finger-sucking, fisting, forest, froggy-style, gym, gym2, handgun, handjob, high-rise, home, huffing, huffing2, island, knife, mansion, martini-short, martini-tall, meth, meth2, missionary, mountains, peeing-girl, pills, pole, pole2, porn-set, punch, reverse-cowgirl, rifle, rock-weapon, rolled-up-bill2, shit, snow, spoon-position, standing-cowgirl, standing-reverse-cowgirl, store, stripper, sword, target, Tits, vomit-man, vomit-puddle, weed, wine, bukkake3" 
         }
     family.each { |family, emojis|
 
