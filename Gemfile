@@ -9,7 +9,8 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'pg'
 gem 'newrelic_rpm'
-
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 gem 'activeadmin'
 # Gems used only for assets and not required
